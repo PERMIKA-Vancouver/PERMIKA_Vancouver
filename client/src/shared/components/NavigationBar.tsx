@@ -1,5 +1,7 @@
 import { Link, Outlet } from 'react-router-dom';
 
+import NavLogo from '../../assets/cropped_logo.png';
+
 import { PAGES } from '../data/pages';
 
 export const NavigationBar = () => {
@@ -8,7 +10,8 @@ export const NavigationBar = () => {
       <div className="flex justify-between items-center z-10 w-full mt-10 absolute">
         <div className="ml-16">
           <Link to="/">
-            <span className="bg-[#D9D9D9] w-14 h-14 block rounded-full" />
+            {/*<span className="bg-[#D9D9D9] w-14 h-14 block rounded-full" />*/}
+            <img src={NavLogo} alt="" className="w-14 h-auto" />
           </Link>
         </div>
         <div className="flex mr-10">
