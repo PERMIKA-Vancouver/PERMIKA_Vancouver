@@ -22,25 +22,26 @@ export const Home = () => {
 
     // Position Calculation
     const calculatePosition = (initialTop: number, initialLeft: number) => {
-        let top = initialTop + (cursorPosition.y / window.innerHeight - 0.5) * 20;
-        let left = initialLeft + (cursorPosition.x / window.innerWidth - 0.5) * 20;
+        let top = initialTop + (cursorPosition.y / window.innerHeight - 0.5) * 5;
+        let left = initialLeft + (cursorPosition.x / window.innerWidth - 0.5) * 5;
 
-        // Limit the movement
-        top = Math.min(Math.max(top, 0), 100);
-        left = Math.min(Math.max(left, 0), 100);
+        // Consider image size and limit the movement
+        const imageSizeRelative = 1/5; // Image size relative to viewport size
+        top = Math.min(Math.max(top, 0), 100 - imageSizeRelative * 100);
+        left = Math.min(Math.max(left, 0), 100 - imageSizeRelative * 100);
 
         return { top: `${top}%`, left: `${left}%` };
     };
 
     return (
-        <div className="relative h-screen">
+        <div className="relative h-screen overflow-hidden">
             <div className="absolute inset-0 opacity-20 z-10">
                 <img src={Black} alt="background" className="absolute w-1/5 opacity-20" style={calculatePosition(10, 5)} />
-                <img src={Black} alt="background" className="absolute w-1/5 opacity-20" style={calculatePosition(8, 90)} />
-                <img src={Black} alt="background" className="absolute w-1/5 opacity-20" style={calculatePosition(95, 15)} />
-                <img src={Black} alt="background" className="absolute w-1/5 opacity-20" style={calculatePosition(97, 93)} />
+                <img src={Black} alt="background" className="absolute w-1/5 opacity-20" style={calculatePosition(8, 70)} />
+                <img src={Black} alt="background" className="absolute w-1/5 opacity-20" style={calculatePosition(65, 15)} />
+                <img src={Black} alt="background" className="absolute w-1/5 opacity-20" style={calculatePosition(67, 73)} />
                 <img src={Black} alt="background" className="absolute w-1/5 opacity-20" style={calculatePosition(2, 40)} />
-                <img src={Black} alt="background" className="absolute w-1/5 opacity-20" style={calculatePosition(90, 65)} />
+                <img src={Black} alt="background" className="absolute w-1/5 opacity-20" style={calculatePosition(60, 45)} />
             </div>
 
             <div className="App z-20 relative">
