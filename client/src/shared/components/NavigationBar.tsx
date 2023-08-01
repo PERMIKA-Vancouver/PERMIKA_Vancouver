@@ -10,8 +10,7 @@ export const NavigationBar = () => {
       <div className="flex justify-between items-center z-10 w-full mt-10 absolute">
         <div className="ml-16">
           <Link to="/">
-            {/*<span className="bg-[#D9D9D9] w-14 h-14 block rounded-full" />*/}
-            <img src={NavLogo} alt="" className="w-14 h-auto" />
+            <img src={NavLogo} alt="" className="w-[55px] h-auto" />
           </Link>
         </div>
         <div className="flex mr-10">
