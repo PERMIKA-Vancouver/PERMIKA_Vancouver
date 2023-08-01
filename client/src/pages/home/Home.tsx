@@ -1,5 +1,5 @@
-import Logo from '../../assets/logo.png';
 import Black from '../../assets/black.png'
+
 export const Home = () => {
   return (
       <div className="relative h-screen">
