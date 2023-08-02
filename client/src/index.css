@@ -7,3 +7,9 @@
   src: local('regola-regular'),
     url('./fonts/Regola/regola-regular.ttf') format('truetype');
 }
+
+@font-face {
+  font-family: 'AveRom';
+  src: local('AvenirRoman'),
+    url('./fonts/Avenir/AvenirRoman.otf') format('opentype');
+}
