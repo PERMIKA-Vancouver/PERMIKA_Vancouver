@@ -16,11 +16,11 @@ export const NavigationBar = () => {
         <div className="flex mr-16 gap-8">
           {PAGES.filter((page) => page.name !== 'home').map((page) => (
             <NavLink key={page.name} to={page.path}>
-              {({ isActive, isPending }) => (
+              {({ isActive }) => (
                 <p
-                  className={`${
+                  className={`font-RegoReg ${
                     isActive ? 'text-[#0A0A0A]' : 'text-[#BCBCBC]'
-                  } font-normal hover:text-[#D07D14]`}
+                  } hover:text-[#D07D14] font-normal not-italic text-lg leading-[normal]`}
                 >
                   {page.name}
                 </p>

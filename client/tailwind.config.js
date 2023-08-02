@@ -9,6 +9,9 @@ module.exports = {
         40: '10rem',
       },
     },
+    fontFamily: {
+      RegoReg: ['"RegoReg"', 'Arial'],
+    },
   },
   plugins: [],
 };
