@@ -22,8 +22,21 @@ export const Home = () => {
 
     // Position Calculation
     const calculatePosition = (initialTop: number, initialLeft: number) => {
-        let top = initialTop + (cursorPosition.y / window.innerHeight - 0.5) * 5;
-        let left = initialLeft + (cursorPosition.x / window.innerWidth - 0.5) * 5;
+        let relativeCursorX = cursorPosition.x / window.innerWidth;
+        let relativeCursorY = cursorPosition.y / window.innerHeight;
+
+        let relativeImgX = initialLeft / 100;
+        let relativeImgY = initialTop / 100;
+
+        // Calculate distance
+        let distanceX = relativeImgX - relativeCursorX;
+        let distanceY = relativeImgY - relativeCursorY;
+
+        // Calculate the overall distance (hypotenuse)
+        let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+        let top = initialTop - distanceY * distance * 30; // multiply by distance and by 100 to increase the shift
+        let left = initialLeft - distanceX * distance * 30;
 
         // Consider image size and limit the movement
         const imageSizeRelative = 1/5; // Image size relative to viewport size
@@ -32,6 +45,8 @@ export const Home = () => {
 
         return { top: `${top}%`, left: `${left}%` };
     };
+
+
 
     return (
         <div className="relative h-screen overflow-hidden">
