@@ -1,18 +1,15 @@
-import Logo from '../../assets/logo.png';
-
-import './Home.css';
+// import { useHeight } from '../../shared/components/NavigationBar';
 
 export const Home = () => {
+  // const { navbarHeight } = useHeight();
+  const navbarHeight = 15;
+
   return (
     <>
-      <div className="text-center">
-        <header className="App-header h-[90vh] flex flex-col items-center justify-center text-2xl">
-          <img
-            src={Logo}
-            className="App-logo min-h-[40vmin] pointer-events-none"
-            alt="logo"
-          />
+      <div className={`mt-[20vh] bg-amber-300`}>
+        <header className={`text-center text-2xl`}>
           <p>PERMIKA Vancouver</p>
+          <span>{navbarHeight}</span>
         </header>
       </div>
     </>
