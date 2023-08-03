@@ -1,36 +1,29 @@
-.App {
-  text-align: center;
+/* RegoReg60 */
+h1 {
+  font-family: 'RegoReg', Arial;
+  font-size: 3.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.075rem;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* RegoReg48 */
+h2 {
+  font-family: 'RegoReg', Arial;
+  font-size: 3rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.06rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* RegoReg30 */
+h3 {
+  font-family: 'RegoReg', Arial;
+  font-size: 1.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.0375rem;
 }
