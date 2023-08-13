@@ -33,3 +33,7 @@ h3 {
   font-style: normal;
   font-weight: 400;
 }
+
+.mt-navbar {
+  margin-top: 20vh;
+}

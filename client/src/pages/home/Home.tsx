@@ -6,7 +6,7 @@ export const Home = () => {
 
   return (
     <>
-      <div className={`mt-[20vh] bg-amber-300`}>
+      <div className={`mt-navbar bg-light-grey h-screen`}>
         <header className={`text-center text-2xl`}>
           <p>PERMIKA Vancouver</p>
           <span>{navbarHeight}</span>
