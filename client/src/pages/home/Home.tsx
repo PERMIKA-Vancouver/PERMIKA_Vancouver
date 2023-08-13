@@ -35,8 +35,8 @@ export const Home = () => {
         // Calculate the overall distance (hypotenuse)
         let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
-        let top = initialTop - distanceY * distance * 30; // multiply by distance and by 100 to increase the shift
-        let left = initialLeft - distanceX * distance * 30;
+        let top = initialTop - distanceY * distance * 20; // multiply by distance and by 100 to increase the shift
+        let left = initialLeft - distanceX * distance * 20;
 
         // Consider image size and limit the movement
         const imageSizeRelative = 1/5; // Image size relative to viewport size
