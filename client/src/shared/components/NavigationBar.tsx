@@ -3,19 +3,8 @@ import { Link, NavLink, Outlet } from 'react-router-dom';
 import NavLogo from '../../assets/cropped_logo.png';
 
 import { PAGES } from '../data/pages';
-// import { OutletContextType } from '../types/types';
 
 export const NavigationBar = () => {
-  // const [navbarHeight, setNavbarHeight] = useState<number>(0);
-  // const ref = useRef<HTMLDivElement>(null);
-
-  // useEffect(() => {
-  //   if (ref.current) {
-  //     setNavbarHeight(ref.current.clientHeight);
-  //     console.log(navbarHeight);
-  //   }
-  // }, []);
-
   return (
     <>
       <div className="absolute z-10 top-0 h-[20vh] w-full">
