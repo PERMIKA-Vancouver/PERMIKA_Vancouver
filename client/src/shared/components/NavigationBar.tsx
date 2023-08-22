@@ -32,7 +32,7 @@ export const NavigationBar = () => {
                   <p
                     className={`RegoReg ${
                       isActive ? 'text-black-permika' : 'text-light-grey'
-                    } hover:text-sunset-orange font-normal not-italic text-lg leading-[normal]`}
+                    } hover:text-sunset-orange font-normal not-italic text-lg leading-[normal] transition duration-500`}
                   >
                     {page.name}
                   </p>
