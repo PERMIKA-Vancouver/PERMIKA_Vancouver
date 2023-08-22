@@ -19,7 +19,7 @@ export const NavigationBar = () => {
   return (
     <>
       <div className="absolute z-10 top-0 h-[20vh] w-full">
-        <div className="absolute top-[30%] flex justify-between items-center w-full">
+        <div className="absolute top-[50%] -translate-y-2/4 flex justify-between items-center w-full">
           <div className="ml-[4%]">
             <Link to="/">
               <img src={NavLogo} alt="" className="w-[55px] h-auto" />
