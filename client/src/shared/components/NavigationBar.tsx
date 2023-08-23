@@ -3,6 +3,7 @@ import { Link, NavLink, Outlet } from 'react-router-dom';
 import NavLogo from '../../assets/cropped_logo.png';
 
 import { PAGES } from '../data/pages';
+import { Footer } from './Footer';
 // import { OutletContextType } from '../types/types';
 
 export const NavigationBar = () => {
@@ -42,6 +43,9 @@ export const NavigationBar = () => {
       </div>
       <>
         <Outlet />
+      </>
+      <>
+        <Footer />
       </>
     </>
   );

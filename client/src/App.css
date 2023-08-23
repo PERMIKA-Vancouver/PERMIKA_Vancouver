@@ -27,3 +27,13 @@ h3 {
   line-height: normal;
   letter-spacing: -0.0375rem;
 }
+
+/* T1: AveRom21 */
+.t1 {
+  font-family: 'AveRom';
+  font-size: 1.3125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 124.6%; /* 1.63538rem */
+  letter-spacing: -0.02625rem;
+}
