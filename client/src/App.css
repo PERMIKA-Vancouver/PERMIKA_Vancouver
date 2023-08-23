@@ -37,3 +37,7 @@ h3 {
 .mt-navbar {
   margin-top: 20vh;
 }
+
+.pt-navbar {
+  padding-top: 20vh;
+}
