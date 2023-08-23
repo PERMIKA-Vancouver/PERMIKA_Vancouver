@@ -38,9 +38,9 @@ export const NavigationBar = () => {
   return (
     <>
       <div
-        className={`fixed z-10 top-0 h-[20vh] w-full bg-white transition-[top] ease-in duration-500 ${
-          !show && '-top-[20vh]'
-        } `}
+        className={`fixed z-10 ${
+          show ? 'top-0' : '-top-[20vh]'
+        } h-[20vh] w-full bg-white transition-[top] ease-in duration-500`}
       >
         <div className="absolute top-[50%] -translate-y-2/4 flex justify-between items-center w-full">
           <div className="ml-[4%]">
