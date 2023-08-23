@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 
 import NavLogo from '../../assets/cropped_logo.png';
@@ -9,7 +9,7 @@ export const NavigationBar = () => {
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  const controlNavbar = () => {
+  const controlNavbar = useCallback(() => {
     if (typeof window !== 'undefined') {
       if (window.scrollY > lastScrollY) {
         // if scroll down hide the navbar
@@ -22,7 +22,7 @@ export const NavigationBar = () => {
       // remember current page location to use in the next move
       setLastScrollY(window.scrollY);
     }
-  };
+  }, [lastScrollY]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -33,14 +33,14 @@ export const NavigationBar = () => {
         window.removeEventListener('scroll', controlNavbar);
       };
     }
-  }, [lastScrollY]);
+  }, [lastScrollY, controlNavbar]);
 
   return (
     <>
       <div
-        className={`fixed z-10 top-0 h-[20vh] w-full bg-white ${
-          !show && 'hidden'
-        }`}
+        className={`fixed z-10 top-0 h-[20vh] w-full bg-white transition-[top] ease-in duration-500 ${
+          !show && '-top-[20vh]'
+        } `}
       >
         <div className="absolute top-[50%] -translate-y-2/4 flex justify-between items-center w-full">
           <div className="ml-[4%]">
