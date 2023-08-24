@@ -12,5 +12,8 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^8.2.0"
+  },
+  "dependencies": {
+    "typewriter-effect": "^2.20.1"
   }
 }
