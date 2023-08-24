@@ -8,9 +8,16 @@ module.exports = {
         30: '7.5rem',
         40: '10rem',
       },
-    },
-    fontFamily: {
-      RegoReg: ['"RegoReg"', 'Arial'],
+
+      fontFamily: {
+        RegoReg: ['"RegoReg"', 'Arial'],
+      },
+
+      colors: {
+        'sunset-orange': '#D07D14',
+        'light-grey': '#BCBCBC',
+        'black-permika': '#0A0A0A',
+      },
     },
   },
   plugins: [],
