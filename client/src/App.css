@@ -37,3 +37,17 @@ h3 {
   line-height: 124.6%; /* 1.63538rem */
   letter-spacing: -0.02625rem;
 }
+
+.RegoReg {
+  font-family: 'RegoReg', Arial;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.mt-navbar {
+  margin-top: 20vh;
+}
+
+.pt-navbar {
+  padding-top: 20vh;
+}
