@@ -1,4 +1,4 @@
-/* RegoReg60 */
+/* H1: RegoReg60 */
 h1 {
   font-family: 'RegoReg', Arial;
   font-size: 3.75rem;
@@ -8,7 +8,7 @@ h1 {
   letter-spacing: -0.075rem;
 }
 
-/* RegoReg48 */
+/* H2: RegoReg48 */
 h2 {
   font-family: 'RegoReg', Arial;
   font-size: 3rem;
@@ -18,7 +18,7 @@ h2 {
   letter-spacing: -0.06rem;
 }
 
-/* RegoReg30 */
+/* H3: RegoReg30 */
 h3 {
   font-family: 'RegoReg', Arial;
   font-size: 1.875rem;
@@ -26,6 +26,26 @@ h3 {
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.0375rem;
+}
+
+/* Sub: RegoReg24 */
+.sub {
+  font-family: 'RegoReg';
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.03rem;
+}
+
+/* ButtonText: AveMed18 */
+.button_text {
+  font-family: 'AveMed';
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.0225rem;
 }
 
 .RegoReg {
