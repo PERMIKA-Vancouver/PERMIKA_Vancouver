@@ -11,6 +11,7 @@ module.exports = {
 
       fontFamily: {
         RegoReg: ['"RegoReg"', 'Arial'],
+        RegoLig: ['"RegoLig"'],
       },
 
       colors: {

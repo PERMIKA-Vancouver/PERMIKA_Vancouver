@@ -9,6 +9,12 @@
 }
 
 @font-face {
+  font-family: 'RegoLig';
+  src: local('regola-light'),
+    url('./fonts/Regola/regola-light.ttf') format('truetype');
+}
+
+@font-face {
   font-family: 'AveRom';
   src: local('AvenirRoman'),
     url('./fonts/Avenir/AvenirRoman.otf') format('opentype');
