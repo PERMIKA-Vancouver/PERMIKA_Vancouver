@@ -59,7 +59,11 @@ export const CountdownEvent = () => {
             </span>
           </div>
           <>
-            <CustomButton text="RSVP" className="m-auto" />
+            <CustomButton
+              text="RSVP"
+              className="m-auto"
+              link={nextEvent.rsvp}
+            />
           </>
         </div>
       </div>
