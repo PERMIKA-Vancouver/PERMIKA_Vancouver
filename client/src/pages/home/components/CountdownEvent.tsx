@@ -12,19 +12,30 @@ function checkDatePassed(date: string): boolean {
   return dayjs(date, DATE_FORMAT).isBefore(dayjs());
 }
 
-// function toStringMonthDate(date: string): string {
-//   return '';
-// }
+function toStringMonthDate(date: string): string {
+  const month = parseInt(date.substring(5, 7));
+  const day = parseInt(date.substring(8, 10));
+
+  const newDate = new Date();
+  newDate.setMonth(month - 1);
+
+  return newDate.toLocaleString('en-US', { month: 'long' }) + ' ' + day;
+}
 
 export const CountdownEvent = () => {
   let nextEvent = UPCOMING_EVENTS_DEFAULT;
 
-  for (let i = 0; UPCOMING_EVENTS.length; i++) {
+  for (let i = 0; i < UPCOMING_EVENTS.length; i++) {
     if (!checkDatePassed(UPCOMING_EVENTS[i].date)) {
       nextEvent = UPCOMING_EVENTS[i];
       break;
     }
   }
+
+  const textDate =
+    nextEvent === UPCOMING_EVENTS_DEFAULT
+      ? ''
+      : toStringMonthDate(nextEvent.date);
 
   return (
     <div className="bg-forest-green h-screen pt-[7%]">
@@ -45,7 +56,7 @@ export const CountdownEvent = () => {
             <span
               className={`font-AveRom text-[#8CA080] text-[1.3125rem] italic font-normal leading-[124.6%] tracking-[-0.02625rem]`}
             >
-              August 21
+              {textDate}
             </span>
           </>
         </div>

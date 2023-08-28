@@ -5,13 +5,13 @@ const DATE_FORMAT = 'YYYY-MM-DD HH:mm';
 // Date format 'YYYY-MM-DD HH:mm'
 const UPCOMING_EVENTS: UpcomingEvent[] = [
   {
-    name: 'Testing',
-    date: '2023-08-26 10:33',
+    name: 'Pre-departure Orientation',
+    date: '2023-06-15 10:00',
     rsvp: '',
   },
   {
-    name: 'Pre-depature Orientation',
-    date: '2023-11-06 09:00',
+    name: 'Welcoming Party',
+    date: '2023-09-16 09:00',
     rsvp: 'https://www.linkedin.com/in/julian-widjaja/',
   },
 ];
