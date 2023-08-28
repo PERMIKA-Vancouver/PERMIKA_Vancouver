@@ -25,3 +25,9 @@
   src: local('AvenirRoman'),
     url('./fonts/Avenir/AvenirRoman.otf') format('opentype');
 }
+
+@font-face {
+  font-family: 'AveMed';
+  src: local('AvenirMedium'),
+    url('./fonts/Avenir/AvenirMedium.ttf') format('truetype');
+}

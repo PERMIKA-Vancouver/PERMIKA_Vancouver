@@ -13,6 +13,8 @@ module.exports = {
         RegoReg: ['"RegoReg"', 'Arial'],
         RegoLig: ['"RegoLig"'],
         RegoBook: ['"RegoBook"'],
+        AveRom: ['"AveRom"'],
+        AveMed: ['"AveMed"'],
       },
 
       colors: {

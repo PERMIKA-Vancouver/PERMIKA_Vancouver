@@ -28,6 +28,16 @@ h3 {
   letter-spacing: -0.0375rem;
 }
 
+/* H4: AveRom21 */
+h4 {
+  font-family: 'AveRom';
+  font-size: 1.3125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 124.6%; /* 1.63538rem */
+  letter-spacing: -0.02625rem;
+}
+
 /* Sub: RegoReg24 */
 .sub {
   font-family: 'RegoReg';
@@ -38,6 +48,26 @@ h3 {
   letter-spacing: -0.03rem;
 }
 
+/* T1: AveRom21 */
+.t1 {
+  font-family: 'AveRom';
+  font-size: 1.3125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 124.6%; /* 1.63538rem */
+  letter-spacing: -0.02625rem;
+}
+
+/* Body: AveRom18 */
+p {
+  font-family: 'AveRom';
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 124.6%; /* 1.40175rem */
+  letter-spacing: -0.0225rem;
+}
+
 /* ButtonText: AveMed18 */
 .button_text {
   font-family: 'AveMed';
@@ -46,24 +76,6 @@ h3 {
   font-weight: 500;
   line-height: normal;
   letter-spacing: -0.0225rem;
-}
-
-.RegoReg {
-  font-family: 'RegoReg', Arial;
-  font-style: normal;
-  font-weight: 400;
-}
-
-.RegoLig {
-  font-family: 'RegoLig';
-  font-style: normal;
-  font-weight: 400;
-}
-
-.RegoBook {
-  font-family: 'RegoBook';
-  font-style: normal;
-  font-weight: 400;
 }
 
 .mt-navbar {
