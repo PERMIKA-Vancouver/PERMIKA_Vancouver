@@ -1,7 +1,6 @@
 import dayjs, { Dayjs } from 'dayjs';
 
-export function getRemainingTimeUntilMsTimestamp(timestampMs: number) {
-  const timestampDayJs = dayjs(timestampMs);
+export function getRemainingTimeUntilTimestamp(timestampDayJs: Dayjs) {
   const nowDayjs = dayjs();
 
   if (timestampDayJs.isBefore(nowDayjs)) {

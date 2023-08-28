@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 import { CountdownTimer } from '../../../shared/components/CountdownTimer/CountdownTimer';
 import { CustomButton } from '../../../shared/components/CustomButton';
 
@@ -28,7 +30,9 @@ export const CountdownEvent = () => {
           </>
         </div>
         <div className="mt-[9%] mb-8">
-          <CountdownTimer countdownTimestampMs={1093623600000} />
+          <CountdownTimer
+            countdownTimestamp={dayjs('2023-08-29 18:44', 'YYYY-MM-DD HH:mm')}
+          />
         </div>
         <div className="text-center">
           <div className="mb-4">

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { getRemainingTimeUntilMsTimestamp } from '../../utils/CountdownTimerUtils';
+import { Dayjs } from 'dayjs';
+import { getRemainingTimeUntilTimestamp } from '../../utils/CountdownTimerUtils';
 
 const defaultRemainingTime = {
   seconds: '00',
@@ -9,21 +10,21 @@ const defaultRemainingTime = {
 };
 
 export const CountdownTimer = ({
-  countdownTimestampMs,
+  countdownTimestamp,
 }: {
-  countdownTimestampMs: number;
+  countdownTimestamp: Dayjs;
 }) => {
   const [remainingTime, setRemainingTime] = useState(defaultRemainingTime);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      updateRemainingTime(countdownTimestampMs);
+      updateRemainingTime(countdownTimestamp);
     }, 1000);
     return () => clearInterval(intervalId);
-  }, [countdownTimestampMs]);
+  }, [countdownTimestamp]);
 
-  function updateRemainingTime(countdown: number) {
-    setRemainingTime(getRemainingTimeUntilMsTimestamp(countdown));
+  function updateRemainingTime(countdown: Dayjs) {
+    setRemainingTime(getRemainingTimeUntilTimestamp(countdown));
   }
 
   return (
