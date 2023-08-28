@@ -31,7 +31,7 @@ function getRemainingHours(nowDayjs: Dayjs, timestampDayJs: Dayjs) {
 }
 
 function getRemainingDays(nowDayjs: Dayjs, timestampDayJs: Dayjs) {
-  const days = timestampDayJs.diff(nowDayjs, 'days');
+  const days = timestampDayJs.diff(nowDayjs, 'days') % nowDayjs.daysInMonth();
   return padWithZeros(days, 2);
 }
 

@@ -4,6 +4,8 @@ import { CountdownTimer } from '../../../shared/components/CountdownTimer/Countd
 import { CustomButton } from '../../../shared/components/CustomButton';
 
 export const CountdownEvent = () => {
+  const nextEventTimestamp = dayjs('2023-09-29 18:44', 'YYYY-MM-DD HH:mm');
+
   return (
     <div className="bg-forest-green h-screen pt-[11.66%]">
       <div className="w-[63.2%] mx-auto">
@@ -30,9 +32,7 @@ export const CountdownEvent = () => {
           </>
         </div>
         <div className="mt-[9%] mb-8">
-          <CountdownTimer
-            countdownTimestamp={dayjs('2023-08-29 18:44', 'YYYY-MM-DD HH:mm')}
-          />
+          <CountdownTimer countdownTimestamp={nextEventTimestamp} />
         </div>
         <div className="text-center">
           <div className="mb-4">
