@@ -1,4 +1,4 @@
-import { CountdownTimer } from '../../../shared/components/CountdownTimer';
+import { CountdownTimer } from '../../../shared/components/CountdownTimer/CountdownTimer';
 import { CustomButton } from '../../../shared/components/CustomButton';
 
 export const CountdownEvent = () => {
@@ -27,8 +27,8 @@ export const CountdownEvent = () => {
             </span>
           </>
         </div>
-        <div className="mt-[9%]">
-          <CountdownTimer />
+        <div className="mt-[9%] mb-8">
+          <CountdownTimer countdownTimestampMs={1093623600000} />
         </div>
         <div className="text-center">
           <div className="mb-4">
