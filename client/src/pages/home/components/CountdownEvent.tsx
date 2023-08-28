@@ -4,10 +4,10 @@ import { CountdownTimer } from '../../../shared/components/CountdownTimer/Countd
 import { CustomButton } from '../../../shared/components/CustomButton';
 
 export const CountdownEvent = () => {
-  const nextEventTimestamp = dayjs('2023-09-29 18:44', 'YYYY-MM-DD HH:mm');
+  const nextEventTimestamp = dayjs('2023-11-14 18:44', 'YYYY-MM-DD HH:mm');
 
   return (
-    <div className="bg-forest-green h-screen pt-[11.66%]">
+    <div className="bg-forest-green h-screen pt-[7%]">
       <div className="w-[63.2%] mx-auto">
         <>
           <h2 className="text-white">Coming Up</h2>
@@ -25,18 +25,18 @@ export const CountdownEvent = () => {
           </div>
           <>
             <span
-              className={`text-[#8CA080] text-[1.3125rem] italic font-normal leading-[124.6%] tracking-[-0.02625rem]`}
+              className={`font-AveRom text-[#8CA080] text-[1.3125rem] italic font-normal leading-[124.6%] tracking-[-0.02625rem]`}
             >
               August 21
             </span>
           </>
         </div>
-        <div className="mt-[9%] mb-8">
+        <div className="mt-[9%] mb-[7%]">
           <CountdownTimer countdownTimestamp={nextEventTimestamp} />
         </div>
         <div className="text-center">
           <div className="mb-4">
-            <span className={`text-[#E3E3E3] text-[1rem]`}>
+            <span className={`font-AveRom text-[#E3E3E3] text-[1rem]`}>
               Save yourself a seat for the event below!
             </span>
           </div>
