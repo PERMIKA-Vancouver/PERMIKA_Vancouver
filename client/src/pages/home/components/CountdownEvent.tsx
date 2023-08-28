@@ -1,10 +1,30 @@
 import dayjs from 'dayjs';
 
-import { CountdownTimer } from '../../../shared/components/CountdownTimer/CountdownTimer';
+import { CountdownTimer } from '../../../shared/components/CountdownTimer';
 import { CustomButton } from '../../../shared/components/CustomButton';
+import {
+  UPCOMING_EVENTS,
+  UPCOMING_EVENTS_DEFAULT,
+  DATE_FORMAT,
+} from '../../../shared/data/events';
+
+function checkDatePassed(date: string): boolean {
+  return dayjs(date, DATE_FORMAT).isBefore(dayjs());
+}
+
+// function toStringMonthDate(date: string): string {
+//   return '';
+// }
 
 export const CountdownEvent = () => {
-  const nextEventTimestamp = dayjs('2023-11-14 18:44', 'YYYY-MM-DD HH:mm');
+  let nextEvent = UPCOMING_EVENTS_DEFAULT;
+
+  for (let i = 0; UPCOMING_EVENTS.length; i++) {
+    if (!checkDatePassed(UPCOMING_EVENTS[i].date)) {
+      nextEvent = UPCOMING_EVENTS[i];
+      break;
+    }
+  }
 
   return (
     <div className="bg-forest-green h-screen pt-[7%]">
@@ -18,9 +38,7 @@ export const CountdownEvent = () => {
               className={`mr-4 bg-light-green w-[1.4375rem] h-[0.4375rem] rounded-[0.0625rem]`}
             ></div>
             <>
-              <span className="sub text-[#8CA080]">
-                Pre-depature Orientation
-              </span>
+              <span className="sub text-[#8CA080]">{nextEvent.name}</span>
             </>
           </div>
           <>
@@ -32,7 +50,7 @@ export const CountdownEvent = () => {
           </>
         </div>
         <div className="mt-[9%] mb-[7%]">
-          <CountdownTimer countdownTimestamp={nextEventTimestamp} />
+          <CountdownTimer countdownTimestamp={nextEvent.date} />
         </div>
         <div className="text-center">
           <div className="mb-4">

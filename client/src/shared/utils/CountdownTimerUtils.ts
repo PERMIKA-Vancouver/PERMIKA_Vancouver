@@ -1,6 +1,8 @@
 import dayjs, { Dayjs } from 'dayjs';
+import { DATE_FORMAT } from '../data/events';
 
-export function getRemainingTimeUntilTimestamp(timestampDayJs: Dayjs) {
+export function getRemainingTimeUntilTimestamp(timestamp: string) {
+  const timestampDayJs = dayjs(timestamp, DATE_FORMAT);
   const nowDayjs = dayjs();
 
   if (timestampDayJs.isBefore(nowDayjs)) {
