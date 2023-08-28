@@ -3,10 +3,10 @@ import { Dayjs } from 'dayjs';
 import { getRemainingTimeUntilTimestamp } from '../../utils/CountdownTimerUtils';
 
 const defaultRemainingTime = {
-  seconds: '00',
   minutes: '00',
   hours: '00',
   days: '00',
+  months: '00',
 };
 
 export const CountdownTimer = ({
@@ -29,14 +29,14 @@ export const CountdownTimer = ({
 
   return (
     <div className="text-white flex justify-between">
+      <span>{remainingTime.months}</span>
+      <span>months</span>
       <span>{remainingTime.days}</span>
       <span>days</span>
       <span>{remainingTime.hours}</span>
       <span>hours</span>
       <span>{remainingTime.minutes}</span>
       <span>minutes</span>
-      <span>{remainingTime.seconds}</span>
-      <span>seconds</span>
     </div>
   );
 };
