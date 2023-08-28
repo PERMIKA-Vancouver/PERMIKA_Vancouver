@@ -54,6 +54,18 @@ h3 {
   font-weight: 400;
 }
 
+.RegoLig {
+  font-family: 'RegoLig';
+  font-style: normal;
+  font-weight: 400;
+}
+
+.RegoBook {
+  font-family: 'RegoBook';
+  font-style: normal;
+  font-weight: 400;
+}
+
 .mt-navbar {
   margin-top: 20vh;
 }
