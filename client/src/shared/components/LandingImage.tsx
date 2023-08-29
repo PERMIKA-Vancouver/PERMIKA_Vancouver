@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useRef, useState} from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import img2 from "../../assets/DSC01469.JPG";
 import img3 from "../../assets/DSC01479.JPG";
 import img4 from "../../assets/DSC01487.JPG";
@@ -15,13 +15,11 @@ const LandingImage: React.FC = () => {
   const img5Ref = useRef<HTMLImageElement>(null);
   const img6Ref = useRef<HTMLImageElement>(null);
 
-  // Mouse Move Handler
-  const mouseMoveHandler = useCallback((e: MouseEvent) => {
-    const cursorPosition = { x: e.clientX, y: e.clientY }; // Get the current cursor position
-
+  // Function to update image positions
+  const updateImagesPosition = useCallback((cursorPosition: { x: number, y: number }) => {
     const applyStyleToImage = (img: HTMLImageElement | null, initialTop: number, initialLeft: number) => {
       if (img) {
-        const style = calculatePosition(initialTop, initialLeft, cursorPosition); // Pass the cursor position to the calculatePosition function
+        const style = calculatePosition(initialTop, initialLeft, cursorPosition);
         img.style.top = style.top;
         img.style.left = style.left;
       }
@@ -35,6 +33,14 @@ const LandingImage: React.FC = () => {
     applyStyleToImage(img6Ref.current, 76, 75);
   }, []);
 
+  // Mouse Move Handler
+  const mouseMoveHandler = useCallback((e: MouseEvent) => {
+    const cursorPosition = { x: e.clientX, y: e.clientY }; // Get the current cursor position
+
+    // Request to update image positions
+    requestAnimationFrame(() => updateImagesPosition(cursorPosition));
+  }, [updateImagesPosition]);
+
   // Effect to Add and Remove Event Listener
   useEffect(() => {
     document.addEventListener("mousemove", mouseMoveHandler);
@@ -46,8 +52,7 @@ const LandingImage: React.FC = () => {
   }, [mouseMoveHandler]);
 
   const calculatePosition = (initialTop: number, initialLeft: number, cursorPosition: { x: number; y: number }) => {
-
-    const navbarSize = 130 / window.innerHeight; // Convert to relative size based on viewport height
+    const navbarSize = 200 / window.innerHeight;
 
     let relativeCursorX = cursorPosition.x / window.innerWidth;
     let relativeCursorY = cursorPosition.y / window.innerHeight;
@@ -55,22 +60,19 @@ const LandingImage: React.FC = () => {
     let relativeImgX = initialLeft / 100;
     let relativeImgY = initialTop / 100;
 
-    // Calculate distance
     let distanceX = relativeImgX - relativeCursorX;
     let distanceY = relativeImgY - relativeCursorY;
 
-    // Calculate the overall distance (hypotenuse)
     let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
-    let top = initialTop - distanceY * distance * 6; // multiply by distance and by 100 to increase the shift
-    let left = initialLeft - distanceX * distance * 6;
+    let top = initialTop - distanceY * distance * 5;
+    let left = initialLeft - distanceX * distance * 5;
 
-    // Consider image size and limit the movement
-    const imageSizeRelative = 1 / 5; // Image size relative to viewport size
+    const imageSizeRelative = 1 / 5;
     top = Math.min(
         Math.max(top, navbarSize * 100),
         100 - imageSizeRelative * 100
-    ); // consider navbar size for the top boundary
+    );
 
     return { top: `${top}%`, left: `${left}%` };
   };
@@ -80,7 +82,7 @@ const LandingImage: React.FC = () => {
   useEffect(() => {
     setTimeout(() => {
       setIsVisible(true);
-    }, 750); // Delay of 500ms before starting the fade-in
+    }, 750);
   }, []);
 
   return (
@@ -138,8 +140,7 @@ const LandingImage: React.FC = () => {
             sint suscipit? Aspernatur eaque ex facere, maxime mollitia nobis non
             vitae voluptates.
           </p>
-        </header>
-      </div>
+        </header>      </div>
   );
 };
 
