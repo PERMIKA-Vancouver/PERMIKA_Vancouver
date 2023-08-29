@@ -1,29 +1,29 @@
-/* H1: RegoReg60 */
+/* H1: RegoBook60 */
 h1 {
-  font-family: 'RegoReg', Arial;
+  font-family: 'RegoBook';
   font-size: 3.75rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   line-height: normal;
   letter-spacing: -0.075rem;
 }
 
-/* H2: RegoReg48 */
+/* H2: RegoBook48 */
 h2 {
-  font-family: 'RegoReg', Arial;
+  font-family: 'RegoBook';
   font-size: 3rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   line-height: normal;
   letter-spacing: -0.06rem;
 }
 
-/* H3: RegoReg30 */
+/* H3: RegoBook30 */
 h3 {
-  font-family: 'RegoReg', Arial;
+  font-family: 'RegoBook';
   font-size: 1.875rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   line-height: normal;
   letter-spacing: -0.0375rem;
 }
@@ -38,12 +38,12 @@ h4 {
   letter-spacing: -0.02625rem;
 }
 
-/* Sub: RegoReg24 */
+/* Sub: RegoBook24 */
 .sub {
-  font-family: 'RegoReg';
+  font-family: 'RegoBook';
   font-size: 1.5rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   line-height: normal;
   letter-spacing: -0.03rem;
 }

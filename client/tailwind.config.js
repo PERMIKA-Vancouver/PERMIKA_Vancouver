@@ -10,8 +10,6 @@ module.exports = {
       },
 
       fontFamily: {
-        RegoReg: ['"RegoReg"', 'Arial'],
-        RegoLig: ['"RegoLig"'],
         RegoBook: ['"RegoBook"'],
         AveRom: ['"AveRom"'],
         AveMed: ['"AveMed"'],

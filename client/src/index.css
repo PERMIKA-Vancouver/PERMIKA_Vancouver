@@ -3,18 +3,6 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'RegoReg';
-  src: local('regola-regular'),
-    url('./fonts/Regola/regola-regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'RegoLig';
-  src: local('regola-light'),
-    url('./fonts/Regola/regola-light.ttf') format('truetype');
-}
-
-@font-face {
   font-family: 'RegoBook';
   src: local('regola-book'),
     url('./fonts/Regola/regola-book.ttf') format('truetype');
