@@ -1,5 +1,8 @@
 import Core from '../../../assets/core.png';
 
+const WelcomingMsg =
+  "Hello there! Welcome to PERMIKA Vancouver's new chapter. We're so excited for you to experience both our signature and new events in this coming year. We also hope to create a community that you can call home while living in Vancouver. We're so glad you're here!";
+
 export const WelcomingMessage = () => {
   return (
     <div className="pt-[15vh] pb-[25vh] flex justify-between h-screen w-full">
@@ -7,11 +10,8 @@ export const WelcomingMessage = () => {
         <h3 className="mb-6 text-black-permika">
           Welcoming message from PERMIKA 2023/24 Core team
         </h3>
-        <p className="text-[#9A9A9A] mb-28">
-          Hello there! Welcome to PERMIKA Vancouver's new chapter. We're so
-          excited for you to experience both our signature and new events in
-          this coming year. We also hope to create a community that you can call
-          home while living in Vancouver. We're so glad you're here!
+        <p className="text-[#9A9A9A] mb-28 w-[84%]">
+          {WelcomingMsg}
           <br />
           <br />
           Tell us a bit about yourself and become a part of Permika Vancouver!
