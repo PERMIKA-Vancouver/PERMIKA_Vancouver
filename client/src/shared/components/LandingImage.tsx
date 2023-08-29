@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import img2 from "../../assets/DSC01469.JPG";
 import img3 from "../../assets/DSC01479.JPG";
 import img4 from "../../assets/DSC01487.JPG";
@@ -16,7 +16,7 @@ const LandingImage: React.FC = () => {
   const img6Ref = useRef<HTMLImageElement>(null);
 
   // Mouse Move Handler
-  const mouseMoveHandler = (e: MouseEvent) => {
+  const mouseMoveHandler = useCallback((e: MouseEvent) => {
     const cursorPosition = { x: e.clientX, y: e.clientY }; // Get the current cursor position
 
     const applyStyleToImage = (img: HTMLImageElement | null, initialTop: number, initialLeft: number) => {
@@ -33,7 +33,7 @@ const LandingImage: React.FC = () => {
     applyStyleToImage(img4Ref.current, 35, 83);
     applyStyleToImage(img5Ref.current, 28, 29);
     applyStyleToImage(img6Ref.current, 76, 75);
-  };
+  }, []);
 
   // Effect to Add and Remove Event Listener
   useEffect(() => {
@@ -43,7 +43,7 @@ const LandingImage: React.FC = () => {
     return () => {
       document.removeEventListener("mousemove", mouseMoveHandler);
     };
-  }, []);
+  }, [mouseMoveHandler]);
 
   const calculatePosition = (initialTop: number, initialLeft: number, cursorPosition: { x: number; y: number }) => {
 
