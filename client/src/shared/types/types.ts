@@ -1,7 +1,5 @@
-// export type OutletContextType = { height: Number };
-
-// interface OutletContext {
-//   height: number;
-// }
-
-export {};
+export interface UpcomingEvent {
+  name: string;
+  date: string;
+  rsvp: string;
+}

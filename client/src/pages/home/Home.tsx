@@ -1,3 +1,5 @@
+import { CountdownEvent } from './components/CountdownEvent';
+
 export const Home = () => {
   const navbarHeight = 15;
 
@@ -9,12 +11,7 @@ export const Home = () => {
           <span>{navbarHeight}</span>
         </header>
       </div>
-      <div className={`h-screen`}>
-        <header className={`text-center text-2xl`}>
-          <p>PERMIKA Vancouver</p>
-          <span>{navbarHeight}</span>
-        </header>
-      </div>
+      <CountdownEvent />
     </div>
   );
 };
