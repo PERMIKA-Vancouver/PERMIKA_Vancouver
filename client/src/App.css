@@ -1,31 +1,51 @@
-/* RegoReg60 */
+/* H1: RegoBook60 */
 h1 {
-  font-family: 'RegoReg', Arial;
+  font-family: 'RegoBook';
   font-size: 3.75rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   line-height: normal;
   letter-spacing: -0.075rem;
 }
 
-/* RegoReg48 */
+/* H2: RegoBook48 */
 h2 {
-  font-family: 'RegoReg', Arial;
+  font-family: 'RegoBook';
   font-size: 3rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   line-height: normal;
   letter-spacing: -0.06rem;
 }
 
-/* RegoReg30 */
+/* H3: RegoBook30 */
 h3 {
-  font-family: 'RegoReg', Arial;
+  font-family: 'RegoBook';
   font-size: 1.875rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   line-height: normal;
   letter-spacing: -0.0375rem;
+}
+
+/* H4: AveRom21 */
+h4 {
+  font-family: 'AveRom';
+  font-size: 1.3125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 124.6%; /* 1.63538rem */
+  letter-spacing: -0.02625rem;
+}
+
+/* Sub: RegoBook24 */
+.sub {
+  font-family: 'RegoBook';
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  letter-spacing: -0.03rem;
 }
 
 /* T1: AveRom21 */
@@ -38,10 +58,24 @@ h3 {
   letter-spacing: -0.02625rem;
 }
 
-.RegoReg {
-  font-family: 'RegoReg', Arial;
+/* Body: AveRom18 */
+p {
+  font-family: 'AveRom';
+  font-size: 1.125rem;
   font-style: normal;
   font-weight: 400;
+  line-height: 124.6%; /* 1.40175rem */
+  letter-spacing: -0.0225rem;
+}
+
+/* ButtonText: AveMed18 */
+.button_text {
+  font-family: 'AveMed';
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.0225rem;
 }
 
 .mt-navbar {

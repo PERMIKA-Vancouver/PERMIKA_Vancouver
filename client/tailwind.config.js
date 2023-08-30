@@ -10,13 +10,17 @@ module.exports = {
       },
 
       fontFamily: {
-        RegoReg: ['"RegoReg"', 'Arial'],
+        RegoBook: ['"RegoBook"'],
+        AveRom: ['"AveRom"'],
+        AveMed: ['"AveMed"'],
       },
 
       colors: {
         'sunset-orange': '#D07D14',
         'light-grey': '#BCBCBC',
         'black-permika': '#0A0A0A',
+        'forest-green': '#102713',
+        'light-green': '#4C7435',
       },
     },
   },

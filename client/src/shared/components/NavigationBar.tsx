@@ -54,7 +54,7 @@ export const NavigationBar = () => {
               <NavLink key={page.name} to={page.path}>
                 {({ isActive }) => (
                   <p
-                    className={`RegoReg ${
+                    className={`RegoBook ${
                       isActive ? 'text-black-permika' : 'text-light-grey'
                     } hover:text-sunset-orange font-normal not-italic text-lg leading-[normal] transition duration-500`}
                   >
