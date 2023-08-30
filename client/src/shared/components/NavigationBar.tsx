@@ -4,6 +4,7 @@ import { Link, NavLink, Outlet } from 'react-router-dom';
 import NavLogo from '../../assets/cropped_logo.png';
 
 import { PAGES } from '../data/pages';
+import { Footer } from './Footer';
 
 export const NavigationBar = () => {
   const [show, setShow] = useState(true);
@@ -67,6 +68,9 @@ export const NavigationBar = () => {
       </div>
       <>
         <Outlet />
+      </>
+      <>
+        <Footer />
       </>
     </>
   );
