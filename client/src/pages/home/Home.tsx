@@ -1,4 +1,5 @@
 import { WelcomingMessage } from './components/WelcomingMessage';
+import { CountdownEvent } from './components/CountdownEvent';
 
 export const Home = () => {
   const navbarHeight = 15;
@@ -12,6 +13,7 @@ export const Home = () => {
         </header>
       </div>
       <WelcomingMessage />
+      <CountdownEvent />
     </>
   );
 };
