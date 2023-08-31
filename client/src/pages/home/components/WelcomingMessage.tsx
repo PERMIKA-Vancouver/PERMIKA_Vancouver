@@ -16,10 +16,10 @@ export const WelcomingMessage = () => {
             {WelcomingMsg}
             <br />
             <br />
-            Tell us a bit about yourself and become a part of Permika Vancouver!
+            Tell us a bit about yourself and become a part of PERMIKA Vancouver!
           </p>
           <CustomButton
-            text="Join Permika"
+            text="Join PERMIKA"
             className="absolute bottom-0"
             link="https://www.linkedin.com/in/julian-widjaja/"
           />
