@@ -6,25 +6,27 @@ const WelcomingMsg =
 
 export const WelcomingMessage = () => {
   return (
-    <div className="pt-[15vh] pb-[25vh] flex justify-between h-screen w-full">
-      <div className="w-[32%] ml-[20%] h-[60%]">
-        <h3 className="mb-6 text-black-permika">
-          Welcoming message from PERMIKA 2023/24 Core team
-        </h3>
-        <p className="text-[#9A9A9A] mb-28 w-[84%]">
-          {WelcomingMsg}
-          <br />
-          <br />
-          Tell us a bit about yourself and become a part of Permika Vancouver!
-        </p>
-        <CustomButton
-          text="Join Permika"
-          className=""
-          link="https://www.linkedin.com/in/julian-widjaja/"
-        />
-      </div>
-      <div>
-        <img src={Core} alt="Core Team" className="max-h-[60vh] w-auto" />
+    <div className="pt-[15vh] pb-[25vh] h-screen w-full">
+      <div className="flex justify-between w-full h-full">
+        <div className="w-[32%] ml-[20%] relative">
+          <h3 className="mb-11 text-black-permika">
+            Welcoming message from PERMIKA 2023/24 Core team
+          </h3>
+          <p className="text-[#9A9A9A] mb-28 w-[84%]">
+            {WelcomingMsg}
+            <br />
+            <br />
+            Tell us a bit about yourself and become a part of Permika Vancouver!
+          </p>
+          <CustomButton
+            text="Join Permika"
+            className="absolute bottom-0"
+            link="https://www.linkedin.com/in/julian-widjaja/"
+          />
+        </div>
+        <div>
+          <img src={Core} alt="Core Team" className="max-h-[60vh] w-auto" />
+        </div>
       </div>
     </div>
   );
