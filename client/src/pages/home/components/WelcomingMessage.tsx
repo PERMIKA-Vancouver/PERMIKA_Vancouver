@@ -8,7 +8,7 @@ export const WelcomingMessage = () => {
   return (
     <div className="pt-[15vh] pb-[25vh] h-screen w-full">
       <div className="flex justify-between w-full h-full">
-        <div className="w-[32%] ml-[20%] relative">
+        <div className="w-[32%] ml-all relative">
           <h3 className="mb-11 text-black-permika">
             Welcoming message from PERMIKA 2023/24 Core team
           </h3>

@@ -39,7 +39,7 @@ export const CountdownEvent = () => {
 
   return (
     <div className="bg-forest-green h-screen pt-[7%]">
-      <div className="w-[63.2%] mx-auto">
+      <div className="w-[63.2%] ml-all">
         <>
           <h2 className="text-white">Coming Up</h2>
         </>
