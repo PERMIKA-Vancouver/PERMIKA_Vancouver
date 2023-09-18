@@ -1,14 +1,14 @@
-import "./App.css";
+import './App.css';
 
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import { PAGES } from "./shared/data/pages";
-import { NavigationBar } from "./shared/components/NavigationBar";
+import { PAGES } from './shared/data/pages';
+import { NavigationBar } from './shared/components/navigation-bar/NavigationBar';
 
 function App() {
   return (

@@ -1,12 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 
-import NavLogo from '../../assets/cropped_logo.png';
+import NavLogo from '../../../assets/cropped_logo.png';
 
-import { PAGES } from '../data/pages';
-import { Footer } from './Footer';
+import { PAGES } from '../../data/pages';
+import { Footer } from '../Footer';
 import { SandwichNavbar } from './SandwichNavbar';
-import { MOBILE_WIDTH } from '../data/common';
+import { MOBILE_WIDTH } from '../../data/common';
 
 export const NavigationBar = () => {
   const [show, setShow] = useState(true);
