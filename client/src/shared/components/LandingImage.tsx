@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import img1 from "../../assets/tuxpi.com.1694742973-min.jpg"
-import img2 from "../../assets/DSC01469-min.JPG";
-import img3 from "../../assets/DSC01479-min.JPG";
-import img4 from "../../assets/DSC01487-min.JPG";
-import img5 from "../../assets/DSC01610-min.JPG";
-import img6 from "../../assets/DSC01614-min.JPG";
-import img7 from "../../assets/DSC01481-min.JPG";
-import img8 from "../../assets/tuxpi.com.1694743036-min.jpg";
+import img1 from "../../assets/tuxpi.com.1694742973-min.webp"
+import img2 from "../../assets/DSC01469-min.webp";
+import img3 from "../../assets/DSC01479-min.webp";
+import img4 from "../../assets/DSC01487-min.webp";
+import img5 from "../../assets/DSC01610-min.webp";
+import img6 from "../../assets/DSC01614-min.webp";
+import img7 from "../../assets/DSC01481-min.webp";
+import img8 from "../../assets/tuxpi.com.1694743036-min.webp";
 import React from "react";
 
 const LandingImage: React.FC = () => {
@@ -50,6 +50,14 @@ const LandingImage: React.FC = () => {
 
   // Effect to Add and Remove Event Listener
   useEffect(() => {
+    const defaultCursorPosition = {
+      x: window.innerWidth / 2,
+      y: window.innerHeight / 2,
+    };
+
+    // Set the initial position of the images
+    updateImagesPosition(defaultCursorPosition);
+
     document.addEventListener("mousemove", mouseMoveHandler);
 
     // Cleanup
@@ -86,7 +94,9 @@ const LandingImage: React.FC = () => {
 
   return (
       <div className="relative h-screen mb-15">
-        <div className="absolute inset-0 z-10">
+        <div className={`absolute inset-0 z-10 fade-in-element ${
+            isVisible ? "visible" : ""
+        }`}>
           <img
               ref={img1Ref}
               src={img7}
@@ -140,7 +150,7 @@ const LandingImage: React.FC = () => {
         <header
             className={`fade-in-element ${
                 isVisible ? "visible" : ""
-            } fade-in-element min-h-screen flex flex-col items-start justify-end pl-80 pb-28`}
+            } min-h-screen flex flex-col items-start justify-end ml-all pb-28`}
         >
           <h1 className="z-20 text-5xl font-Avenir">
             This is <span className="permikaVancouver">PERMIKA Vancouver</span>
