@@ -48,12 +48,16 @@ export const NavigationBar = () => {
       <div
         className={`fixed z-10 ${
           show ? 'top-0' : '-top-[20vh]'
-        } h-[20vh] w-full bg-white transition-[top] ease-in duration-500`}
+        } h-[10vh] sm:h-[20vh] w-full bg-white transition-[top] ease-in duration-500`}
       >
         <div className="absolute top-[50%] -translate-y-2/4 flex justify-between items-center w-full">
           <div className="ml-[10%] sm:ml-[4%]">
             <Link to="/">
-              <img src={NavLogo} alt="" className="w-[55px] h-auto" />
+              <img
+                src={NavLogo}
+                alt=""
+                className="w-[2.125rem] sm:w-[55px] h-auto"
+              />
             </Link>
           </div>
           {windowWidth < MOBILE_WIDTH ? (
