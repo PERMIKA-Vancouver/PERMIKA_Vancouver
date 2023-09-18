@@ -3,7 +3,7 @@ import SandwichLogo from './SandwichLogo';
 import { MenuInterface } from './MenuInterface';
 
 export const SandwichNavbar = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const handleClose = () => {
     setIsOpen(false);
   };

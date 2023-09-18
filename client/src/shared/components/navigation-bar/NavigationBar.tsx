@@ -9,7 +9,7 @@ import { SandwichNavbar } from './SandwichNavbar';
 import { MOBILE_WIDTH } from '../../data/common';
 
 export const NavigationBar = () => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
