@@ -92,58 +92,49 @@ p {
 
 /* Mobile View */
 @media only screen and (max-width: 639px) {
+  /* M-H1: RegoReg48 */
   h1 {
     font-size: 3rem;
     font-style: normal;
-    font-weight: 500;
-    line-height: 3.5rem; /* 116.667% */
-    letter-spacing: -0.09rem;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.06rem;
   }
 
+  /* M-H2: RegoReg30 */
   h2 {
-    font-size: 2.25rem;
+    font-size: 1.875rem;
     font-style: normal;
-    font-weight: 500;
-    line-height: 3rem; /* 133.333% */
-    letter-spacing: -0.0675rem;
-  }
-
-  h3 {
-    font-size: 1.5rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 2rem; /* 133.333% */
-    letter-spacing: -0.045rem;
-  }
-
-  h4 {
-    font-size: 1.25rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 1.75rem; /* 140% */
+    font-weight: 400;
+    line-height: normal;
     letter-spacing: -0.0375rem;
   }
 
-  h5 {
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 800;
-    line-height: 1.375rem; /* 137.5% */
-    letter-spacing: -0.03rem;
-  }
-
-  .sub {
-    font-size: 1rem;
+  /* M-H3: RegoReg20 */
+  h3 {
+    font-size: 1.25rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 1.375rem; /* 137.5% */
+    line-height: normal;
+    letter-spacing: -0.025rem;
   }
 
+  /* M-Body: AveRom15 */
   p {
-    font-size: 1rem;
+    font-size: 0.9375rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 1.375rem; /* 137.5% */
+    line-height: 124.6%; /* 1.16813rem */
+    letter-spacing: -0.01875rem;
+  }
+
+  /* M-Button: AveMed 15 */
+  .button_text {
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.01875rem;
   }
 
   .mt-navbar {
