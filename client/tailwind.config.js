@@ -22,6 +22,18 @@ module.exports = {
         'forest-green': '#102713',
         'light-green': '#4C7435',
       },
+
+      keyframes: {
+        growDown: {
+          '0%': { transform: 'scaleY(0)' },
+          '50%': { transform: 'scaleY(1.1)' },
+          '100%': { transform: 'scaleY(1)' },
+        },
+      },
+
+      animation: {
+        growDown: 'growDown 500ms ease-in-out forwards',
+      },
     },
   },
   plugins: [],

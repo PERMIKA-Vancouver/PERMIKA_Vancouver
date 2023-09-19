@@ -19,7 +19,7 @@ export const SandwichNavbar = () => {
         openHandler={handleOpen}
         closeHandler={handleClose}
       />
-      {isOpen && <MenuInterface />}
+      <MenuInterface isOpen={isOpen} />
     </div>
   );
 };
