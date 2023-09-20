@@ -7,7 +7,6 @@ import img5 from "../../assets/DSC01610-min.webp";
 import img6 from "../../assets/DSC01614-min.webp";
 import img7 from "../../assets/DSC01481-min.webp";
 import img8 from "../../assets/tuxpi.com.1694743036-min.webp";
-import React from "react";
 
 const LandingImage: React.FC = () => {
   const img1Ref = useRef<HTMLImageElement>(null);
