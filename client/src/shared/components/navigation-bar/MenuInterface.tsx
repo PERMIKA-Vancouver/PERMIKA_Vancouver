@@ -13,9 +13,9 @@ export const MenuInterface = ({ isOpen }: { isOpen: boolean }) => {
           <NavLink key={page.name} to={page.path}>
             {({ isActive }) => (
               <p
-                className={`RegoBook ${
+                className={`${
                   isActive ? 'text-black-permika' : 'text-light-grey'
-                } font-medium not-italic text-[0.75rem] leading-[normal] transition duration-500 ${
+                } transition duration-500 ${
                   isOpen ? 'block opacity-100' : 'hidden opacity-0'
                 }`}
               >
