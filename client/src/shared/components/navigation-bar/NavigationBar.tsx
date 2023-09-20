@@ -48,7 +48,7 @@ export const NavigationBar = () => {
       <div
         className={`fixed z-10 ${
           show ? 'top-0' : '-top-[20vh]'
-        } h-[10vh] sm:h-[15vh] md:h-[20vh] w-full bg-white transition-[top] ease-in duration-500`}
+        } h-[10vh] sm:h-[15vh] lg:h-[20vh] w-full bg-white transition-[top] ease-in duration-500`}
       >
         <div className="absolute top-[50%] -translate-y-2/4 flex justify-between items-center w-full">
           <div className="ml-[10%] sm:ml-[4%]">
