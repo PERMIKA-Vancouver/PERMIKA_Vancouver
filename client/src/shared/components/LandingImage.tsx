@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import img1 from "../../assets/tuxpi.com.1694742973-min.webp"
 import img2 from "../../assets/DSC01469-min.webp";
-import img3 from "../../assets/DSC01479-min.webp";
+import img3 from "../../assets/DSC01619-min.webp";
 import img4 from "../../assets/DSC01487-min.webp";
 import img5 from "../../assets/DSC01610-min.webp";
 import img6 from "../../assets/DSC01614-min.webp";
@@ -31,7 +31,7 @@ const LandingImage: React.FC = () => {
 
     applyStyleToImage(img1Ref.current, 20, 0);
     applyStyleToImage(img2Ref.current, 20, 55);
-    applyStyleToImage(img3Ref.current, 60, 2);
+    applyStyleToImage(img3Ref.current, 60, -4);
     applyStyleToImage(img4Ref.current, 35, 83);
     applyStyleToImage(img5Ref.current, 28, 29);
     applyStyleToImage(img6Ref.current, 76, 75);
@@ -64,7 +64,7 @@ const LandingImage: React.FC = () => {
     return () => {
       document.removeEventListener("mousemove", mouseMoveHandler);
     };
-  }, [mouseMoveHandler]);
+  }, [mouseMoveHandler, updateImagesPosition]);
 
   const calculatePosition = (initialTop: number, initialLeft: number, cursorPosition: { x: number; y: number }) => {
     let relativeCursorX = cursorPosition.x / window.innerWidth;
@@ -113,7 +113,7 @@ const LandingImage: React.FC = () => {
               ref={img3Ref}
               src={img3}
               alt="background"
-              className="absolute h-2/6 opacity-60 transition-all duration-300 ease-out"
+              className="absolute w-1/6 opacity-60 transition-all duration-300 ease-out"
           />
           <img
               ref={img4Ref}
@@ -150,7 +150,7 @@ const LandingImage: React.FC = () => {
         <header
             className={`fade-in-element ${
                 isVisible ? "visible" : ""
-            } min-h-screen flex flex-col items-start justify-end ml-all pb-28`}
+            } min-h-screen flex flex-col items-start justify-end ml-all xl:pb-44 lg:pb-32`}
         >
           <h1 className="z-20 text-5xl font-Avenir">
             This is <span className="permikaVancouver">PERMIKA Vancouver</span>
