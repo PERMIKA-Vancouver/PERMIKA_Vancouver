@@ -10,6 +10,10 @@ const logoStyling =
   'w-[1.88rem] h-auto text-[#757575] hover:text-[#D07D14] transition duration-300';
 
 export const Footer = ({ isMobileView }: { isMobileView: boolean }) => {
+  const openExternalLink = (link: string) => {
+    window.open(link, '_blank');
+  };
+
   return (
     <div className={`relative w-full bg-[#F8F8F8] h-[15vh]`}>
       <div
@@ -30,11 +34,36 @@ export const Footer = ({ isMobileView }: { isMobileView: boolean }) => {
             isMobileView ? 'justify-center h-5 mt-4' : 'mr-[4%] h-[24%]'
           }`}
         >
-          <FaInstagram className={logoStyling} />
-          <FaDiscord className={logoStyling} />
-          <FaYoutube className={logoStyling} />
-          <FaFacebookF className={logoStyling} />
-          <FaTiktok className={logoStyling} />
+          <FaInstagram
+            className={logoStyling}
+            onClick={() =>
+              openExternalLink('https://www.instagram.com/permika.van')
+            }
+          />
+          <FaDiscord
+            className={logoStyling}
+            onClick={() =>
+              openExternalLink('https://discord.com/invite/nSub8bbGHr')
+            }
+          />
+          <FaYoutube
+            className={logoStyling}
+            onClick={() =>
+              openExternalLink('https://www.youtube.com/@permikavancouver5643')
+            }
+          />
+          <FaFacebookF
+            className={logoStyling}
+            onClick={() =>
+              openExternalLink('https://www.facebook.com/permika.van')
+            }
+          />
+          <FaTiktok
+            className={logoStyling}
+            onClick={() =>
+              openExternalLink('https://www.tiktok.com/@permika.van')
+            }
+          />
         </div>
       </div>
     </div>
