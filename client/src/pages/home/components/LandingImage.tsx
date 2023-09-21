@@ -152,7 +152,7 @@ const LandingImage: React.FC = () => {
             } min-h-screen flex flex-col items-start justify-end ml-all xl:pb-44 pb-56`}
         >
           <h1 className="z-20 xl:text-5xl text-4xl font-Avenir">
-            This is <span className="permikaVancouver">PERMIKA Vancouver</span>
+            This is <span className="relative z-20 bg-[#102713] pt-2 text-white">PERMIKA Vancouver</span>
           </h1>
           <p className="z-20 text-sm md:text-md lg:text-lg text-left w-7/12 text-gray-500 pt-4 font-RegoReg">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio
