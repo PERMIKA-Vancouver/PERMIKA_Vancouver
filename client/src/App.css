@@ -89,3 +89,62 @@ p {
 .ml-all {
   margin-left: 20%;
 }
+
+/* Mobile View */
+@media only screen and (max-width: 639px) {
+  /* M-H1: RegoReg48 */
+  h1 {
+    font-family: 'RegoReg';
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.06rem;
+  }
+
+  /* M-H2: RegoReg30 */
+  h2 {
+    font-family: 'RegoReg';
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.0375rem;
+  }
+
+  /* M-H3: RegoReg20 */
+  h3 {
+    font-family: 'RegoReg';
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.025rem;
+  }
+
+  /* M-Body: AveRom15 */
+  p {
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 124.6%; /* 1.16813rem */
+    letter-spacing: -0.01875rem;
+  }
+
+  /* M-Button: AveMed15 */
+  .button_text {
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.01875rem;
+  }
+
+  .mt-navbar {
+    margin-top: 10vh;
+  }
+
+  .pt-navbar {
+    padding-top: 10vh;
+  }
+}
