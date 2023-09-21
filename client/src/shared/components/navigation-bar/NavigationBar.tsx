@@ -6,7 +6,7 @@ import NavLogo from '../../../assets/cropped_logo.png';
 import { PAGES } from '../../data/pages';
 import { Footer } from '../Footer';
 import { SandwichNavbar } from './SandwichNavbar';
-import { MOBILE_WIDTH } from '../../data/common';
+import { MOBILE_WIDTH, TABLET_POTRAIT_WIDTH } from '../../data/common';
 
 export const NavigationBar = () => {
   const [show, setShow] = useState(true);
@@ -85,7 +85,10 @@ export const NavigationBar = () => {
         <Outlet />
       </>
       <>
-        <Footer isMobileView={windowWidth < MOBILE_WIDTH} />
+        <Footer
+          isMobileView={windowWidth < MOBILE_WIDTH}
+          isTabletPotraitView={windowWidth < TABLET_POTRAIT_WIDTH}
+        />
       </>
     </>
   );
