@@ -85,7 +85,7 @@ export const NavigationBar = () => {
         <Outlet />
       </>
       <>
-        <Footer />
+        <Footer isMobileView={windowWidth < MOBILE_WIDTH} />
       </>
     </>
   );
