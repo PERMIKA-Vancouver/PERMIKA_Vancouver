@@ -14,10 +14,10 @@ export const Footer = ({ isMobileView }: { isMobileView: boolean }) => {
     <div className={`relative w-full bg-[#F8F8F8] h-[15vh]`}>
       <div
         className={`absolute top-[50%] -translate-y-2/4 ${
-          isMobileView ? 'grid' : 'flex'
-        } items-center w-full h-full`}
+          isMobileView ? 'grid' : 'flex h-full'
+        } items-center w-full `}
       >
-        <div className={`${!isMobileView && 'ml-[4%]'}`}>
+        <div className={`${isMobileView ? 'text-center' : 'ml-[4%]'}`}>
           <span className={`${isMobileView ? 'footer' : 't1'} text-[#5B5B5B]`}>
             PERMIKA Vancouver 2023
           </span>
@@ -26,8 +26,8 @@ export const Footer = ({ isMobileView }: { isMobileView: boolean }) => {
           <div className="border-l-2 border-solid border-[#969696] h-[65%] self-center mr-[4.4rem] ml-auto"></div>
         )}
         <div
-          className={`flex gap-[1.875rem] h-[24%] self-center ${
-            !isMobileView && 'mr-[4%]'
+          className={`flex gap-[1.875rem] self-center ${
+            isMobileView ? 'justify-center h-5 mt-4' : 'mr-[4%] h-[24%]'
           }`}
         >
           <FaInstagram className={logoStyling} />
