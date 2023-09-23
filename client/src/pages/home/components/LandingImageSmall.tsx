@@ -16,43 +16,43 @@ const LandingImageSmall: React.FC = () => {
                 src={img1}
                 alt="background"
                 className="absolute w-1/4 sm:w-1/4 md:w-1/5 opacity-25"
-                style={{ top: `80%`, left: `75%` }}
+                style={{ top: `75%`, left: `75%` }}
             />
             <img
                 src={img2}
                 alt="background"
-                className="absolute w-1/4 sm:w-1/4 md:w-1/5 opacity-25"
-                style={{ top: `37%`, left: `75%` }}
+                className="absolute w-1/4 sm:w-1/4 md:w-1/5 opacity-40"
+                style={{ top: `24%`, left: `75%` }}
             />
             <img
                 src={img3}
                 alt="background"
-                className="absolute w-1/4 sm:w-1/4 md:w-1/5 opacity-25"
-                style={{ top: `40%`, left: `30%` }}
+                className="absolute w-1/4 sm:w-1/4 md:w-1/5 opacity-60"
+                style={{ top: `27%`, left: `24%` }}
             />
             <img
                 src={img4}
                 alt="background"
-                className="absolute w-1/4 sm:w-1/4 md:w-1/5 opacity-25"
-                style={{ top: `23%`, left: `55%` }}
+                className="absolute w-1/4 sm:w-1/4 md:w-1/5 opacity-70"
+                style={{ top: `13%`, left: `50%` }}
             />
             <img
                 src={img5}
                 alt="background"
-                className="absolute w-1/4 sm:w-1/4 md:w-1/5 opacity-25"
-                style={{ top: `26%`, left: `-5%` }}
+                className="absolute w-1/4 sm:w-1/4 md:w-1/5 opacity-40"
+                style={{ top: `18%`, left: `-5%` }}
             />
             <img
                 src={img6}
                 alt="background"
                 className="absolute w-1/4 sm:w-1/4 md:w-1/5 opacity-25"
-                style={{ top: `55%`, left: `80%` }}
+                style={{ top: `37%`, left: `70%` }}
             />
             <img
                 src={img7}
                 alt="background"
                 className="absolute w-1/4 sm:w-1/4 md:w-1/5 opacity-40"
-                style={{ top: `45%`, left: `-13%` }}
+                style={{ top: `35%`, left: `-22%` }}
             />
             <img
                 src={img8}
@@ -64,9 +64,9 @@ const LandingImageSmall: React.FC = () => {
                 className={`min-h-screen flex flex-col items-start justify-end ml-all xl:pb-44 pb-56`}
             >
                 <div className="z-20 font-Avenir flex flex-col items-start">
-                    <span className="text-[48px] z-20 pt-2">This is</span>
-                    <span className="text-[48px] z-20 bg-[#102713] text-white px-1 mt-1 rounded-md">PERMIKA</span>
-                    <span className="text-[48px] z-20 bg-[#102713] text-white px-1 mt-1 rounded-md">Vancouver</span>
+                    <span className="text-[48px] z-20">This is</span>
+                    <span className="text-[48px] z-20 bg-[#102713] text-white px-1 rounded-sm">PERMIKA</span>
+                    <span className="text-[48px] z-20 bg-[#102713] text-white px-1 mt-1 rounded-sm">Vancouver</span>
                 </div>
 
 

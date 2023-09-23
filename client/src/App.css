@@ -140,6 +140,7 @@ p {
 
   /* M-Body: AveRom15 */
   p {
+    font-family: 'AveRom';
     font-size: 0.9375rem;
     font-style: normal;
     font-weight: 400;
@@ -149,6 +150,7 @@ p {
 
   /* M-Button: AveMed15 */
   .button_text {
+    font-family: 'AveMed';
     font-size: 0.9375rem;
     font-style: normal;
     font-weight: 500;
