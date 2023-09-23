@@ -3,6 +3,9 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      screens: {
+        'custom': {'raw': '(min-height: 750px)'}
+      },
       spacing: {
         15: '3.75rem',
         30: '7.5rem',
