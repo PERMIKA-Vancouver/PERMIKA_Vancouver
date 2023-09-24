@@ -38,30 +38,53 @@ export const CountdownEvent = ({ isMobileView }: { isMobileView: boolean }) => {
       : toStringMonthDate(nextEvent.date);
 
   return (
-    <div className="bg-forest-green h-screen pt-[7%]">
-      <div className="w-[63.2%] ml-all">
+    <div
+      className={`${
+        isMobileView ? 'pt-[4.31rem] pb-16' : 'h-screen pt-[7%]'
+      } bg-forest-green`}
+    >
+      <div className={`${isMobileView ? 'w-[80%]' : 'w-[63.2%]'} ml-all`}>
         <>
           <h2 className="text-white">Coming Up</h2>
         </>
-        <div className="flex justify-between mt-[1.5%]">
+        <div
+          className={`${
+            isMobileView ? 'mt-4' : 'flex mt-[1.5%]'
+          } justify-between`}
+        >
           <div className="flex items-center">
-            <div
-              className={`mr-4 bg-light-green w-[1.4375rem] h-[0.4375rem] rounded-[0.0625rem]`}
-            ></div>
+            {!isMobileView && (
+              <div
+                className={`mr-4 bg-light-green w-[1.4375rem] h-[0.4375rem] rounded-[0.0625rem]`}
+              ></div>
+            )}
             <>
-              <span className="sub text-[#8CA080]">{nextEvent.name}</span>
+              <h3 className={`${isMobileView ? 'mt-4' : 'sub'} text-[#8CA080]`}>
+                {nextEvent.name}
+              </h3>
             </>
           </div>
           <>
-            <span
-              className={`font-AveRom text-[#8CA080] text-[1.3125rem] italic font-normal leading-[124.6%] tracking-[-0.02625rem]`}
+            <p
+              className={`${
+                isMobileView
+                  ? 'mt-2'
+                  : 'font-AveRom text-[1.3125rem] italic font-normal leading-[124.6%] tracking-[-0.02625rem]'
+              } text-[#8CA080]`}
             >
               {textDate}
-            </span>
+            </p>
           </>
         </div>
-        <div className="mt-[9%] mb-[7%]">
-          <CountdownTimer countdownTimestamp={nextEvent.date} />
+        <div
+          className={`${
+            isMobileView ? 'mt-[4.3rem] mb-[5.25rem]' : 'mt-[9%] mb-[7%]'
+          }`}
+        >
+          <CountdownTimer
+            countdownTimestamp={nextEvent.date}
+            isMobileView={isMobileView}
+          />
         </div>
         <div className="text-center">
           <div className="mb-4">

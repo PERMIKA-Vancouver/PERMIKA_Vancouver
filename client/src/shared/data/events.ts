@@ -6,7 +6,7 @@ const DATE_FORMAT = 'YYYY-MM-DD HH:mm';
 const UPCOMING_EVENTS: UpcomingEvent[] = [
   {
     name: 'Welcoming Party',
-    date: '2023-09-16 09:00',
+    date: '2023-10-16 09:00',
     rsvp: 'https://www.linkedin.com/in/julian-widjaja/',
   },
 ];
