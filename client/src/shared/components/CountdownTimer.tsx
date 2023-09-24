@@ -15,7 +15,7 @@ const mobileDateStyle =
   'font-AveRom text-base font-medium leading-[normal] -tracking-[0.02rem] text-center';
 
 const dateNumberStyle =
-  'font-RegoBook text-[9rem] font-medium leading-[normal] -tracking-[0.03rem] text-center';
+  'font-RegoBook text-[6.4375rem] xl:text-[9rem] font-medium leading-[normal] -tracking-[0.03rem] text-center';
 
 const tabletDateNumberStyle =
   'font-RegoBook text-[4.625rem] font-normal leading-[normal] -tracking-[0.03rem] text-center';
