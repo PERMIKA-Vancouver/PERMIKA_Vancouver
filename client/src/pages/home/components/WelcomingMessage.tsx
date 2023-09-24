@@ -4,11 +4,21 @@ import { CustomButton } from '../../../shared/components/CustomButton';
 const WelcomingMsg =
   "Hello there! Welcome to PERMIKA Vancouver's new chapter. We're so excited for you to experience both our signature and new events in this coming year. We also hope to create a community that you can call home while living in Vancouver. We're so glad you're here!";
 
-export const WelcomingMessage = () => {
+export const WelcomingMessage = ({
+  isMobileView,
+}: {
+  isMobileView: boolean;
+}) => {
   return (
-    <div className="pt-[15vh] pb-[25vh] h-screen w-full">
-      <div className="flex justify-between w-full h-full">
-        <div className="w-[32%] ml-all relative">
+    <div
+      className={`${
+        !isMobileView && 'h-screen'
+      } pt-[15vh] pb-[25vh] w-full bg-white`}
+    >
+      <div
+        className={`${!isMobileView && 'flex'} justify-between w-full h-full`}
+      >
+        <div className={`${!isMobileView && 'w-[32%]'} ml-all relative`}>
           <h3 className="mb-11 text-black-permika">
             Welcoming message from PERMIKA 2023/24 Core team
           </h3>
@@ -20,7 +30,7 @@ export const WelcomingMessage = () => {
           </p>
           <CustomButton
             text="Join PERMIKA"
-            className="absolute bottom-0"
+            className={`${!isMobileView && 'absolute bottom-0'}`}
             link="https://www.linkedin.com/in/julian-widjaja/"
           />
         </div>

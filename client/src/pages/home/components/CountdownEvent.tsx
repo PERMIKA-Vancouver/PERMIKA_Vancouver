@@ -22,7 +22,7 @@ function toStringMonthDate(date: string): string {
   return newDate.toLocaleString('en-US', { month: 'long' }) + ' ' + day;
 }
 
-export const CountdownEvent = () => {
+export const CountdownEvent = ({ isMobileView }: { isMobileView: boolean }) => {
   let nextEvent = UPCOMING_EVENTS_DEFAULT;
 
   for (let i = 0; i < UPCOMING_EVENTS.length; i++) {
