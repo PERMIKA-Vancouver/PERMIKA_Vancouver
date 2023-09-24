@@ -1,3 +1,9 @@
+html,
+body {
+  overflow-x: hidden;
+  max-height: 100%;
+}
+
 /* H1: RegoBook60 */
 h1 {
   font-family: 'RegoBook';
@@ -138,6 +144,16 @@ p {
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.01875rem;
+  }
+
+  /* M-Footer: AveRom16 */
+  .footer {
+    font-family: 'AveRom';
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 124.6%; /* 1.246rem */
+    letter-spacing: -0.02rem;
   }
 
   .mt-navbar {
