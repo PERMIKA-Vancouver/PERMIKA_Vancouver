@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { getRemainingTimeUntilTimestamp } from '../utils/CountdownTimerUtils';
 
 const defaultRemainingTime = {
+  seconds: '00',
   minutes: '00',
   hours: '00',
   days: '00',
-  months: '00',
 };
 
 const dateStyle =
@@ -44,10 +44,6 @@ export const CountdownTimer = ({
     <div className="grid grid-cols-[minmax(0,_1fr)_8.5%_minmax(0,_1fr)_8.5%_minmax(0,_1fr)_8.5%_minmax(0,_1fr)] text-[#E3EEDD]">
       <>
         <span className={`${isMobileView ? mobileDateStyle : dateStyle}`}>
-          Months
-        </span>
-        <div></div>
-        <span className={`${isMobileView ? mobileDateStyle : dateStyle}`}>
           Days
         </span>
         <div></div>
@@ -58,22 +54,12 @@ export const CountdownTimer = ({
         <span className={`${isMobileView ? mobileDateStyle : dateStyle}`}>
           Minutes
         </span>
+        <div></div>
+        <span className={`${isMobileView ? mobileDateStyle : dateStyle}`}>
+          Seconds
+        </span>
       </>
       <>
-        <span
-          className={`${
-            isMobileView ? mobileDateNumberStyle : dateNumberStyle
-          }`}
-        >
-          {remainingTime.months}
-        </span>
-        <span
-          className={`${
-            isMobileView ? mobileDateNumberStyle : dateNumberStyle
-          }`}
-        >
-          :
-        </span>
         <span
           className={`${
             isMobileView ? mobileDateNumberStyle : dateNumberStyle
@@ -108,6 +94,20 @@ export const CountdownTimer = ({
           }`}
         >
           {remainingTime.minutes}
+        </span>
+        <span
+          className={`${
+            isMobileView ? mobileDateNumberStyle : dateNumberStyle
+          }`}
+        >
+          :
+        </span>
+        <span
+          className={`${
+            isMobileView ? mobileDateNumberStyle : dateNumberStyle
+          }`}
+        >
+          {remainingTime.seconds}
         </span>
       </>
     </div>

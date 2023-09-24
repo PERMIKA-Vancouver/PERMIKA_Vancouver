@@ -7,19 +7,24 @@ export function getRemainingTimeUntilTimestamp(timestamp: string) {
 
   if (timestampDayJs.isBefore(nowDayjs)) {
     return {
+      seconds: '00',
       minutes: '00',
       hours: '00',
       days: '00',
-      months: '00',
     };
   }
 
   return {
+    seconds: getRemainingSeconds(nowDayjs, timestampDayJs).toString(),
     minutes: getRemainingMinutes(nowDayjs, timestampDayJs).toString(),
     hours: getRemainingHours(nowDayjs, timestampDayJs).toString(),
     days: getRemainingDays(nowDayjs, timestampDayJs).toString(),
-    months: getRemainingMonths(nowDayjs, timestampDayJs).toString(),
   };
+}
+
+function getRemainingSeconds(nowDayjs: Dayjs, timestampDayJs: Dayjs) {
+  const seconds = timestampDayJs.diff(nowDayjs, 'seconds') % 60;
+  return padWithZeros(seconds, 2);
 }
 
 function getRemainingMinutes(nowDayjs: Dayjs, timestampDayJs: Dayjs) {
@@ -33,13 +38,8 @@ function getRemainingHours(nowDayjs: Dayjs, timestampDayJs: Dayjs) {
 }
 
 function getRemainingDays(nowDayjs: Dayjs, timestampDayJs: Dayjs) {
-  const days = timestampDayJs.diff(nowDayjs, 'days') % nowDayjs.daysInMonth();
+  const days = timestampDayJs.diff(nowDayjs, 'days');
   return padWithZeros(days, 2);
-}
-
-function getRemainingMonths(nowDayjs: Dayjs, timestampDayJs: Dayjs) {
-  const months = timestampDayJs.diff(nowDayjs, 'months');
-  return padWithZeros(months, 2);
 }
 
 function padWithZeros(time: number, minLength: number) {
