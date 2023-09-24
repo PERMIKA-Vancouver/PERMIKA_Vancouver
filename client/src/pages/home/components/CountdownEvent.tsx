@@ -50,7 +50,7 @@ export const CountdownEvent = ({
           ? 'pt-[4.31rem] pb-16'
           : isTabletPotraitView
           ? 'py-[6.5rem]'
-          : 'h-screen pt-[7%]'
+          : 'pt-[7%] pb-[18%]'
       } bg-forest-green`}
     >
       <div className={`${isMobileView ? 'w-[80%]' : 'w-[63.2%]'} ml-all`}>
