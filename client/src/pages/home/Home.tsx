@@ -1,6 +1,6 @@
 import { WelcomingMessage } from './components/WelcomingMessage';
 import { CountdownEvent } from './components/CountdownEvent';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MOBILE_WIDTH } from '../../shared/data/common';
 
 export const Home = () => {
