@@ -17,15 +17,20 @@ const mobileDateStyle =
 const dateNumberStyle =
   'font-RegoBook text-[9rem] font-medium leading-[normal] -tracking-[0.03rem] text-center';
 
+const tabletDateNumberStyle =
+  'font-RegoBook text-[4.625rem] font-normal leading-[normal] -tracking-[0.03rem] text-center';
+
 const mobileDateNumberStyle =
   'font-RegoReg text-[2.9375rem] font-normal leading-[normal] text-center';
 
 export const CountdownTimer = ({
   countdownTimestamp,
   isMobileView,
+  isTabletPotraitView,
 }: {
   countdownTimestamp: string;
   isMobileView: boolean;
+  isTabletPotraitView: boolean;
 }) => {
   const [remainingTime, setRemainingTime] = useState(defaultRemainingTime);
 
@@ -62,49 +67,77 @@ export const CountdownTimer = ({
       <>
         <span
           className={`${
-            isMobileView ? mobileDateNumberStyle : dateNumberStyle
+            isMobileView
+              ? mobileDateNumberStyle
+              : isTabletPotraitView
+              ? tabletDateNumberStyle
+              : dateNumberStyle
           }`}
         >
           {remainingTime.days}
         </span>
         <span
           className={`${
-            isMobileView ? mobileDateNumberStyle : dateNumberStyle
+            isMobileView
+              ? mobileDateNumberStyle
+              : isTabletPotraitView
+              ? tabletDateNumberStyle
+              : dateNumberStyle
           }`}
         >
           :
         </span>
         <span
           className={`${
-            isMobileView ? mobileDateNumberStyle : dateNumberStyle
+            isMobileView
+              ? mobileDateNumberStyle
+              : isTabletPotraitView
+              ? tabletDateNumberStyle
+              : dateNumberStyle
           }`}
         >
           {remainingTime.hours}
         </span>
         <span
           className={`${
-            isMobileView ? mobileDateNumberStyle : dateNumberStyle
+            isMobileView
+              ? mobileDateNumberStyle
+              : isTabletPotraitView
+              ? tabletDateNumberStyle
+              : dateNumberStyle
           }`}
         >
           :
         </span>
         <span
           className={`${
-            isMobileView ? mobileDateNumberStyle : dateNumberStyle
+            isMobileView
+              ? mobileDateNumberStyle
+              : isTabletPotraitView
+              ? tabletDateNumberStyle
+              : dateNumberStyle
           }`}
         >
           {remainingTime.minutes}
         </span>
         <span
           className={`${
-            isMobileView ? mobileDateNumberStyle : dateNumberStyle
+            isMobileView
+              ? mobileDateNumberStyle
+              : isTabletPotraitView
+              ? tabletDateNumberStyle
+              : dateNumberStyle
           }`}
         >
           :
         </span>
         <span
           className={`${
-            isMobileView ? mobileDateNumberStyle : dateNumberStyle
+            isMobileView
+              ? mobileDateNumberStyle
+              : isTabletPotraitView
+              ? tabletDateNumberStyle
+              : dateNumberStyle
           }`}
         >
           {remainingTime.seconds}

@@ -22,7 +22,13 @@ function toStringMonthDate(date: string): string {
   return newDate.toLocaleString('en-US', { month: 'long' }) + ' ' + day;
 }
 
-export const CountdownEvent = ({ isMobileView }: { isMobileView: boolean }) => {
+export const CountdownEvent = ({
+  isMobileView,
+  isTabletPotraitView,
+}: {
+  isMobileView: boolean;
+  isTabletPotraitView: boolean;
+}) => {
   let nextEvent = UPCOMING_EVENTS_DEFAULT;
 
   for (let i = 0; i < UPCOMING_EVENTS.length; i++) {
@@ -40,7 +46,11 @@ export const CountdownEvent = ({ isMobileView }: { isMobileView: boolean }) => {
   return (
     <div
       className={`${
-        isMobileView ? 'pt-[4.31rem] pb-16' : 'h-screen pt-[7%]'
+        isMobileView
+          ? 'pt-[4.31rem] pb-16'
+          : isTabletPotraitView
+          ? 'py-[6.5rem]'
+          : 'h-screen pt-[7%]'
       } bg-forest-green`}
     >
       <div className={`${isMobileView ? 'w-[80%]' : 'w-[63.2%]'} ml-all`}>
@@ -49,7 +59,7 @@ export const CountdownEvent = ({ isMobileView }: { isMobileView: boolean }) => {
         </>
         <div
           className={`${
-            isMobileView ? 'mt-4' : 'flex mt-[1.5%]'
+            isMobileView ? 'mt-4' : 'flex mt-[2%]'
           } justify-between`}
         >
           <div className="flex items-center">
@@ -78,12 +88,17 @@ export const CountdownEvent = ({ isMobileView }: { isMobileView: boolean }) => {
         </div>
         <div
           className={`${
-            isMobileView ? 'mt-[4.3rem] mb-[5.25rem]' : 'mt-[9%] mb-[7%]'
+            isMobileView
+              ? 'mt-[4.3rem] mb-[5.25rem]'
+              : isTabletPotraitView
+              ? 'my-[5.75rem]'
+              : 'mt-[9%] mb-[7%]'
           }`}
         >
           <CountdownTimer
             countdownTimestamp={nextEvent.date}
             isMobileView={isMobileView}
+            isTabletPotraitView={isTabletPotraitView}
           />
         </div>
         {nextEvent !== UPCOMING_EVENTS_DEFAULT && (
