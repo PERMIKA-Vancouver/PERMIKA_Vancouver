@@ -86,20 +86,22 @@ export const CountdownEvent = ({ isMobileView }: { isMobileView: boolean }) => {
             isMobileView={isMobileView}
           />
         </div>
-        <div className="text-center">
-          <div className="mb-4">
-            <span className={`font-AveRom text-[#E3E3E3] text-[1rem]`}>
-              Save yourself a seat for the event below!
-            </span>
+        {nextEvent !== UPCOMING_EVENTS_DEFAULT && (
+          <div className="text-center">
+            <div className="mb-4">
+              <span className={`font-AveRom text-[#E3E3E3] text-[1rem]`}>
+                Save yourself a seat for the event below!
+              </span>
+            </div>
+            <>
+              <CustomButton
+                text="RSVP"
+                className="m-auto"
+                link={nextEvent.rsvp}
+              />
+            </>
           </div>
-          <>
-            <CustomButton
-              text="RSVP"
-              className="m-auto"
-              link={nextEvent.rsvp}
-            />
-          </>
-        </div>
+        )}
       </div>
     </div>
   );
