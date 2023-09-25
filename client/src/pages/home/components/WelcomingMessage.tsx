@@ -16,9 +16,23 @@ export const WelcomingMessage = ({
       } pt-[15vh] pb-[25vh] w-full bg-white`}
     >
       <div
-        className={`${!isMobileView && 'flex'} justify-between w-full h-full`}
+        className={`${
+          isMobileView ? 'ml-all' : 'flex flex-row-reverse'
+        } justify-between w-full h-full`}
       >
-        <div className={`${!isMobileView && 'w-[32%]'} ml-all relative`}>
+        <div
+          className={`${
+            isMobileView &&
+            'h-[11.3125rem] overflow-y-hidden relative grid items-center w-[21.375rem] float-right'
+          }`}
+        >
+          <img
+            src={Core}
+            alt="Core Team"
+            className={`${isMobileView && 'absolute'} max-h-[60vh] w-auto`}
+          />
+        </div>
+        <div className={`${isMobileView ? 'mt-5' : 'w-[32%] relative ml-all'}`}>
           <h3 className="mb-11 text-black-permika">
             Welcoming message from PERMIKA 2023/24 Core team
           </h3>
@@ -33,9 +47,6 @@ export const WelcomingMessage = ({
             className={`${!isMobileView && 'absolute bottom-0'}`}
             link="https://www.linkedin.com/in/julian-widjaja/"
           />
-        </div>
-        <div>
-          <img src={Core} alt="Core Team" className="max-h-[60vh] w-auto" />
         </div>
       </div>
     </div>
