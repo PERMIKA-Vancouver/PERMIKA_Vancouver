@@ -163,4 +163,8 @@ p {
   .pt-navbar {
     padding-top: 10vh;
   }
+
+  .ml-all {
+    margin-left: 10%;
+  }
 }
