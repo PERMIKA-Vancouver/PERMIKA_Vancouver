@@ -60,7 +60,7 @@ const LandingImageSmall: React.FC = () => {
             />
 
             <header
-                className={`min-h-screen flex flex-col items-start justify-end ml-all pb-40 sm:pb-52`}
+                className={`min-h-screen flex flex-col items-start justify-end ml-all pb-44 sm:pb-52`}
             >
                 <div className="z-20 font-Avenir flex flex-col items-start md:flex-row">
                     <span className="text-[48px] z-20">This is&nbsp;</span>
