@@ -88,7 +88,7 @@ const LandingImage: React.FC = () => {
   useEffect(() => {
     setTimeout(() => {
       setIsVisible(true);
-    }, 750);
+    }, 100);
   }, []);
 
   return (

@@ -6,12 +6,22 @@ import img5 from "../../../assets/DSC01610-min.webp";
 import img6 from "../../../assets/DSC01614-min.webp";
 import img7 from "../../../assets/DSC01481-min.webp";
 import img8 from "../../../assets/tuxpi.com.1694743036-min.webp";
+import {useEffect, useState} from "react";
 
 
 const LandingImageSmall: React.FC = () => {
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsVisible(true);
+        }, 100);
+    }, []);
 
     return (
-        <div className="h-screen relative overflow-hidden">
+        <div className={`h-screen relative overflow-hidden fade-in-element ${
+            isVisible ? "visible" : ""
+        }`}>
             <img
                 src={img1}
                 alt="background"
