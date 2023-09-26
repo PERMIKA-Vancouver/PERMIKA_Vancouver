@@ -17,7 +17,10 @@ export const Home = () => {
           <p>PERMIKA Vancouver</p>
         </header>
       </div>
-      <WelcomingMessage isMobileView={windowWidth < MOBILE_WIDTH} />
+      <WelcomingMessage
+        isMobileView={windowWidth < MOBILE_WIDTH}
+        isTabletPotraitView={windowWidth < TABLET_POTRAIT_WIDTH}
+      />
       <CountdownEvent
         isMobileView={windowWidth < MOBILE_WIDTH}
         isTabletPotraitView={windowWidth < TABLET_POTRAIT_WIDTH}

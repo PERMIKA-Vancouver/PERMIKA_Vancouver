@@ -7,6 +7,7 @@ import {
   UPCOMING_EVENTS_DEFAULT,
   DATE_FORMAT,
 } from '../../../shared/data/events';
+import { ScreenSizeProps } from '../../../shared/types/types';
 
 function checkDatePassed(date: string): boolean {
   return dayjs(date, DATE_FORMAT).isBefore(dayjs());
@@ -25,10 +26,7 @@ function toStringMonthDate(date: string): string {
 export const CountdownEvent = ({
   isMobileView,
   isTabletPotraitView,
-}: {
-  isMobileView: boolean;
-  isTabletPotraitView: boolean;
-}) => {
+}: ScreenSizeProps) => {
   let nextEvent = UPCOMING_EVENTS_DEFAULT;
 
   for (let i = 0; i < UPCOMING_EVENTS.length; i++) {
