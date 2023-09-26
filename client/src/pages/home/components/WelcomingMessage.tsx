@@ -1,4 +1,5 @@
 import Core from '../../../assets/core.png';
+import CoreSquare from '../../../assets/core_square.png';
 import { CustomButton } from '../../../shared/components/CustomButton';
 
 const WelcomingMsg =
@@ -12,31 +13,38 @@ export const WelcomingMessage = ({
   return (
     <div
       className={`${
-        !isMobileView && 'h-screen'
-      } pt-[15vh] pb-[25vh] w-full bg-white`}
+        isMobileView ? 'pt-20 pb-[5.5rem]' : 'h-screen pt-[15vh] pb-[25vh]'
+      } w-full bg-white`}
     >
       <div
         className={`${
           isMobileView ? 'ml-all' : 'flex flex-row-reverse'
         } justify-between w-full h-full`}
       >
-        <div
-          className={`${
-            isMobileView &&
-            'h-[11.3125rem] overflow-y-hidden relative grid items-center w-[21.375rem] float-right'
-          }`}
-        >
+        <div>
           <img
-            src={Core}
+            src={isMobileView ? Core : CoreSquare}
             alt="Core Team"
-            className={`${isMobileView && 'absolute'} max-h-[60vh] w-auto`}
+            className={`${
+              isMobileView
+                ? 'w-full aspect-[2/1] object-cover'
+                : 'max-h-[60vh] w-auto'
+            }`}
           />
         </div>
         <div className={`${isMobileView ? 'mt-5' : 'w-[32%] relative ml-all'}`}>
-          <h3 className="mb-11 text-black-permika">
+          <h3
+            className={` ${
+              isMobileView ? 'w-[70%] mb-5' : 'mb-11'
+            }  text-black-permika`}
+          >
             Welcoming message from PERMIKA 2023/24 Core team
           </h3>
-          <p className="text-[#9A9A9A] mb-28 w-[84%]">
+          <p
+            className={`${
+              isMobileView ? 'mb-12' : 'mb-28'
+            } text-[#9A9A9A]  w-[84%]`}
+          >
             {WelcomingMsg}
             <br />
             <br />
