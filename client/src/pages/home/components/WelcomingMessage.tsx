@@ -58,8 +58,12 @@ export const WelcomingMessage = ({
           </h3>
           <p
             className={`${
-              isMobileView ? 'mb-12' : isTabletPotraitView ? 'mb-16' : 'mb-28'
-            } text-[#9A9A9A] w-[84%]`}
+              isMobileView
+                ? 'mb-12 w-[75%]'
+                : isTabletPotraitView
+                ? 'mb-16'
+                : 'mb-28 w-[84%]'
+            } text-[#9A9A9A] `}
           >
             {WelcomingMsg}
             <br />
