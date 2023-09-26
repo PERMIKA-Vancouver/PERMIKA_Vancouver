@@ -15,59 +15,58 @@ const LandingImageSmall: React.FC = () => {
             <img
                 src={img1}
                 alt="background"
-                className="absolute w-1/4 sm:w-1/4 md:w-1/5 opacity-25"
-                style={{ top: `75%`, left: `75%` }}
+                className="absolute w-1/4 sm:w-1/6 opacity-25 top-[83%] left-[75%] sm:left-[83%]"
             />
             <img
                 src={img2}
                 alt="background"
-                className="absolute w-1/4 sm:w-1/4 md:w-1/5 opacity-40"
-                style={{ top: `24%`, left: `75%` }}
+                className="absolute w-1/4 sm:w-1/6 opacity-60 top-[24%] left-[86%]"
+
             />
             <img
                 src={img3}
                 alt="background"
-                className="absolute w-1/4 sm:w-1/4 md:w-1/5 opacity-60"
-                style={{ top: `27%`, left: `24%` }}
+                className="absolute w-1/4 sm:w-1/6 opacity-60 top-[27%] left-[28%]"
             />
+
             <img
                 src={img4}
                 alt="background"
-                className="absolute w-1/4 sm:w-1/4 md:w-1/5 opacity-70"
-                style={{ top: `13%`, left: `50%` }}
+                className="absolute w-1/4 sm:w-1/6 opacity-70 top-[13%] left-[55%]"
             />
+
             <img
                 src={img5}
                 alt="background"
-                className="absolute w-1/4 sm:w-1/4 md:w-1/5 opacity-40"
-                style={{ top: `18%`, left: `-5%` }}
+                className="absolute w-1/4 sm:w-1/6 opacity-60 top-[18%] left-[-5%]"
             />
+
             <img
                 src={img6}
                 alt="background"
-                className="absolute w-1/4 sm:w-1/4 md:w-1/5 opacity-25"
-                style={{ top: `37%`, left: `70%` }}
+                className="absolute w-1/4 sm:w-1/6 opacity-60 top-[40%] left-[65%] sm:top-[53%] sm:left-[-6%]"
             />
+
             <img
                 src={img7}
                 alt="background"
-                className="absolute w-1/4 sm:w-1/4 md:w-1/5 opacity-40"
-                style={{ top: `35%`, left: `-22%` }}
+                className="absolute w-1/4 sm:w-1/6 opacity-40 top-[35%] left-[-22%] sm:top-[46%] sm:left-[90%]"
             />
+
             <img
                 src={img8}
                 alt="background"
-                className="absolute w-1/4 sm:w-1/4 md:w-1/5 opacity-40"
-                style={{ top: `75%`, left: `-5%` }}
+                className="absolute w-1/4 sm:w-1/6 opacity-40 top-[86%] left-[-5%]"
             />
+
             <header
-                className={`min-h-screen flex flex-col items-start justify-end ml-all xl:pb-44 pb-56`}
+                className={`min-h-screen flex flex-col items-start justify-end ml-all pb-40 sm:pb-52`}
             >
-                <div className="z-20 font-Avenir flex flex-col items-start">
-                    <span className="text-[48px] z-20">This is</span>
-                    <span className="text-[48px] z-20 bg-[#102713] text-white px-1 rounded-sm">PERMIKA</span>
-                    <span className="text-[48px] z-20 bg-[#102713] text-white px-1 mt-1 rounded-sm">Vancouver</span>
+                <div className="z-20 font-Avenir flex flex-col items-start md:flex-row">
+                    <span className="text-[48px] z-20">This is&nbsp;</span>
+                    <span className="text-[48px] z-20 bg-[#102713] text-white px-1 rounded-sm md:mt-0">PERMIKA</span><span className="text-[48px] z-20 bg-[#102713] text-white px-1 mt-1 rounded-sm md:mt-0">Vancouver</span>
                 </div>
+
 
 
                 <p className="z-20 text-md text-left w-9/12 text-gray-500 pt-4 font-RegoReg">
