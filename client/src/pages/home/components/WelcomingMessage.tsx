@@ -53,7 +53,7 @@ export const WelcomingMessage = ({
           <CustomButton
             text="Join PERMIKA"
             className={`${!isMobileView && 'absolute bottom-0'}`}
-            link="https://www.linkedin.com/in/julian-widjaja/"
+            link="https://forms.gle/z8AFC5m5PiJzKBEf7"
           />
         </div>
       </div>
