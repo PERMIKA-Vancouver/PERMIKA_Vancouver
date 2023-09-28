@@ -3,3 +3,8 @@ export interface UpcomingEvent {
   date: string;
   rsvp: string;
 }
+
+export type ScreenSizeProps = {
+  isMobileView: boolean;
+  isTabletPotraitView: boolean;
+};
