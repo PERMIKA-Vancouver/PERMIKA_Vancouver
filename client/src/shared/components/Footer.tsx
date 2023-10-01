@@ -5,6 +5,13 @@ import {
   FaFacebookF,
   FaTiktok,
 } from 'react-icons/fa6';
+import {
+  openDiscord,
+  openFacebook,
+  openInstagram,
+  openTiktok,
+  openYoutube,
+} from '../utils/OpenLinkUtil';
 
 const logoStyling =
   'w-[1.88rem] h-auto text-[#757575] hover:text-[#D07D14] transition duration-300';
@@ -16,10 +23,6 @@ export const Footer = ({
   isMobileView: boolean;
   isTabletPotraitView: boolean;
 }) => {
-  const openExternalLink = (link: string) => {
-    window.open(link, '_blank');
-  };
-
   return (
     <div className={`relative w-full bg-[#F8F8F8] h-[15vh]`}>
       <div
@@ -44,36 +47,11 @@ export const Footer = ({
               : 'h-[24%]'
           } ${isTabletPotraitView ? 'justify-center' : 'mr-[4%]'}`}
         >
-          <FaInstagram
-            className={logoStyling}
-            onClick={() =>
-              openExternalLink('https://www.instagram.com/permika.van')
-            }
-          />
-          <FaDiscord
-            className={logoStyling}
-            onClick={() =>
-              openExternalLink('https://discord.com/invite/nSub8bbGHr')
-            }
-          />
-          <FaYoutube
-            className={logoStyling}
-            onClick={() =>
-              openExternalLink('https://www.youtube.com/@permikavancouver5643')
-            }
-          />
-          <FaFacebookF
-            className={logoStyling}
-            onClick={() =>
-              openExternalLink('https://www.facebook.com/permika.van')
-            }
-          />
-          <FaTiktok
-            className={logoStyling}
-            onClick={() =>
-              openExternalLink('https://www.tiktok.com/@permika.van')
-            }
-          />
+          <FaInstagram className={logoStyling} onClick={openInstagram} />
+          <FaDiscord className={logoStyling} onClick={openDiscord} />
+          <FaYoutube className={logoStyling} onClick={openYoutube} />
+          <FaFacebookF className={logoStyling} onClick={openFacebook} />
+          <FaTiktok className={logoStyling} onClick={openTiktok} />
         </div>
       </div>
     </div>
