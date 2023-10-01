@@ -5,8 +5,8 @@ module.exports = {
     extend: {
       screens: {
         'sm': '640px',
-        // 'smVertical': {'raw': '(min-height: 640px)'},
-        'mdVertical': {'raw': '(min-height: 750px)'},
+        'smVertical': {'raw': '(min-height: 700px)'},
+        'mdVertical': {'raw': '(min-height: 900px)'},
         'lgVertical': {'raw': '(min-height: 1100px)'},
         // 'mdVertical': {'raw': '(min-height: 750px)'}
 

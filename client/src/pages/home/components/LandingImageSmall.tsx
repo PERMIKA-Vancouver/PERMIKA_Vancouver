@@ -70,12 +70,12 @@ const LandingImageSmall: React.FC = () => {
             />
 
             <header
-                className={`min-h-screen flex flex-col items-start justify-end ml-all pb-36 mdVertical:pb-44 sm:pb-52 lgVertical:pb-64 lgVertical:pl-16`}
+                className={`min-h-screen flex flex-col items-start justify-end ml-all pb-36 sm:pb-52 smVertical:pb-52 mdVertical:pb-60 lgVertical:pb-64 lgVertical:pl-16`}
             >
                 <div className="z-20 font-Avenir flex flex-col items-start">
-                <span className="text-[27px] mdVertical:text-[48px] lgVertical:text-[70px] z-20">This is</span>
-                <span className="text-[27px] mdVertical:text-[48px] lgVertical:text-[70px] z-20 bg-[#102713] text-white px-1 rounded-sm">PERMIKA</span>
-                <span className="text-[27px] mdVertical:text-[48px] lgVertical:text-[70px] z-20 bg-[#102713] text-white px-1 mt-1 rounded-sm">Vancouver</span>
+                <span className="text-[27px] mdVertical:text-[48px] lgVertical:text-[63px] z-20">This is</span>
+                <span className="text-[27px] mdVertical:text-[48px] lgVertical:text-[63px] z-20 bg-[#102713] text-white px-1 rounded-sm">PERMIKA</span>
+                <span className="text-[27px] mdVertical:text-[48px] lgVertical:text-[63px] z-20 bg-[#102713] text-white px-1 mt-1 rounded-sm">Vancouver</span>
         </div>
 
 
