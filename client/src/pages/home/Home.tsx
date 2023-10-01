@@ -17,11 +17,14 @@ export const Home = () => {
   return (
     <>
         {isSmallScreen ? <LandingImageSmall /> : <LandingImage />}
-      <WelcomingMessage isMobileView={windowWidth < MOBILE_WIDTH} />
-      <CountdownEvent
-        isMobileView={windowWidth < MOBILE_WIDTH}
-        isTabletPotraitView={windowWidth < TABLET_POTRAIT_WIDTH}
-      />
+        <WelcomingMessage
+            isMobileView={windowWidth < MOBILE_WIDTH}
+            isTabletPotraitView={windowWidth < TABLET_POTRAIT_WIDTH}
+        />
+        <CountdownEvent
+            isMobileView={windowWidth < MOBILE_WIDTH}
+            isTabletPotraitView={windowWidth < TABLET_POTRAIT_WIDTH}
+        />
     </>
   );
 };
