@@ -3,6 +3,14 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      screens: {
+        'sm': '640px',
+        'smVertical': {'raw': '(min-height: 700px)'},
+        'mdVertical': {'raw': '(min-height: 900px)'},
+        'lgVertical': {'raw': '(min-height: 1100px)'},
+        // 'mdVertical': {'raw': '(min-height: 750px)'}
+
+      },
       spacing: {
         15: '3.75rem',
         30: '7.5rem',
