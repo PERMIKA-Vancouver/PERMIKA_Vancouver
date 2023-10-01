@@ -70,21 +70,19 @@ const LandingImageSmall: React.FC = () => {
       />
 
       <header
-        className={`min-h-screen flex flex-col items-start justify-end ml-all pb-36 sm:pb-52 mdVertical:pb-60 lgVertical:pb-64 lgVertical:pl-16`}
+        className={`min-h-screen flex flex-col items-start justify-end ml-all  pb-36 sm:smVertical:pb-24 mdVertical:pb-60 lgVertical:pb-64 lgVertical:pl-16`}
       >
-        <div className="z-20 font-Avenir flex flex-col items-start">
-          <h1 className="mdVertical:text-[48px] lgVertical:text-[63px] z-20">
-            This is
-          </h1>
-          <h1 className="mdVertical:text-[48px] lgVertical:text-[63px] z-20 bg-[#102713] text-white px-1 rounded-sm">
+        <div className="z-20 flex flex-col items-start">
+          <h1 className="z-20">This is</h1>
+          <h1 className="z-20 bg-[#102713] text-white px-1 rounded-sm">
             PERMIKA
           </h1>
-          <h1 className="mdVertical:text-[48px] lgVertical:text-[63px] z-20 bg-[#102713] text-white px-1 mt-1 rounded-sm">
-            Vancouver
+          <h1 className="z-20 bg-[#102713] text-white px-1 mt-1 rounded-sm">
+            Vancouver,
           </h1>
         </div>
 
-        <span className="sub z-20 text-md mdVertical:text-2xl text-left w-9/12 text-[#9A9A9A] pt-4 font-RegoReg">
+        <span className="sub z-20 text-left w-9/12 text-[#9A9A9A] pt-4">
           A student-led organization that unites all Indonesians in
           post-secondary institutions across the Greater Vancouver area.
         </span>
