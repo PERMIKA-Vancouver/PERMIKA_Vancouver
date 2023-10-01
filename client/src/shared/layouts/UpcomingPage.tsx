@@ -12,7 +12,7 @@ const socialStyle = 'text-sunset-orange cursor-pointer';
 
 export const UpcomingPage = () => {
   return (
-    <div className="pt-navbar h-[85vh] h-[85dvh]">
+    <div className="pt-navbar h-screen">
       <div className="ml-all mr-[10%] h-full">
         <div className="relative h-[30%] lg:h-[40%]">
           <img
@@ -33,19 +33,19 @@ export const UpcomingPage = () => {
           <p className={`text-[#9a9a9a] mt-5`}>
             It will be up soon but in the meantime, you can find us on{' '}
             <span className={socialStyle} onClick={openInstagram}>
-              instagram
+              Instagram
             </span>
             ,{' '}
             <span className={socialStyle} onClick={openDiscord}>
-              discord
+              Discord
             </span>
             ,{' '}
             <span className={socialStyle} onClick={openYoutube}>
-              youtube
+              Youtube
             </span>
             ,{' '}
             <span className={socialStyle} onClick={openFacebook}>
-              facebook
+              Facebook
             </span>
             , or{' '}
             <span className={socialStyle} onClick={openTiktok}>
