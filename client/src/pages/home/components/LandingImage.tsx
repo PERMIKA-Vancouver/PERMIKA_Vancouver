@@ -149,7 +149,7 @@ const LandingImage: React.FC = () => {
         <header
             className={`fade-in-element ${
                 isVisible ? "visible" : ""
-            } min-h-screen flex flex-col items-start justify-end ml-all custom:pb-44 pb-30`}
+            } min-h-screen flex flex-col items-start justify-end ml-all mdVertical:pb-44 pb-30`}
         >
           <h1 className="z-20 xl:text-5xl text-4xl">
             This is <span className="relative z-20 bg-[#102713] pt-2 text-white">PERMIKA Vancouver</span>

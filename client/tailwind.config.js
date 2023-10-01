@@ -4,7 +4,12 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        'custom': {'raw': '(min-height: 750px)'}
+        'sm': '640px',
+        // 'smVertical': {'raw': '(min-height: 640px)'},
+        'mdVertical': {'raw': '(min-height: 750px)'},
+        'lgVertical': {'raw': '(min-height: 1100px)'},
+        // 'mdVertical': {'raw': '(min-height: 750px)'}
+
       },
       spacing: {
         15: '3.75rem',
