@@ -15,12 +15,10 @@ export const NavigationBar = () => {
 
   const controlNavbar = useCallback(() => {
     if (typeof window !== 'undefined') {
-      if (window.scrollY > lastScrollY) {
-        // if scroll down hide the navbar
-        setShow(false);
-      } else {
-        // if scroll up show the navbar
+      if (window.scrollY < lastScrollY || window.scrollY === 0) {
         setShow(true);
+      } else {
+        setShow(false);
       }
 
       // remember current page location to use in the next move
