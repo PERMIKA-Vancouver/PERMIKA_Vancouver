@@ -2,16 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: 'RegoBook';
+  src: local('regola-book'),
+    url('./fonts/Regola/regola-book.ttf') format('truetype');
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+@font-face {
+  font-family: 'RegoReg';
+  src: local('regola-regular'),
+    url('./fonts/Regola/regola-regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'AveRom';
+  src: local('AvenirRoman'),
+    url('./fonts/Avenir/AvenirRoman.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'AveMed';
+  src: local('AvenirMedium'),
+    url('./fonts/Avenir/AvenirMedium.ttf') format('truetype');
 }
