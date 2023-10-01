@@ -14,19 +14,19 @@ export const UpcomingPage = () => {
   return (
     <div className="pt-navbar h-[85vh]">
       <div className="ml-all mr-[10%] h-full">
-        <div className="relative h-[40%]">
+        <div className="relative h-[30%] lg:h-[40%]">
           <img
             src={Cloud}
             alt="cloud"
-            className={`absolute bottom-0 left-0 w-[15%]`}
+            className={`absolute bottom-0 left-0 w-1/4 lg:w-[15%]`}
           />
           <img
             src={Cloud}
             alt="cloud"
-            className={`absolute top-0 left-52 w-[15%]`}
+            className={`absolute bottom-[25%] sm:bottom-[40%] left-[30%] lg:left-[20%] w-1/4 lg:w-[15%]`}
           />
         </div>
-        <div className="mt-[5%]">
+        <div className="mt-[10%] lg:mt-[5%]">
           <h2>
             Hello, you're early! This page is currently undergoing renovations..
           </h2>
