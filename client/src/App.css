@@ -98,12 +98,12 @@ p {
 
 /*for fade in transition*/
 .fade-in-element {
-  opacity: 0;  /* Initial state: element is invisible */
-  transition: opacity 0.5s ease-in-out;  /* Transition effect for opacity */
+  opacity: 0; /* Initial state: element is invisible */
+  transition: opacity 0.5s ease-in-out; /* Transition effect for opacity */
 }
 
 .fade-in-element.visible {
-  opacity: 1;  /* Target state: element is fully visible */
+  opacity: 1; /* Target state: element is fully visible */
 }
 
 /* Mobile View */
@@ -136,6 +136,16 @@ p {
     font-weight: 400;
     line-height: normal;
     letter-spacing: -0.025rem;
+  }
+
+  /* M-Sub: AveRom18 */
+  .sub {
+    font-family: 'AveRom';
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 124.6%; /* 1.40175rem */
+    letter-spacing: -0.0225rem;
   }
 
   /* M-Body: AveRom15 */
