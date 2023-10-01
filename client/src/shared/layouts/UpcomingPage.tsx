@@ -12,7 +12,7 @@ const socialStyle = 'text-sunset-orange cursor-pointer';
 
 export const UpcomingPage = () => {
   return (
-    <div className="pt-navbar h-[85vh]">
+    <div className="pt-navbar h-[85vh] h-[85dvh]">
       <div className="ml-all mr-[10%] h-full">
         <div className="relative h-[30%] lg:h-[40%]">
           <img
