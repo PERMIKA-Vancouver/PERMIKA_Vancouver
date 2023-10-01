@@ -80,9 +80,8 @@ const LandingImageSmall: React.FC = () => {
 
 
 
-                <p className="z-20 text-md text-left w-9/12 text-gray-500 pt-4 font-RegoReg">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio
-                    excepturi laboriosam minima?
+                <p className="z-20 text-md mdVertical:text-2xl text-left w-9/12 text-gray-500 pt-4 font-RegoReg">
+                    A student-led organization that unites all Indonesians in post-secondary institutions across the Greater Vancouver area.
                 </p>
             </header>
         </div>
