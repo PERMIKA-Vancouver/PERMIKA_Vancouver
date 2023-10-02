@@ -14,7 +14,7 @@ import {
 } from '../utils/OpenLinkUtil';
 
 const logoStyling =
-  'w-[1.88rem] h-auto text-[#757575] hover:text-[#D07D14] transition duration-300';
+  'w-[1.88rem] h-auto text-[#757575] hover:text-[#D07D14] transition duration-300 cursor-pointer';
 
 export const Footer = ({
   isMobileView,
@@ -31,9 +31,9 @@ export const Footer = ({
         } items-center w-full `}
       >
         <div className={`${isTabletPotraitView ? 'text-center' : 'ml-[4%]'}`}>
-          <span className={`${isMobileView ? 'footer' : 't1'} text-[#5B5B5B]`}>
+          <p className={`${!isMobileView && 'navbar-text'} text-[#5B5B5B]`}>
             PERMIKA Vancouver 2023
-          </span>
+          </p>
         </div>
         {!isTabletPotraitView && (
           <div className="border-l-2 border-solid border-[#969696] h-[65%] self-center mr-[4.4rem] ml-auto"></div>

@@ -84,6 +84,14 @@ p {
   letter-spacing: -0.0225rem;
 }
 
+.navbar-text {
+  font-family: 'RegoBook';
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
 .mt-navbar {
   margin-top: 20vh;
 }

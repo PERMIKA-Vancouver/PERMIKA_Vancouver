@@ -15,12 +15,10 @@ export const NavigationBar = () => {
 
   const controlNavbar = useCallback(() => {
     if (typeof window !== 'undefined') {
-      if (window.scrollY > lastScrollY) {
-        // if scroll down hide the navbar
-        setShow(false);
-      } else {
-        // if scroll up show the navbar
+      if (window.scrollY < lastScrollY || window.scrollY === 0) {
         setShow(true);
+      } else {
+        setShow(false);
       }
 
       // remember current page location to use in the next move
@@ -46,7 +44,7 @@ export const NavigationBar = () => {
   return (
     <>
       <div
-        className={`fixed z-10 ${
+        className={`fixed z-20 ${
           show ? 'top-0' : '-top-[20vh]'
         } h-[10vh] sm:h-[15vh] lg:h-[20vh] w-full bg-white transition-[top] ease-in duration-500`}
       >
@@ -68,9 +66,9 @@ export const NavigationBar = () => {
                 <NavLink key={page.name} to={page.path}>
                   {({ isActive }) => (
                     <p
-                      className={`RegoBook ${
+                      className={`${
                         isActive ? 'text-black-permika' : 'text-light-grey'
-                      } hover:text-sunset-orange font-normal not-italic text-lg leading-[normal] transition duration-500`}
+                      } hover:text-sunset-orange navbar-text transition duration-500`}
                     >
                       {page.name}
                     </p>
