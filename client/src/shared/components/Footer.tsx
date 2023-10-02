@@ -14,7 +14,7 @@ import {
 } from '../utils/OpenLinkUtil';
 
 const logoStyling =
-  'w-[1.88rem] h-auto text-[#757575] hover:text-[#D07D14] transition duration-300';
+  'w-[1.88rem] h-auto text-[#757575] hover:text-[#D07D14] transition duration-300 cursor-pointer';
 
 export const Footer = ({
   isMobileView,
