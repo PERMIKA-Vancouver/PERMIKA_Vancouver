@@ -1,38 +1,200 @@
-.App {
-  text-align: center;
+html,
+body {
+  overflow-x: hidden;
+  max-height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* H1: RegoBook60 */
+h1 {
+  font-family: 'RegoBook';
+  font-size: 3.75rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  letter-spacing: -0.075rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* H2: RegoBook48 */
+h2 {
+  font-family: 'RegoBook';
+  font-size: 3rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  letter-spacing: -0.06rem;
+}
+
+/* H3: RegoBook30 */
+h3 {
+  font-family: 'RegoBook';
+  font-size: 1.875rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  letter-spacing: -0.0375rem;
+}
+
+/* H4: AveRom21 */
+h4 {
+  font-family: 'AveRom';
+  font-size: 1.3125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 124.6%; /* 1.63538rem */
+  letter-spacing: -0.02625rem;
+}
+
+/* Sub: RegoBook24 */
+.sub {
+  font-family: 'RegoBook';
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  letter-spacing: -0.03rem;
+}
+
+/* T1: AveRom21 */
+.t1 {
+  font-family: 'AveRom';
+  font-size: 1.3125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 124.6%; /* 1.63538rem */
+  letter-spacing: -0.02625rem;
+}
+
+/* Body: AveRom18 */
+p {
+  font-family: 'AveRom';
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 124.6%; /* 1.40175rem */
+  letter-spacing: -0.0225rem;
+}
+
+/* ButtonText: AveMed18 */
+.button_text {
+  font-family: 'AveMed';
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.0225rem;
+}
+
+.navbar-text {
+  font-family: 'RegoBook';
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.mt-navbar {
+  margin-top: 20vh;
+}
+
+.pt-navbar {
+  padding-top: 20vh;
+}
+
+.ml-all {
+  margin-left: 20%;
+}
+
+/*for fade in transition*/
+.fade-in-element {
+  opacity: 0; /* Initial state: element is invisible */
+  transition: opacity 0.5s ease-in-out; /* Transition effect for opacity */
+}
+
+.fade-in-element.visible {
+  opacity: 1; /* Target state: element is fully visible */
+}
+
+/* Mobile View */
+@media only screen and (max-width: 639px) {
+  /* M-H1: RegoReg48 */
+  h1 {
+    font-family: 'RegoReg';
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.06rem;
   }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  /* M-H2: RegoReg30 */
+  h2 {
+    font-family: 'RegoReg';
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.0375rem;
   }
-  to {
-    transform: rotate(360deg);
+
+  /* M-H3: RegoReg20 */
+  h3 {
+    font-family: 'RegoReg';
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.025rem;
+  }
+
+  /* M-Sub: AveRom18 */
+  .sub {
+    font-family: 'AveRom';
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 124.6%; /* 1.40175rem */
+    letter-spacing: -0.0225rem;
+  }
+
+  /* M-Body: AveRom15 */
+  p {
+    font-family: 'AveRom';
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 124.6%; /* 1.16813rem */
+    letter-spacing: -0.01875rem;
+  }
+
+  /* M-Button: AveMed15 */
+  .button_text {
+    font-family: 'AveMed';
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.01875rem;
+  }
+
+  /* M-Footer: AveRom16 */
+  .footer {
+    font-family: 'AveRom';
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 124.6%; /* 1.246rem */
+    letter-spacing: -0.02rem;
+  }
+
+  .mt-navbar {
+    margin-top: 10vh;
+  }
+
+  .pt-navbar {
+    padding-top: 10vh;
+  }
+
+  .ml-all {
+    margin-left: 10%;
   }
 }

@@ -1,15 +1,29 @@
-import React from "react";
-import WhiteLogo from "./assets/logo_white.png";
-import "./App.css";
+import './App.css';
+
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
+
+import { PAGES } from './shared/data/pages';
+import { NavigationBar } from './shared/components/navigation-bar/NavigationBar';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={WhiteLogo} className="App-logo" alt="logo" />
-        <p>PERMIKA Vancouver</p>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<NavigationBar />}>
+            {PAGES.map((page) => (
+              <Route key={page.name} path={page.path} element={page.element} />
+            ))}
+          </Route>
+          <Route path="*" element={<Navigate replace to="/" />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
