@@ -109,7 +109,7 @@ const LandingImage: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative h-screen mb-15">
+    <div className="relative h-screen min-h-[800px] max-h-[1150px] mb-15">
       <div
         className={`absolute inset-0 z-10 fade-in-element ${
           isVisible ? 'visible' : ''
@@ -167,7 +167,7 @@ const LandingImage: React.FC = () => {
       <header
         className={`fade-in-element ${
           isVisible ? 'visible' : ''
-        } min-h-screen flex flex-col items-start justify-end ml-all mdVertical:pb-44 pb-30`}
+        } flex flex-col items-start justify-end ml-all h-[80%] min-h-[650px]`}
       >
         <h1 className="z-20 text-[#0A0A0A]">
           This is{' '}

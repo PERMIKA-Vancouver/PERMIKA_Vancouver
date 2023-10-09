@@ -17,7 +17,7 @@ export const WelcomingMessage = ({
           ? 'pt-20 pb-[5.5rem]'
           : isTabletPotraitView
           ? 'pt-20 pb-28'
-          : 'h-screen pt-[15vh] pb-[25vh]'
+          : 'h-screen min-h-[700px] max-h-[900px] pt-[15vh] pb-[25vh]'
       } w-full bg-white`}
     >
       <div
@@ -72,7 +72,7 @@ export const WelcomingMessage = ({
           </p>
           <CustomButton
             text="Join PERMIKA"
-            className={`${!isTabletPotraitView && 'absolute bottom-0'}`}
+            className={`${!isTabletPotraitView && ''}`}
             link="https://forms.gle/z8AFC5m5PiJzKBEf7"
           />
         </div>
