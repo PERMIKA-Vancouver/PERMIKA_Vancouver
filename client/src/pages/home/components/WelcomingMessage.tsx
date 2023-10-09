@@ -25,14 +25,14 @@ export const WelcomingMessage = ({
           isTabletPotraitView ? 'ml-all' : 'flex flex-row-reverse'
         } justify-between w-full h-full`}
       >
-        <div>
+        <div className="flex justify-end">
           <img
             src={isTabletPotraitView ? Core : CoreSquare}
             alt="Core Team"
             className={`${
               isTabletPotraitView
                 ? 'w-full aspect-[2/1] object-cover'
-                : 'max-h-[60vh] w-auto'
+                : 'max-h-full w-auto'
             }`}
           />
         </div>
@@ -62,7 +62,7 @@ export const WelcomingMessage = ({
                 ? 'mb-12 w-[75%]'
                 : isTabletPotraitView
                 ? 'mb-16'
-                : 'mb-28 w-[84%]'
+                : 'w-[84%]'
             } text-[#9A9A9A] `}
           >
             {WelcomingMsg}
@@ -72,7 +72,7 @@ export const WelcomingMessage = ({
           </p>
           <CustomButton
             text="Join PERMIKA"
-            className={`${!isTabletPotraitView && ''}`}
+            className={`${!isTabletPotraitView && 'absolute bottom-0'}`}
             link="https://forms.gle/z8AFC5m5PiJzKBEf7"
           />
         </div>
