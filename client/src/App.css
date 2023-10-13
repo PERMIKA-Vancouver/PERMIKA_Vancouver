@@ -34,7 +34,7 @@ h3 {
   letter-spacing: -0.0375rem;
 }
 
-/* H4: AveRom21 */
+/* H4: AveBook21 */
 h4 {
   font-family: 'AveBook';
   font-size: 1.2125rem;
@@ -64,10 +64,10 @@ h4 {
   letter-spacing: -0.02625rem;
 }
 
-/* Body: AveRom18 */
+/* Body: AveBook18 */
 p {
-  font-family: 'AveRom';
-  font-size: 1.125rem;
+  font-family: 'AveBook';
+  font-size: 1.1rem;
   font-style: normal;
   font-weight: 400;
   line-height: 124.6%; /* 1.40175rem */
