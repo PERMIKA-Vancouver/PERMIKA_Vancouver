@@ -25,3 +25,9 @@
   src: local('AvenirMedium'),
     url('./fonts/Avenir/AvenirMedium.ttf') format('truetype');
 }
+
+@font-face {
+  font-family: 'AveBook';
+  src: local('AvenirBook'),
+    url('./fonts/Avenir/AvenirBook.ttf') format('truetype');
+}
