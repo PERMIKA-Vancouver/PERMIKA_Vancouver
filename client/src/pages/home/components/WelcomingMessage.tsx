@@ -17,7 +17,7 @@ export const WelcomingMessage = ({
           ? 'pt-20 pb-[5.5rem]'
           : isTabletPotraitView
           ? 'pt-20 pb-28'
-          : 'h-screen pt-[15vh] pb-[25vh]'
+          : 'h-screen min-h-[700px] max-h-[900px] pt-[15vh] pb-[25vh]'
       } w-full bg-white`}
     >
       <div
@@ -25,14 +25,14 @@ export const WelcomingMessage = ({
           isTabletPotraitView ? 'ml-all' : 'flex flex-row-reverse'
         } justify-between w-full h-full`}
       >
-        <div>
+        <div className="flex justify-end">
           <img
             src={isTabletPotraitView ? Core : CoreSquare}
             alt="Core Team"
             className={`${
               isTabletPotraitView
                 ? 'w-full aspect-[2/1] object-cover'
-                : 'max-h-[60vh] w-auto'
+                : 'max-h-full w-auto'
             }`}
           />
         </div>
@@ -62,7 +62,7 @@ export const WelcomingMessage = ({
                 ? 'mb-12 w-[75%]'
                 : isTabletPotraitView
                 ? 'mb-16'
-                : 'mb-28 w-[84%]'
+                : 'w-[84%]'
             } text-[#9A9A9A] `}
           >
             {WelcomingMsg}

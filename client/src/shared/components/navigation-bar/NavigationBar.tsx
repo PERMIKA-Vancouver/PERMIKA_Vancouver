@@ -44,7 +44,7 @@ export const NavigationBar = () => {
   return (
     <>
       <div
-        className={`fixed z-20 ${
+        className={`fixed z-30 ${
           show ? 'top-0' : '-top-[20vh]'
         } h-[10vh] sm:h-[15vh] lg:h-[20vh] w-full bg-white transition-[top] ease-in duration-500`}
       >

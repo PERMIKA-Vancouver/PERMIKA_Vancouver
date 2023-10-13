@@ -19,7 +19,7 @@ const LandingImageSmall: React.FC = () => {
 
   return (
     <div
-      className={`h-screen relative overflow-hidden fade-in-element ${
+      className={`h-screen min-h-[800px] max-h-[1100px] relative overflow-hidden fade-in-element ${
         isVisible ? 'visible' : ''
       }`}
     >
@@ -70,7 +70,7 @@ const LandingImageSmall: React.FC = () => {
       />
 
       <header
-        className={`min-h-screen flex flex-col items-start justify-end ml-all  pb-36 sm:smVertical:pb-24 mdVertical:pb-60 lgVertical:pb-64 lgVertical:pl-16`}
+        className={`sm:h-[82%] h-[80%] min-h-[500px] flex flex-col items-start justify-end ml-all`}
       >
         <div className="z-20 flex flex-col items-start">
           <h1 className="z-20">This is</h1>
