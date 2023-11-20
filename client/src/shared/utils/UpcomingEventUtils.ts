@@ -36,6 +36,7 @@ const getNextEvent = () => {
 
   const isNextEvent = isNextEvents(nextEvent);
   const nextEventName: string = getNextEventName(nextEvent);
+  const nextEventTimestamp: string = getNextEventTimestamp(nextEvent);
   const nextEventDate: string = getNextEventDate(nextEvent);
   const nextEventDescription: string = getNextEventDescription(nextEvent);
   const nextEventButtonText: string = getNextEventButtonText(nextEvent);
@@ -44,6 +45,7 @@ const getNextEvent = () => {
   return [
     isNextEvent,
     nextEventName,
+    nextEventTimestamp,
     nextEventDate,
     nextEventDescription,
     nextEventButtonText,
@@ -60,6 +62,10 @@ const isNextEvents = (nextEvent: UpcomingEvent): string => {
 
 const getNextEventName = (nextEvent: UpcomingEvent): string => {
   return nextEvent.name;
+};
+
+const getNextEventTimestamp = (nextEvent: UpcomingEvent): string => {
+  return nextEvent.date;
 };
 
 const getNextEventDate = (nextEvent: UpcomingEvent): string => {

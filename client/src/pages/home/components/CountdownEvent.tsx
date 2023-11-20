@@ -10,6 +10,7 @@ export const CountdownEvent = ({
   const [
     isNextEvent,
     nextEventName,
+    nextEventTimestamp,
     nextEventDate,
     nextEventDescription,
     nextEventButtonText,
@@ -69,7 +70,7 @@ export const CountdownEvent = ({
           }`}
         >
           <CountdownTimer
-            countdownTimestamp={nextEventDate}
+            countdownTimestamp={nextEventTimestamp}
             isMobileView={isMobileView}
             isTabletPotraitView={isTabletPotraitView}
           />
