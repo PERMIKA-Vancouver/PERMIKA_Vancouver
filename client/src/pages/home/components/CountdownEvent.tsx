@@ -6,8 +6,12 @@ import {
   UPCOMING_EVENTS,
   UPCOMING_EVENTS_DEFAULT,
   DATE_FORMAT,
+  EVENT_DESCRIPTION,
+  EVENT_BUTTON,
+  RANTANGAN_DESCRIPTION,
+  RANTANGAN_BUTTON,
 } from '../../../shared/data/events';
-import { ScreenSizeProps } from '../../../shared/types/types';
+import { ScreenSizeProps, TypeEvent } from '../../../shared/types/types';
 
 function checkDatePassed(date: string): boolean {
   return dayjs(date, DATE_FORMAT).isBefore(dayjs());
@@ -36,10 +40,12 @@ export const CountdownEvent = ({
     }
   }
 
-  const textDate =
+  const eventDate =
     nextEvent === UPCOMING_EVENTS_DEFAULT
       ? ''
       : toStringMonthDate(nextEvent.date);
+
+  const eventType: TypeEvent = nextEvent.type;
 
   return (
     <div
@@ -80,7 +86,7 @@ export const CountdownEvent = ({
                   : 'font-AveRom text-[1.3125rem] italic font-normal leading-[124.6%] tracking-[-0.02625rem]'
               } text-[#8CA080]`}
             >
-              {textDate}
+              {eventDate}
             </p>
           </>
         </div>
@@ -103,12 +109,12 @@ export const CountdownEvent = ({
           <div className="text-center">
             <div className="mb-4">
               <span className={`font-AveRom text-[#E3E3E3] text-[1rem]`}>
-                Save yourself a seat for the event below!
+                {eventType ? RANTANGAN_DESCRIPTION : EVENT_DESCRIPTION}
               </span>
             </div>
             <>
               <CustomButton
-                text="RSVP"
+                text={eventType ? RANTANGAN_BUTTON : EVENT_BUTTON}
                 className="m-auto"
                 link={nextEvent.rsvp}
               />
