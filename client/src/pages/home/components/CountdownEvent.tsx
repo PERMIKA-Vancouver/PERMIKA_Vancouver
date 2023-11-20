@@ -1,7 +1,15 @@
 import { CountdownTimer } from '../../../shared/components/CountdownTimer';
 import { CustomButton } from '../../../shared/components/CustomButton';
+import {
+  EVENT_BUTTON,
+  EVENT_DESCRIPTION,
+  UPCOMING_EVENTS,
+} from '../../../shared/data/events';
 import { ScreenSizeProps } from '../../../shared/types/types';
-import { getNextEvent } from '../../../shared/utils/UpcomingEventUtils';
+import {
+  getNextEvent,
+  toStringMonthDate,
+} from '../../../shared/utils/UpcomingEventUtils';
 
 export const CountdownEvent = ({
   isMobileView,
@@ -92,7 +100,11 @@ export const CountdownEvent = ({
           </div>
         )}
         {/** TEMPORARY */}
-        <div className="mt-40"></div>
+        <div
+          className={
+            isMobileView ? 'mt-20' : isTabletPotraitView ? 'mt-30' : 'mt-40'
+          }
+        ></div>
         <div
           className={`${
             isMobileView ? 'mt-4' : 'flex mt-[2%]'
@@ -106,7 +118,7 @@ export const CountdownEvent = ({
             )}
             <>
               <h3 className={`${isMobileView ? 'mt-4' : 'sub'} text-[#8CA080]`}>
-                {nextEventName}
+                {UPCOMING_EVENTS[1].name}
               </h3>
             </>
           </div>
@@ -118,7 +130,7 @@ export const CountdownEvent = ({
                   : 'font-AveRom text-[1.3125rem] italic font-normal leading-[124.6%] tracking-[-0.02625rem]'
               } text-[#8CA080]`}
             >
-              {nextEventDate}
+              {toStringMonthDate(UPCOMING_EVENTS[1].date)}
             </p>
           </>
         </div>
@@ -132,7 +144,7 @@ export const CountdownEvent = ({
           }`}
         >
           <CountdownTimer
-            countdownTimestamp={nextEventTimestamp}
+            countdownTimestamp={UPCOMING_EVENTS[1].date}
             isMobileView={isMobileView}
             isTabletPotraitView={isTabletPotraitView}
           />
@@ -141,14 +153,14 @@ export const CountdownEvent = ({
           <div className="text-center">
             <div className="mb-4">
               <span className={`font-AveRom text-[#E3E3E3] text-[1rem]`}>
-                {nextEventDescription}
+                {EVENT_DESCRIPTION}
               </span>
             </div>
             <>
               <CustomButton
-                text={nextEventButtonText}
+                text={EVENT_BUTTON}
                 className="m-auto"
-                link={nextEventLink}
+                link={UPCOMING_EVENTS[1].rsvp}
               />
             </>
           </div>
