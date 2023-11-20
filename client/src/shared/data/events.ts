@@ -10,6 +10,12 @@ const UPCOMING_EVENTS: UpcomingEvent[] = [
     rsvp: 'https://docs.google.com/forms/d/e/1FAIpQLScFf8FnSkpjzGEQMW5MGE6FjgiLo14AvmiIo_-UqdvQRxWQGg/viewform',
     type: 1,
   },
+  {
+    name: 'KOMPAS: Navigating Job Search in Canada',
+    date: '2023-11-25 16:00',
+    rsvp: 'https://forms.gle/S2cMcmNzERSncudx8',
+    type: 0,
+  },
 ];
 
 const UPCOMING_EVENTS_DEFAULT: UpcomingEvent = {
