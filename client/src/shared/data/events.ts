@@ -5,9 +5,9 @@ const DATE_FORMAT = 'YYYY-MM-DD HH:mm';
 // Date format 'YYYY-MM-DD HH:mm'
 const UPCOMING_EVENTS: UpcomingEvent[] = [
   {
-    name: 'Layar Tancap',
-    date: '2023-10-21 18:30',
-    rsvp: 'https://forms.gle/QxhUzh8JXhb5zMmUA',
+    name: 'Waroeng Soto Madura',
+    date: '2023-11-22 23:59',
+    rsvp: 'https://docs.google.com/forms/d/e/1FAIpQLScFf8FnSkpjzGEQMW5MGE6FjgiLo14AvmiIo_-UqdvQRxWQGg/viewform',
   },
 ];
 
