@@ -1,45 +1,21 @@
-import dayjs from 'dayjs';
-
 import { CountdownTimer } from '../../../shared/components/CountdownTimer';
 import { CustomButton } from '../../../shared/components/CustomButton';
-import {
-  UPCOMING_EVENTS,
-  UPCOMING_EVENTS_DEFAULT,
-  DATE_FORMAT,
-} from '../../../shared/data/events';
 import { ScreenSizeProps } from '../../../shared/types/types';
-
-function checkDatePassed(date: string): boolean {
-  return dayjs(date, DATE_FORMAT).isBefore(dayjs());
-}
-
-function toStringMonthDate(date: string): string {
-  const month = parseInt(date.substring(5, 7));
-  const day = parseInt(date.substring(8, 10));
-
-  const newDate = new Date();
-  newDate.setMonth(month - 1);
-
-  return newDate.toLocaleString('en-US', { month: 'long' }) + ' ' + day;
-}
+import { getNextEvent } from '../../../shared/utils/UpcomingEventUtils';
 
 export const CountdownEvent = ({
   isMobileView,
   isTabletPotraitView,
 }: ScreenSizeProps) => {
-  let nextEvent = UPCOMING_EVENTS_DEFAULT;
-
-  for (let i = 0; i < UPCOMING_EVENTS.length; i++) {
-    if (!checkDatePassed(UPCOMING_EVENTS[i].date)) {
-      nextEvent = UPCOMING_EVENTS[i];
-      break;
-    }
-  }
-
-  const textDate =
-    nextEvent === UPCOMING_EVENTS_DEFAULT
-      ? ''
-      : toStringMonthDate(nextEvent.date);
+  const [
+    isNextEvent,
+    nextEventName,
+    nextEventTimestamp,
+    nextEventDate,
+    nextEventDescription,
+    nextEventButtonText,
+    nextEventLink,
+  ] = getNextEvent();
 
   return (
     <div
@@ -68,7 +44,7 @@ export const CountdownEvent = ({
             )}
             <>
               <h3 className={`${isMobileView ? 'mt-4' : 'sub'} text-[#8CA080]`}>
-                {nextEvent.name}
+                {nextEventName}
               </h3>
             </>
           </div>
@@ -80,7 +56,7 @@ export const CountdownEvent = ({
                   : 'font-AveRom text-[1.3125rem] italic font-normal leading-[124.6%] tracking-[-0.02625rem]'
               } text-[#8CA080]`}
             >
-              {textDate}
+              {nextEventDate}
             </p>
           </>
         </div>
@@ -94,23 +70,23 @@ export const CountdownEvent = ({
           }`}
         >
           <CountdownTimer
-            countdownTimestamp={nextEvent.date}
+            countdownTimestamp={nextEventTimestamp}
             isMobileView={isMobileView}
             isTabletPotraitView={isTabletPotraitView}
           />
         </div>
-        {nextEvent !== UPCOMING_EVENTS_DEFAULT && (
+        {isNextEvent === 'true' && (
           <div className="text-center">
             <div className="mb-4">
               <span className={`font-AveRom text-[#E3E3E3] text-[1rem]`}>
-                Save yourself a seat for the event below!
+                {nextEventDescription}
               </span>
             </div>
             <>
               <CustomButton
-                text="RSVP"
+                text={nextEventButtonText}
                 className="m-auto"
-                link={nextEvent.rsvp}
+                link={nextEventLink}
               />
             </>
           </div>

@@ -5,9 +5,10 @@ const DATE_FORMAT = 'YYYY-MM-DD HH:mm';
 // Date format 'YYYY-MM-DD HH:mm'
 const UPCOMING_EVENTS: UpcomingEvent[] = [
   {
-    name: 'Welcoming Party',
-    date: '2023-09-16 09:00',
-    rsvp: 'https://www.linkedin.com/in/julian-widjaja/',
+    name: 'Waroeng Soto Madura',
+    date: '2023-11-22 23:59',
+    rsvp: 'https://docs.google.com/forms/d/e/1FAIpQLScFf8FnSkpjzGEQMW5MGE6FjgiLo14AvmiIo_-UqdvQRxWQGg/viewform',
+    type: 1,
   },
 ];
 
@@ -15,6 +16,22 @@ const UPCOMING_EVENTS_DEFAULT: UpcomingEvent = {
   name: 'No Upcoming Events',
   date: '0000-00-00 00:00',
   rsvp: '',
+  type: 0,
 };
 
-export { DATE_FORMAT, UPCOMING_EVENTS, UPCOMING_EVENTS_DEFAULT };
+const EVENT_DESCRIPTION = 'Save yourself a seat for the event below!';
+const EVENT_BUTTON = 'RSVP';
+
+const RANTANGAN_DESCRIPTION =
+  "Savor the flavor, seize the moment, order Waroeng before they're all gone!";
+const RANTANGAN_BUTTON = 'Pre-order';
+
+export {
+  DATE_FORMAT,
+  UPCOMING_EVENTS,
+  UPCOMING_EVENTS_DEFAULT,
+  EVENT_DESCRIPTION,
+  EVENT_BUTTON,
+  RANTANGAN_DESCRIPTION,
+  RANTANGAN_BUTTON,
+};
