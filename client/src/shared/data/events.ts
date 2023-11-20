@@ -23,7 +23,7 @@ const EVENT_DESCRIPTION = 'Save yourself a seat for the event below!';
 const EVENT_BUTTON = 'RSVP';
 
 const RANTANGAN_DESCRIPTION =
-  "Savor the flavor, seize the moment - order Waroeng before they're all gone!";
+  "Savor the flavor, seize the moment, order Waroeng before they're all gone!";
 const RANTANGAN_BUTTON = 'Pre-order';
 
 export {
