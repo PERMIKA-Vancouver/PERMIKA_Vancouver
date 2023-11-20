@@ -11,9 +11,9 @@ const UPCOMING_EVENTS: UpcomingEvent[] = [
     type: 1,
   },
   {
-    name: 'Co-op Info Session',
-    date: '2023-11-25 19:00',
-    rsvp: 'https://docs.google.com/forms/d/e/1FAIpQLScFf8FnSkpjzGEQMW5MGE6FjgiLo14AvmiIo_-UqdvQRxWQGg/viewform',
+    name: 'KOMPAS: Navigating Job Search in Canada',
+    date: '2023-11-25 16:00',
+    rsvp: 'https://forms.gle/S2cMcmNzERSncudx8',
     type: 0,
   },
 ];
