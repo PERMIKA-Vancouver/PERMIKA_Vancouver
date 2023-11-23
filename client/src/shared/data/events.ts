@@ -6,7 +6,7 @@ const DATE_FORMAT = 'YYYY-MM-DD HH:mm';
 const UPCOMING_EVENTS: UpcomingEvent[] = [
   {
     name: 'Waroeng Soto Madura',
-    date: '2023-11-22 23:59',
+    date: '2023-11-23 23:59',
     rsvp: 'https://docs.google.com/forms/d/e/1FAIpQLScFf8FnSkpjzGEQMW5MGE6FjgiLo14AvmiIo_-UqdvQRxWQGg/viewform',
     type: 1,
   },
