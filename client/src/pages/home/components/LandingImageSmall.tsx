@@ -73,16 +73,16 @@ const LandingImageSmall: React.FC = () => {
         className={`sm:h-[82%] h-[80%] min-h-[500px] flex flex-col items-start justify-end ml-all`}
       >
         <div className="z-20 flex flex-col items-start">
-          <h1 className="z-20">This is</h1>
-          <h1 className="z-20 bg-[#102713] text-white px-1 rounded-sm">
+          <h1 className="z-20 text-[#0A0A0A]">This is</h1>
+          <h1 className="z-20 bg-forest-green text-white px-1 rounded-sm">
             PERMIKA
           </h1>
-          <h1 className="z-20 bg-[#102713] text-white px-1 mt-1 rounded-sm">
+          <h1 className="z-20 bg-forest-green text-white px-1 mt-1 rounded-sm">
             Vancouver,
           </h1>
         </div>
 
-        <span className="sub z-20 text-left w-9/12 text-[#9A9A9A] pt-4">
+        <span className="sub z-20 text-left w-9/12 text-grey-body pt-4">
           A student-led organization that unites all Indonesians in
           post-secondary institutions across the Greater Vancouver area.
         </span>

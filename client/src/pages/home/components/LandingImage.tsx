@@ -171,11 +171,11 @@ const LandingImage: React.FC = () => {
       >
         <h1 className="z-20 text-[#0A0A0A]">
           This is{' '}
-          <span className="relative z-20 bg-[#102713] pt-2 text-white">
+          <span className="relative z-20 bg-forest-green pt-2 text-white">
             PERMIKA Vancouver,
           </span>
         </h1>
-        <h4 className="z-20 text-left w-7/12 text-[#9A9A9A] pt-4">
+        <h4 className="z-20 text-left w-7/12 text-grey-body pt-4">
           A student-led organization that unites all Indonesians in
           post-secondary institutions across the Greater Vancouver area. We
           strive to bring a part of Indonesia through our events and services to
