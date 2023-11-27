@@ -67,7 +67,7 @@ export const NavigationBar = () => {
                   {({ isActive }) => (
                     <p
                       className={`${
-                        isActive ? 'text-black-permika' : 'text-light-grey'
+                        isActive ? 'text-black-text' : 'text-light-grey'
                       } hover:text-sunset-orange navbar-text transition duration-500`}
                     >
                       {page.name}
