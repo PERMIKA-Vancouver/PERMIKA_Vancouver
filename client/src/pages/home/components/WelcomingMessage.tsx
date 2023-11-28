@@ -52,7 +52,7 @@ export const WelcomingMessage = ({
                 : isTabletPotraitView
                 ? 'mb-11'
                 : 'mb-11'
-            }  text-black-permika`}
+            }  text-black-text`}
           >
             Welcoming message from PERMIKA 2023/24 Core team
           </h3>
@@ -63,7 +63,7 @@ export const WelcomingMessage = ({
                 : isTabletPotraitView
                 ? 'mb-16'
                 : 'w-[84%]'
-            } text-[#9A9A9A] `}
+            } text-grey-body `}
           >
             {WelcomingMsg}
             <br />
