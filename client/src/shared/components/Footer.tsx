@@ -1,5 +1,6 @@
 import {
   FaInstagram,
+  FaWhatsapp,
   FaDiscord,
   FaYoutube,
   FaFacebookF,
@@ -10,6 +11,7 @@ import {
   openFacebook,
   openInstagram,
   openTiktok,
+  openWhatsapp,
   openYoutube,
 } from '../utils/OpenLinkUtil';
 
@@ -31,7 +33,7 @@ export const Footer = ({
         } items-center w-full `}
       >
         <div className={`${isTabletPotraitView ? 'text-center' : 'ml-[4%]'}`}>
-          <p className={`${!isMobileView && 'navbar-text'} text-[#5B5B5B]`}>
+          <p className={`${!isMobileView && 'navbar-text'} text-grey-footer`}>
             PERMIKA Vancouver 2023
           </p>
         </div>
@@ -48,6 +50,7 @@ export const Footer = ({
           } ${isTabletPotraitView ? 'justify-center' : 'mr-[4%]'}`}
         >
           <FaInstagram className={logoStyling} onClick={openInstagram} />
+          <FaWhatsapp className={logoStyling} onClick={openWhatsapp} />
           <FaDiscord className={logoStyling} onClick={openDiscord} />
           <FaYoutube className={logoStyling} onClick={openYoutube} />
           <FaFacebookF className={logoStyling} onClick={openFacebook} />
