@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import img1 from '../../../assets/tuxpi.com.1694742973-min.webp';
-import img2 from '../../../assets/DSC01469-min.webp';
-import img3 from '../../../assets/DSC01619-min.webp';
-import img4 from '../../../assets/DSC01487-min.webp';
-import img5 from '../../../assets/DSC01610-min.webp';
-import img6 from '../../../assets/DSC01614-min.webp';
-import img7 from '../../../assets/DSC01481-min.webp';
-import img8 from '../../../assets/tuxpi.com.1694743036-min.webp';
+import img1 from '../../../assets/landing-image/img1.webp';
+import img2 from '../../../assets/landing-image/img2.webp';
+import img3 from '../../../assets/landing-image/img3.webp';
+import img4 from '../../../assets/landing-image/img4.webp';
+import img5 from '../../../assets/landing-image/img5.webp';
+import img6 from '../../../assets/landing-image/img6.webp';
+import img7 from '../../../assets/landing-image/img7.webp';
+import img8 from '../../../assets/landing-image/img8.webp';
 
 const LandingImage: React.FC = () => {
   const img1Ref = useRef<HTMLImageElement>(null);

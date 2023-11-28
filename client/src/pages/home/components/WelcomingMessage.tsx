@@ -1,5 +1,5 @@
-import Core from '../../../assets/core.png';
-import CoreSquare from '../../../assets/core_square.png';
+import Core from '../../../assets/welcome/core.png';
+import CoreSquare from '../../../assets/welcome/core_square.png';
 import { CustomButton } from '../../../shared/components/CustomButton';
 import { ScreenSizeProps } from '../../../shared/types/types';
 
