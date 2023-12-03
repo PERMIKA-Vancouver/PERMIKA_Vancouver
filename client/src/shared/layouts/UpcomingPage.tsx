@@ -27,10 +27,10 @@ export const UpcomingPage = () => {
           />
         </div>
         <div className="mt-[10%] lg:mt-[5%]">
-          <h2>
+          <h2 className="text-black-text">
             Hello, you're early! This page is currently undergoing renovations..
           </h2>
-          <p className={`text-[#9a9a9a] mt-5`}>
+          <p className={`text-grey-body mt-5`}>
             It will be up soon but in the meantime, you can find us on{' '}
             <span className={socialStyle} onClick={openInstagram}>
               Instagram

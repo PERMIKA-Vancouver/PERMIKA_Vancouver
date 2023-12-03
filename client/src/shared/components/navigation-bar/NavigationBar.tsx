@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 
-import NavLogo from '../../../assets/cropped_logo.png';
+import NavLogo from '../../../assets/logo/cropped_logo.png';
 
 import { PAGES } from '../../data/pages';
 import { Footer } from '../Footer';
@@ -67,7 +67,7 @@ export const NavigationBar = () => {
                   {({ isActive }) => (
                     <p
                       className={`${
-                        isActive ? 'text-black-permika' : 'text-light-grey'
+                        isActive ? 'text-black-text' : 'text-light-grey'
                       } hover:text-sunset-orange navbar-text transition duration-500`}
                     >
                       {page.name}
