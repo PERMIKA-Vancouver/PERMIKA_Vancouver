@@ -19,6 +19,7 @@
     "react-responsive": "^9.0.2",
     "react-router-dom": "^6.14.2",
     "react-scripts": "5.0.1",
+    "react-slot-counter": "^2.1.1",
     "typescript": "^4.9.5",
     "typewriter-effect": "^2.20.1",
     "web-vitals": "^2.1.4"
