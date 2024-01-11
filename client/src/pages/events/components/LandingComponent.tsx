@@ -27,7 +27,9 @@ export const LandingComponent = () => {
               className={yearRollingClassname}
             />
           )}
-          {state === 1 && <div className="">PERMIKA Vancouver Events</div>}
+          {state === 1 && (
+            <div className="fade-in-up">PERMIKA Vancouver Events</div>
+          )}
         </h1>
       </div>
     </div>

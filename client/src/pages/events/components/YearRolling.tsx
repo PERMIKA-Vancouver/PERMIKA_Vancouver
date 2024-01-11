@@ -10,11 +10,11 @@ export const YearRolling = ({
 }) => {
   const [year, setYear] = useState(2019);
   const complete = async () => {
-    await setTimeout(() => completeHandler(true), 1000);
+    await setTimeout(() => completeHandler(true), 1800);
   };
 
   useEffect(() => {
-    setYear(2023);
+    setYear(new Date().getFullYear());
     complete();
   }, []);
 
@@ -24,7 +24,7 @@ export const YearRolling = ({
         value={year}
         autoAnimationStart={false}
         sequentialAnimationMode={true}
-        duration={0.7}
+        duration={1.5}
         containerClassName=""
       />
     </div>
