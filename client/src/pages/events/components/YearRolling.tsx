@@ -3,23 +3,24 @@ import SlotCounter from 'react-slot-counter';
 
 export const YearRolling = ({
   completeHandler,
-  className,
 }: {
-  completeHandler: (bool: boolean) => void;
-  className: string;
+  completeHandler: () => void;
 }) => {
   const [year, setYear] = useState(2019);
-  const complete = async () => {
-    await setTimeout(() => completeHandler(true), 1800);
+  const [yearRollingClassname, setYearRollingClassname] = useState('');
+
+  const complete = () => {
+    setYearRollingClassname('fade-out-up');
+    completeHandler();
   };
 
   useEffect(() => {
     setYear(new Date().getFullYear());
-    complete();
+    setTimeout(() => complete(), 1800);
   }, []);
 
   return (
-    <div className={className}>
+    <div className={yearRollingClassname}>
       <SlotCounter
         value={year}
         autoAnimationStart={false}
