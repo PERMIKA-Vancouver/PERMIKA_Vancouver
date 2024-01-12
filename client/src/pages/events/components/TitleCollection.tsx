@@ -23,7 +23,8 @@ export const TitleCollection = ({
 
   useEffect(() => {
     setTimeout(() => contentDone(), 1800);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [content]);
 
-  return <div className={className}>{CONTENT[content]}</div>;
+  return <h1 className={className}>{CONTENT[content]}</h1>;
 };

@@ -17,10 +17,11 @@ export const YearRolling = ({
   useEffect(() => {
     setYear(new Date().getFullYear());
     setTimeout(() => complete(), 1800);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className={yearRollingClassname}>
+    <h1 className={yearRollingClassname}>
       <SlotCounter
         value={year}
         autoAnimationStart={false}
@@ -28,6 +29,6 @@ export const YearRolling = ({
         duration={1.5}
         containerClassName=""
       />
-    </div>
+    </h1>
   );
 };
