@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { YearRolling } from './YearRolling';
 import { TitleCollection } from './TitleCollection';
-import { UpcomingEvent } from './UpcomingEvent';
+import { UpcomingEventComponent } from './UpcomingEventComponent';
 
 export const LandingComponent = () => {
   const [state, setState] = useState(2);
@@ -16,7 +16,7 @@ export const LandingComponent = () => {
         <div className="relative text-white top-[39.5%] ml-[20%] mr-[10.7%] -translate-y-[39.5%]">
           {state === 0 && <YearRolling completeHandler={nextState} />}
           {state === 1 && <TitleCollection completeHandler={nextState} />}
-          {state === 2 && <UpcomingEvent />}
+          {state === 2 && <UpcomingEventComponent />}
         </div>
       </div>
     </div>

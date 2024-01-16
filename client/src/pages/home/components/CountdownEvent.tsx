@@ -4,15 +4,21 @@ import {
   EVENT_BUTTON_TEXT,
   EVENT_DESCRIPTION,
 } from '../../../shared/data/events';
-import { ScreenSizeProps } from '../../../shared/types/types';
-import { getNextEvent } from '../../../shared/utils/UpcomingEventUtils';
+import { ScreenSizeProps, UpcomingEvent } from '../../../shared/types/types';
+import {
+  getEventMonthDate,
+  getEventName,
+  getEventRsvp,
+  getEventTimestamp,
+  getNextEvent,
+  isNextEvent,
+} from '../../../shared/utils/UpcomingEventUtils';
 
 export const CountdownEvent = ({
   isMobileView,
   isTabletPotraitView,
 }: ScreenSizeProps) => {
-  const [isEvent, eventName, eventTimestamp, eventDate, eventLink] =
-    getNextEvent();
+  const event: UpcomingEvent = getNextEvent();
 
   return (
     <div
@@ -44,7 +50,7 @@ export const CountdownEvent = ({
                 <h3
                   className={`${isMobileView ? 'mt-4' : 'sub'} text-[#8CA080]`}
                 >
-                  {eventName}
+                  {getEventName(event)}
                 </h3>
               </>
             </div>
@@ -56,7 +62,7 @@ export const CountdownEvent = ({
                     : 'font-AveRom text-[1.3125rem] italic font-normal leading-[124.6%] tracking-[-0.02625rem]'
                 } text-[#8CA080]`}
               >
-                {eventDate}
+                {getEventMonthDate(event)}
               </p>
             </>
           </div>
@@ -70,12 +76,12 @@ export const CountdownEvent = ({
             }`}
           >
             <CountdownTimer
-              countdownTimestamp={eventTimestamp}
+              countdownTimestamp={getEventTimestamp(event)}
               isMobileView={isMobileView}
               isTabletPotraitView={isTabletPotraitView}
             />
           </div>
-          {isEvent === 'true' && (
+          {isNextEvent(event) && (
             <div className="text-center">
               <div className="mb-4">
                 <span className={`font-AveRom text-[#E3E3E3] text-[1rem]`}>
@@ -86,7 +92,7 @@ export const CountdownEvent = ({
                 <CustomButton
                   text={EVENT_BUTTON_TEXT}
                   className="m-auto"
-                  link={eventLink}
+                  link={getEventRsvp(event)}
                 />
               </>
             </div>
