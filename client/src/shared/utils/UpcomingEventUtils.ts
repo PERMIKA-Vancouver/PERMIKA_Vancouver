@@ -6,7 +6,7 @@ import {
 } from '../data/events';
 import { UpcomingEvent } from '../types/types';
 
-const getNextEvent = () => {
+export const getNextEvent = (): UpcomingEvent => {
   let nextEvent = UPCOMING_EVENTS_DEFAULT;
 
   for (let i = 0; i < UPCOMING_EVENTS.length; i++) {
@@ -16,58 +16,34 @@ const getNextEvent = () => {
     }
   }
 
-  const isNextEvent = isNextEvents(nextEvent);
-  const nextEventName: string = getNextEventName(nextEvent);
-  const nextEventTimestamp: string = getNextEventTimestamp(nextEvent);
-  const nextEventDate: string = getNextEventDate(nextEvent);
-  const nextEventLink: string = getNextEventLink(nextEvent);
-  const nextEventLocation: string = getNextEventLocation(nextEvent);
-  const nextEventLocationLink: string = getNextEventLocationLink(nextEvent);
-
-  return [
-    isNextEvent,
-    nextEventName,
-    nextEventTimestamp,
-    nextEventDate,
-    nextEventLink,
-    nextEventLocation,
-    nextEventLocationLink,
-  ];
+  return nextEvent;
 };
 
-export { getNextEvent };
-
-// PRIVATE HELPER METHODS
-const isNextEvents = (nextEvent: UpcomingEvent): string => {
-  return nextEvent === UPCOMING_EVENTS_DEFAULT ? 'false' : 'true';
+export const isNextEvent = (event: UpcomingEvent): boolean => {
+  return event !== UPCOMING_EVENTS_DEFAULT;
 };
 
-const getNextEventName = (nextEvent: UpcomingEvent): string => {
-  return nextEvent.name;
+export const getEventName = (event: UpcomingEvent): string => {
+  return event.name;
 };
 
-const getNextEventTimestamp = (nextEvent: UpcomingEvent): string => {
-  return nextEvent.date;
+export const getEventTimestamp = (event: UpcomingEvent): string => {
+  return event.date;
 };
 
-const getNextEventDate = (nextEvent: UpcomingEvent): string => {
-  return nextEvent === UPCOMING_EVENTS_DEFAULT
-    ? ''
-    : toStringMonthDate(nextEvent.date);
+export const getEventDate = (event: UpcomingEvent): string => {
+  return event === UPCOMING_EVENTS_DEFAULT ? '' : toStringMonthDate(event.date);
 };
 
-const getNextEventLink = (nextEvent: UpcomingEvent): string => {
-  return nextEvent.rsvp;
+export const getEventRsvp = (event: UpcomingEvent): string => {
+  return event.rsvp;
 };
 
-const getNextEventLocation = (nextEvent: UpcomingEvent): string => {
-  return nextEvent.location;
+export const getEventLocation = (event: UpcomingEvent) => {
+  return [event.location, event.locationLink];
 };
 
-const getNextEventLocationLink = (nextEvent: UpcomingEvent): string => {
-  return nextEvent.locationLink;
-};
-
+// PRIVATE HELPER
 const checkDatePassed = (date: string): boolean => {
   return dayjs(date, DATE_FORMAT).isBefore(dayjs());
 };
@@ -83,6 +59,83 @@ const toStringMonthDate = (date: string): string => {
 };
 
 // ARCHIVE
+
+// const getNextEvent = () => {
+//   let nextEvent = UPCOMING_EVENTS_DEFAULT;
+
+//   for (let i = 0; i < UPCOMING_EVENTS.length; i++) {
+//     if (!checkDatePassed(UPCOMING_EVENTS[i].date)) {
+//       nextEvent = UPCOMING_EVENTS[i];
+//       break;
+//     }
+//   }
+
+//   const isNextEvent = isNextEvents(nextEvent);
+//   const nextEventName: string = getNextEventName(nextEvent);
+//   const nextEventTimestamp: string = getNextEventTimestamp(nextEvent);
+//   const nextEventDate: string = getNextEventDate(nextEvent);
+//   const nextEventLink: string = getNextEventLink(nextEvent);
+//   const nextEventLocation: string = getNextEventLocation(nextEvent);
+//   const nextEventLocationLink: string = getNextEventLocationLink(nextEvent);
+
+//   return [
+//     isNextEvent,
+//     nextEventName,
+//     nextEventTimestamp,
+//     nextEventDate,
+//     nextEventLink,
+//     nextEventLocation,
+//     nextEventLocationLink,
+//   ];
+// };
+
+// export { getNextEvent };
+
+// // PRIVATE HELPER METHODS
+// const isNextEvents = (nextEvent: UpcomingEvent): string => {
+//   return nextEvent === UPCOMING_EVENTS_DEFAULT ? 'false' : 'true';
+// };
+
+// const getNextEventName = (nextEvent: UpcomingEvent): string => {
+//   return nextEvent.name;
+// };
+
+// const getNextEventTimestamp = (nextEvent: UpcomingEvent): string => {
+//   return nextEvent.date;
+// };
+
+// const getNextEventDate = (nextEvent: UpcomingEvent): string => {
+//   return nextEvent === UPCOMING_EVENTS_DEFAULT
+//     ? ''
+//     : toStringMonthDate(nextEvent.date);
+// };
+
+// const getNextEventLink = (nextEvent: UpcomingEvent): string => {
+//   return nextEvent.rsvp;
+// };
+
+// const getNextEventLocation = (nextEvent: UpcomingEvent): string => {
+//   return nextEvent.location;
+// };
+
+// const getNextEventLocationLink = (nextEvent: UpcomingEvent): string => {
+//   return nextEvent.locationLink;
+// };
+
+// const checkDatePassed = (date: string): boolean => {
+//   return dayjs(date, DATE_FORMAT).isBefore(dayjs());
+// };
+
+// const toStringMonthDate = (date: string): string => {
+//   const month = parseInt(date.substring(5, 7));
+//   const day = parseInt(date.substring(8, 10));
+
+//   const newDate = new Date();
+//   newDate.setMonth(month - 1);
+
+//   return newDate.toLocaleString('en-US', { month: 'long' }) + ' ' + day;
+// };
+
 // const getNextEvents = (): number[] => {
 //   const nextEvents: number[] = [];
 //   for (let i = 0; i < UPCOMING_EVENTS.length; i++) {
