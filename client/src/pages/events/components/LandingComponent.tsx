@@ -4,7 +4,7 @@ import { TitleCollection } from './TitleCollection';
 import { UpcomingEvent } from './UpcomingEvent';
 
 export const LandingComponent = () => {
-  const [state, setState] = useState(0);
+  const [state, setState] = useState(2);
 
   const nextState = () => {
     setTimeout(() => setState(state + 1), 1000);

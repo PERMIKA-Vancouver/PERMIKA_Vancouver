@@ -21,6 +21,8 @@ const getNextEvent = () => {
   const nextEventTimestamp: string = getNextEventTimestamp(nextEvent);
   const nextEventDate: string = getNextEventDate(nextEvent);
   const nextEventLink: string = getNextEventLink(nextEvent);
+  const nextEventLocation: string = getNextEventLocation(nextEvent);
+  const nextEventLocationLink: string = getNextEventLocationLink(nextEvent);
 
   return [
     isNextEvent,
@@ -28,6 +30,8 @@ const getNextEvent = () => {
     nextEventTimestamp,
     nextEventDate,
     nextEventLink,
+    nextEventLocation,
+    nextEventLocationLink,
   ];
 };
 
@@ -54,6 +58,14 @@ const getNextEventDate = (nextEvent: UpcomingEvent): string => {
 
 const getNextEventLink = (nextEvent: UpcomingEvent): string => {
   return nextEvent.rsvp;
+};
+
+const getNextEventLocation = (nextEvent: UpcomingEvent): string => {
+  return nextEvent.location;
+};
+
+const getNextEventLocationLink = (nextEvent: UpcomingEvent): string => {
+  return nextEvent.locationLink;
 };
 
 const checkDatePassed = (date: string): boolean => {
