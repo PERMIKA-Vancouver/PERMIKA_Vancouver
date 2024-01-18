@@ -1,22 +1,26 @@
-require('dotenv').config();
+import express from 'express';
+import dotenv from 'dotenv';
 
-const express = require('express');
+dotenv.config();
 
 // express app
 const app = express();
 
 // middleware
-app.use((req, rest, next) => {
-  console.log(req.path, req.method);
-  next();
-});
+// app.use((req, rest, next) => {
+//   console.log(req.path, req.method);
+//   next();
+// });
 
 // routes
+// app.use(merchandiseRoutes);
+
 app.get('/', (req, res) => {
-  res.json({ msg: 'Welcome to the app' });
+  console.log(req.method, req.path);
+  return res.status(234).send('Welcone to PERMIKA');
 });
 
 // listen for request
 app.listen(process.env.PORT, () => {
-  console.log('listening on port 4000');
+  console.log(`listening on port ${process.env.PORT}`);
 });
