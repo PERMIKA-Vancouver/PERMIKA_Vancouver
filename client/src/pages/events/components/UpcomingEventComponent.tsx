@@ -24,13 +24,17 @@ export const UpcomingEventComponent = () => {
   return (
     <div className="fade-in-up">
       <h1>{getEventName(event)}</h1>
-      <div className="mt-4 mb-24 flex">
-        <h4>{getEventFullDate(event)}</h4>
+      <div className="mt-4 mb-24 sm:flex">
+        <h4 className="text-grey-body sm:text-white">
+          {getEventFullDate(event)}
+        </h4>
         <div
           className="ml-auto flex hover:cursor-pointer"
           onClick={() => openExternalLink(eventLocLink)}
         >
-          <h4 className="whitespace-nowrap mr-3">{eventLoc}</h4>
+          <h4 className="text-grey-body sm:text-white whitespace-nowrap mr-3">
+            {eventLoc}
+          </h4>
           <img src={Arrow} alt="Arrow" />
         </div>
       </div>
