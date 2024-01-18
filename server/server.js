@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 
 dotenv.config();
 
@@ -20,7 +21,15 @@ app.get('/', (req, res) => {
   return res.status(234).send('Welcone to PERMIKA');
 });
 
-// listen for request
-app.listen(process.env.PORT, () => {
-  console.log(`listening on port ${process.env.PORT}`);
-});
+// connect to mongodb
+mongoose
+  .connect(process.env.MONGODB)
+  .then(() => {
+    console.log('App connected to database');
+    app.listen(process.env.PORT, () => {
+      console.log(`App is listening to port: ${process.env.PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error(err);
+  });
