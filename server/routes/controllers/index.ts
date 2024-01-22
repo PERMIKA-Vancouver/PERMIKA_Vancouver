@@ -1,5 +1,6 @@
 export * from './createOrderController';
 export * from './getOrdersController';
+export * from './createPromoCodeController';
 
 // // Route for Save a new Book
 // router.post('/', async (req, res) => {
