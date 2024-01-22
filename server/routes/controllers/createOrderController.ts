@@ -1,18 +1,13 @@
 import { Request, Response } from 'express';
-import { ItemType, Items, Order } from '../../models/orderModel';
 import { ObjectId } from 'mongodb';
+
+import { getErrorMessage } from '../../helper/ErrorMessage';
+import { ItemType, Items } from '../../models/merchandise/itemsModel';
+import { Order } from '../../models/merchandise/orderModel';
 
 export const createOrderController = async (req: Request, res: Response) => {
   try {
-    if (
-      !req.body.firstName ||
-      !req.body.lastName ||
-      !req.body.emailAddress ||
-      !req.body.phoneNumber ||
-      !req.body.pickUpLocation ||
-      !req.body.items ||
-      req.body.items.isEmpty
-    ) {
+    if (checkOrderRequestBody(req)) {
       return res.status(400).send({ message: 'Send all required fields' });
     }
 
@@ -45,21 +40,29 @@ export const createOrderController = async (req: Request, res: Response) => {
       phoneNumber: req.body.phoneNumber,
       pickUpLocation: req.body.pickUpLocation,
       items: itemsId,
+      promoCode: req.body.promoCode,
+      totalPrice: req.body.totalPrice,
+      payment: req.body.payment,
     };
 
     const order = await Order.create(newOrder);
 
     return res.status(201).send(order);
   } catch (err) {
-    let errorMsg: string = '';
-
-    if (typeof err === 'string') {
-      errorMsg = err;
-    } else if (err instanceof Error) {
-      errorMsg = err.message;
-    }
-
-    console.log(errorMsg);
-    return res.status(500).send({ message: errorMsg });
+    return res.status(500).send({ message: getErrorMessage(err) });
   }
+};
+
+const checkOrderRequestBody = (req: Request): boolean => {
+  return (
+    !req.body.firstName ||
+    !req.body.lastName ||
+    !req.body.emailAddress ||
+    !req.body.phoneNumber ||
+    !req.body.pickUpLocation ||
+    !req.body.items ||
+    req.body.items.length === 0 ||
+    !req.body.totalPrice ||
+    !req.body.payment
+  );
 };

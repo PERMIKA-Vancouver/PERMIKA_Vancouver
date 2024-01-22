@@ -1,27 +1,6 @@
 import { ObjectId } from 'mongodb';
 import mongoose, { Schema } from 'mongoose';
 
-export interface ItemType {
-  quantity: number;
-  size: String;
-  model: String;
-}
-
-const ItemsSchema = new Schema({
-  quantity: {
-    type: Number,
-    required: true,
-  },
-  size: {
-    type: String,
-    required: true,
-  },
-  model: {
-    type: String,
-    required: true,
-  },
-});
-
 const OrderSchema = new Schema(
   {
     firstName: {
@@ -50,9 +29,19 @@ const OrderSchema = new Schema(
         ref: 'Items',
       },
     ],
+    promoCode: {
+      type: String,
+    },
+    totalPrice: {
+      type: Number,
+      required: true,
+    },
+    payment: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
 
-export const Items = mongoose.model('Items', ItemsSchema);
 export const Order = mongoose.model('Order', OrderSchema);
