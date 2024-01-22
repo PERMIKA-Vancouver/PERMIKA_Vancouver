@@ -5,16 +5,10 @@ const DATE_FORMAT = 'YYYY-MM-DD HH:mm';
 // Date format 'YYYY-MM-DD HH:mm'
 const UPCOMING_EVENTS: UpcomingEvent[] = [
   {
-    name: 'Waroeng Soto Madura',
-    date: '2023-11-23 23:59',
-    rsvp: 'https://docs.google.com/forms/d/e/1FAIpQLScFf8FnSkpjzGEQMW5MGE6FjgiLo14AvmiIo_-UqdvQRxWQGg/viewform',
+    name: 'Waroeng Rawon',
+    date: '2024-01-28 17:00',
+    rsvp: 'https://forms.gle/p9tdTPB8GXAkU9cNA',
     type: 1,
-  },
-  {
-    name: 'KOMPAS: Navigating Job Search in Canada',
-    date: '2023-11-25 16:00',
-    rsvp: 'https://forms.gle/S2cMcmNzERSncudx8',
-    type: 0,
   },
 ];
 
