@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import orderRoutes from './routes/orderRoute';
 
 dotenv.config();
 const MONGODB: string = process.env.MONGODB ?? '';
@@ -21,10 +22,7 @@ app.use(
   })
 );
 
-app.get('/', (req, res) => {
-  console.log(req.method, req.path);
-  return res.status(234).send('Welcome to PERMIKA!!!!!');
-});
+app.use('/order', orderRoutes);
 
 // connect to mongodb
 mongoose
