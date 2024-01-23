@@ -1,28 +1,25 @@
 import './App.css';
 
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from 'react-router-dom';
+import * as reactRouterDom from 'react-router-dom';
 
 import { PAGES } from './shared/data/pages';
 import { NavigationBar } from './shared/components/navigation-bar/NavigationBar';
+import { Order } from './pages/order/Order';
 
 function App() {
   return (
     <>
-      <Router>
-        <Routes>
-          <Route path="/" element={<NavigationBar />}>
-            {PAGES.map((page) => (
-              <Route key={page.name} path={page.path} element={page.element} />
+      <reactRouterDom.BrowserRouter>
+        <reactRouterDom.Routes>
+        <reactRouterDom.Route path="order" element={<Order />} />
+          <reactRouterDom.Route path="/" element={<NavigationBar />}>
+            {PAGES.filter((page) => page.name != "order").map((page) => (
+              <reactRouterDom.Route key={page.name} path={page.path} element={page.element} />
             ))}
-          </Route>
-          <Route path="*" element={<Navigate replace to="/" />} />
-        </Routes>
-      </Router>
+          </reactRouterDom.Route>
+          <reactRouterDom.Route path="*" element={<reactRouterDom.Navigate replace to="/" />} />
+        </reactRouterDom.Routes>
+      </reactRouterDom.BrowserRouter>
     </>
   );
 }

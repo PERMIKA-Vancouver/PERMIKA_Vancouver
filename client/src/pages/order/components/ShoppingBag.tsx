@@ -1,3 +1,3 @@
 export const ShoppingBag = () => {
-  return <div>ShoppingBag</div>;
+  return <div className = "w-[38%]">Shopping Bag</div>;
 };
