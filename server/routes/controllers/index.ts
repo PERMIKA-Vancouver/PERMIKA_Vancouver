@@ -1,6 +1,8 @@
 export * from './createOrderController';
 export * from './getOrdersController';
 export * from './createPromoCodeController';
+export * from './updatePromoCodeController';
+export * from './getPromoCodeController';
 export * from './createMerchandiseController';
 
 // // Route for Save a new Book
