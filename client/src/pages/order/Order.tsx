@@ -6,7 +6,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import InputAdornment from "@mui/material/InputAdornment";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 const locations = [
   {
@@ -54,21 +54,40 @@ const sizes = [
   },
 ];
 
-const items = [
+const sizeshoodie = [
   {
     value: "1",
-    label: "Option 1",
-    price: 30,
+    label: "M",
   },
   {
     value: "2",
-    label: "Option 2",
-    price: 30,
+    label: "L",
   },
   {
     value: "3",
-    label: "Option 3",
-    price: 10,
+    label: "XL",
+  },
+  {
+    value: "4",
+    label: "XXL",
+  },
+];
+
+const items = [
+  {
+    value: "1",
+    label: "KELANA - Waroeng Cak Timmies Hoodie",
+    price: 35,
+  },
+  {
+    value: "2",
+    label: "KELANA - Anak Rantau Hoodie",
+    price: 35,
+  },
+  {
+    value: "3",
+    label: "KELANA - Anak Rantau T-Shirt",
+    price: 20,
   },
 ];
 
@@ -86,11 +105,24 @@ const DEFAULT_SELECTED_ITEM = {
 };
 
 export const Order = () => {
-  const [page, setPage] = useState<"checkout" | "review" | "payment">("checkout");
+  const [page, setPage] = useState<"checkout" | "review" | "payment" | "confirmation">("checkout");
   const [shoppingBag, setShoppingBag] = useState([DEFAULT_SHOPPING_BAG]);
   const [selectedItem, setSelectedItem] = useState(DEFAULT_SELECTED_ITEM);
   const [numItems, setNumItems] = useState(0);
-  const [editMode, setEditMode] = useState(false);
+  const [fileUploaded, setFileUploaded] = useState(false);
+  const [selectedItemType, setSelectedItemType] = useState("");
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [pickupLocation, setPickupLocation] = useState("");
+  
+  const [firstNameError, setFirstNameError] = useState(false);
+  const [lastNameError, setLastNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [phoneNumberError, setPhoneNumberError] = useState(false);
+  const [pickupLocationError, setPickupLocationError] = useState(false);
 
   const handleQuantityChange = (index: number, newQuantity: number) => {
     const updatedShoppingBag = [...shoppingBag];
@@ -133,14 +165,22 @@ export const Order = () => {
   }, [shoppingBag]);
 
   const totalPrice = shoppingBag.reduce((total, item) => total + item.price * item.quantity, 0);
-  const taxRate = 0.12;
-  const tax = totalPrice * taxRate;
-  const subtotal = totalPrice + tax;
+  const discount = 0.10;
+  const disc = totalPrice * discount;
+  const subtotal = totalPrice - disc;
 
   const isTotalsVisible = shoppingBag.some((item) => item.quantity > 0 && item.size && item.item);
 
   const handleChooseItem = (index: number, item: (typeof items)[number]) => {
     if (page !== "checkout") return;
+    
+    // Set the selected item type based on the chosen item
+    if (item.value === "1" || item.value === "2") {
+      setSelectedItemType("hoodie");
+    } else {
+      setSelectedItemType("");
+    }
+
     setShoppingBag((prev) => {
       return prev.map((bag, idx) =>
         idx !== index ? bag : { ...bag, item: item.label, price: item.price }
@@ -149,54 +189,155 @@ export const Order = () => {
   };
 
   const handleNextPage = () => {
-    setPage((page) => {
-      if (page === "checkout") {
-        if (getTotalPrice() <= 0) return "checkout";
-        return "review";
+    if (page === "checkout") {
+      // Check if total price is zero
+      if (getTotalPrice() <= 0) {
+        setFirstNameError(true); // Set error state if total price is zero
+        return;
       }
-      if (page === "review") return "payment";
-      return "payment";
-    });
+  
+      // Check if first name is provided
+      if (!firstName.trim()) {
+        setFirstNameError(true); // Set error state if first name is not provided
+        return;
+      }
+  
+      // Check if last name is provided
+      if (!lastName.trim()) {
+        setLastNameError(true);
+        return;
+      } else {
+        setLastNameError(false);
+      }
+  
+      // Check if email is provided
+      if (!email.trim()) {
+        setEmailError(true);
+        return;
+      } else {
+        setEmailError(false);
+      }
+  
+      // Check if phone number is provided
+      if (!phoneNumber.trim()) {
+        setPhoneNumberError(true);
+        return;
+      } else {
+        setPhoneNumberError(false);
+      }
+  
+      // Check if pick-up location is provided
+      if (!pickupLocation.trim()) {
+        setPickupLocationError(true);
+        return;
+      } else {
+        setPickupLocationError(false);
+      }
+  
+      // Proceed to the next page if all checks pass
+      setPage("review");
+
+    } else if (page === "review") {
+      // Proceed to the payment page after finishing the review
+      setPage("payment");
+    } else if (page === "payment") {
+      // Check if the file is uploaded
+      if (fileUploaded) {
+        // If the file is uploaded, proceed to the confirmation page
+        setPage("confirmation");
+      } else {
+        // If the file is not uploaded, proceed to the payment page
+        setPage("payment");
+      }
+    } else {
+      setPage("confirmation"); // Assuming this is the last step after payment and file upload
+    }
+  };
+
+  const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
+    const uploadedFile = event.target.files?.[0];
+
+    if (uploadedFile) {
+      // Check if the file type is an image (you can customize this check based on your specific requirements)
+      const isImage = uploadedFile.type.startsWith('image/');
+
+      if (isImage) {
+        setFileUploaded(true);
+        // You may want to store the uploaded file for further use, for example, displaying the image
+        // You can save it in the state or send it to the server as needed.
+        // For simplicity, I'll just log the file information for now.
+        console.log('Uploaded file:', uploadedFile);
+      } else {
+        // Handle the case where the uploaded file is not an image (e.g., show an error message)
+        console.error('Invalid file type. Please upload an image.');
+      }
+    }
+  };
+
+  const handleGoBackToCheckout = () => {
+    setPage("checkout");
   };
 
   return (
     <div className="h-screen flex pt-[7%] pl-[6.3%]">
-      <ShoppingBag />
-      <div className="Checkout-details pl-[6.3%] w-[62%] pr-[12%]">
+      {/* <ShoppingBag /> */}
+      
+      <div className="Checkout-details pl-[6.3%] w-[100%] pr-[12%]">
         <div className="Checkout">
           <div className="checkout-outer mb-[50px]">
-            <div className="checkout-label">
-              <h1>Checkout</h1>
+            <div className="checkout-label flex justify-between">
+            <h1>{page === "review" ? "Review Order" : page === "payment" ? "Payment Details" : page === "confirmation" ? "Thank You" : "Checkout"}</h1>
+              {page === "review" && (
+                <button onClick={() => setPage("checkout")}>Edit</button>
+              )}
             </div>
             <div className="checkout-information"></div>
           </div>
+          {page !== "payment" && page !== "confirmation" && (
           <form className="checkout-form">
             <div className="name flex justify-between gap-5">
               <TextField
-                className="flex-auto"
+                className={`flex-auto ${firstNameError ? "error" : ""}`}
                 id="outlined-multiline-flexible"
                 label="First Name*"
                 multiline
                 maxRows={4}
                 disabled={page !== "checkout"}
+                value={firstName}
+                onChange={(e) => {
+                  setFirstName(e.target.value);
+                  setFirstNameError(false);
+                }}
               />
               <TextField
-                className="flex-auto"
+                className={`flex-auto ${lastNameError ? 'error' : ''}`}
                 id="outlined-multiline-flexible"
                 label="Last Name*"
                 multiline
                 maxRows={4}
                 disabled={page !== "checkout"}
+                value={lastName}
+                onChange={(e) => {
+                  setLastName(e.target.value);
+                  setLastNameError(false);
+                }
+              }
               />
             </div>
             <div className="pt-[3%]">
               <TextField
-                id="outlined-multiline-flexible"
-                label="Email Adress*"
+                className={`w-full ${emailError ? 'error' : ''}`}
+                label="Email Address*"
                 multiline
                 maxRows={4}
                 fullWidth
                 disabled={page !== "checkout"}
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setEmailError(false);
+                }
+              }
               />
             </div>
             <div className="phone-number flex justify-between pt-[3%] gap-5">
@@ -207,22 +348,34 @@ export const Order = () => {
                 defaultValue="  +1"
               />  
               <TextField
-                className="flex-auto"
+                className={`flex-auto ${phoneNumberError ? 'error' : ''}`}
                 id="outlined-multiline-flexible"
                 label="Phone Number*"
                 multiline
                 maxRows={4}
                 disabled={page !== "checkout"}
+                value={phoneNumber}
+                onChange={(e) => {
+                  setPhoneNumber(e.target.value);
+                  setPhoneNumberError(false);
+                }
+              }
               />
             </div>
 
             <form className="pickup-location pt-[3%]">
               <TextField
-                id="outlined-multiline-location"
+                className={`w-full ${pickupLocationError ? 'error' : ''}`}
                 select
                 label="Pick-Up Location*"
                 fullWidth
                 disabled={page !== "checkout"}
+                value={pickupLocation}
+                onChange={(e) => {
+                  setPickupLocation(e.target.value);
+                  setPickupLocationError(false);
+                }
+              }
               >
                 {locations.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
@@ -232,21 +385,24 @@ export const Order = () => {
               </TextField>
             </form>
           </form>
+          )}
         </div>
+        
 
         {/* Shopping Bag */}
         <div className="Shopping-bag mt-10">
           <div className="shopping flex justify-between mb-3">
             <h1 className="text-4xl">Shopping Bag</h1>
+            {page === "checkout" && (
             <button
               onClick={handleAddItem}
               className="add-button pr-[2%]"
-              disabled={page !== "checkout"}
             >
               Add
             </button>
+            )}
           </div>
-
+          
           {shoppingBag.map((bag, index) => (
             <div
               key={index}
@@ -275,11 +431,17 @@ export const Order = () => {
                     defaultValue={bag.size}
                     disabled={page !== "checkout"}
                   >
-                    {sizes.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
+                    {selectedItemType === "hoodie"
+                ? sizeshoodie.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))
+                : sizes.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
                   </TextField>
                 </div>
                 <div className="w-[67%]">
@@ -310,13 +472,14 @@ export const Order = () => {
                     ))}
                   </TextField>
                 </div>
+                {page === "checkout" && (
                 <button
                   onClick={() => handleRemoveItem(index)}
                   className="remove-button pr-[2%]"
-                  disabled={page !== "checkout"}
                 >
                   X
                 </button>
+                )}
               </div>
             </div>
           ))}
@@ -327,7 +490,7 @@ export const Order = () => {
                   Merchandise Total <span className="">${totalPrice.toFixed(2)}</span>
                 </div>
                 <div className="text-[#9A9A9A] flex justify-between">
-                  Tax (12%) <span>${tax.toFixed(2)}</span>
+                  Discount (10%) <span>${disc.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between mt-2.5 text-2xl">
                   Subtotal <span>${subtotal.toFixed(2)}</span>
@@ -335,7 +498,24 @@ export const Order = () => {
               </div>
             </div>
           )}
-          {!isTotalsVisible && shoppingBag.length === 0 && <div>kosong</div>}
+          {page === "payment" && (
+              <form className="payment-form">
+                {/* Additional payment details and upload picture form*/}
+                {/* You can add your form fields here */}
+                <div className="upload-picture pt-[5%]">
+                  <h1 className="payment-label text-4xl">Payment</h1>
+                  <p style={{ color: 'grey', fontSize:'14px' }} className="payment-description pt-[2%]">Please send the total of your order to the following email address:</p>
+                  <p style={{ color: 'grey',fontSize:'14px' }} className="payment-description2">treasurer.permika@gmail.com and make sure to attach your proof of payment below.</p>
+                  <TextField
+                    type="file"
+                    fullWidth
+                    disabled={page !== "payment"}
+                    onChange={handleFileUpload}
+                  />
+                </div>
+              </form>
+          )}
+          {!isTotalsVisible && shoppingBag.length === 0 && <div></div>}
           <button
             className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400"
             onClick={() => handleNextPage()}
