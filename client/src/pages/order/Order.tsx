@@ -1,11 +1,6 @@
-import { ShoppingBag } from './components/ShoppingBag';
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
-import FormControl from '@mui/material/FormControl';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import InputAdornment from '@mui/material/InputAdornment';
 import { ChangeEvent, useState } from 'react';
 
 const locations = [
