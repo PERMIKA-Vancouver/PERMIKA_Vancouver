@@ -1,5 +1,6 @@
 import sample from "../../../assets/merchandise/hoodie.png";
 import { CustomButton } from "../../../shared/components/CustomButton";
+import ImageModal from "../../../shared/components/ImageModal";
 
 export const Merchandise = () => {
   return (
@@ -12,9 +13,9 @@ export const Merchandise = () => {
           link="https://forms.gle/z8AFC5m5PiJzKBEf7"
         />{" "}
       </div>
-      <div className="flex gap-20">
+      <div className="flex gap-20 justify-evenly">
         <div className="flex flex-col text-grey-body">
-          <img src={sample} alt="background" className="w-full" />
+          <ImageModal src={sample} />
           <p className="text-sm mt-3">Hoodie Collection</p>
           <p className="text-xl text-black-text">The PERMIKA Hoodie</p>
           <p className="text-sm">$45</p>
@@ -28,7 +29,7 @@ export const Merchandise = () => {
           </div>
         </div>
         <div className="flex flex-col text-grey-body">
-          <img src={sample} alt="background" className="w-full" />
+          <ImageModal src={sample} />
           <p className="text-sm mt-3">Hoodie Collection</p>
           <p className="text-xl text-black-text">The PERMIKA Hoodie</p>
           <p className="text-sm">$45</p>
@@ -42,7 +43,7 @@ export const Merchandise = () => {
           </div>
         </div>
         <div className="flex flex-col text-grey-body">
-          <img src={sample} alt="background" className="w-full" />
+          <ImageModal src={sample} />
           <p className="text-sm mt-3">Hoodie Collection</p>
           <p className="text-xl text-black-text">The PERMIKA Hoodie</p>
           <p className="text-sm">$45</p>
