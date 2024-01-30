@@ -283,12 +283,8 @@ export const Order = () => {
     }
   };
 
-  const handleGoBackToCheckout = () => {
-    setPage('checkout');
-  };
-
   return (
-    <div className="h-screen flex pt-[7%] pl-[6.3%]">
+    <div className="flex pt-navbar py-20 ml-all min-h-screen">
       {/* <ShoppingBag /> */}
 
       <div className="Checkout-details pl-[6.3%] w-[100%] pr-[12%]">
@@ -301,7 +297,7 @@ export const Order = () => {
                   : page === 'payment'
                   ? 'Payment Details'
                   : page === 'confirmation'
-                  ? 'Thank You'
+                  ? 'Thank you for your purchase!'
                   : 'Checkout'}
               </h2>
               {page === 'review' && (
@@ -312,9 +308,11 @@ export const Order = () => {
           </div>
           {page !== 'payment' && page !== 'confirmation' && (
             <form className="checkout-form">
-              <div className="name flex justify-between gap-5">
+              <div className="name sm:flex justify-between sm:gap-5">
                 <TextField
-                  className={`flex-auto ${firstNameError ? 'error' : ''}`}
+                  className={`w-full sm:basis-[49%] ${
+                    firstNameError ? 'error' : ''
+                  }`}
                   id="outlined-multiline-flexible"
                   label="First Name*"
                   multiline
@@ -327,7 +325,9 @@ export const Order = () => {
                   }}
                 />
                 <TextField
-                  className={`flex-auto ${lastNameError ? 'error' : ''}`}
+                  className={`w-full sm:basis-[49%] ${
+                    lastNameError ? 'error' : ''
+                  } !mt-[3%] sm:!mt-0`}
                   id="outlined-multiline-flexible"
                   label="Last Name*"
                   multiline
@@ -356,12 +356,6 @@ export const Order = () => {
                 />
               </div>
               <div className="phone-number flex justify-between pt-[3%] gap-5">
-                <TextField
-                  className="w-[10%] flex justify-center items-center"
-                  disabled
-                  id="outlined-disabled"
-                  defaultValue="  +1"
-                />
                 <TextField
                   className={`flex-auto ${phoneNumberError ? 'error' : ''}`}
                   id="outlined-multiline-flexible"
@@ -402,151 +396,153 @@ export const Order = () => {
         </div>
 
         {/* Shopping Bag */}
-        <div className="Shopping-bag mt-10">
-          <div className="shopping flex justify-between mb-3">
-            <h1 className="text-4xl">Shopping Bag</h1>
-            {page === 'checkout' && (
-              <button onClick={handleAddItem} className="add-button pr-[2%]">
-                Add
-              </button>
-            )}
-          </div>
+        {page !== 'confirmation' && (
+          <div className="Shopping-bag mt-10">
+            <div className="shopping flex justify-between mb-3">
+              <h1 className="text-4xl">Shopping Bag</h1>
+              {page === 'checkout' && (
+                <button onClick={handleAddItem} className="add-button pr-[2%]">
+                  Add
+                </button>
+              )}
+            </div>
 
-          {shoppingBag.map((bag, index) => (
-            <div
-              key={index}
-              className="shopping-details flex justify-between pl-[1.5%] pr-[2.5%] pt-[1.5%] mb-3"
-            >
-              <TextField
-                className="quantity w-[15%]"
-                id="outlined-flexible"
-                label="Qty"
-                value={bag.quantity}
-                onChange={(event) => {
-                  if (page !== 'checkout') return;
-                  const newQuantity = parseInt(event.target.value, 10) || 0;
-                  handleQuantityChange(index, newQuantity);
-                }}
-                disabled={page !== 'checkout'}
-              />
-              <div className="x flex items-center">X</div>
-              <div className="justify-between flex w-[80%]">
-                <div className="w-[27%]">
-                  <TextField
-                    className="w-full"
-                    id="outlined-multiline-sizes"
-                    select
-                    label="Size*"
-                    defaultValue={bag.size}
-                    disabled={page !== 'checkout'}
-                  >
-                    {selectedItemType === 'hoodie'
-                      ? sizeshoodie.map((option) => (
-                          <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                          </MenuItem>
-                        ))
-                      : sizes.map((option) => (
-                          <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                          </MenuItem>
-                        ))}
-                  </TextField>
-                </div>
-                <div className="w-[67%]">
-                  <TextField
-                    className="w-full"
-                    id="outlined-multiline-sizes"
-                    select
-                    label="Select your item*"
-                    defaultValue={bag.item}
-                    onChange={(event) => {
-                      const selectedItemValue = event.target.value;
-                      const selected =
-                        items.find(
-                          (item) => item.value === selectedItemValue
-                        ) || DEFAULT_SELECTED_ITEM;
-                      setSelectedItem(selected);
-                    }}
-                    disabled={page !== 'checkout'}
-                  >
-                    {items.map((option) => (
-                      <MenuItem
-                        key={option.value}
-                        value={option.value}
-                        onClick={() => handleChooseItem(index, option)}
-                        disabled={page !== 'checkout'}
-                      >
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                </div>
-                {page === 'checkout' && (
-                  <button
-                    onClick={() => handleRemoveItem(index)}
-                    className="remove-button px-[2%]"
-                  >
-                    X
-                  </button>
-                )}
-              </div>
-            </div>
-          ))}
-          {getTotalPrice() > 0 && (
-            <div className="">
-              <div className="totals font-light">
-                <div className="text-[#9A9A9A] flex justify-between">
-                  Merchandise Total{' '}
-                  <span className="">${totalPrice.toFixed(2)}</span>
-                </div>
-                <div className="text-[#9A9A9A] flex justify-between">
-                  Discount (10%) <span>${disc.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between mt-2.5 text-2xl">
-                  Subtotal <span>${subtotal.toFixed(2)}</span>
-                </div>
-              </div>
-            </div>
-          )}
-          {page === 'payment' && (
-            <form className="payment-form">
-              {/* Additional payment details and upload picture form*/}
-              {/* You can add your form fields here */}
-              <div className="upload-picture pt-[5%]">
-                <h1 className="payment-label text-4xl">Payment</h1>
-                <p
-                  style={{ color: 'grey', fontSize: '14px' }}
-                  className="payment-description pt-[2%]"
-                >
-                  Please send the total of your order to the following email
-                  address:
-                </p>
-                <p
-                  style={{ color: 'grey', fontSize: '14px' }}
-                  className="payment-description2"
-                >
-                  treasurer.permika@gmail.com and make sure to attach your proof
-                  of payment below.
-                </p>
+            {shoppingBag.map((bag, index) => (
+              <div
+                key={index}
+                className="shopping-details flex justify-between pl-[1.5%] pr-[2.5%] pt-[1.5%] mb-3"
+              >
                 <TextField
-                  type="file"
-                  fullWidth
-                  disabled={page !== 'payment'}
-                  onChange={handleFileUpload}
+                  className="quantity w-[15%]"
+                  id="outlined-flexible"
+                  label="Qty"
+                  value={bag.quantity}
+                  onChange={(event) => {
+                    if (page !== 'checkout') return;
+                    const newQuantity = parseInt(event.target.value, 10) || 0;
+                    handleQuantityChange(index, newQuantity);
+                  }}
+                  disabled={page !== 'checkout'}
                 />
+                <div className="x flex items-center">X</div>
+                <div className="justify-between flex w-[80%]">
+                  <div className="w-[27%]">
+                    <TextField
+                      className="w-full"
+                      id="outlined-multiline-sizes"
+                      select
+                      label="Size*"
+                      defaultValue={bag.size}
+                      disabled={page !== 'checkout'}
+                    >
+                      {selectedItemType === 'hoodie'
+                        ? sizeshoodie.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                              {option.label}
+                            </MenuItem>
+                          ))
+                        : sizes.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                              {option.label}
+                            </MenuItem>
+                          ))}
+                    </TextField>
+                  </div>
+                  <div className="w-[67%]">
+                    <TextField
+                      className="w-full"
+                      id="outlined-multiline-sizes"
+                      select
+                      label="Select your item*"
+                      defaultValue={bag.item}
+                      onChange={(event) => {
+                        const selectedItemValue = event.target.value;
+                        const selected =
+                          items.find(
+                            (item) => item.value === selectedItemValue
+                          ) || DEFAULT_SELECTED_ITEM;
+                        setSelectedItem(selected);
+                      }}
+                      disabled={page !== 'checkout'}
+                    >
+                      {items.map((option) => (
+                        <MenuItem
+                          key={option.value}
+                          value={option.value}
+                          onClick={() => handleChooseItem(index, option)}
+                          disabled={page !== 'checkout'}
+                        >
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </div>
+                  {page === 'checkout' && (
+                    <button
+                      onClick={() => handleRemoveItem(index)}
+                      className="remove-button px-[2%]"
+                    >
+                      X
+                    </button>
+                  )}
+                </div>
               </div>
-            </form>
-          )}
-          {!isTotalsVisible && shoppingBag.length === 0 && <div></div>}
-          <button
-            className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400"
-            onClick={() => handleNextPage()}
-            disabled={getTotalPrice() <= 0}
-          >
-            Next
-          </button>
-        </div>
+            ))}
+            {getTotalPrice() > 0 && (
+              <div className="">
+                <div className="totals font-light">
+                  <div className="text-[#9A9A9A] flex justify-between">
+                    Merchandise Total{' '}
+                    <span className="">${totalPrice.toFixed(2)}</span>
+                  </div>
+                  <div className="text-[#9A9A9A] flex justify-between">
+                    Discount (10%) <span>${disc.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between mt-2.5 text-2xl">
+                    Subtotal <span>${subtotal.toFixed(2)}</span>
+                  </div>
+                </div>
+              </div>
+            )}
+            {page === 'payment' && (
+              <form className="payment-form">
+                {/* Additional payment details and upload picture form*/}
+                {/* You can add your form fields here */}
+                <div className="upload-picture pt-[5%]">
+                  <h1 className="payment-label text-4xl">Payment</h1>
+                  <p
+                    style={{ color: 'grey', fontSize: '14px' }}
+                    className="payment-description pt-[2%]"
+                  >
+                    Please send the total of your order to the following email
+                    address:
+                  </p>
+                  <p
+                    style={{ color: 'grey', fontSize: '14px' }}
+                    className="payment-description2"
+                  >
+                    treasurer.permika@gmail.com and make sure to attach your
+                    proof of payment below.
+                  </p>
+                  <TextField
+                    type="file"
+                    fullWidth
+                    disabled={page !== 'payment'}
+                    onChange={handleFileUpload}
+                  />
+                </div>
+              </form>
+            )}
+            {!isTotalsVisible && shoppingBag.length === 0 && <div></div>}
+            <button
+              className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400"
+              onClick={() => handleNextPage()}
+              disabled={getTotalPrice() <= 0}
+            >
+              {page === 'payment' ? 'Submit' : 'Next'}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
