@@ -1,12 +1,10 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { LOCATIONS, SIZES, MODELS } from './data/data';
 import axios from 'axios';
 import { openExternalLink } from '../../shared/utils/OpenLinkUtil';
-import { Button } from '@mui/material';
-import { CustomButton } from '../../shared/components/CustomButton';
 
 const DEFAULT_SHOPPING_BAG = {
   quantity: 0,
@@ -28,7 +26,6 @@ export const Order = () => {
   const [shoppingBag, setShoppingBag] = useState([DEFAULT_SHOPPING_BAG]);
   const [selectedItem, setSelectedItem] = useState(DEFAULT_SELECTED_ITEM);
   const [numItems, setNumItems] = useState(0);
-  const [fileUploaded, setFileUploaded] = useState(false);
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
