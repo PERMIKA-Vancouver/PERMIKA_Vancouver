@@ -4,6 +4,9 @@ import MenuItem from '@mui/material/MenuItem';
 import { ChangeEvent, useState } from 'react';
 import { LOCATIONS, SIZES, MODELS } from './data/data';
 import axios from 'axios';
+import { openExternalLink } from '../../shared/utils/OpenLinkUtil';
+import { Button } from '@mui/material';
+import { CustomButton } from '../../shared/components/CustomButton';
 
 const DEFAULT_SHOPPING_BAG = {
   quantity: 0,
@@ -38,6 +41,8 @@ export const Order = () => {
   const [emailError, setEmailError] = useState(false);
   const [phoneNumberError, setPhoneNumberError] = useState(false);
   const [pickupLocationError, setPickupLocationError] = useState(false);
+
+  const [paymentClicked, setPaymentClicked] = useState(false);
 
   const handleQuantityChange = (index: number, newQuantity: number) => {
     const updatedShoppingBag = [...shoppingBag];
@@ -169,7 +174,7 @@ export const Order = () => {
       });
     } else if (page === 'payment') {
       // Check if the file is uploaded
-      if (fileUploaded) {
+      if (paymentClicked) {
         // If the file is uploaded, proceed to the confirmation page
         checkAvailability(true).then((available) => {
           if (available) {
@@ -307,26 +312,6 @@ export const Order = () => {
           });
       });
     });
-  };
-
-  const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
-    const uploadedFile = event.target.files?.[0];
-
-    if (uploadedFile) {
-      // Check if the file type is an image (you can customize this check based on your specific requirements)
-      const isImage = uploadedFile.type.startsWith('image/');
-
-      if (isImage) {
-        setFileUploaded(true);
-        // You may want to store the uploaded file for further use, for example, displaying the image
-        // You can save it in the state or send it to the server as needed.
-        // For simplicity, I'll just log the file information for now.
-        console.log('Uploaded file:', uploadedFile);
-      } else {
-        // Handle the case where the uploaded file is not an image (e.g., show an error message)
-        console.error('Invalid file type. Please upload an image.');
-      }
-    }
   };
 
   return (
@@ -554,37 +539,40 @@ export const Order = () => {
                 {/* You can add your form fields here */}
                 <div className="upload-picture pt-[5%]">
                   <h1 className="payment-label text-4xl">Payment</h1>
-                  <p
-                    style={{ color: 'grey', fontSize: '14px' }}
-                    className="payment-description pt-[2%]"
-                  >
-                    Please send the total of your order to the following email
-                    address:
+                  <p className="payment-description pt-[2%] text-grey-body">
+                    Please access the link below and pay your total amount
+                    there.
                   </p>
                   <p
-                    style={{ color: 'grey', fontSize: '14px' }}
-                    className="payment-description2"
+                    onClick={() => {
+                      setPaymentClicked(true);
+                      openExternalLink('https://forms.gle/wSxUEACu6ydqegVh9');
+                    }}
+                    className="text-blue-600 cursor-pointer text-xl"
                   >
-                    treasurer.permika@gmail.com and make sure to attach your
-                    proof of payment below.
+                    Click here
                   </p>
-                  <TextField
-                    type="file"
-                    fullWidth
-                    disabled={page !== 'payment'}
-                    onChange={handleFileUpload}
-                  />
                 </div>
               </form>
             )}
             {!isTotalsVisible && shoppingBag.length === 0 && <div></div>}
-            <button
-              className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400"
-              onClick={() => handleNextPage()}
-              disabled={getTotalPrice() <= 0}
-            >
-              {page === 'payment' ? 'Submit' : 'Next'}
-            </button>
+            {page === 'payment' ? (
+              <button
+                className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400"
+                onClick={handleNextPage}
+                disabled={getTotalPrice() <= 0 || !paymentClicked}
+              >
+                Submit Order
+              </button>
+            ) : (
+              <button
+                className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400"
+                onClick={() => handleNextPage()}
+                disabled={getTotalPrice() <= 0}
+              >
+                Next
+              </button>
+            )}
           </div>
         )}
       </div>
