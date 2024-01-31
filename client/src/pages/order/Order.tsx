@@ -2,9 +2,16 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
-import { LOCATIONS, SIZES, MODELS } from './data/data';
+import {
+  LOCATIONS,
+  SIZES,
+  MODELS,
+  DISCOUNT,
+  DISCOUNT_DEADLINE,
+} from './data/data';
 import axios from 'axios';
 import { openExternalLink } from '../../shared/utils/OpenLinkUtil';
+import dayjs from 'dayjs';
 
 const DEFAULT_SHOPPING_BAG = {
   quantity: 0,
@@ -18,6 +25,8 @@ const DEFAULT_SELECTED_ITEM = {
   label: '',
   price: 0,
 };
+
+const SERVER = process.env.REACT_APP_LOCAL_SERVER;
 
 export const Order = () => {
   const [page, setPage] = useState<
@@ -40,6 +49,8 @@ export const Order = () => {
   const [pickupLocationError, setPickupLocationError] = useState(false);
 
   const [paymentClicked, setPaymentClicked] = useState(false);
+
+  const isDiscount = dayjs().isBefore(dayjs(DISCOUNT_DEADLINE, 'YYYY-MM-DD'));
 
   const handleQuantityChange = (index: number, newQuantity: number) => {
     const updatedShoppingBag = [...shoppingBag];
@@ -86,9 +97,13 @@ export const Order = () => {
     (total, item) => total + item.price * item.quantity,
     0
   );
-  const discount = 0.1;
-  const disc = totalPrice * discount;
-  const subtotal = totalPrice - disc;
+
+  let subtotal = totalPrice;
+  let disc = 0;
+  if (isDiscount) {
+    disc = totalPrice * DISCOUNT;
+    subtotal -= disc;
+  }
 
   const isTotalsVisible = shoppingBag.some(
     (item) => item.quantity > 0 && item.size && item.model
@@ -194,7 +209,7 @@ export const Order = () => {
   const checkAvailability = async (payment: boolean): Promise<boolean> => {
     return new Promise((resolve, reject) => {
       axios
-        .get(`${process.env.REACT_APP_TEST_SERVER}/order/merchandise`)
+        .get(`${SERVER}/order/merchandise`)
         .then((res) => {
           res.data.data.forEach((item: any) => {
             const initialValue = 0;
@@ -230,98 +245,87 @@ export const Order = () => {
   };
 
   const handlePayment = () => {
-    axios
-      .get(`${process.env.REACT_APP_TEST_SERVER}/order/merchandise`)
-      .then((res) => {
-        let proceedPayment = true;
+    axios.get(`${SERVER}/order/merchandise`).then((res) => {
+      let proceedPayment = true;
+      for (let bag of shoppingBag) {
+        const merchandise = res.data.data.find(
+          (item: any) => item.model === bag.model && item.size === bag.size
+        );
+        if (!merchandise) {
+          alert(bag.model + ' has no size ' + bag.size);
+          proceedPayment = false;
+        }
+      }
+
+      if (proceedPayment) {
         for (let bag of shoppingBag) {
-          const merchandise = res.data.data.find(
-            (item: any) => item.model === bag.model && item.size === bag.size
-          );
-          if (!merchandise) {
-            alert(bag.model + ' has no size ' + bag.size);
-            proceedPayment = false;
-          }
-        }
-
-        if (proceedPayment) {
-          for (let bag of shoppingBag) {
-            const id = bag.model + ' ' + bag.size;
-            const merchandise = res.data.data.find(
-              (item: any) => item.model === bag.model && item.size === bag.size
-            );
-            const data = {
-              pending: merchandise.pending + bag.quantity,
-              bought: merchandise.bought,
-            };
-            axios
-              .put(
-                `${process.env.REACT_APP_TEST_SERVER}/order/merchandise/${id}`,
-                data
-              )
-              .then(() => {
-                setPage('payment');
-              })
-              .catch((err) => {
-                alert('Error occured: ' + err.message + '. Please try again!');
-                setPage('review');
-              });
-          }
-        } else {
-          setPage('review');
-        }
-      });
-  };
-
-  const handleSubmitOrder = () => {
-    axios
-      .get(`${process.env.REACT_APP_TEST_SERVER}/order/merchandise`)
-      .then((res) => {
-        shoppingBag.forEach((bag) => {
           const id = bag.model + ' ' + bag.size;
           const merchandise = res.data.data.find(
             (item: any) => item.model === bag.model && item.size === bag.size
           );
           const data = {
-            pending: merchandise.pending - bag.quantity,
-            bought: merchandise.bought + bag.quantity,
+            pending: merchandise.pending + bag.quantity,
+            bought: merchandise.bought,
           };
           axios
-            .put(
-              `${process.env.REACT_APP_TEST_SERVER}/order/merchandise/${id}`,
-              data
-            )
+            .put(`${SERVER}/order/merchandise/${id}`, data)
             .then(() => {
-              const location = LOCATIONS.find(
-                (loc) => loc.value === pickupLocation
-              );
-              const dataOrder = {
-                firstName,
-                lastName,
-                emailAddress: email,
-                phoneNumber,
-                pickUpLocation: location?.label,
-                items: shoppingBag,
-                totalPrice,
-                payment: 'link',
-              };
-
-              axios
-                .post(`${process.env.REACT_APP_TEST_SERVER}/order`, dataOrder)
-                .then(() => {
-                  setPage('confirmation');
-                })
-                .catch((err) => {
-                  alert('An error happened: ' + err.message);
-                  setPage('payment');
-                });
+              setPage('payment');
             })
             .catch((err) => {
-              alert('An error happened: ' + err.message);
-              setPage('payment');
+              alert('Error occured: ' + err.message + '. Please try again!');
+              setPage('review');
             });
-        });
+        }
+      } else {
+        setPage('review');
+      }
+    });
+  };
+
+  const handleSubmitOrder = () => {
+    axios.get(`${SERVER}/order/merchandise`).then((res) => {
+      shoppingBag.forEach((bag) => {
+        const id = bag.model + ' ' + bag.size;
+        const merchandise = res.data.data.find(
+          (item: any) => item.model === bag.model && item.size === bag.size
+        );
+        const data = {
+          pending: merchandise.pending - bag.quantity,
+          bought: merchandise.bought + bag.quantity,
+        };
+        axios
+          .put(`${SERVER}/order/merchandise/${id}`, data)
+          .then(() => {
+            const location = LOCATIONS.find(
+              (loc) => loc.value === pickupLocation
+            );
+            const dataOrder = {
+              firstName,
+              lastName,
+              emailAddress: email,
+              phoneNumber,
+              pickUpLocation: location?.label,
+              items: shoppingBag,
+              totalPrice,
+            };
+
+            axios
+              .post(`${SERVER}/order`, dataOrder)
+              .then(() => {
+                setPage('confirmation');
+              })
+              .catch((err) => {
+                alert('An error happened: ' + err.message);
+                setPage('payment');
+              });
+          })
+          .catch((err) => {
+            alert('An error happened: ' + err.message);
+            setPage('payment');
+          });
       });
+    });
   };
 
   return (
@@ -534,9 +538,12 @@ export const Order = () => {
                     Merchandise Total{' '}
                     <span className="">${totalPrice.toFixed(2)}</span>
                   </div>
-                  <div className="text-[#9A9A9A] flex justify-between">
-                    Discount (10%) <span>${disc.toFixed(2)}</span>
-                  </div>
+                  {isDiscount && (
+                    <div className="text-[#9A9A9A] flex justify-between">
+                      Discount ({`${DISCOUNT * 100}%`})
+                      <span>${disc.toFixed(2)}</span>
+                    </div>
+                  )}
                   <div className="flex justify-between mt-2.5 text-2xl">
                     Subtotal <span>${subtotal.toFixed(2)}</span>
                   </div>

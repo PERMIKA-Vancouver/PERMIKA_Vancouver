@@ -66,7 +66,6 @@ const checkOrderRequestBody = (req: Request): boolean => {
     !req.body.pickUpLocation ||
     !req.body.items ||
     req.body.items.length === 0 ||
-    !req.body.totalPrice ||
-    !req.body.payment
+    !req.body.totalPrice
   );
 };

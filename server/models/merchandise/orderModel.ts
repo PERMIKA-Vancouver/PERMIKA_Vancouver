@@ -36,10 +36,6 @@ const OrderSchema = new Schema(
       type: Number,
       required: true,
     },
-    payment: {
-      type: String,
-      required: true,
-    },
   },
   { timestamps: true }
 );
