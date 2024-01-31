@@ -455,23 +455,23 @@ export const Order = () => {
             {shoppingBag.map((bag, index) => (
               <div
                 key={index}
-                className="shopping-details flex justify-between pl-[1.5%] pr-[2.5%] pt-[1.5%] mb-3"
+                className="shopping-details sm:flex justify-between pl-[1.5%] pr-[2.5%] mt-[10%] sm:pt-[1.5%] mb-3"
               >
-                <TextField
-                  className="quantity w-[15%]"
-                  id="outlined-flexible"
-                  label="Qty"
-                  value={bag.quantity}
-                  onChange={(event) => {
-                    if (page !== 'checkout') return;
-                    const newQuantity = parseInt(event.target.value, 10) || 0;
-                    handleQuantityChange(index, newQuantity);
-                  }}
-                  disabled={page !== 'checkout'}
-                />
-                <div className="x flex items-center">X</div>
-                <div className="justify-between flex w-[80%]">
-                  <div className="w-[27%]">
+                <div className="flex w-[90%] sm:w-[48%] justify-between">
+                  <TextField
+                    className="quantity w-[30%]"
+                    id="outlined-flexible"
+                    label="Qty"
+                    value={bag.quantity}
+                    onChange={(event) => {
+                      if (page !== 'checkout') return;
+                      const newQuantity = parseInt(event.target.value, 10) || 0;
+                      handleQuantityChange(index, newQuantity);
+                    }}
+                    disabled={page !== 'checkout'}
+                  />
+                  <div className="x flex items-center">X</div>
+                  <div className="w-[54%]">
                     <TextField
                       className="w-full"
                       id="outlined-multiline-sizes"
@@ -491,7 +491,9 @@ export const Order = () => {
                       ))}
                     </TextField>
                   </div>
-                  <div className="w-[67%]">
+                </div>
+                <div className="justify-between flex sm:w-[50%] mt-3 sm:mt-0">
+                  <div className="w-[90%]">
                     <TextField
                       className="w-full"
                       id="outlined-multiline-sizes"
