@@ -185,12 +185,24 @@ export const Order = () => {
       setPage('review');
     } else if (page === 'review') {
       // Proceed to the payment page after finishing the review
-      setPage('payment');
+      checkAvailability().then((available) => {
+        if (available) {
+          setPage('payment');
+        }
+      });
     } else if (page === 'payment') {
       // Check if the file is uploaded
       if (fileUploaded) {
         // If the file is uploaded, proceed to the confirmation page
-        handleSubmitOrder();
+        checkAvailability().then((available) => {
+          if (available) {
+            handleSubmitOrder();
+          } else {
+            alert(
+              'If you have paid, please contact us at our instagram to process the refund. Sorry for the inconvenience.'
+            );
+          }
+        });
       } else {
         // If the file is not uploaded, proceed to the payment page
         setPage('payment');
@@ -198,6 +210,34 @@ export const Order = () => {
     } else {
       setPage('confirmation'); // Assuming this is the last step after payment and file upload
     }
+  };
+
+  const checkAvailability = async (): Promise<boolean> => {
+    return new Promise((resolve, reject) => {
+      axios
+        .get('http://localhost:4000/order/merchandise')
+        .then((res) => {
+          res.data.data.map((item: any) => {
+            const itemName = item.model;
+            const initialValue = 0;
+            const total = shoppingBag.reduce(
+              (accumulator, bag) =>
+                bag.model === itemName
+                  ? accumulator + bag.quantity
+                  : accumulator,
+              initialValue
+            );
+            if (total > item.stock) {
+              alert(item.model + ' has only ' + item.stock + ' in stock left.');
+              resolve(false);
+            }
+          });
+          resolve(true);
+        })
+        .catch((err) => {
+          resolve(false);
+        });
+    });
   };
 
   const handleSubmitOrder = () => {

@@ -81,4 +81,10 @@ const MODELS = [
   },
 ];
 
+// const MODELS = [
+//   'KELANA - Waroeng Cak Timmies Hoodie',
+//   'KELANA - Anak Rantau Hoodie',
+//   'KELANA - Anak Rantau T-Shirt',
+// ];
+
 export { LOCATIONS, SIZES, HOODIESIZES, MODELS };
