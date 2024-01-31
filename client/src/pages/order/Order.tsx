@@ -2,7 +2,7 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { ChangeEvent, useState } from 'react';
-import { LOCATIONS, SIZES, HOODIESIZES, MODELS } from './data/data';
+import { LOCATIONS, SIZES, MODELS } from './data/data';
 import axios from 'axios';
 
 const DEFAULT_SHOPPING_BAG = {
@@ -26,7 +26,6 @@ export const Order = () => {
   const [selectedItem, setSelectedItem] = useState(DEFAULT_SELECTED_ITEM);
   const [numItems, setNumItems] = useState(0);
   const [fileUploaded, setFileUploaded] = useState(false);
-  const [selectedItemType, setSelectedItemType] = useState('');
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -54,8 +53,6 @@ export const Order = () => {
   };
 
   const handleAddItem = () => {
-    // setShoppingBag([...shoppingBag, DEFAULT_SHOPPING_BAG]);
-
     if (selectedItem) {
       const newItem = {
         ...DEFAULT_SHOPPING_BAG,
@@ -105,28 +102,8 @@ export const Order = () => {
     });
   };
 
-  const handleHoodieSizeChange = (
-    index: number,
-    size: (typeof HOODIESIZES)[number]
-  ) => {
-    if (page !== 'checkout') return;
-
-    setShoppingBag((prev) => {
-      return prev.map((bag, idx) =>
-        idx !== index ? bag : { ...bag, size: size.label }
-      );
-    });
-  };
-
   const handleChooseItem = (index: number, item: (typeof MODELS)[number]) => {
     if (page !== 'checkout') return;
-
-    // Set the selected item type based on the chosen item
-    if (item.value === '1' || item.value === '2') {
-      setSelectedItemType('hoodie');
-    } else {
-      setSelectedItemType('');
-    }
 
     setShoppingBag((prev) => {
       return prev.map((bag, idx) =>
@@ -185,16 +162,16 @@ export const Order = () => {
       setPage('review');
     } else if (page === 'review') {
       // Proceed to the payment page after finishing the review
-      checkAvailability().then((available) => {
+      checkAvailability(false).then((available) => {
         if (available) {
-          setPage('payment');
+          handlePayment();
         }
       });
     } else if (page === 'payment') {
       // Check if the file is uploaded
       if (fileUploaded) {
         // If the file is uploaded, proceed to the confirmation page
-        checkAvailability().then((available) => {
+        checkAvailability(true).then((available) => {
           if (available) {
             handleSubmitOrder();
           } else {
@@ -212,24 +189,33 @@ export const Order = () => {
     }
   };
 
-  const checkAvailability = async (): Promise<boolean> => {
+  const checkAvailability = async (payment: boolean): Promise<boolean> => {
     return new Promise((resolve, reject) => {
       axios
         .get('http://localhost:4000/order/merchandise')
         .then((res) => {
-          res.data.data.map((item: any) => {
-            const itemName = item.model;
+          res.data.data.forEach((item: any) => {
             const initialValue = 0;
             const total = shoppingBag.reduce(
               (accumulator, bag) =>
-                bag.model === itemName
+                bag.model === item.model && bag.size === item.size
                   ? accumulator + bag.quantity
                   : accumulator,
               initialValue
             );
-            const itemStock = item.stock - item.bought - item.pending;
+
+            const itemStock = payment
+              ? item.stock - item.bought
+              : item.stock - item.bought - item.pending;
             if (total > itemStock) {
-              alert(item.model + ' has only ' + itemStock + ' in stock left.');
+              alert(
+                item.model +
+                  ' ' +
+                  item.size +
+                  ' has only ' +
+                  itemStock +
+                  ' in stock left.'
+              );
               resolve(false);
             }
           });
@@ -241,26 +227,86 @@ export const Order = () => {
     });
   };
 
+  const handlePayment = () => {
+    axios.get('http://localhost:4000/order/merchandise').then((res) => {
+      let proceedPayment = true;
+      for (let bag of shoppingBag) {
+        const merchandise = res.data.data.find(
+          (item: any) => item.model === bag.model && item.size === bag.size
+        );
+        if (!merchandise) {
+          alert(bag.model + ' has no size ' + bag.size);
+          proceedPayment = false;
+        }
+      }
+
+      if (proceedPayment) {
+        for (let bag of shoppingBag) {
+          const id = bag.model + ' ' + bag.size;
+          const merchandise = res.data.data.find(
+            (item: any) => item.model === bag.model && item.size === bag.size
+          );
+          const data = {
+            pending: merchandise.pending + bag.quantity,
+            bought: merchandise.bought,
+          };
+          axios
+            .put(`http://localhost:4000/order/merchandise/${id}`, data)
+            .then(() => {
+              setPage('payment');
+            })
+            .catch((err) => {
+              alert('Error occured: ' + err.message + '. Please try again!');
+              setPage('review');
+            });
+        }
+      } else {
+        setPage('review');
+      }
+    });
+  };
+
   const handleSubmitOrder = () => {
-    const data = {
-      firstName,
-      lastName,
-      emailAddress: email,
-      phoneNumber,
-      pickUpLocation: pickupLocation,
-      items: shoppingBag,
-      totalPrice,
-      payment: 'link',
-    };
-    axios
-      .post('http://localhost:4000/order', data)
-      .then(() => {
-        setPage('confirmation');
-      })
-      .catch((err) => {
-        alert('An error happened: ' + err.message);
-        setPage('payment');
+    axios.get('http://localhost:4000/order/merchandise').then((res) => {
+      shoppingBag.forEach((bag) => {
+        const id = bag.model + ' ' + bag.size;
+        const merchandise = res.data.data.find(
+          (item: any) => item.model === bag.model && item.size === bag.size
+        );
+        const data = {
+          pending: merchandise.pending - bag.quantity,
+          bought: merchandise.bought + bag.quantity,
+        };
+        axios
+          .put(`http://localhost:4000/order/merchandise/${id}`, data)
+          .then(() => {
+            const dataOrder = {
+              firstName,
+              lastName,
+              emailAddress: email,
+              phoneNumber,
+              pickUpLocation: pickupLocation,
+              items: shoppingBag,
+              totalPrice,
+              payment: 'link',
+            };
+
+            axios
+              .post('http://localhost:4000/order', dataOrder)
+              .then(() => {
+                setPage('confirmation');
+              })
+              .catch((err) => {
+                alert('An error happened: ' + err.message);
+                setPage('payment');
+              });
+          })
+          .catch((err) => {
+            alert('An error happened: ' + err.message);
+            setPage('payment');
+          });
       });
+    });
   };
 
   const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
@@ -435,27 +481,15 @@ export const Order = () => {
                       defaultValue={bag.size}
                       disabled={page !== 'checkout'}
                     >
-                      {selectedItemType === 'hoodie'
-                        ? HOODIESIZES.map((option) => (
-                            <MenuItem
-                              key={option.value}
-                              value={option.value}
-                              onClick={() =>
-                                handleHoodieSizeChange(index, option)
-                              }
-                            >
-                              {option.label}
-                            </MenuItem>
-                          ))
-                        : SIZES.map((option) => (
-                            <MenuItem
-                              key={option.value}
-                              value={option.value}
-                              onClick={() => handleSizeChange(index, option)}
-                            >
-                              {option.label}
-                            </MenuItem>
-                          ))}
+                      {SIZES.map((option) => (
+                        <MenuItem
+                          key={option.value}
+                          value={option.value}
+                          onClick={() => handleSizeChange(index, option)}
+                        >
+                          {option.label}
+                        </MenuItem>
+                      ))}
                     </TextField>
                   </div>
                   <div className="w-[67%]">

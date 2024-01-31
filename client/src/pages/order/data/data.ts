@@ -44,25 +44,6 @@ const SIZES = [
   },
 ];
 
-const HOODIESIZES = [
-  {
-    value: '1',
-    label: 'M',
-  },
-  {
-    value: '2',
-    label: 'L',
-  },
-  {
-    value: '3',
-    label: 'XL',
-  },
-  {
-    value: '4',
-    label: 'XXL',
-  },
-];
-
 const MODELS = [
   {
     value: '1',
@@ -81,10 +62,4 @@ const MODELS = [
   },
 ];
 
-// const MODELS = [
-//   'KELANA - Waroeng Cak Timmies Hoodie',
-//   'KELANA - Anak Rantau Hoodie',
-//   'KELANA - Anak Rantau T-Shirt',
-// ];
-
-export { LOCATIONS, SIZES, HOODIESIZES, MODELS };
+export { LOCATIONS, SIZES, MODELS };
