@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "build": "rimraf dist && npx tsc",
+    "builddev": "rimraf dist && npx tsc",
+    "build": "npm i && npx tsc",
     "prestart": "npm run build",
     "start": "node dist/server.js",
-    "predev": "npm run build",
+    "predev": "npm run builddev",
     "dev": "concurrently \"npx tsc -w\" \"nodemon dist/server.js\" "
   },
   "keywords": [],
