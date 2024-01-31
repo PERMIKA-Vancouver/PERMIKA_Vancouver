@@ -292,12 +292,15 @@ export const Order = () => {
               data
             )
             .then(() => {
+              const location = LOCATIONS.find(
+                (loc) => loc.value === pickupLocation
+              );
               const dataOrder = {
                 firstName,
                 lastName,
                 emailAddress: email,
                 phoneNumber,
-                pickUpLocation: pickupLocation,
+                pickUpLocation: location?.label,
                 items: shoppingBag,
                 totalPrice,
                 payment: 'link',
