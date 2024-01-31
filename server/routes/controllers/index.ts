@@ -5,6 +5,7 @@ export * from './updatePromoCodeController';
 export * from './getPromoCodeController';
 export * from './createMerchandiseController';
 export * from './getMerchandisesController';
+export * from './updateMerchandiseController';
 
 // // Route for Save a new Book
 // router.post('/', async (req, res) => {

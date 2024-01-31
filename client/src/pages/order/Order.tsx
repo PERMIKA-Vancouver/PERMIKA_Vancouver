@@ -227,8 +227,9 @@ export const Order = () => {
                   : accumulator,
               initialValue
             );
-            if (total > item.stock) {
-              alert(item.model + ' has only ' + item.stock + ' in stock left.');
+            const itemStock = item.stock - item.bought - item.pending;
+            if (total > itemStock) {
+              alert(item.model + ' has only ' + itemStock + ' in stock left.');
               resolve(false);
             }
           });

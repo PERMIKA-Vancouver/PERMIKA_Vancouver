@@ -6,6 +6,7 @@ import {
   getMerchandisesController,
   getOrdersController,
   getPromoCodeController,
+  updateMerchandiseController,
   updatePromoCodeController,
 } from './controllers';
 
@@ -18,5 +19,6 @@ router.put('/promocode', updatePromoCodeController);
 router.get('/promocode', getPromoCodeController);
 router.post('/merchandise', createMerchandiseController);
 router.get('/merchandise', getMerchandisesController);
+router.put('/merchandise/:id', updateMerchandiseController);
 
 export default router;

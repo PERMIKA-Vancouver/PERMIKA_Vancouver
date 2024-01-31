@@ -18,6 +18,8 @@ export const createMerchandiseController = async (
       size: req.body.size,
       stock: req.body.stock,
       price: req.body.price,
+      bought: 0,
+      pending: 0,
     };
 
     const merchandise = await Merchandise.create(newMerchandise);
