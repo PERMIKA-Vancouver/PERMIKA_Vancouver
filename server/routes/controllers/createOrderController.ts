@@ -8,13 +8,17 @@ import { Order } from '../../models/merchandise/orderModel';
 export const createOrderController = async (req: Request, res: Response) => {
   try {
     if (checkOrderRequestBody(req)) {
-      return res.status(400).send({ message: 'Send all required fields' });
+      return res
+        .status(400)
+        .send({ message: 'Order: Send all required fields' });
     }
 
     let items: any[] = [];
     req.body.items.map((item: ItemType) => {
       if (!item.quantity || !item.size || !item.model) {
-        return res.status(400).send({ message: 'Send all required fields' });
+        return res
+          .status(400)
+          .send({ message: 'Item: Send all required fields' });
       }
 
       const newItem = {

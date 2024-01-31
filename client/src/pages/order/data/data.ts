@@ -63,7 +63,7 @@ const HOODIESIZES = [
   },
 ];
 
-const ITEMS = [
+const MODELS = [
   {
     value: '1',
     label: 'KELANA - Waroeng Cak Timmies Hoodie',
@@ -81,4 +81,4 @@ const ITEMS = [
   },
 ];
 
-export { LOCATIONS, SIZES, HOODIESIZES, ITEMS };
+export { LOCATIONS, SIZES, HOODIESIZES, MODELS };

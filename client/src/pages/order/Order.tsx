@@ -2,12 +2,13 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { ChangeEvent, useState } from 'react';
-import { LOCATIONS, SIZES, HOODIESIZES, ITEMS } from './data/data';
+import { LOCATIONS, SIZES, HOODIESIZES, MODELS } from './data/data';
+import axios from 'axios';
 
 const DEFAULT_SHOPPING_BAG = {
   quantity: 0,
   size: '',
-  item: '',
+  model: '',
   price: 0,
 };
 
@@ -91,10 +92,33 @@ export const Order = () => {
   const subtotal = totalPrice - disc;
 
   const isTotalsVisible = shoppingBag.some(
-    (item) => item.quantity > 0 && item.size && item.item
+    (item) => item.quantity > 0 && item.size && item.model
   );
 
-  const handleChooseItem = (index: number, item: (typeof ITEMS)[number]) => {
+  const handleSizeChange = (index: number, size: (typeof SIZES)[number]) => {
+    if (page !== 'checkout') return;
+
+    setShoppingBag((prev) => {
+      return prev.map((bag, idx) =>
+        idx !== index ? bag : { ...bag, size: size.label }
+      );
+    });
+  };
+
+  const handleHoodieSizeChange = (
+    index: number,
+    size: (typeof HOODIESIZES)[number]
+  ) => {
+    if (page !== 'checkout') return;
+
+    setShoppingBag((prev) => {
+      return prev.map((bag, idx) =>
+        idx !== index ? bag : { ...bag, size: size.label }
+      );
+    });
+  };
+
+  const handleChooseItem = (index: number, item: (typeof MODELS)[number]) => {
     if (page !== 'checkout') return;
 
     // Set the selected item type based on the chosen item
@@ -106,7 +130,7 @@ export const Order = () => {
 
     setShoppingBag((prev) => {
       return prev.map((bag, idx) =>
-        idx !== index ? bag : { ...bag, item: item.label, price: item.price }
+        idx !== index ? bag : { ...bag, model: item.label, price: item.price }
       );
     });
   };
@@ -166,7 +190,7 @@ export const Order = () => {
       // Check if the file is uploaded
       if (fileUploaded) {
         // If the file is uploaded, proceed to the confirmation page
-        setPage('confirmation');
+        handleSubmitOrder();
       } else {
         // If the file is not uploaded, proceed to the payment page
         setPage('payment');
@@ -174,6 +198,28 @@ export const Order = () => {
     } else {
       setPage('confirmation'); // Assuming this is the last step after payment and file upload
     }
+  };
+
+  const handleSubmitOrder = () => {
+    const data = {
+      firstName,
+      lastName,
+      emailAddress: email,
+      phoneNumber,
+      pickUpLocation: pickupLocation,
+      items: shoppingBag,
+      totalPrice,
+      payment: 'link',
+    };
+    axios
+      .post('http://localhost:4000/order', data)
+      .then(() => {
+        setPage('confirmation');
+      })
+      .catch((err) => {
+        alert('An error happened: ' + err.message);
+        setPage('payment');
+      });
   };
 
   const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
@@ -350,12 +396,22 @@ export const Order = () => {
                     >
                       {selectedItemType === 'hoodie'
                         ? HOODIESIZES.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
+                            <MenuItem
+                              key={option.value}
+                              value={option.value}
+                              onClick={() =>
+                                handleHoodieSizeChange(index, option)
+                              }
+                            >
                               {option.label}
                             </MenuItem>
                           ))
                         : SIZES.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
+                            <MenuItem
+                              key={option.value}
+                              value={option.value}
+                              onClick={() => handleSizeChange(index, option)}
+                            >
                               {option.label}
                             </MenuItem>
                           ))}
@@ -367,18 +423,18 @@ export const Order = () => {
                       id="outlined-multiline-sizes"
                       select
                       label="Select your item*"
-                      defaultValue={bag.item}
+                      defaultValue={bag.model}
                       onChange={(event) => {
                         const selectedItemValue = event.target.value;
                         const selected =
-                          ITEMS.find(
-                            (item) => item.value === selectedItemValue
+                          MODELS.find(
+                            (model) => model.value === selectedItemValue
                           ) || DEFAULT_SELECTED_ITEM;
                         setSelectedItem(selected);
                       }}
                       disabled={page !== 'checkout'}
                     >
-                      {ITEMS.map((option) => (
+                      {MODELS.map((option) => (
                         <MenuItem
                           key={option.value}
                           value={option.value}
