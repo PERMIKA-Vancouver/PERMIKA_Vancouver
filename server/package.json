@@ -5,7 +5,6 @@
   "scripts": {
     "builddev": "rimraf dist && npx tsc",
     "build": "npm i && npm run builddev",
-    "prestart": "npm run build",
     "start": "node dist/server.js",
     "predev": "npm run builddev",
     "dev": "concurrently \"npx tsc -w\" \"nodemon dist/server.js\" "
