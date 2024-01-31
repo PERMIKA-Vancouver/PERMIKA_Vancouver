@@ -194,7 +194,7 @@ export const Order = () => {
   const checkAvailability = async (payment: boolean): Promise<boolean> => {
     return new Promise((resolve, reject) => {
       axios
-        .get('http://localhost:4000/order/merchandise')
+        .get(`${process.env.REACT_APP_TEST_SERVER}/order/merchandise`)
         .then((res) => {
           res.data.data.forEach((item: any) => {
             const initialValue = 0;
@@ -230,85 +230,95 @@ export const Order = () => {
   };
 
   const handlePayment = () => {
-    axios.get('http://localhost:4000/order/merchandise').then((res) => {
-      let proceedPayment = true;
-      for (let bag of shoppingBag) {
-        const merchandise = res.data.data.find(
-          (item: any) => item.model === bag.model && item.size === bag.size
-        );
-        if (!merchandise) {
-          alert(bag.model + ' has no size ' + bag.size);
-          proceedPayment = false;
-        }
-      }
-
-      if (proceedPayment) {
+    axios
+      .get(`${process.env.REACT_APP_TEST_SERVER}/order/merchandise`)
+      .then((res) => {
+        let proceedPayment = true;
         for (let bag of shoppingBag) {
+          const merchandise = res.data.data.find(
+            (item: any) => item.model === bag.model && item.size === bag.size
+          );
+          if (!merchandise) {
+            alert(bag.model + ' has no size ' + bag.size);
+            proceedPayment = false;
+          }
+        }
+
+        if (proceedPayment) {
+          for (let bag of shoppingBag) {
+            const id = bag.model + ' ' + bag.size;
+            const merchandise = res.data.data.find(
+              (item: any) => item.model === bag.model && item.size === bag.size
+            );
+            const data = {
+              pending: merchandise.pending + bag.quantity,
+              bought: merchandise.bought,
+            };
+            axios
+              .put(
+                `${process.env.REACT_APP_TEST_SERVER}/order/merchandise/${id}`,
+                data
+              )
+              .then(() => {
+                setPage('payment');
+              })
+              .catch((err) => {
+                alert('Error occured: ' + err.message + '. Please try again!');
+                setPage('review');
+              });
+          }
+        } else {
+          setPage('review');
+        }
+      });
+  };
+
+  const handleSubmitOrder = () => {
+    axios
+      .get(`${process.env.REACT_APP_TEST_SERVER}/order/merchandise`)
+      .then((res) => {
+        shoppingBag.forEach((bag) => {
           const id = bag.model + ' ' + bag.size;
           const merchandise = res.data.data.find(
             (item: any) => item.model === bag.model && item.size === bag.size
           );
           const data = {
-            pending: merchandise.pending + bag.quantity,
-            bought: merchandise.bought,
+            pending: merchandise.pending - bag.quantity,
+            bought: merchandise.bought + bag.quantity,
           };
           axios
-            .put(`http://localhost:4000/order/merchandise/${id}`, data)
+            .put(
+              `${process.env.REACT_APP_TEST_SERVER}/order/merchandise/${id}`,
+              data
+            )
             .then(() => {
-              setPage('payment');
+              const dataOrder = {
+                firstName,
+                lastName,
+                emailAddress: email,
+                phoneNumber,
+                pickUpLocation: pickupLocation,
+                items: shoppingBag,
+                totalPrice,
+                payment: 'link',
+              };
+
+              axios
+                .post(`${process.env.REACT_APP_TEST_SERVER}/order`, dataOrder)
+                .then(() => {
+                  setPage('confirmation');
+                })
+                .catch((err) => {
+                  alert('An error happened: ' + err.message);
+                  setPage('payment');
+                });
             })
             .catch((err) => {
-              alert('Error occured: ' + err.message + '. Please try again!');
-              setPage('review');
+              alert('An error happened: ' + err.message);
+              setPage('payment');
             });
-        }
-      } else {
-        setPage('review');
-      }
-    });
-  };
-
-  const handleSubmitOrder = () => {
-    axios.get('http://localhost:4000/order/merchandise').then((res) => {
-      shoppingBag.forEach((bag) => {
-        const id = bag.model + ' ' + bag.size;
-        const merchandise = res.data.data.find(
-          (item: any) => item.model === bag.model && item.size === bag.size
-        );
-        const data = {
-          pending: merchandise.pending - bag.quantity,
-          bought: merchandise.bought + bag.quantity,
-        };
-        axios
-          .put(`http://localhost:4000/order/merchandise/${id}`, data)
-          .then(() => {
-            const dataOrder = {
-              firstName,
-              lastName,
-              emailAddress: email,
-              phoneNumber,
-              pickUpLocation: pickupLocation,
-              items: shoppingBag,
-              totalPrice,
-              payment: 'link',
-            };
-
-            axios
-              .post('http://localhost:4000/order', dataOrder)
-              .then(() => {
-                setPage('confirmation');
-              })
-              .catch((err) => {
-                alert('An error happened: ' + err.message);
-                setPage('payment');
-              });
-          })
-          .catch((err) => {
-            alert('An error happened: ' + err.message);
-            setPage('payment');
-          });
+        });
       });
-    });
   };
 
   return (
