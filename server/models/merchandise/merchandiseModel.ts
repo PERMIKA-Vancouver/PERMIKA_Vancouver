@@ -21,6 +21,14 @@ const MerchandiseSchema = new Schema({
     type: Number,
     required: true,
   },
+  bought: {
+    type: Number,
+    defaultValue: 0,
+  },
+  pending: {
+    type: Number,
+    defaultValue: 0,
+  },
 });
 
 export const Merchandise = mongoose.model('Merchandise', MerchandiseSchema);

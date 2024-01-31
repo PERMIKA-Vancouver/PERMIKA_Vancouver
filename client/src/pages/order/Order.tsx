@@ -2,89 +2,7 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { ChangeEvent, useState } from 'react';
-
-const locations = [
-  {
-    value: '1',
-    label: 'Lougheed Skytrain Station',
-  },
-  {
-    value: '2',
-    label: 'UBC',
-  },
-  {
-    value: '3',
-    label: 'SFU',
-  },
-  {
-    value: '4',
-    label: 'Marine Drive',
-  },
-  {
-    value: '5',
-    label: 'Joyce Collingwood',
-  },
-];
-
-const sizes = [
-  {
-    value: '1',
-    label: 'S',
-  },
-  {
-    value: '2',
-    label: 'M',
-  },
-  {
-    value: '3',
-    label: 'L',
-  },
-  {
-    value: '4',
-    label: 'XL',
-  },
-  {
-    value: '5',
-    label: 'XXL',
-  },
-];
-
-const sizeshoodie = [
-  {
-    value: '1',
-    label: 'M',
-  },
-  {
-    value: '2',
-    label: 'L',
-  },
-  {
-    value: '3',
-    label: 'XL',
-  },
-  {
-    value: '4',
-    label: 'XXL',
-  },
-];
-
-const items = [
-  {
-    value: '1',
-    label: 'KELANA - Waroeng Cak Timmies Hoodie',
-    price: 35,
-  },
-  {
-    value: '2',
-    label: 'KELANA - Anak Rantau Hoodie',
-    price: 35,
-  },
-  {
-    value: '3',
-    label: 'KELANA - Anak Rantau T-Shirt',
-    price: 20,
-  },
-];
+import { LOCATIONS, SIZES, HOODIESIZES, ITEMS } from './data/data';
 
 const DEFAULT_SHOPPING_BAG = {
   quantity: 0,
@@ -176,7 +94,7 @@ export const Order = () => {
     (item) => item.quantity > 0 && item.size && item.item
   );
 
-  const handleChooseItem = (index: number, item: (typeof items)[number]) => {
+  const handleChooseItem = (index: number, item: (typeof ITEMS)[number]) => {
     if (page !== 'checkout') return;
 
     // Set the selected item type based on the chosen item
@@ -379,7 +297,7 @@ export const Order = () => {
                     setPickupLocationError(false);
                   }}
                 >
-                  {locations.map((option) => (
+                  {LOCATIONS.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
                       {option.label}
                     </MenuItem>
@@ -431,12 +349,12 @@ export const Order = () => {
                       disabled={page !== 'checkout'}
                     >
                       {selectedItemType === 'hoodie'
-                        ? sizeshoodie.map((option) => (
+                        ? HOODIESIZES.map((option) => (
                             <MenuItem key={option.value} value={option.value}>
                               {option.label}
                             </MenuItem>
                           ))
-                        : sizes.map((option) => (
+                        : SIZES.map((option) => (
                             <MenuItem key={option.value} value={option.value}>
                               {option.label}
                             </MenuItem>
@@ -453,14 +371,14 @@ export const Order = () => {
                       onChange={(event) => {
                         const selectedItemValue = event.target.value;
                         const selected =
-                          items.find(
+                          ITEMS.find(
                             (item) => item.value === selectedItemValue
                           ) || DEFAULT_SELECTED_ITEM;
                         setSelectedItem(selected);
                       }}
                       disabled={page !== 'checkout'}
                     >
-                      {items.map((option) => (
+                      {ITEMS.map((option) => (
                         <MenuItem
                           key={option.value}
                           value={option.value}
