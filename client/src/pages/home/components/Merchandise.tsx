@@ -1,8 +1,35 @@
-import sample from "../../../assets/merchandise/hoodie.png";
 import { CustomButton } from "../../../shared/components/CustomButton";
 import ImageModal from "../../../shared/components/ImageModal";
+import { useState } from "react";
+import sample1 from "../../../assets/merchandise/hoodie.png";
+import sample2 from "../../../assets/merchandise/hoodie2.png";
+
+const ImageModalContainer: React.FC<{ images: string[] }> = ({ images }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const onNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  };
+
+  const onPrevious = () => {
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length,
+    );
+  };
+
+  return (
+    <ImageModal
+      images={images}
+      currentIndex={currentIndex}
+      onNext={onNext}
+      onPrevious={onPrevious}
+    />
+  );
+};
 
 export const Merchandise = () => {
+  const images1 = [sample1, sample2];
+  const images2 = [sample2, sample1]; // Example
   return (
     <div className="flex flex-col p-28 gap-15">
       <div className="flex justify-between">
@@ -15,7 +42,8 @@ export const Merchandise = () => {
       </div>
       <div className="flex gap-20 justify-evenly">
         <div className="flex flex-col text-grey-body">
-          <ImageModal src={sample} />
+          <ImageModalContainer images={images1} />
+
           <p className="text-sm mt-3">Hoodie Collection</p>
           <p className="text-xl text-black-text">The PERMIKA Hoodie</p>
           <p className="text-sm">$45</p>
@@ -29,7 +57,8 @@ export const Merchandise = () => {
           </div>
         </div>
         <div className="flex flex-col text-grey-body">
-          <ImageModal src={sample} />
+          <ImageModalContainer images={images2} />
+
           <p className="text-sm mt-3">Hoodie Collection</p>
           <p className="text-xl text-black-text">The PERMIKA Hoodie</p>
           <p className="text-sm">$45</p>
@@ -43,7 +72,8 @@ export const Merchandise = () => {
           </div>
         </div>
         <div className="flex flex-col text-grey-body">
-          <ImageModal src={sample} />
+          <ImageModalContainer images={images1} />
+
           <p className="text-sm mt-3">Hoodie Collection</p>
           <p className="text-xl text-black-text">The PERMIKA Hoodie</p>
           <p className="text-sm">$45</p>

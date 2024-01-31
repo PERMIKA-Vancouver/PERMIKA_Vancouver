@@ -2,10 +2,18 @@ import React, { useEffect, useRef, useState } from "react";
 import { FaGreaterThan, FaLessThan } from "react-icons/fa6";
 
 interface ImageModalProps {
-  src: string;
+  images: string[]; // Array of image sources
+  currentIndex: number; // Current index of the displayed image
+  onNext: () => void; // Callback for next image
+  onPrevious: () => void; // Callback for previous image
 }
 
-const ImageModal: React.FC<ImageModalProps> = ({ src }) => {
+const ImageModal: React.FC<ImageModalProps> = ({
+  images,
+  currentIndex,
+  onNext,
+  onPrevious,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [imageStyle, setImageStyle] = useState({});
@@ -44,13 +52,24 @@ const ImageModal: React.FC<ImageModalProps> = ({ src }) => {
 
   return (
     <div className="relative group">
-      <img ref={imageRef} src={src} alt="background" className="w-full z-50" />
+      <img
+        ref={imageRef}
+        src={images[currentIndex]}
+        alt="background"
+        className="w-full z-50"
+      />
 
       <div className="absolute inset-0 flex justify-between items-center opacity-0 group-hover:opacity-100 z-0 p-2">
-        <div className="cursor-pointer hover:bg-black hover:bg-opacity-50 rounded-full p-1">
+        <div
+          className="cursor-pointer hover:bg-black hover:bg-opacity-50 rounded-full p-1"
+          onClick={onPrevious}
+        >
           <FaLessThan className="text-xl" />
         </div>
-        <div className="cursor-pointer hover:bg-black hover:bg-opacity-50 rounded-full p-1">
+        <div
+          className="cursor-pointer hover:bg-black hover:bg-opacity-50 rounded-full p-1"
+          onClick={onNext}
+        >
           <FaGreaterThan className="text-xl" />
         </div>
         <div
@@ -71,7 +90,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ src }) => {
           <div className="p-2" onClick={(e) => e.stopPropagation()}>
             s
             <img
-              src={src}
+              src={images[currentIndex]}
               alt="Enlarged"
               style={imageStyle}
               className={`object-contain transition-transform duration-300 ease-in-out transform ${
