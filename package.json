@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "npm run dev --prefix server",
+    "server": "npm start --prefix server",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "concurrently \"npm run nodemon\" \"npm run client\"",
+    "nodemon": "cd server && npm run dev"
   },
   "author": "",
   "license": "ISC",

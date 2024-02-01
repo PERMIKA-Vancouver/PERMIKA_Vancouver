@@ -1,95 +1,24 @@
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import { ChangeEvent, useState } from 'react';
-
-const locations = [
-  {
-    value: '1',
-    label: 'Lougheed Skytrain Station',
-  },
-  {
-    value: '2',
-    label: 'UBC',
-  },
-  {
-    value: '3',
-    label: 'SFU',
-  },
-  {
-    value: '4',
-    label: 'Marine Drive',
-  },
-  {
-    value: '5',
-    label: 'Joyce Collingwood',
-  },
-];
-
-const sizes = [
-  {
-    value: '1',
-    label: 'S',
-  },
-  {
-    value: '2',
-    label: 'M',
-  },
-  {
-    value: '3',
-    label: 'L',
-  },
-  {
-    value: '4',
-    label: 'XL',
-  },
-  {
-    value: '5',
-    label: 'XXL',
-  },
-];
-
-const sizeshoodie = [
-  {
-    value: '1',
-    label: 'M',
-  },
-  {
-    value: '2',
-    label: 'L',
-  },
-  {
-    value: '3',
-    label: 'XL',
-  },
-  {
-    value: '4',
-    label: 'XXL',
-  },
-];
-
-const items = [
-  {
-    value: '1',
-    label: 'KELANA - Waroeng Cak Timmies Hoodie',
-    price: 35,
-  },
-  {
-    value: '2',
-    label: 'KELANA - Anak Rantau Hoodie',
-    price: 35,
-  },
-  {
-    value: '3',
-    label: 'KELANA - Anak Rantau T-Shirt',
-    price: 20,
-  },
-];
+import { useState } from 'react';
+import {
+  LOCATIONS,
+  SIZES,
+  MODELS,
+  DISCOUNT,
+  DISCOUNT_DEADLINE,
+} from './data/data';
+import axios from 'axios';
+import { openExternalLink } from '../../shared/utils/OpenLinkUtil';
+import dayjs from 'dayjs';
+import { IoMdInformationCircle } from 'react-icons/io';
+import { PopUpMessage } from '../../shared/components/PopUpMessage';
 
 const DEFAULT_SHOPPING_BAG = {
   quantity: 0,
   size: '',
-  item: '',
+  model: '',
   price: 0,
 };
 
@@ -99,6 +28,8 @@ const DEFAULT_SELECTED_ITEM = {
   price: 0,
 };
 
+const SERVER = process.env.REACT_APP_SERVER;
+
 export const Order = () => {
   const [page, setPage] = useState<
     'checkout' | 'review' | 'payment' | 'confirmation'
@@ -106,8 +37,6 @@ export const Order = () => {
   const [shoppingBag, setShoppingBag] = useState([DEFAULT_SHOPPING_BAG]);
   const [selectedItem, setSelectedItem] = useState(DEFAULT_SELECTED_ITEM);
   const [numItems, setNumItems] = useState(0);
-  const [fileUploaded, setFileUploaded] = useState(false);
-  const [selectedItemType, setSelectedItemType] = useState('');
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -120,6 +49,14 @@ export const Order = () => {
   const [emailError, setEmailError] = useState(false);
   const [phoneNumberError, setPhoneNumberError] = useState(false);
   const [pickupLocationError, setPickupLocationError] = useState(false);
+
+  const [paymentClicked, setPaymentClicked] = useState(false);
+  const [popUpMessage, setPopUpMessage] = useState('');
+  const [popUpOpen, setPopUpOpen] = useState(false);
+
+  const isDiscount = dayjs().isBefore(
+    dayjs(DISCOUNT_DEADLINE, 'YYYY-MM-DD HH:mm')
+  );
 
   const handleQuantityChange = (index: number, newQuantity: number) => {
     const updatedShoppingBag = [...shoppingBag];
@@ -135,8 +72,6 @@ export const Order = () => {
   };
 
   const handleAddItem = () => {
-    // setShoppingBag([...shoppingBag, DEFAULT_SHOPPING_BAG]);
-
     if (selectedItem) {
       const newItem = {
         ...DEFAULT_SHOPPING_BAG,
@@ -168,27 +103,34 @@ export const Order = () => {
     (total, item) => total + item.price * item.quantity,
     0
   );
-  const discount = 0.1;
-  const disc = totalPrice * discount;
-  const subtotal = totalPrice - disc;
+
+  let subtotal = totalPrice;
+  let disc = 0;
+  if (isDiscount) {
+    disc = totalPrice * DISCOUNT;
+    subtotal -= disc;
+  }
 
   const isTotalsVisible = shoppingBag.some(
-    (item) => item.quantity > 0 && item.size && item.item
+    (item) => item.quantity > 0 && item.size && item.model
   );
 
-  const handleChooseItem = (index: number, item: (typeof items)[number]) => {
+  const handleSizeChange = (index: number, size: (typeof SIZES)[number]) => {
     if (page !== 'checkout') return;
-
-    // Set the selected item type based on the chosen item
-    if (item.value === '1' || item.value === '2') {
-      setSelectedItemType('hoodie');
-    } else {
-      setSelectedItemType('');
-    }
 
     setShoppingBag((prev) => {
       return prev.map((bag, idx) =>
-        idx !== index ? bag : { ...bag, item: item.label, price: item.price }
+        idx !== index ? bag : { ...bag, size: size.label }
+      );
+    });
+  };
+
+  const handleChooseItem = (index: number, item: (typeof MODELS)[number]) => {
+    if (page !== 'checkout') return;
+
+    setShoppingBag((prev) => {
+      return prev.map((bag, idx) =>
+        idx !== index ? bag : { ...bag, model: item.label, price: item.price }
       );
     });
   };
@@ -243,12 +185,25 @@ export const Order = () => {
       setPage('review');
     } else if (page === 'review') {
       // Proceed to the payment page after finishing the review
-      setPage('payment');
+      checkAvailability(false).then((available) => {
+        if (available) {
+          handlePayment();
+        }
+      });
     } else if (page === 'payment') {
       // Check if the file is uploaded
-      if (fileUploaded) {
+      if (paymentClicked) {
         // If the file is uploaded, proceed to the confirmation page
-        setPage('confirmation');
+        checkAvailability(true).then((available) => {
+          if (available) {
+            handleSubmitOrder();
+          } else {
+            setPopUpMessage(
+              'If you have paid, please contact us at our instagram to process the refund. Sorry for the inconvenience.'
+            );
+            setPopUpOpen(true);
+          }
+        });
       } else {
         // If the file is not uploaded, proceed to the payment page
         setPage('payment');
@@ -258,34 +213,141 @@ export const Order = () => {
     }
   };
 
-  const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
-    const uploadedFile = event.target.files?.[0];
+  const checkAvailability = async (payment: boolean): Promise<boolean> => {
+    console.log(SERVER);
+    return new Promise((resolve, reject) => {
+      axios
+        .get(`${SERVER}/order/merchandise`)
+        .then((res) => {
+          res.data.data.forEach((item: any) => {
+            const initialValue = 0;
+            const total = shoppingBag.reduce(
+              (accumulator, bag) =>
+                bag.model === item.model && bag.size === item.size
+                  ? accumulator + bag.quantity
+                  : accumulator,
+              initialValue
+            );
 
-    if (uploadedFile) {
-      // Check if the file type is an image (you can customize this check based on your specific requirements)
-      const isImage = uploadedFile.type.startsWith('image/');
+            const itemStock = payment
+              ? item.stock - item.bought
+              : item.stock - item.bought - item.pending;
+            if (total > itemStock) {
+              setPopUpMessage(
+                `${item.model} ${item.size} has only ${itemStock} in stock left.`
+              );
+              setPopUpOpen(true);
+              resolve(false);
+            }
+          });
+          resolve(true);
+        })
+        .catch((err) => {
+          resolve(false);
+        });
+    });
+  };
 
-      if (isImage) {
-        setFileUploaded(true);
-        // You may want to store the uploaded file for further use, for example, displaying the image
-        // You can save it in the state or send it to the server as needed.
-        // For simplicity, I'll just log the file information for now.
-        console.log('Uploaded file:', uploadedFile);
-      } else {
-        // Handle the case where the uploaded file is not an image (e.g., show an error message)
-        console.error('Invalid file type. Please upload an image.');
+  const handlePayment = () => {
+    axios.get(`${SERVER}/order/merchandise`).then((res) => {
+      let proceedPayment = true;
+      for (let bag of shoppingBag) {
+        const merchandise = res.data.data.find(
+          (item: any) => item.model === bag.model && item.size === bag.size
+        );
+        if (!merchandise) {
+          setPopUpMessage(`${bag.model} has no size ${bag.size}`);
+          setPopUpOpen(true);
+          proceedPayment = false;
+        }
       }
-    }
+
+      if (proceedPayment) {
+        for (let bag of shoppingBag) {
+          const id = bag.model + ' ' + bag.size;
+          const merchandise = res.data.data.find(
+            (item: any) => item.model === bag.model && item.size === bag.size
+          );
+          const data = {
+            pending: merchandise.pending + bag.quantity,
+            bought: merchandise.bought,
+          };
+          axios
+            .put(`${SERVER}/order/merchandise/${id}`, data)
+            .then(() => {
+              setPage('payment');
+            })
+            .catch((err) => {
+              alert('Error occured: ' + err.message + '. Please try again!');
+              setPage('review');
+            });
+        }
+      } else {
+        setPage('review');
+      }
+    });
+  };
+
+  const handleSubmitOrder = () => {
+    axios.get(`${SERVER}/order/merchandise`).then((res) => {
+      shoppingBag.forEach((bag) => {
+        const id = bag.model + ' ' + bag.size;
+        const merchandise = res.data.data.find(
+          (item: any) => item.model === bag.model && item.size === bag.size
+        );
+        const data = {
+          pending: merchandise.pending - bag.quantity,
+          bought: merchandise.bought + bag.quantity,
+        };
+        axios
+          .put(`${SERVER}/order/merchandise/${id}`, data)
+          .then(() => {
+            const location = LOCATIONS.find(
+              (loc) => loc.value === pickupLocation
+            );
+            const dataOrder = {
+              firstName,
+              lastName,
+              emailAddress: email,
+              phoneNumber,
+              pickUpLocation: location?.label,
+              items: shoppingBag,
+              totalPrice: subtotal,
+            };
+
+            axios
+              .post(`${SERVER}/order`, dataOrder)
+              .then(() => {
+                setPage('confirmation');
+              })
+              .catch((err) => {
+                alert('An error happened: ' + err.message);
+                setPage('payment');
+              });
+          })
+          .catch((err) => {
+            alert('An error happened: ' + err.message);
+            setPage('payment');
+          });
+      });
+    });
   };
 
   return (
     <div className="flex pt-navbar py-20 ml-all min-h-screen">
+      {/* Pop Up */}
+      <PopUpMessage
+        open={popUpOpen}
+        handleClose={() => setPopUpOpen(false)}
+        message={popUpMessage}
+      />
+
       {/* <ShoppingBag /> */}
 
       <div className="Checkout-details pl-[6.3%] w-[100%] pr-[12%]">
         <div className="Checkout">
           <div className="checkout-outer mb-[50px]">
-            <div className="checkout-label flex justify-between">
+            <div className="checkout-label flex justify-between items-center">
               <h2>
                 {page === 'review'
                   ? 'Review Order'
@@ -297,6 +359,16 @@ export const Order = () => {
               </h2>
               {page === 'review' && (
                 <button onClick={() => setPage('checkout')}>Edit</button>
+              )}
+              {page === 'checkout' && (
+                <IoMdInformationCircle
+                  className="w-7 h-auto text-grey-body"
+                  onClick={() =>
+                    openExternalLink(
+                      'https://drive.google.com/file/d/1Swg0aOP7Nh_XmDY7ceCWxJkeAcGVq8uS/view?usp=sharing'
+                    )
+                  }
+                />
               )}
             </div>
             <div className="checkout-information"></div>
@@ -379,7 +451,7 @@ export const Order = () => {
                     setPickupLocationError(false);
                   }}
                 >
-                  {locations.map((option) => (
+                  {LOCATIONS.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
                       {option.label}
                     </MenuItem>
@@ -392,7 +464,7 @@ export const Order = () => {
 
         {/* Shopping Bag */}
         {page !== 'confirmation' && (
-          <div className="Shopping-bag mt-10">
+          <div className="Shopping-bag mt-20">
             <div className="shopping flex justify-between mb-3">
               <h1 className="text-4xl">Shopping Bag</h1>
               {page === 'checkout' && (
@@ -405,23 +477,23 @@ export const Order = () => {
             {shoppingBag.map((bag, index) => (
               <div
                 key={index}
-                className="shopping-details flex justify-between pl-[1.5%] pr-[2.5%] pt-[1.5%] mb-3"
+                className="shopping-details sm:flex justify-between pl-[1.5%] pr-[2.5%] mt-[10%] sm:pt-[1.5%] sm:mt-0 mb-3"
               >
-                <TextField
-                  className="quantity w-[15%]"
-                  id="outlined-flexible"
-                  label="Qty"
-                  value={bag.quantity}
-                  onChange={(event) => {
-                    if (page !== 'checkout') return;
-                    const newQuantity = parseInt(event.target.value, 10) || 0;
-                    handleQuantityChange(index, newQuantity);
-                  }}
-                  disabled={page !== 'checkout'}
-                />
-                <div className="x flex items-center">X</div>
-                <div className="justify-between flex w-[80%]">
-                  <div className="w-[27%]">
+                <div className="flex w-[90%] sm:w-[48%] justify-between">
+                  <TextField
+                    className="quantity w-[30%]"
+                    id="outlined-flexible"
+                    label="Qty"
+                    value={bag.quantity}
+                    onChange={(event) => {
+                      if (page !== 'checkout') return;
+                      const newQuantity = parseInt(event.target.value, 10) || 0;
+                      handleQuantityChange(index, newQuantity);
+                    }}
+                    disabled={page !== 'checkout'}
+                  />
+                  <div className="x flex items-center">X</div>
+                  <div className="w-[54%]">
                     <TextField
                       className="w-full"
                       id="outlined-multiline-sizes"
@@ -430,37 +502,37 @@ export const Order = () => {
                       defaultValue={bag.size}
                       disabled={page !== 'checkout'}
                     >
-                      {selectedItemType === 'hoodie'
-                        ? sizeshoodie.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                              {option.label}
-                            </MenuItem>
-                          ))
-                        : sizes.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                              {option.label}
-                            </MenuItem>
-                          ))}
+                      {SIZES.map((option) => (
+                        <MenuItem
+                          key={option.value}
+                          value={option.value}
+                          onClick={() => handleSizeChange(index, option)}
+                        >
+                          {option.label}
+                        </MenuItem>
+                      ))}
                     </TextField>
                   </div>
-                  <div className="w-[67%]">
+                </div>
+                <div className="justify-between flex sm:w-[50%] mt-3 sm:mt-0">
+                  <div className="w-[90%]">
                     <TextField
                       className="w-full"
                       id="outlined-multiline-sizes"
                       select
                       label="Select your item*"
-                      defaultValue={bag.item}
+                      defaultValue={bag.model}
                       onChange={(event) => {
                         const selectedItemValue = event.target.value;
                         const selected =
-                          items.find(
-                            (item) => item.value === selectedItemValue
+                          MODELS.find(
+                            (model) => model.value === selectedItemValue
                           ) || DEFAULT_SELECTED_ITEM;
                         setSelectedItem(selected);
                       }}
                       disabled={page !== 'checkout'}
                     >
-                      {items.map((option) => (
+                      {MODELS.map((option) => (
                         <MenuItem
                           key={option.value}
                           value={option.value}
@@ -490,9 +562,12 @@ export const Order = () => {
                     Merchandise Total{' '}
                     <span className="">${totalPrice.toFixed(2)}</span>
                   </div>
-                  <div className="text-[#9A9A9A] flex justify-between">
-                    Discount (10%) <span>${disc.toFixed(2)}</span>
-                  </div>
+                  {isDiscount && (
+                    <div className="text-[#9A9A9A] flex justify-between">
+                      Discount ({`${DISCOUNT * 100}%`})
+                      <span>${disc.toFixed(2)}</span>
+                    </div>
+                  )}
                   <div className="flex justify-between mt-2.5 text-2xl">
                     Subtotal <span>${subtotal.toFixed(2)}</span>
                   </div>
@@ -500,42 +575,45 @@ export const Order = () => {
               </div>
             )}
             {page === 'payment' && (
-              <form className="payment-form">
+              <div className="payment-form mt-10">
                 {/* Additional payment details and upload picture form*/}
                 {/* You can add your form fields here */}
                 <div className="upload-picture pt-[5%]">
                   <h1 className="payment-label text-4xl">Payment</h1>
-                  <p
-                    style={{ color: 'grey', fontSize: '14px' }}
-                    className="payment-description pt-[2%]"
-                  >
-                    Please send the total of your order to the following email
-                    address:
+                  <p className="payment-description pt-[2%] text-grey-body">
+                    Please access the link below and pay your total amount
+                    there.
                   </p>
                   <p
-                    style={{ color: 'grey', fontSize: '14px' }}
-                    className="payment-description2"
+                    onClick={() => {
+                      setPaymentClicked(true);
+                      openExternalLink('https://forms.gle/wSxUEACu6ydqegVh9');
+                    }}
+                    className="text-blue-600 cursor-pointer text-xl"
                   >
-                    treasurer.permika@gmail.com and make sure to attach your
-                    proof of payment below.
+                    Click here
                   </p>
-                  <TextField
-                    type="file"
-                    fullWidth
-                    disabled={page !== 'payment'}
-                    onChange={handleFileUpload}
-                  />
                 </div>
-              </form>
+              </div>
             )}
             {!isTotalsVisible && shoppingBag.length === 0 && <div></div>}
-            <button
-              className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400"
-              onClick={() => handleNextPage()}
-              disabled={getTotalPrice() <= 0}
-            >
-              {page === 'payment' ? 'Submit' : 'Next'}
-            </button>
+            {page === 'payment' ? (
+              <button
+                className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400"
+                onClick={handleNextPage}
+                disabled={getTotalPrice() <= 0 || !paymentClicked}
+              >
+                Submit Order
+              </button>
+            ) : (
+              <button
+                className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400"
+                onClick={() => handleNextPage()}
+                disabled={getTotalPrice() <= 0}
+              >
+                Next
+              </button>
+            )}
           </div>
         )}
       </div>
