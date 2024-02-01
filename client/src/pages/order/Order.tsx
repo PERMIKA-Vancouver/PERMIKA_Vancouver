@@ -146,12 +146,16 @@ export const Order = () => {
       // Check if first name is provided
       if (!firstName.trim()) {
         setFirstNameError(true); // Set error state if first name is not provided
+        setPopUpMessage('Please enter your first name!');
+        setPopUpOpen(true);
         return;
       }
 
       // Check if last name is provided
       if (!lastName.trim()) {
         setLastNameError(true);
+        setPopUpMessage('Please enter your last name!');
+        setPopUpOpen(true);
         return;
       } else {
         setLastNameError(false);
@@ -160,6 +164,10 @@ export const Order = () => {
       // Check if email is provided
       if (!email.trim() || !email.includes('@') || !email.includes('.')) {
         setEmailError(true);
+        setPopUpMessage(
+          "Please enter your email address or check it's in the right format!"
+        );
+        setPopUpOpen(true);
         return;
       } else {
         setEmailError(false);
@@ -168,6 +176,10 @@ export const Order = () => {
       // Check if phone number is provided
       if (!phoneNumber.trim() || isNaN(Number(phoneNumber))) {
         setPhoneNumberError(true);
+        setPopUpMessage(
+          'Please enter your phone number! (only numbers allowed)'
+        );
+        setPopUpOpen(true);
         return;
       } else {
         setPhoneNumberError(false);
@@ -176,6 +188,8 @@ export const Order = () => {
       // Check if pick-up location is provided
       if (!pickupLocation.trim()) {
         setPickupLocationError(true);
+        setPopUpMessage('Please choose a pick up location!');
+        setPopUpOpen(true);
         return;
       } else {
         setPickupLocationError(false);
