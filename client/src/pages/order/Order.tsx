@@ -369,7 +369,7 @@ export const Order = () => {
                   ? 'Payment Details'
                   : page === 'confirmation'
                   ? 'Thank you for your purchase!'
-                  : 'Checkout'}
+                  : 'Order'}
               </h2>
               {page === 'review' && (
                 <button onClick={() => setPage('checkout')}>Edit</button>
