@@ -13,7 +13,9 @@ import axios from 'axios';
 import { openExternalLink } from '../../shared/utils/OpenLinkUtil';
 import dayjs from 'dayjs';
 import { IoMdInformationCircle } from 'react-icons/io';
+import { FaTrash } from 'react-icons/fa';
 import { PopUpMessage } from '../../shared/components/PopUpMessage';
+import { CustomButton } from '../../shared/components/CustomButton';
 
 const DEFAULT_SHOPPING_BAG = {
   quantity: 0,
@@ -348,7 +350,7 @@ export const Order = () => {
   };
 
   return (
-    <div className="flex pt-navbar py-20 ml-all min-h-screen">
+    <div className="flex pt-navbar py-20 ml-[5%] min-h-screen">
       {/* Pop Up */}
       <PopUpMessage
         open={popUpOpen}
@@ -369,7 +371,7 @@ export const Order = () => {
                   ? 'Payment Details'
                   : page === 'confirmation'
                   ? 'Thank you for your purchase!'
-                  : 'Checkout'}
+                  : 'Order'}
               </h2>
               {page === 'review' && (
                 <button onClick={() => setPage('checkout')}>Edit</button>
@@ -480,7 +482,7 @@ export const Order = () => {
         {page !== 'confirmation' && (
           <div className="Shopping-bag mt-20">
             <div className="shopping flex justify-between mb-3">
-              <h1 className="text-4xl">Shopping Bag</h1>
+              <h2 className="text-[1.875rem] text-[#414141]">Shopping Bag</h2>
               {page === 'checkout' && (
                 <button onClick={handleAddItem} className="add-button pr-[2%]">
                   Add
@@ -563,7 +565,7 @@ export const Order = () => {
                       onClick={() => handleRemoveItem(index)}
                       className="remove-button px-[2%]"
                     >
-                      X
+                      <FaTrash className="text-grey-body w-[125%] 2xl:w-[150%] h-auto" />
                     </button>
                   )}
                 </div>
@@ -593,7 +595,9 @@ export const Order = () => {
                 {/* Additional payment details and upload picture form*/}
                 {/* You can add your form fields here */}
                 <div className="upload-picture pt-[5%]">
-                  <h1 className="payment-label text-4xl">Payment</h1>
+                  <h2 className="payment-label text-[1.875rem] text-[#414141]">
+                    Payment
+                  </h2>
                   <p className="payment-description pt-[2%] text-grey-body">
                     Please access the link below and pay your total amount
                     there.
@@ -628,6 +632,25 @@ export const Order = () => {
                 Next
               </button>
             )}
+          </div>
+        )}
+
+        {/* Thank you for purchase */}
+        {page === 'confirmation' && (
+          <div>
+            <h4 className="text-grey-body xl:max-w-[50%]">
+              Your order has been submitted and you will receive a confirmation
+              email from us shortly. Please reach out to
+              permika.vancouver@gmail.com if you haven't received your email
+              within 48 hours. We appreciate your support and we can't wait for
+              you to wear them!
+            </h4>
+
+            <CustomButton
+              text={'Back to home'}
+              className={'mt-[6.88rem]'}
+              link={'https://permikavancouver.com'}
+            />
           </div>
         )}
       </div>
