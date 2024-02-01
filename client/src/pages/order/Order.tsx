@@ -28,7 +28,7 @@ const DEFAULT_SELECTED_ITEM = {
   price: 0,
 };
 
-const SERVER = process.env.REACT_APP_LOCAL_SERVER;
+const SERVER = process.env.REACT_APP_SERVER;
 
 export const Order = () => {
   const [page, setPage] = useState<
