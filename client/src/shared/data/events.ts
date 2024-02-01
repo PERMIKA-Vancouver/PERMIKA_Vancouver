@@ -3,7 +3,14 @@ import { UpcomingEvent } from '../types/types';
 const DATE_FORMAT = 'YYYY-MM-DD HH:mm';
 
 // Date format 'YYYY-MM-DD HH:mm'
-const UPCOMING_EVENTS: UpcomingEvent[] = [];
+const UPCOMING_EVENTS: UpcomingEvent[] = [
+  {
+    name: 'Waroeng Rawon',
+    date: '2024-01-28 17:00',
+    rsvp: 'https://forms.gle/p9tdTPB8GXAkU9cNA',
+    type: 1,
+  },
+];
 
 const UPCOMING_EVENTS_DEFAULT: UpcomingEvent = {
   name: 'No Upcoming Events',
