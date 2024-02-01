@@ -21,11 +21,14 @@ module.exports = {
       },
 
       colors: {
+        'black-text': '#050505',
+        'grey-body': '#9A9A9A',
+        'forest-green': '#06170E',
         'sunset-orange': '#D07D14',
-        'light-grey': '#BCBCBC',
-        'black-permika': '#0A0A0A',
-        'forest-green': '#102713',
         'light-green': '#4C7435',
+        'light-grey': '#BCBCBC',
+        'grey-footer': '#5B5B5B',
+        'cream-bg': '#F7F6F4',
       },
 
       keyframes: {

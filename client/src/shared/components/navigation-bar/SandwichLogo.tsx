@@ -4,6 +4,9 @@ type propsType = {
   closeHandler: () => void;
 };
 
+const sandwichStyle =
+  'w-[0.75rem] h-[2px] mt-[3px] mb-[3px] block duration-500 bg-[#BAB8B8]';
+
 const MenuLogo = ({ isOpen, openHandler, closeHandler }: propsType) => {
   return (
     <div
@@ -14,32 +17,32 @@ const MenuLogo = ({ isOpen, openHandler, closeHandler }: propsType) => {
         className={`w-full h-full flex flex-col flex-wrap items-center content-center`}
       >
         <span
-          className={`menu-line-1 w-[0.75rem] h-[2px] mt-[3px] mb-[3px] block rounded-l-sm duration-500 origin-[right_center] bg-[#BAB8B8] ${
+          className={`${sandwichStyle} menu-line-1 rounded-l-sm origin-[right_center] ${
             isOpen && 'translate-y-[0.49rem] rotate-45'
           }`}
         ></span>
         <span
-          className={`menu-line-2 w-[0.75rem] h-[2px] mt-[3px] mb-[3px] block rounded-l-sm duration-500 origin-[right_center] bg-[#BAB8B8] ${
+          className={`${sandwichStyle} menu-line-2 rounded-l-sm origin-[right_center] ${
             isOpen && 'scale-0'
           }`}
         ></span>
         <span
-          className={`menu-line-3 w-[0.75rem] h-[2px] mt-[3px] mb-[3px] block rounded-l-sm duration-500 origin-[right_center] bg-[#BAB8B8] ${
+          className={`${sandwichStyle} menu-line-3 rounded-l-sm origin-[right_center] ${
             isOpen && '-translate-y-[0.49rem] -rotate-45'
           }`}
         ></span>
         <span
-          className={`menu-line-4 w-[0.75rem] h-[2px] mt-[3px] mb-[3px] block rounded-r-sm duration-500 origin-[left_center] bg-[#BAB8B8] ${
+          className={`${sandwichStyle} menu-line-4 rounded-r-sm origin-[left_center] ${
             isOpen && 'translate-y-[0.49rem] -rotate-45'
           }`}
         ></span>
         <span
-          className={`menu-line-5 w-[0.75rem] h-[2px] mt-[3px] mb-[3px] block rounded-r-sm duration-500 origin-[left_center] bg-[#BAB8B8] ${
+          className={`${sandwichStyle} menu-line-5 rounded-r-sm origin-[left_center] ${
             isOpen && 'scale-0'
           }`}
         ></span>
         <span
-          className={`menu-line-6 w-[0.75rem] h-[2px] mt-[3px] mb-[3px] block rounded-r-sm duration-500 origin-[left_center] bg-[#BAB8B8] ${
+          className={`${sandwichStyle} menu-line-6 rounded-r-sm origin-[left_center] ${
             isOpen && '-translate-y-[0.49rem] rotate-45'
           }`}
         ></span>
