@@ -29,9 +29,6 @@ const OrderSchema = new Schema(
         ref: 'Items',
       },
     ],
-    promoCode: {
-      type: String,
-    },
     totalPrice: {
       type: Number,
       required: true,
