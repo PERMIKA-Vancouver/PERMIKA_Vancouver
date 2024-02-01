@@ -61,7 +61,7 @@ const Item = ({ itemId }: { itemId: String }) => {
     axios.get(`${SERVER}/order/item/${itemId}`).then((res) => {
       setItem(res.data.data);
     });
-  }, []);
+  });
 
   return (
     <div className="mb-4">
