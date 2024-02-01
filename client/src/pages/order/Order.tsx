@@ -12,6 +12,7 @@ import {
 import axios from 'axios';
 import { openExternalLink } from '../../shared/utils/OpenLinkUtil';
 import dayjs from 'dayjs';
+import { IoMdInformationCircle } from 'react-icons/io';
 
 const DEFAULT_SHOPPING_BAG = {
   quantity: 0,
@@ -337,7 +338,7 @@ export const Order = () => {
       <div className="Checkout-details pl-[6.3%] w-[100%] pr-[12%]">
         <div className="Checkout">
           <div className="checkout-outer mb-[50px]">
-            <div className="checkout-label flex justify-between">
+            <div className="checkout-label flex justify-between items-center">
               <h2>
                 {page === 'review'
                   ? 'Review Order'
@@ -349,6 +350,16 @@ export const Order = () => {
               </h2>
               {page === 'review' && (
                 <button onClick={() => setPage('checkout')}>Edit</button>
+              )}
+              {page === 'checkout' && (
+                <IoMdInformationCircle
+                  className="w-7 h-auto text-grey-body"
+                  onClick={() =>
+                    openExternalLink(
+                      'https://drive.google.com/file/d/1Swg0aOP7Nh_XmDY7ceCWxJkeAcGVq8uS/view?usp=sharing'
+                    )
+                  }
+                />
               )}
             </div>
             <div className="checkout-information"></div>
@@ -457,7 +468,7 @@ export const Order = () => {
             {shoppingBag.map((bag, index) => (
               <div
                 key={index}
-                className="shopping-details sm:flex justify-between pl-[1.5%] pr-[2.5%] mt-[10%] sm:pt-[1.5%] mb-3"
+                className="shopping-details sm:flex justify-between pl-[1.5%] pr-[2.5%] mt-[10%] sm:pt-[1.5%] sm:mt-0 mb-3"
               >
                 <div className="flex w-[90%] sm:w-[48%] justify-between">
                   <TextField
