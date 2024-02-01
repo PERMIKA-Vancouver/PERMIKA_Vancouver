@@ -482,7 +482,7 @@ export const Order = () => {
         {page !== 'confirmation' && (
           <div className="Shopping-bag mt-20">
             <div className="shopping flex justify-between mb-3">
-              <h1 className="text-4xl">Shopping Bag</h1>
+              <h2 className="text-[1.875rem] text-[#414141]">Shopping Bag</h2>
               {page === 'checkout' && (
                 <button onClick={handleAddItem} className="add-button pr-[2%]">
                   Add
@@ -595,7 +595,9 @@ export const Order = () => {
                 {/* Additional payment details and upload picture form*/}
                 {/* You can add your form fields here */}
                 <div className="upload-picture pt-[5%]">
-                  <h1 className="payment-label text-4xl">Payment</h1>
+                  <h2 className="payment-label text-[1.875rem] text-[#414141]">
+                    Payment
+                  </h2>
                   <p className="payment-description pt-[2%] text-grey-body">
                     Please access the link below and pay your total amount
                     there.
@@ -634,21 +636,23 @@ export const Order = () => {
         )}
 
         {/* Thank you for purchase */}
-        <div>
-          <h4 className="text-grey-body xl:max-w-[50%]">
-            Your order has been submitted and you will receive a confirmation
-            email from us shortly. Please reach out to
-            permika.vancouver@gmail.com if you haven't received your email
-            within 48 hours. We appreciate your support and we can't wait for
-            you to wear them!
-          </h4>
+        {page === 'confirmation' && (
+          <div>
+            <h4 className="text-grey-body xl:max-w-[50%]">
+              Your order has been submitted and you will receive a confirmation
+              email from us shortly. Please reach out to
+              permika.vancouver@gmail.com if you haven't received your email
+              within 48 hours. We appreciate your support and we can't wait for
+              you to wear them!
+            </h4>
 
-          <CustomButton
-            text={'Back to home'}
-            className={'mt-[6.88rem]'}
-            link={'https://permikavancouver.com'}
-          />
-        </div>
+            <CustomButton
+              text={'Back to home'}
+              className={'mt-[6.88rem]'}
+              link={'https://permikavancouver.com'}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
