@@ -214,6 +214,7 @@ export const Order = () => {
   };
 
   const checkAvailability = async (payment: boolean): Promise<boolean> => {
+    console.log(SERVER);
     return new Promise((resolve, reject) => {
       axios
         .get(`${SERVER}/order/merchandise`)
@@ -463,7 +464,7 @@ export const Order = () => {
 
         {/* Shopping Bag */}
         {page !== 'confirmation' && (
-          <div className="Shopping-bag mt-10">
+          <div className="Shopping-bag mt-20">
             <div className="shopping flex justify-between mb-3">
               <h1 className="text-4xl">Shopping Bag</h1>
               {page === 'checkout' && (
@@ -574,7 +575,7 @@ export const Order = () => {
               </div>
             )}
             {page === 'payment' && (
-              <form className="payment-form">
+              <div className="payment-form mt-10">
                 {/* Additional payment details and upload picture form*/}
                 {/* You can add your form fields here */}
                 <div className="upload-picture pt-[5%]">
@@ -593,7 +594,7 @@ export const Order = () => {
                     Click here
                   </p>
                 </div>
-              </form>
+              </div>
             )}
             {!isTotalsVisible && shoppingBag.length === 0 && <div></div>}
             {page === 'payment' ? (
