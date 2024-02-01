@@ -13,6 +13,7 @@ import axios from 'axios';
 import { openExternalLink } from '../../shared/utils/OpenLinkUtil';
 import dayjs from 'dayjs';
 import { IoMdInformationCircle } from 'react-icons/io';
+import { FaTrash } from 'react-icons/fa';
 import { PopUpMessage } from '../../shared/components/PopUpMessage';
 
 const DEFAULT_SHOPPING_BAG = {
@@ -563,7 +564,7 @@ export const Order = () => {
                       onClick={() => handleRemoveItem(index)}
                       className="remove-button px-[2%]"
                     >
-                      X
+                      <FaTrash className="text-grey-body w-[125%] 2xl:w-[150%] h-auto" />
                     </button>
                   )}
                 </div>
