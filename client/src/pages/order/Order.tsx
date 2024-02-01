@@ -13,6 +13,7 @@ import axios from 'axios';
 import { openExternalLink } from '../../shared/utils/OpenLinkUtil';
 import dayjs from 'dayjs';
 import { IoMdInformationCircle } from 'react-icons/io';
+import { PopUpMessage } from '../../shared/components/PopUpMessage';
 
 const DEFAULT_SHOPPING_BAG = {
   quantity: 0,
@@ -50,6 +51,8 @@ export const Order = () => {
   const [pickupLocationError, setPickupLocationError] = useState(false);
 
   const [paymentClicked, setPaymentClicked] = useState(false);
+  const [popUpMessage, setPopUpMessage] = useState('');
+  const [popUpOpen, setPopUpOpen] = useState(false);
 
   const isDiscount = dayjs().isBefore(
     dayjs(DISCOUNT_DEADLINE, 'YYYY-MM-DD HH:mm')
@@ -195,9 +198,10 @@ export const Order = () => {
           if (available) {
             handleSubmitOrder();
           } else {
-            alert(
+            setPopUpMessage(
               'If you have paid, please contact us at our instagram to process the refund. Sorry for the inconvenience.'
             );
+            setPopUpOpen(true);
           }
         });
       } else {
@@ -228,14 +232,10 @@ export const Order = () => {
               ? item.stock - item.bought
               : item.stock - item.bought - item.pending;
             if (total > itemStock) {
-              alert(
-                item.model +
-                  ' ' +
-                  item.size +
-                  ' has only ' +
-                  itemStock +
-                  ' in stock left.'
+              setPopUpMessage(
+                `${item.model} ${item.size} has only ${itemStock} in stock left.`
               );
+              setPopUpOpen(true);
               resolve(false);
             }
           });
@@ -255,7 +255,8 @@ export const Order = () => {
           (item: any) => item.model === bag.model && item.size === bag.size
         );
         if (!merchandise) {
-          alert(bag.model + ' has no size ' + bag.size);
+          setPopUpMessage(`${bag.model} has no size ${bag.size}`);
+          setPopUpOpen(true);
           proceedPayment = false;
         }
       }
@@ -333,6 +334,13 @@ export const Order = () => {
 
   return (
     <div className="flex pt-navbar py-20 ml-all min-h-screen">
+      {/* Pop Up */}
+      <PopUpMessage
+        open={popUpOpen}
+        handleClose={() => setPopUpOpen(false)}
+        message={popUpMessage}
+      />
+
       {/* <ShoppingBag /> */}
 
       <div className="Checkout-details pl-[6.3%] w-[100%] pr-[12%]">
