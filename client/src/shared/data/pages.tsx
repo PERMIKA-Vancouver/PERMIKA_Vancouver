@@ -11,7 +11,7 @@ const PAGES = [
   { name: 'events', path: 'events', element: <Events /> },
   { name: 'blog', path: 'blog', element: <Blog /> },
   { name: 'sponsorship', path: 'sponsorship', element: <Partnerships /> },
-  { name: 'order', path: 'order', element: <Order /> },
+  { name: 'merchandise', path: 'order', element: <Order /> },
 ];
 
 export { PAGES };
