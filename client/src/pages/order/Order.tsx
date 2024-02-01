@@ -50,7 +50,9 @@ export const Order = () => {
 
   const [paymentClicked, setPaymentClicked] = useState(false);
 
-  const isDiscount = dayjs().isBefore(dayjs(DISCOUNT_DEADLINE, 'YYYY-MM-DD'));
+  const isDiscount = dayjs().isBefore(
+    dayjs(DISCOUNT_DEADLINE, 'YYYY-MM-DD HH:mm')
+  );
 
   const handleQuantityChange = (index: number, newQuantity: number) => {
     const updatedShoppingBag = [...shoppingBag];
@@ -307,7 +309,7 @@ export const Order = () => {
               phoneNumber,
               pickUpLocation: location?.label,
               items: shoppingBag,
-              totalPrice,
+              totalPrice: subtotal,
             };
 
             axios
