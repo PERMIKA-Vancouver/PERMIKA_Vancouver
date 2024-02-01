@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { FaGreaterThan, FaLessThan } from "react-icons/fa6";
 
 interface ImageModalProps {
@@ -18,12 +18,6 @@ const ImageModal: React.FC<ImageModalProps> = ({
   const [showModal, setShowModal] = useState(false);
   const [imageStyle, setImageStyle] = useState({});
   const imageRef = useRef<HTMLImageElement>(null);
-
-  useEffect(() => {
-    if (isOpen) {
-      setShowModal(true);
-    }
-  }, [isOpen]);
 
   const openModal = () => {
     if (imageRef.current) {
@@ -52,12 +46,14 @@ const ImageModal: React.FC<ImageModalProps> = ({
 
   return (
     <div className="relative group">
-      <img
-        ref={imageRef}
-        src={images[currentIndex]}
-        alt="background"
-        className="w-full z-50"
-      />
+      <div className="w-64 h-64 bg-white flex justify-center items-center overflow-hidden border-2 border-[#EFEFEF]">
+        <img
+          ref={imageRef}
+          src={images[currentIndex]}
+          alt="background"
+          className="max-w-full max-h-full object-contain"
+        />
+      </div>
 
       <div className="absolute inset-0 flex justify-between items-center opacity-0 group-hover:opacity-100 z-0 p-2">
         <div
@@ -88,13 +84,12 @@ const ImageModal: React.FC<ImageModalProps> = ({
           onClick={closeModal}
         >
           <div className="p-2" onClick={(e) => e.stopPropagation()}>
-            s
             <img
               src={images[currentIndex]}
               alt="Enlarged"
               style={imageStyle}
               className={`object-contain transition-transform duration-300 ease-in-out transform ${
-                isOpen ? "scale-110" : "scale-100"
+                isOpen ? "scale-150" : "scale-100"
               }`}
             />
           </div>
