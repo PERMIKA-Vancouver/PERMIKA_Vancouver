@@ -15,6 +15,7 @@ import dayjs from 'dayjs';
 import { IoMdInformationCircle } from 'react-icons/io';
 import { FaTrash } from 'react-icons/fa';
 import { PopUpMessage } from '../../shared/components/PopUpMessage';
+import { CustomButton } from '../../shared/components/CustomButton';
 
 const DEFAULT_SHOPPING_BAG = {
   quantity: 0,
@@ -349,7 +350,7 @@ export const Order = () => {
   };
 
   return (
-    <div className="flex pt-navbar py-20 ml-all min-h-screen">
+    <div className="flex pt-navbar py-20 ml-[5%] min-h-screen">
       {/* Pop Up */}
       <PopUpMessage
         open={popUpOpen}
@@ -631,6 +632,23 @@ export const Order = () => {
             )}
           </div>
         )}
+
+        {/* Thank you for purchase */}
+        <div>
+          <h4 className="text-grey-body xl:max-w-[50%]">
+            Your order has been submitted and you will receive a confirmation
+            email from us shortly. Please reach out to
+            permika.vancouver@gmail.com if you haven't received your email
+            within 48 hours. We appreciate your support and we can't wait for
+            you to wear them!
+          </h4>
+
+          <CustomButton
+            text={'Back to home'}
+            className={'mt-[6.88rem]'}
+            link={'https://permikavancouver.com'}
+          />
+        </div>
       </div>
     </div>
   );
