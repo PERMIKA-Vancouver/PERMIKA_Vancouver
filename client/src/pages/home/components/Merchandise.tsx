@@ -40,17 +40,17 @@ export const Merchandise = () => {
 
   return (
     <div className="flex flex-col p-28 gap-15">
-      <div className="flex justify-between">
+      <div className="flex justify-between flex-wrap gap-5">
         <h2>Merchandise</h2>
         <div
-          className={`bg-sunset-orange w-[12.875rem] h-[2.1875rem] rounded-[0.1875rem] hover:bg-[#A86108] transition-colors ease-out duration-500 flex items-center justify-center cursor-pointer`}
+          className={`my-auto bg-sunset-orange w-[12.875rem] h-[2.1875rem] rounded-[0.1875rem] hover:bg-[#A86108] transition-colors ease-out duration-500 flex items-center justify-center cursor-pointer`}
         >
           <Link to="/order" className="text-white button-text w-full text-center">
             Buy
           </Link>
         </div>{" "}
       </div>
-      <div className="flex gap-20 justify-evenly">
+      <div className="flex gap-20 justify-evenly flex-wrap">
         <div className="flex flex-col text-grey-body">
           <ImageModalContainer images={shirt} />
 
