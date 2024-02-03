@@ -54,9 +54,9 @@ export const Merchandise = () => {
         <div className="flex flex-col text-grey-body">
           <ImageModalContainer images={shirt} />
 
-          <p className="text-sm mt-[0.9rem]">Hoodie Collection</p>
-          <p className="text-xl text-black-text">The PERMIKA Hoodie</p>
-          <p className="text-sm">$45</p>
+          <p className="text-sm mt-[0.9rem]">Shirt Collection</p>
+          <p className="text-xl text-black-text">Anak Rantau T-Shirt</p>
+          <p className="text-sm">$20</p>
           <div className="flex justify-between mt-8">
             <p className="text-sm text-black text bg-[#F1F1F1] py-1 px-3.5 rounded-sm">
               5 Sizes - XS, S, M, L, XL
@@ -68,8 +68,8 @@ export const Merchandise = () => {
           <ImageModalContainer images={hoodieBlack} />
 
           <p className="text-sm mt-[0.9rem]">Hoodie Collection</p>
-          <p className="text-xl text-black-text">The PERMIKA Hoodie</p>
-          <p className="text-sm">$45</p>
+          <p className="text-xl text-black-text">Waroeng Cak Timmies Hoodie</p>
+          <p className="text-sm">$35</p>
           <div className="flex justify-between mt-8">
             <p className="text-sm text-black text bg-[#F1F1F1] py-1 px-3.5 rounded-sm">
               5 Sizes - XS, S, M, L, XL
@@ -81,8 +81,8 @@ export const Merchandise = () => {
           <ImageModalContainer images={hoodieWhite} />
 
           <p className="text-sm mt-[0.9rem]">Hoodie Collection</p>
-          <p className="text-xl text-black-text">The PERMIKA Hoodie</p>
-          <p className="text-sm">$45</p>
+          <p className="text-xl text-black-text">Anak Rantau Hoodie</p>
+          <p className="text-sm">$35</p>
           <div className="flex justify-between mt-8">
             <p className="text-sm text-black text bg-[#F1F1F1] py-1 px-3.5 rounded-sm">
               5 Sizes - XS, S, M, L, XL

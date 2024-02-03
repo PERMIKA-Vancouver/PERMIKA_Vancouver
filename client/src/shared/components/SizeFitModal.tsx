@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import chart from "../../assets/merchandise/sizeChart.jpeg";
 
 const SizeFitModal = () => {
@@ -39,7 +39,7 @@ const SizeFitModal = () => {
               src={chart}
               alt="chart"
               className={`object-contain transition-transform duration-300 ease-in-out transform ${
-                isOpen ? "scale-150" : "scale-100"
+                isOpen ? "scale-90" : "scale-50"
               }`}
             />
           </div>
