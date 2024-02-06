@@ -20,7 +20,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.6",
     "@mui/material": "^5.15.6",
-    "@types/react": "^18.2.48",
+    "@types/react": "^18.2.54",
     "@types/react-helmet": "^6.1.11"
   }
 }
