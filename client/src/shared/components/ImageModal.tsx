@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { FaGreaterThan, FaLessThan } from "react-icons/fa6";
+import React, {useRef, useState} from "react";
+import {FaGreaterThan, FaLessThan} from "react-icons/fa6";
 
 interface ImageModalProps {
   images: string[]; // Array of image sources
@@ -55,7 +55,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
         />
       </div>
 
-      <div className="absolute inset-0 flex justify-between items-center opacity-0 group-hover:opacity-100 z-0 p-2">
+      <div className="absolute inset-0 flex justify-between items-center xs:opacity-0 xs:group-hover:opacity-100 z-0 p-2">
         <div
           className="cursor-pointer hover:bg-black hover:bg-opacity-50 rounded-full p-1"
           onClick={onPrevious}
