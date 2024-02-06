@@ -63,7 +63,10 @@ export const NavigationBar = () => {
           ) : (
             <div className="flex mr-[4%] gap-8">
               {PAGES.filter(
-                (page) => page.name !== 'home' && page.name !== 'orders'
+                (page) =>
+                  page.name !== 'home' &&
+                  page.name !== 'merchandise' &&
+                  page.name !== 'orders'
               ).map((page) => (
                 <NavLink key={page.name} to={page.path}>
                   {({ isActive }) => (

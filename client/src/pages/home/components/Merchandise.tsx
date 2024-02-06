@@ -1,13 +1,13 @@
-import ImageModal from "../../../shared/components/ImageModal";
-import {useState} from "react";
-import hoodieWhiteBack from "../../../assets/merchandise/hoodieWhiteBack.png";
-import hoodieWhiteFront from "../../../assets/merchandise/hoodieWhiteFront.png";
-import hoodieBlackBack from "../../../assets/merchandise/hoodieBlackBack.png";
-import hoodieBlackFront from "../../../assets/merchandise/hoodieBlackFront.png";
-import shirtBack from "../../../assets/merchandise/shirtBack.png";
-import shirtFront from "../../../assets/merchandise/shirtFront.png";
-import SizeFitModal from "../../../shared/components/SizeFitModal";
-import {Link} from "react-router-dom";
+import ImageModal from '../../../shared/components/ImageModal';
+import { useState } from 'react';
+import hoodieWhiteBack from '../../../assets/merchandise/hoodieWhiteBack.png';
+import hoodieWhiteFront from '../../../assets/merchandise/hoodieWhiteFront.png';
+import hoodieBlackBack from '../../../assets/merchandise/hoodieBlackBack.png';
+import hoodieBlackFront from '../../../assets/merchandise/hoodieBlackFront.png';
+import shirtBack from '../../../assets/merchandise/shirtBack.png';
+import shirtFront from '../../../assets/merchandise/shirtFront.png';
+import SizeFitModal from '../../../shared/components/SizeFitModal';
+import { Link } from 'react-router-dom';
 // import SizeFitModal from "../../../shared/components/SizeFitModal";
 
 const ImageModalContainer: React.FC<{ images: string[] }> = ({ images }) => {
@@ -19,7 +19,7 @@ const ImageModalContainer: React.FC<{ images: string[] }> = ({ images }) => {
 
   const onPrevious = () => {
     setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + images.length) % images.length,
+      (prevIndex) => (prevIndex - 1 + images.length) % images.length
     );
   };
 
@@ -45,7 +45,10 @@ export const Merchandise = () => {
         <div
           className={`my-auto bg-sunset-orange w-[12.875rem] h-[2.1875rem] rounded-[0.1875rem] hover:bg-[#A86108] transition-colors ease-out duration-500 flex items-center justify-center cursor-pointer`}
         >
-          <Link to="/order" className="text-white button-text w-full text-center">
+          <Link
+            to="/order"
+            className="text-white button-text w-full text-center"
+          >
             Buy
           </Link>
         </div>
@@ -59,7 +62,7 @@ export const Merchandise = () => {
           <p className="text-sm">$20</p>
           <div className="flex justify-between mt-8">
             <p className="text-sm text-black text bg-[#F1F1F1] py-1 px-3.5 rounded-sm">
-              5 Sizes - XS, S, M, L, XL
+              5 Sizes - S, M, L, XL, XXL
             </p>
             <SizeFitModal />
           </div>
@@ -72,7 +75,7 @@ export const Merchandise = () => {
           <p className="text-sm">$35</p>
           <div className="flex justify-between mt-8">
             <p className="text-sm text-black text bg-[#F1F1F1] py-1 px-3.5 rounded-sm">
-              5 Sizes - XS, S, M, L, XL
+              4 Sizes - M, L, XL, XXL
             </p>
             <SizeFitModal />
           </div>
@@ -85,7 +88,7 @@ export const Merchandise = () => {
           <p className="text-sm">$35</p>
           <div className="flex justify-between mt-8">
             <p className="text-sm text-black text bg-[#F1F1F1] py-1 px-3.5 rounded-sm">
-              5 Sizes - XS, S, M, L, XL
+              4 Sizes - M, L, XL, XXL
             </p>
             <SizeFitModal />
           </div>
