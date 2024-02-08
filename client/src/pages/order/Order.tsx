@@ -12,7 +12,6 @@ import {
 import axios from 'axios';
 import { openExternalLink } from '../../shared/utils/OpenLinkUtil';
 import dayjs from 'dayjs';
-import { IoMdInformationCircle } from 'react-icons/io';
 import { FaTrash } from 'react-icons/fa';
 import { PopUpMessage } from '../../shared/components/PopUpMessage';
 import { CustomButton } from '../../shared/components/CustomButton';
@@ -376,16 +375,6 @@ export const Order = () => {
               </h2>
               {page === 'review' && (
                 <button onClick={() => setPage('checkout')}>Edit</button>
-              )}
-              {page === 'checkout' && (
-                <IoMdInformationCircle
-                  className="w-7 h-auto text-grey-body"
-                  onClick={() =>
-                    openExternalLink(
-                      'https://drive.google.com/file/d/1Swg0aOP7Nh_XmDY7ceCWxJkeAcGVq8uS/view?usp=sharing'
-                    )
-                  }
-                />
               )}
             </div>
             <div className="checkout-information"></div>
