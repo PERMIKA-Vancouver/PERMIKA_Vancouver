@@ -555,7 +555,7 @@ export const Order = () => {
                       onClick={() => handleRemoveItem(index)}
                       className="remove-button px-[2%]"
                     >
-                      <FaTrash className="text-grey-body w-[125%] 2xl:w-[150%] h-auto" />
+                      <FaTrash className="text-grey-body w-5 h-auto" />
                     </button>
                   )}
                 </div>
