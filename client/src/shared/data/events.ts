@@ -5,10 +5,10 @@ const DATE_FORMAT = 'YYYY-MM-DD HH:mm';
 // Date format 'YYYY-MM-DD HH:mm'
 const UPCOMING_EVENTS: UpcomingEvent[] = [
   {
-    name: 'Waroeng Rawon',
-    date: '2024-01-28 17:00',
-    rsvp: 'https://forms.gle/p9tdTPB8GXAkU9cNA',
-    type: 1,
+    name: 'Layar Tancap',
+    date: '2024-02-25 15:30',
+    rsvp: 'https://docs.google.com/forms/d/e/1FAIpQLSfNU-Kzv4o9DghHdbPy2gHbUcN4WfDunveQZ4bFdRlDNjYvYA/viewform?fbclid=PAAaal5I7bo-ImSEFuZtU_zb0DU7qS6ye5otyOK6Lo_sopvULzudB8ArWhC7w_aem_AWZfi3c1bckgDwibFaHHLQK1ECM7DH2ROvizBHV5YO79IDWc75_mGe-w-58NNumXTSE',
+    type: 0,
   },
 ];
 
