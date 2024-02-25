@@ -4,8 +4,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        smVertical: { raw: '(min-height: 700px)' },
-        mdVertical: { raw: '(min-height: 900px)' },
+        "xs": "500px",
         lgVertical: { raw: '(min-height: 1100px)' },
       },
       spacing: {
