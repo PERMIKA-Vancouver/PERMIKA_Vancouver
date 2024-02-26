@@ -8,6 +8,8 @@ const UPCOMING_EVENTS: UpcomingEvent[] = [
     name: 'Layar Tancap',
     date: '2024-02-25 15:30',
     rsvp: 'https://docs.google.com/forms/d/e/1FAIpQLSfNU-Kzv4o9DghHdbPy2gHbUcN4WfDunveQZ4bFdRlDNjYvYA/viewform?fbclid=PAAaal5I7bo-ImSEFuZtU_zb0DU7qS6ye5otyOK6Lo_sopvULzudB8ArWhC7w_aem_AWZfi3c1bckgDwibFaHHLQK1ECM7DH2ROvizBHV5YO79IDWc75_mGe-w-58NNumXTSE',
+    location: 'KJRI, 1630 Alberni St',
+    locationLink: 'https://maps.app.goo.gl/A3vNgBUN2oPrKRYk6',
     type: 0,
   },
 ];
@@ -16,6 +18,8 @@ const UPCOMING_EVENTS_DEFAULT: UpcomingEvent = {
   name: 'No Upcoming Events',
   date: '0000-00-00 00:00',
   rsvp: '',
+  location: '',
+  locationLink: '',
   type: 0,
 };
 

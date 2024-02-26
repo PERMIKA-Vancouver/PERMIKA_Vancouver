@@ -2,31 +2,29 @@ import { CustomButton } from '../../../shared/components/CustomButton';
 import Arrow from '../../../assets/arrow.svg';
 import { openExternalLink } from '../../../shared/utils/OpenLinkUtil';
 import {
-  getEventFullDate,
   getEventLocation,
-  getEventName,
-  getEventRsvp,
-  getNextEvent,
-  isNextEvent,
+  getNextEventFullDate,
+  getNextEventLink,
+  getNextEventName,
+  getNextEvents,
+  isNextEvents,
 } from '../../../shared/utils/UpcomingEventUtils';
 
-import { UpcomingEvent } from '../../../shared/types/types';
-
 export const UpcomingEventComponent = () => {
-  const event: UpcomingEvent = getNextEvent();
+  const nextEvent: number = getNextEvents()[0];
 
-  if (!isNextEvent(event)) {
+  if (!isNextEvents(nextEvent)) {
     return <div></div>;
   }
 
-  const [eventLoc, eventLocLink] = getEventLocation(event);
+  const [eventLoc, eventLocLink] = getEventLocation(nextEvent);
 
   return (
     <div className="fade-in-up">
-      <h1>{getEventName(event)}</h1>
+      <h1>{getNextEventName(nextEvent)}</h1>
       <div className="mt-4 mb-24 sm:flex">
         <h4 className="text-grey-body sm:text-white">
-          {getEventFullDate(event)}
+          {getNextEventFullDate(nextEvent)}
         </h4>
         <div
           className="ml-auto flex hover:cursor-pointer"
@@ -41,7 +39,7 @@ export const UpcomingEventComponent = () => {
       <CustomButton
         text="RSVP"
         className={`w-[9.45rem]`}
-        link={getEventRsvp(event)}
+        link={getNextEventLink(nextEvent)}
       />
     </div>
   );

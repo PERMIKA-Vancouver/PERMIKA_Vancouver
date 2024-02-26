@@ -6,6 +6,8 @@ export interface UpcomingEvent {
   name: string;
   date: string;
   rsvp: string;
+  location: string;
+  locationLink: string;
   type: TypeEvent;
 }
 
