@@ -1,9 +1,9 @@
-import { UpcomingPage } from '../../shared/layouts/UpcomingPage';
+import {PastEvents} from "./components/PastEvents";
 
 export const Events = () => {
   return (
     <>
-      <UpcomingPage />
+      <PastEvents/>
     </>
   );
 };
