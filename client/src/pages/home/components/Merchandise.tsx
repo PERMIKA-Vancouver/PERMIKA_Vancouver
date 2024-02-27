@@ -1,13 +1,11 @@
 import ImageModal from '../../../shared/components/ImageModal';
-import { useState } from 'react';
+import {useState} from 'react';
 import hoodieWhiteBack from '../../../assets/merchandise/hoodieWhiteBack.png';
 import hoodieWhiteFront from '../../../assets/merchandise/hoodieWhiteFront.png';
-import hoodieBlackBack from '../../../assets/merchandise/hoodieBlackBack.png';
-import hoodieBlackFront from '../../../assets/merchandise/hoodieBlackFront.png';
 import shirtBack from '../../../assets/merchandise/shirtBack.png';
 import shirtFront from '../../../assets/merchandise/shirtFront.png';
 import SizeFitModal from '../../../shared/components/SizeFitModal';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 // import SizeFitModal from "../../../shared/components/SizeFitModal";
 
 const ImageModalContainer: React.FC<{ images: string[] }> = ({ images }) => {
@@ -35,7 +33,7 @@ const ImageModalContainer: React.FC<{ images: string[] }> = ({ images }) => {
 
 export const Merchandise = () => {
   const shirt = [shirtFront, shirtBack];
-  const hoodieBlack = [hoodieBlackFront, hoodieBlackBack];
+  const hoodieBlack = ["https://permika.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieWhiteFront.png", "https://permika.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieWhiteBack.png"];
   const hoodieWhite = [hoodieWhiteFront, hoodieWhiteBack];
 
   return (
