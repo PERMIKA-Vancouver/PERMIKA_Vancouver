@@ -1,3 +1,4 @@
+import {PastEvents} from "./components/PastEvents";
 import OurEventArchive from "./components/OurEventArchive";
 import {useMediaQuery} from "react-responsive";
 import OurEventArchiveSmall from "./components/OurEventArchiveSmall";
@@ -8,7 +9,7 @@ export const Events = () => {
     return (
     <>
         {isSmallScreen ? <OurEventArchiveSmall /> : <OurEventArchive />}
-
+        <PastEvents/>
     </>
   );
 };
