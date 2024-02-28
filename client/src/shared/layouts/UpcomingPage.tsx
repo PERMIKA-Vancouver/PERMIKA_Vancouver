@@ -1,12 +1,4 @@
-import {
-  openDiscord,
-  openInstagram,
-  openYoutube,
-  openFacebook,
-  openTiktok,
-} from '../utils/OpenLinkUtil';
-
-import Cloud from '../../assets/cloud.svg';
+import {openDiscord, openFacebook, openInstagram, openTiktok, openYoutube,} from '../utils/OpenLinkUtil';
 
 const socialStyle = 'text-sunset-orange cursor-pointer';
 
@@ -16,12 +8,12 @@ export const UpcomingPage = () => {
       <div className="ml-all mr-[10%] h-full">
         <div className="relative h-[30%] lg:h-[40%]">
           <img
-            src={Cloud}
+            src="https://permika.s3.us-west-2.amazonaws.com/assets/cloud.svg"
             alt="cloud"
             className={`absolute bottom-0 left-0 w-1/4 lg:w-[15%]`}
           />
           <img
-            src={Cloud}
+            src="https://permika.s3.us-west-2.amazonaws.com/assets/cloud.svg"
             alt="cloud"
             className={`absolute bottom-[25%] sm:bottom-[40%] left-[30%] lg:left-[20%] w-1/4 lg:w-[15%]`}
           />
