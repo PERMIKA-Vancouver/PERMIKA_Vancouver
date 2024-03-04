@@ -25,7 +25,7 @@ const EventDropdown: React.FC<DropdownProps> = ({
 
   useEffect(() => {
     setIsOpen(globalToggle.isOpen);
-  }, [globalToggle.changeCounter]);
+  }, [globalToggle.changeCounter, globalToggle.isOpen]);
 
   const requireImage = (imagePath: string) => {
     try {
