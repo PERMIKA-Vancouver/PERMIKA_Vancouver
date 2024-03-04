@@ -25,7 +25,7 @@ export const WelcomingMessage = ({
       >
         <div className="flex justify-end">
           <img
-            src={isTabletPotraitView ? "https://permika.s3.us-west-2.amazonaws.com/assets/welcome/core.png" : "https://permika.s3.us-west-2.amazonaws.com/assets/welcome/core_square.png"}
+            src={isTabletPotraitView ? "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/welcome/core.png" : "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/welcome/core_square.png"}
             alt="Core Team"
             className={`${
               isTabletPotraitView

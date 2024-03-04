@@ -50,7 +50,7 @@ export const NavigationBar = () => {
           <div className="ml-[10%] sm:ml-[4%]">
             <Link to="/">
               <img
-                src="https://permika.s3.us-west-2.amazonaws.com/assets/logo/cropped_logo.png"
+                src="https://permikawebsite.s3.us-west-2.amazonaws.com/assets/logo/cropped_logo.png"
                 alt=""
                 className="w-[2.125rem] sm:w-[55px] h-auto"
               />

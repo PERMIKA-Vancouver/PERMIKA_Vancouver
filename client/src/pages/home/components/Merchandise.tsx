@@ -28,9 +28,9 @@ const ImageModalContainer: React.FC<{ images: string[] }> = ({ images }) => {
 };
 
 export const Merchandise = () => {
-  const shirt = ["https://permika.s3.us-west-2.amazonaws.com/assets/merchandise/shirtFront.webp", "https://permika.s3.us-west-2.amazonaws.com/assets/merchandise/shirtBack.webp"];
-  const hoodieBlack = ["https://permika.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieBlackFront.webp", "https://permika.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieBlackBack.webp"];
-  const hoodieWhite = ["https://permika.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieWhiteFront.webp", "https://permika.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieWhiteBack.webp"];
+  const shirt = ["https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/shirtFront.webp", "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/shirtBack.webp"];
+  const hoodieBlack = ["https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieBlackFront.webp", "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieBlackBack.webp"];
+  const hoodieWhite = ["https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieWhiteFront.webp", "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieWhiteBack.webp"];
 
   return (
     <div className="flex flex-col xs:p-28 p-20 gap-15">

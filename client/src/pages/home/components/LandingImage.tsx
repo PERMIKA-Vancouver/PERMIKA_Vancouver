@@ -109,49 +109,49 @@ const LandingImage: React.FC = () => {
       >
         <img
           ref={img1Ref}
-          src="https://permika.s3.us-west-2.amazonaws.com/assets/landing-image/img7.webp"
+          src="https://permikawebsite.s3.us-west-2.amazonaws.com/assets/landing-image/img7.webp"
           alt="background"
           className="absolute w-1/6 opacity-60 transition-all duration-300 ease-out"
         />
         <img
           ref={img2Ref}
-          src="https://permika.s3.us-west-2.amazonaws.com/assets/landing-image/img2.webp"
+          src="https://permikawebsite.s3.us-west-2.amazonaws.com/assets/landing-image/img2.webp"
           alt="background"
           className="absolute w-1/6 opacity-40 transition-all duration-300 ease-out"
         />
         <img
           ref={img3Ref}
-          src="https://permika.s3.us-west-2.amazonaws.com/assets/landing-image/img3.webp"
+          src="https://permikawebsite.s3.us-west-2.amazonaws.com/assets/landing-image/img3.webp"
           alt="background"
           className="absolute w-1/6 opacity-60 transition-all duration-300 ease-out"
         />
         <img
           ref={img4Ref}
-          src="https://permika.s3.us-west-2.amazonaws.com/assets/landing-image/img4.webp"
+          src="https://permikawebsite.s3.us-west-2.amazonaws.com/assets/landing-image/img4.webp"
           alt="background"
           className="absolute w-1/6 opacity-60 transition-all duration-300 ease-out"
         />
         <img
           ref={img5Ref}
-          src="https://permika.s3.us-west-2.amazonaws.com/assets/landing-image/img5.webp"
+          src="https://permikawebsite.s3.us-west-2.amazonaws.com/assets/landing-image/img5.webp"
           alt="background"
           className="absolute w-1/6 opacity-60 transition-all duration-300 ease-out"
         />
         <img
           ref={img6Ref}
-          src="https://permika.s3.us-west-2.amazonaws.com/assets/landing-image/img6.webp"
+          src="https://permikawebsite.s3.us-west-2.amazonaws.com/assets/landing-image/img6.webp"
           alt="background"
           className="absolute w-1/6 opacity-60 transition-all duration-300 ease-out"
         />
         <img
           ref={img7Ref}
-          src="https://permika.s3.us-west-2.amazonaws.com/assets/landing-image/img1.webp"
+          src="https://permikawebsite.s3.us-west-2.amazonaws.com/assets/landing-image/img1.webp"
           alt="background"
           className="absolute w-1/6 opacity-50 transition-all duration-300 ease-out"
         />
         <img
           ref={img8Ref}
-          src="https://permika.s3.us-west-2.amazonaws.com/assets/landing-image/img8.webp"
+          src="https://permikawebsite.s3.us-west-2.amazonaws.com/assets/landing-image/img8.webp"
           alt="background"
           className="absolute w-1/6 opacity-50 transition-all duration-300 ease-out"
         />

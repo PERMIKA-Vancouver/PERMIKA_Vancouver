@@ -35,7 +35,7 @@ const SizeFitModal = () => {
         >
           <div className="p-2" onClick={(e) => e.stopPropagation()}>
             <img
-              src="https://permika.s3.us-west-2.amazonaws.com/assets/merchandise/sizeChart.jpeg"
+              src="https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/sizeChart.jpeg"
               alt="chart"
               className={`object-contain transition-transform duration-300 ease-in-out transform ${
                 isOpen ? "scale-90" : "scale-50"
