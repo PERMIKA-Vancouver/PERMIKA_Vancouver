@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import SlideDown from "react-slidedown/lib/slidedown";
+import React, {useEffect, useState} from "react";
+import SlideDown from "react-slidedown/build/lib/slidedown";
 import "react-slidedown/lib/slidedown.css";
 
 interface DropdownProps {
