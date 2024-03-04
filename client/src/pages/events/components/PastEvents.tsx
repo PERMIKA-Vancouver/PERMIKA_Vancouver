@@ -48,14 +48,13 @@ export const PastEvents = () => {
             {isHovering && (
               <div className="absolute bg-white rounded-md overflow-hidden z-10 w-full text-center space-y-1 font-RegoBook">
                 {["2023", "2022", "2021", "2020", "2019"].map((year) => (
-                  <a
+                  <button
                     key={year}
-                    href="#"
                     onClick={() => handleYearChange(year)}
                     className="block py-2 text-lg text-gray-700 bg-gray-100 hover:bg-sunset-orange hover:text-white"
                   >
                     {year}
-                  </a>
+                  </button>
                 ))}
               </div>
             )}
