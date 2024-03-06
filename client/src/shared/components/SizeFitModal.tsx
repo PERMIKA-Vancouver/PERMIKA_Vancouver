@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import chart from "../../assets/merchandise/sizeChart.jpeg";
 
 const SizeFitModal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,7 +35,7 @@ const SizeFitModal = () => {
         >
           <div className="p-2" onClick={(e) => e.stopPropagation()}>
             <img
-              src={chart}
+              src="https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/sizeChart.jpeg"
               alt="chart"
               className={`object-contain transition-transform duration-300 ease-in-out transform ${
                 isOpen ? "scale-90" : "scale-50"

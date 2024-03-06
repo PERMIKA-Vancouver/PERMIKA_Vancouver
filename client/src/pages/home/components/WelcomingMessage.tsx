@@ -1,7 +1,5 @@
-import Core from '../../../assets/welcome/core.png';
-import CoreSquare from '../../../assets/welcome/core_square.png';
-import { CustomButton } from '../../../shared/components/CustomButton';
-import { ScreenSizeProps } from '../../../shared/types/types';
+import {CustomButton} from '../../../shared/components/CustomButton';
+import {ScreenSizeProps} from '../../../shared/types/types';
 
 const WelcomingMsg =
   "Hello there! Welcome to PERMIKA Vancouver's new chapter. We're so excited for you to experience both our signature and new events in this coming year. We also hope to create a community that you can call home while living in Vancouver. We're so glad you're here!";
@@ -27,7 +25,7 @@ export const WelcomingMessage = ({
       >
         <div className="flex justify-end">
           <img
-            src={isTabletPotraitView ? Core : CoreSquare}
+            src={isTabletPotraitView ? "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/welcome/core.png" : "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/welcome/core_square.png"}
             alt="Core Team"
             className={`${
               isTabletPotraitView
