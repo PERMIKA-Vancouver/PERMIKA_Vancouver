@@ -1,9 +1,9 @@
-import { UpcomingPage } from '../../shared/layouts/UpcomingPage';
+import { LandingComponent } from './components/LandingComponent';
 
 export const Events = () => {
   return (
     <>
-      <UpcomingPage />
+      <LandingComponent />
     </>
   );
 };

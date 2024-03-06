@@ -18,6 +18,7 @@ export const CountdownEvent = ({
 }: ScreenSizeProps) => {
   return (
     <div
+      id="upcoming_event"
       className={`${
         isMobileView
           ? 'pt-[4.31rem]'
