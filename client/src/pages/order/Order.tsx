@@ -54,6 +54,7 @@ export const Order = () => {
   const [paymentClicked, setPaymentClicked] = useState(false);
   const [popUpMessage, setPopUpMessage] = useState('');
   const [popUpOpen, setPopUpOpen] = useState(false);
+  const [submitOrderClicked, setSubmitOrderClicked] = useState(false);
 
   const isDiscount = dayjs().isBefore(
     dayjs(DISCOUNT_DEADLINE, 'YYYY-MM-DD HH:mm')
@@ -554,7 +555,7 @@ export const Order = () => {
                       onClick={() => handleRemoveItem(index)}
                       className="remove-button px-[2%]"
                     >
-                      <FaTrash className="text-grey-body w-[125%] 2xl:w-[150%] h-auto" />
+                      <FaTrash className="text-grey-body w-5 h-auto" />
                     </button>
                   )}
                 </div>
@@ -607,8 +608,13 @@ export const Order = () => {
             {page === 'payment' ? (
               <button
                 className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400"
-                onClick={handleNextPage}
-                disabled={getTotalPrice() <= 0 || !paymentClicked}
+                onClick={() => {
+                  setSubmitOrderClicked(true);
+                  handleNextPage();
+                }}
+                disabled={
+                  getTotalPrice() <= 0 || !paymentClicked || submitOrderClicked
+                }
               >
                 Submit Order
               </button>

@@ -33,7 +33,7 @@ export const Merchandise = () => {
   const hoodieWhite = ["https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieWhiteFront.webp", "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieWhiteBack.webp"];
 
   return (
-    <div className="flex flex-col xs:p-28 p-20 gap-15">
+    <div id="merchandise" className="flex flex-col xs:p-28 p-20 gap-15">
       <div className="flex justify-between flex-wrap xs:gap-5 gap-2">
         <h2>Merchandise</h2>
         <div
