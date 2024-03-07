@@ -10,6 +10,12 @@ const UPCOMING_EVENTS: UpcomingEvent[] = [
     rsvp: 'https://docs.google.com/forms/d/e/1FAIpQLSfNU-Kzv4o9DghHdbPy2gHbUcN4WfDunveQZ4bFdRlDNjYvYA/viewform?fbclid=PAAaal5I7bo-ImSEFuZtU_zb0DU7qS6ye5otyOK6Lo_sopvULzudB8ArWhC7w_aem_AWZfi3c1bckgDwibFaHHLQK1ECM7DH2ROvizBHV5YO79IDWc75_mGe-w-58NNumXTSE',
     type: 0,
   },
+  {
+    name: 'Waroeng Nasi Ayam Gulai',
+    date: '2024-03-17 00:00',
+    rsvp: '  https://docs.google.com/forms/d/e/1FAIpQLSdM6hEo8mEIgaB_lvBwwqHw3OWddqowRVWUNwkzzDpXq5upJQ/viewform',
+    type: 1,
+  },
 ];
 
 const UPCOMING_EVENTS_DEFAULT: UpcomingEvent = {
