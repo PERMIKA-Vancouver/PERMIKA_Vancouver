@@ -51,7 +51,7 @@ export const PastEvents = () => {
                   <button
                     key={year}
                     onClick={() => handleYearChange(year)}
-                    className="block py-2 text-lg text-gray-700 bg-gray-100 hover:bg-sunset-orange hover:text-white"
+                    className="block w-full py-2 text-lg text-gray-700 bg-gray-100 hover:bg-sunset-orange hover:text-white"
                   >
                     {year}
                   </button>
