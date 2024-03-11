@@ -15,6 +15,7 @@ import dayjs from 'dayjs';
 import { FaTrash } from 'react-icons/fa';
 import { PopUpMessage } from '../../shared/components/PopUpMessage';
 import { CustomButton } from '../../shared/components/CustomButton';
+import { Button, InputBase } from '@mui/material';
 
 const DEFAULT_SHOPPING_BAG = {
   quantity: 0,
@@ -34,7 +35,7 @@ const SERVER = process.env.REACT_APP_SERVER;
 export const Order = () => {
   const [page, setPage] = useState<
     'checkout' | 'review' | 'payment' | 'confirmation'
-  >('checkout');
+  >('payment');
   const [shoppingBag, setShoppingBag] = useState([DEFAULT_SHOPPING_BAG]);
   const [selectedItem, setSelectedItem] = useState(DEFAULT_SELECTED_ITEM);
   const [numItems, setNumItems] = useState(0);
@@ -50,6 +51,9 @@ export const Order = () => {
   const [emailError, setEmailError] = useState(false);
   const [phoneNumberError, setPhoneNumberError] = useState(false);
   const [pickupLocationError, setPickupLocationError] = useState(false);
+
+  const [promoCode, setPromoCode] = useState('');
+  const [isPromoCodeApplied, setIsPromoCodeApplied] = useState(false);
 
   const [paymentClicked, setPaymentClicked] = useState(false);
   const [popUpMessage, setPopUpMessage] = useState('');
@@ -578,6 +582,36 @@ export const Order = () => {
                     Subtotal <span>${subtotal.toFixed(2)}</span>
                   </div>
                 </div>
+              </div>
+            )}
+            {page === 'payment' && (
+              <div className="flex">
+                <InputBase
+                  className={`border-[1px] border-r-0 ${
+                    isPromoCodeApplied
+                      ? 'border-light-green'
+                      : 'border-[#bdbdbd]'
+                  } rounded-l py-1.5 px-3`}
+                  value={promoCode}
+                  onChange={(e) => setPromoCode(e.target.value)}
+                  disabled={isPromoCodeApplied}
+                  placeholder="Promo code"
+                  fullWidth
+                />
+                <Button
+                  variant="contained"
+                  onClick={() => setIsPromoCodeApplied(true)}
+                  className={`!rounded-l-none !text-white !shadow-none !normal-case ${
+                    isPromoCodeApplied
+                      ? '!bg-light-green'
+                      : promoCode
+                      ? '!bg-sunset-orange'
+                      : '!bg-grey-body'
+                  }`}
+                  disabled={!promoCode}
+                >
+                  {isPromoCodeApplied ? 'Applied' : 'Apply'}
+                </Button>
               </div>
             )}
             {page === 'payment' && (
