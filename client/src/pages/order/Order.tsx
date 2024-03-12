@@ -341,7 +341,20 @@ export const Order = () => {
             axios
               .post(`${SERVER}/order`, dataOrder)
               .then(() => {
-                setPage('confirmation');
+                const data = {
+                  promoCode: promoCode,
+                  claimed: true,
+                };
+
+                axios
+                  .put(`${SERVER}/order/promocode`, data)
+                  .then(() => {
+                    setPage('confirmation');
+                  })
+                  .catch((err) => {
+                    alert('An error happened: ' + err.message);
+                    setPage('payment');
+                  });
               })
               .catch((err) => {
                 alert('An error happened: ' + err.message);
@@ -357,8 +370,34 @@ export const Order = () => {
   };
 
   const handleApplyPromoCode = () => {
-    setFinalPrice(finalPrice * (1 - DISCOUNT));
-    setIsPromoCodeApplied(true);
+    axios
+      .get(`${SERVER}/order/promocode/${promoCode}`)
+      .then((res) => {
+        if (!res.data || res.data.pending || res.data.claimed) {
+          setIsPromoCodeInvalid(true);
+          setPromoCode('');
+          return;
+        }
+
+        const data = {
+          promoCode: promoCode,
+          pending: true,
+        };
+
+        axios
+          .put(`${SERVER}/order/promocode`, data)
+          .then(() => {
+            setIsPromoCodeInvalid(false);
+            setIsPromoCodeApplied(true);
+            setFinalPrice(finalPrice * (1 - DISCOUNT));
+          })
+          .catch((err) => {
+            alert('An error happened: ' + err.message);
+          });
+      })
+      .catch((err) => {
+        alert('An error happened: ' + err.message);
+      });
   };
 
   return (
@@ -628,7 +667,7 @@ export const Order = () => {
                       ? '!bg-sunset-orange'
                       : '!bg-grey-body'
                   }`}
-                  disabled={!promoCode}
+                  disabled={!promoCode || isPromoCodeApplied}
                 >
                   {isPromoCodeApplied ? 'Applied' : 'Apply'}
                 </Button>

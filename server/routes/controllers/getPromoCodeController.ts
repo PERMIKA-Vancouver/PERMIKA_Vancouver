@@ -5,11 +5,7 @@ import { PromoCode } from '../../models/merchandise/promoCodeModel';
 
 export const getPromoCodeController = async (req: Request, res: Response) => {
   try {
-    if (!req.body.promoCode) {
-      return res.status(400).send({ message: 'Send all required fields' });
-    }
-
-    const id = req.body.promoCode;
+    const { id } = req.params;
 
     const promoCode = await PromoCode.findById(id);
 

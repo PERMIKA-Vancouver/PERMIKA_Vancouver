@@ -12,14 +12,9 @@ export const updatePromoCodeController = async (
       return res.status(400).send({ message: 'Send all required fields' });
     }
 
-    const updatedPromoCode = {
-      claimed: true,
-    };
+    const id = req.body.promoCode;
 
-    const result = await PromoCode.findByIdAndUpdate(
-      req.body.promoCode,
-      updatedPromoCode
-    );
+    const result = await PromoCode.findByIdAndUpdate(id, req.body);
 
     if (!result) {
       return res.status(404).send({ message: 'Promocode not found' });
@@ -27,7 +22,7 @@ export const updatePromoCodeController = async (
 
     return res
       .status(200)
-      .send({ message: `Promocode ${req.body.promoCode} applied!` });
+      .send({ message: `Promocode ${req.body.promoCode} updated!` });
   } catch (err) {
     return res.status(500).send({ message: getErrorMessage(err) });
   }
