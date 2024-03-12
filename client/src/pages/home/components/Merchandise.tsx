@@ -1,7 +1,7 @@
 import ImageModal from '../../../shared/components/ImageModal';
-import {useState} from 'react';
+import { useState } from 'react';
 import SizeFitModal from '../../../shared/components/SizeFitModal';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import SizeFitModal from "../../../shared/components/SizeFitModal";
 
 const ImageModalContainer: React.FC<{ images: string[] }> = ({ images }) => {
@@ -28,12 +28,21 @@ const ImageModalContainer: React.FC<{ images: string[] }> = ({ images }) => {
 };
 
 export const Merchandise = () => {
-  const shirt = ["https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/shirtFront.webp", "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/shirtBack.webp"];
-  const hoodieBlack = ["https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieBlackFront.webp", "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieBlackBack.webp"];
-  const hoodieWhite = ["https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieWhiteFront.webp", "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieWhiteBack.webp"];
+  const shirt = [
+    'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/shirtFront.webp',
+    'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/shirtBack.webp',
+  ];
+  const hoodieBlack = [
+    'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieBlackFront.webp',
+    'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieBlackBack.webp',
+  ];
+  const hoodieWhite = [
+    'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieWhiteFront.webp',
+    'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieWhiteBack.webp',
+  ];
 
   return (
-    <div id="merchandise" className="flex flex-col xs:p-28 p-20 gap-15">
+    <div id="merchandise" className="flex flex-col xs:p-28 p-20 gap-15 pl-all">
       <div className="flex justify-between flex-wrap xs:gap-5 gap-2">
         <h2>Merchandise</h2>
         <div
@@ -47,7 +56,7 @@ export const Merchandise = () => {
           </Link>
         </div>
       </div>
-      <div className="flex gap-20 justify-evenly flex-wrap">
+      <div className="flex gap-20 justify-between flex-wrap">
         <div className="flex flex-col text-grey-body">
           <ImageModalContainer images={shirt} />
 
