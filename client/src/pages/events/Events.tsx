@@ -1,9 +1,14 @@
 import OurEventArchive from "./components/OurEventArchive";
+import {useMediaQuery} from "react-responsive";
+import OurEventArchiveSmall from "./components/OurEventArchiveSmall";
 
 export const Events = () => {
-  return (
+    const isSmallScreen = useMediaQuery({ maxWidth: 1023 }); // Adjust the values as per your tailwindCSS configuration
+
+    return (
     <>
-      <OurEventArchive />
+        {isSmallScreen ? <OurEventArchiveSmall /> : <OurEventArchive />}
+
     </>
   );
 };
