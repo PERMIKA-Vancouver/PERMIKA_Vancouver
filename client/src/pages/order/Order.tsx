@@ -328,15 +328,30 @@ export const Order = () => {
             const location = LOCATIONS.find(
               (loc) => loc.value === pickupLocation
             );
-            const dataOrder = {
-              firstName,
-              lastName,
-              emailAddress: email,
-              phoneNumber,
-              pickUpLocation: location?.label,
-              items: shoppingBag,
-              totalPrice: subtotal,
-            };
+
+            let dataOrder;
+            if (isPromoCodeApplied) {
+              dataOrder = {
+                firstName,
+                lastName,
+                emailAddress: email,
+                phoneNumber,
+                pickUpLocation: location?.label,
+                items: shoppingBag,
+                totalPrice: subtotal,
+                promoCode: promoCode,
+              };
+            } else {
+              dataOrder = {
+                firstName,
+                lastName,
+                emailAddress: email,
+                phoneNumber,
+                pickUpLocation: location?.label,
+                items: shoppingBag,
+                totalPrice: subtotal,
+              };
+            }
 
             axios
               .post(`${SERVER}/order`, dataOrder)
