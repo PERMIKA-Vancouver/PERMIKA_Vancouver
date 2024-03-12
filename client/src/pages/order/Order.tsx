@@ -35,7 +35,7 @@ const SERVER = process.env.REACT_APP_SERVER;
 export const Order = () => {
   const [page, setPage] = useState<
     'checkout' | 'review' | 'payment' | 'confirmation'
-  >('payment');
+  >('checkout');
   const [shoppingBag, setShoppingBag] = useState([DEFAULT_SHOPPING_BAG]);
   const [selectedItem, setSelectedItem] = useState(DEFAULT_SELECTED_ITEM);
   const [numItems, setNumItems] = useState(0);
@@ -54,6 +54,8 @@ export const Order = () => {
 
   const [promoCode, setPromoCode] = useState('');
   const [isPromoCodeApplied, setIsPromoCodeApplied] = useState(false);
+  const [isPromoCodeInvalid, setIsPromoCodeInvalid] = useState(false);
+  const [finalPrice, setFinalPrice] = useState(0);
 
   const [paymentClicked, setPaymentClicked] = useState(false);
   const [popUpMessage, setPopUpMessage] = useState('');
@@ -295,6 +297,7 @@ export const Order = () => {
           axios
             .put(`${SERVER}/order/merchandise/${id}`, data)
             .then(() => {
+              setFinalPrice(subtotal);
               setPage('payment');
             })
             .catch((err) => {
@@ -351,6 +354,11 @@ export const Order = () => {
           });
       });
     });
+  };
+
+  const handleApplyPromoCode = () => {
+    setFinalPrice(finalPrice * (1 - DISCOUNT));
+    setIsPromoCodeApplied(true);
   };
 
   return (
@@ -567,28 +575,38 @@ export const Order = () => {
             ))}
             {getTotalPrice() > 0 && (
               <div className="">
-                <div className="totals font-light">
-                  <div className="text-[#9A9A9A] flex justify-between">
-                    Merchandise Total{' '}
-                    <span className="">${totalPrice.toFixed(2)}</span>
-                  </div>
-                  {isDiscount && (
-                    <div className="text-[#9A9A9A] flex justify-between">
-                      Discount ({`${DISCOUNT * 100}%`})
-                      <span>${disc.toFixed(2)}</span>
-                    </div>
-                  )}
-                  <div className="flex justify-between mt-2.5 text-2xl">
+                {page === 'payment' ? (
+                  <div className="text-[#9A9A9A] flex justify-between font-light">
                     Subtotal <span>${subtotal.toFixed(2)}</span>
                   </div>
-                </div>
+                ) : (
+                  <div className="totals font-light">
+                    <div className="text-[#9A9A9A] flex justify-between">
+                      Merchandise Total{' '}
+                      <span className="">${totalPrice.toFixed(2)}</span>
+                    </div>
+                    {isDiscount && (
+                      <div className="text-[#9A9A9A] flex justify-between">
+                        Discount ({`${DISCOUNT * 100}%`})
+                        <span>${disc.toFixed(2)}</span>
+                      </div>
+                    )}
+                    <div className="flex justify-between mt-2.5 text-2xl">
+                      Subtotal <span>${subtotal.toFixed(2)}</span>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
+
+            {/** PROMO CODE */}
             {page === 'payment' && (
-              <div className="flex">
+              <div className="flex mt-10">
                 <InputBase
                   className={`border-[1px] border-r-0 ${
-                    isPromoCodeApplied
+                    isPromoCodeInvalid
+                      ? 'border-[#d32f2f]'
+                      : isPromoCodeApplied
                       ? 'border-light-green'
                       : 'border-[#bdbdbd]'
                   } rounded-l py-1.5 px-3`}
@@ -600,9 +618,11 @@ export const Order = () => {
                 />
                 <Button
                   variant="contained"
-                  onClick={() => setIsPromoCodeApplied(true)}
+                  onClick={handleApplyPromoCode}
                   className={`!rounded-l-none !text-white !shadow-none !normal-case ${
-                    isPromoCodeApplied
+                    isPromoCodeInvalid
+                      ? '!bg-[#d32f2f]'
+                      : isPromoCodeApplied
                       ? '!bg-light-green'
                       : promoCode
                       ? '!bg-sunset-orange'
@@ -614,6 +634,24 @@ export const Order = () => {
                 </Button>
               </div>
             )}
+
+            {/** FINAL TOTAL PRICE */}
+            {page === 'payment' && (
+              <div className="mt-4">
+                <div className="totals font-light">
+                  {isPromoCodeApplied && (
+                    <div className="text-[#9A9A9A] flex justify-between">
+                      Discount ({`${DISCOUNT * 100}%`})
+                      <span>${(subtotal * DISCOUNT).toFixed(2)}</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between mt-2.5 text-2xl">
+                    Total <span>${finalPrice.toFixed(2)}</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {page === 'payment' && (
               <div className="payment-form mt-10">
                 {/* Additional payment details and upload picture form*/}
