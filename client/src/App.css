@@ -201,4 +201,8 @@ p {
   .ml-all {
     margin-left: 10%;
   }
+
+  .pl-all {
+    padding-left: 10%;
+  }
 }

@@ -42,7 +42,10 @@ export const Merchandise = () => {
   ];
 
   return (
-    <div id="merchandise" className="flex flex-col xs:p-28 p-20 gap-15 pl-all">
+    <div
+      id="merchandise"
+      className="flex flex-col py-20 pr-[10%] xs:p-28 gap-15 pl-all"
+    >
       <div className="flex justify-between flex-wrap xs:gap-5 gap-2">
         <h2>Merchandise</h2>
         <div

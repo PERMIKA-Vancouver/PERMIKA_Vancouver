@@ -5,9 +5,9 @@ import { CustomButton } from '../../../shared/components/CustomButton';
 
 export const Waroeng = () => {
   return (
-    <div className="ml-all mt-24 xs:mr-28 mr-20">
-      <div className="flex justify-between">
-        <h2>Waroeng '24 Presents</h2>
+    <div className="ml-all mt-24 mr-[10%] sm:mr-28">
+      <div className="flex justify-between flex-wrap">
+        <h2 className="mb-4">Waroeng '24 Presents</h2>
         <CustomButton
           text={'Pre-order'}
           className={'self-center'}
