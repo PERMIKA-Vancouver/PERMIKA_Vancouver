@@ -33,6 +33,9 @@ const OrderSchema = new Schema(
       type: Number,
       required: true,
     },
+    promoCode: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

@@ -13,6 +13,10 @@ const PromoCodeSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  pending: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export const PromoCode = mongoose.model('PromoCode', PromoCodeSchema);

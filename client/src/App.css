@@ -104,6 +104,10 @@ p {
   margin-left: 20%;
 }
 
+.pl-all {
+  padding-left: 20%;
+}
+
 /*for fade in transition*/
 .fade-in-element {
   opacity: 0; /* Initial state: element is invisible */
@@ -196,5 +200,9 @@ p {
 
   .ml-all {
     margin-left: 10%;
+  }
+
+  .pl-all {
+    padding-left: 10%;
   }
 }

@@ -5,10 +5,10 @@ const DATE_FORMAT = 'YYYY-MM-DD HH:mm';
 // Date format 'YYYY-MM-DD HH:mm'
 const UPCOMING_EVENTS: UpcomingEvent[] = [
   {
-    name: 'Waroeng Rawon',
-    date: '2024-01-28 17:00',
-    rsvp: 'https://forms.gle/p9tdTPB8GXAkU9cNA',
-    type: 1,
+    name: 'PERMIKA Panel 2024',
+    date: '2024-04-06 14:00',
+    rsvp: 'https://bit.ly/PERMIKAPanel2024',
+    type: 0,
   },
 ];
 
