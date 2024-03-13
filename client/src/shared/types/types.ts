@@ -9,6 +9,11 @@ export interface UpcomingEvent {
   type: TypeEvent;
 }
 
+export interface UpcomingWaroeng {
+  date: string;
+  link: string;
+}
+
 export type ScreenSizeProps = {
   isMobileView: boolean;
   isTabletPotraitView: boolean;
