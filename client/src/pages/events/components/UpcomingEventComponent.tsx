@@ -7,16 +7,10 @@ import {
   getNextEventLink,
   getNextEventName,
   getNextEvents,
-  isNextEvents,
 } from '../../../shared/utils/UpcomingEventUtils';
 
 export const UpcomingEventComponent = () => {
   const nextEvent: number = getNextEvents()[0];
-
-  if (!isNextEvents(nextEvent)) {
-    return <div></div>;
-  }
-
   const [eventLoc, eventLocLink] = getEventLocation(nextEvent);
 
   return (

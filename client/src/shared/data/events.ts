@@ -15,7 +15,9 @@ const UPCOMING_EVENTS: UpcomingEvent[] = [
   {
     name: 'Waroeng Nasi Ayam Gulai',
     date: '2024-03-17 00:00',
-    rsvp: '  https://docs.google.com/forms/d/e/1FAIpQLSdM6hEo8mEIgaB_lvBwwqHw3OWddqowRVWUNwkzzDpXq5upJQ/viewform',
+    rsvp: 'https://docs.google.com/forms/d/e/1FAIpQLSdM6hEo8mEIgaB_lvBwwqHw3OWddqowRVWUNwkzzDpXq5upJQ/viewform',
+    location: '',
+    locationLink: '',
     type: 1,
   },
 ];

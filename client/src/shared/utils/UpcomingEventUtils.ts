@@ -20,8 +20,8 @@ const getNextEvents = (): number[] => {
   return nextEvents;
 };
 
-const isNextEvents = (index: number): string => {
-  return index === -1 ? 'false' : 'true';
+const isNextEvents = (index: number): boolean => {
+  return index !== -1;
 };
 
 const getNextEventName = (index: number): string => {

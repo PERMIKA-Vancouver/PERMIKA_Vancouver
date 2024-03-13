@@ -81,7 +81,7 @@ export const CountdownEvent = ({
                 isTabletPotraitView={isTabletPotraitView}
               />
             </div>
-            {isNextEvents(index) === 'true' && (
+            {isNextEvents(index) && (
               <div className="text-center">
                 <div className="mb-4">
                   <span className={`font-AveRom text-[#E3E3E3] text-[1rem]`}>
