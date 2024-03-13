@@ -12,6 +12,12 @@ const UPCOMING_EVENTS: UpcomingEvent[] = [
     locationLink: 'https://maps.app.goo.gl/A3vNgBUN2oPrKRYk6',
     type: 0,
   },
+  {
+    name: 'Waroeng Nasi Ayam Gulai',
+    date: '2024-03-17 00:00',
+    rsvp: '  https://docs.google.com/forms/d/e/1FAIpQLSdM6hEo8mEIgaB_lvBwwqHw3OWddqowRVWUNwkzzDpXq5upJQ/viewform',
+    type: 1,
+  },
 ];
 
 const UPCOMING_EVENTS_DEFAULT: UpcomingEvent = {
