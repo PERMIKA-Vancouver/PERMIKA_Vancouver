@@ -1,11 +1,5 @@
 import ImageModal from '../../../shared/components/ImageModal';
 import { useState } from 'react';
-import hoodieWhiteBack from '../../../assets/merchandise/hoodieWhiteBack.png';
-import hoodieWhiteFront from '../../../assets/merchandise/hoodieWhiteFront.png';
-import hoodieBlackBack from '../../../assets/merchandise/hoodieBlackBack.png';
-import hoodieBlackFront from '../../../assets/merchandise/hoodieBlackFront.png';
-import shirtBack from '../../../assets/merchandise/shirtBack.png';
-import shirtFront from '../../../assets/merchandise/shirtFront.png';
 import SizeFitModal from '../../../shared/components/SizeFitModal';
 import { Link } from 'react-router-dom';
 // import SizeFitModal from "../../../shared/components/SizeFitModal";
@@ -34,12 +28,24 @@ const ImageModalContainer: React.FC<{ images: string[] }> = ({ images }) => {
 };
 
 export const Merchandise = () => {
-  const shirt = [shirtFront, shirtBack];
-  const hoodieBlack = [hoodieBlackFront, hoodieBlackBack];
-  const hoodieWhite = [hoodieWhiteFront, hoodieWhiteBack];
+  const shirt = [
+    'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/shirtFront.webp',
+    'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/shirtBack.webp',
+  ];
+  const hoodieBlack = [
+    'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieBlackFront.webp',
+    'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieBlackBack.webp',
+  ];
+  const hoodieWhite = [
+    'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieWhiteFront.webp',
+    'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieWhiteBack.webp',
+  ];
 
   return (
-    <div id="merchandise" className="flex flex-col xs:p-28 p-20 gap-15">
+    <div
+      id="merchandise"
+      className="flex flex-col py-20 pr-[10%] xs:p-28 gap-15 pl-all"
+    >
       <div className="flex justify-between flex-wrap xs:gap-5 gap-2">
         <h2>Merchandise</h2>
         <div
@@ -53,7 +59,7 @@ export const Merchandise = () => {
           </Link>
         </div>
       </div>
-      <div className="flex gap-20 justify-evenly flex-wrap">
+      <div className="flex gap-20 justify-between flex-wrap">
         <div className="flex flex-col text-grey-body">
           <ImageModalContainer images={shirt} />
 

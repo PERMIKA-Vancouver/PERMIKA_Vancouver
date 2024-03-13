@@ -1,12 +1,4 @@
-import img1 from '../../../assets/landing-image/img1.webp';
-import img2 from '../../../assets/landing-image/img2.webp';
-import img3 from '../../../assets/landing-image/img3.webp';
-import img4 from '../../../assets/landing-image/img4.webp';
-import img5 from '../../../assets/landing-image/img5.webp';
-import img6 from '../../../assets/landing-image/img6.webp';
-import img7 from '../../../assets/landing-image/img7.webp';
-import img8 from '../../../assets/landing-image/img8.webp';
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 
 const LandingImageSmall: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -24,47 +16,47 @@ const LandingImageSmall: React.FC = () => {
       }`}
     >
       <img
-        src={img1}
+        src="https://permikawebsite.s3.us-west-2.amazonaws.com/assets/landing-image/img1.webp"
         alt="background"
         className="absolute w-1/4 sm:w-1/6 lgVertical:w-1/5 opacity-25 top-[83%] left-[75%] sm:left-[83%]"
       />
       <img
-        src={img2}
+        src="https://permikawebsite.s3.us-west-2.amazonaws.com/assets/landing-image/img2.webp"
         alt="background"
         className="absolute w-1/4 sm:w-1/6 lgVertical:w-1/5 opacity-60 top-[24%] left-[86%]"
       />
       <img
-        src={img3}
+        src="https://permikawebsite.s3.us-west-2.amazonaws.com/assets/landing-image/img3.webp"
         alt="background"
         className="absolute w-1/4 sm:w-1/6 lgVertical:w-1/5 opacity-60 top-[27%] left-[28%]"
       />
 
       <img
-        src={img4}
+        src="https://permikawebsite.s3.us-west-2.amazonaws.com/assets/landing-image/img4.webp"
         alt="background"
         className="absolute w-1/4 sm:w-1/6 lgVertical:w-1/5 opacity-70 top-[13%] left-[55%]"
       />
 
       <img
-        src={img5}
+        src="https://permikawebsite.s3.us-west-2.amazonaws.com/assets/landing-image/img5.webp"
         alt="background"
         className="absolute w-1/4 sm:w-1/6 lgVertical:w-1/5 opacity-60 top-[18%] left-[-5%]"
       />
 
       <img
-        src={img6}
+        src="https://permikawebsite.s3.us-west-2.amazonaws.com/assets/landing-image/img6.webp"
         alt="background"
         className="absolute w-1/4 sm:w-1/6 lgVertical:w-1/5 opacity-60 top-[40%] left-[65%] sm:top-[53%] sm:left-[-6%]"
       />
 
       <img
-        src={img7}
+        src="https://permikawebsite.s3.us-west-2.amazonaws.com/assets/landing-image/img7.webp"
         alt="background"
         className="absolute w-1/4 sm:w-1/6 lgVertical:w-1/5 opacity-40 top-[35%] left-[-22%] sm:top-[46%] sm:left-[90%]"
       />
 
       <img
-        src={img8}
+        src="https://permikawebsite.s3.us-west-2.amazonaws.com/assets/landing-image/img8.webp"
         alt="background"
         className="absolute w-1/4 sm:w-1/6 lgVertical:w-1/5 opacity-40 top-[86%] left-[-5%]"
       />

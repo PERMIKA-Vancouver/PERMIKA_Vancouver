@@ -17,7 +17,7 @@ router.get('', getOrdersController);
 router.post('', createOrderController);
 router.post('/promocode', createPromoCodeController);
 router.put('/promocode', updatePromoCodeController);
-router.get('/promocode', getPromoCodeController);
+router.get('/promocode/:id', getPromoCodeController);
 router.post('/merchandise', createMerchandiseController);
 router.get('/merchandise', getMerchandisesController);
 router.put('/merchandise/:id', updateMerchandiseController);

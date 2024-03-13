@@ -1,12 +1,10 @@
-import { useState, useEffect, useCallback } from 'react';
-import { Link, NavLink, Outlet } from 'react-router-dom';
+import {useCallback, useEffect, useState} from 'react';
+import {Link, NavLink, Outlet} from 'react-router-dom';
 
-import NavLogo from '../../../assets/logo/cropped_logo.png';
-
-import { PAGES } from '../../data/pages';
-import { Footer } from '../Footer';
-import { SandwichNavbar } from './SandwichNavbar';
-import { MOBILE_WIDTH, TABLET_POTRAIT_WIDTH } from '../../data/common';
+import {PAGES} from '../../data/pages';
+import {Footer} from '../Footer';
+import {SandwichNavbar} from './SandwichNavbar';
+import {MOBILE_WIDTH, TABLET_POTRAIT_WIDTH} from '../../data/common';
 
 export const NavigationBar = () => {
   const [show, setShow] = useState(true);
@@ -52,7 +50,7 @@ export const NavigationBar = () => {
           <div className="ml-[10%] sm:ml-[4%]">
             <Link to="/">
               <img
-                src={NavLogo}
+                src="https://permikawebsite.s3.us-west-2.amazonaws.com/assets/logo/cropped_logo.png"
                 alt=""
                 className="w-[2.125rem] sm:w-[55px] h-auto"
               />
