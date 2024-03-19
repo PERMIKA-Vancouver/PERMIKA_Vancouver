@@ -35,7 +35,7 @@ const PAST_EVENTS: PastEvent[] = [
   },
   {
     year: "2022",
-    title: "RUMAH HANTU - House of Indonesian Horror",
+    title: "RUMAH HANTU",
     date: "2022-11-04",
     location: "UBC AMS Nest, Room 2314",
     description:
