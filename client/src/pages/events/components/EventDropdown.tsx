@@ -28,15 +28,15 @@ const EventDropdown: React.FC<DropdownProps> = ({
   }, [globalToggle.changeCounter, globalToggle.isOpen]);
 
   return (
-    <div className="relative w-11/12 mb-2">
+    <div className="relative w-11/12 mb-2 text-xs sm:text-sm md:text-md lg:text-lg">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex justify-between items-center py-2 px-4 rounded hover:bg-amber-50 border-b-2"
+        className="w-full flex justify-between items-center py-2 sm:px-4 rounded hover:bg-amber-50 border-b-2"
       >
-        <span className="flex-1 text-left">{year}</span>
-        <span className="flex-1 text-center">{title}</span>
-        <span className="flex-1 text-center">{date}</span>
-        <span className="flex-1 text-right">{location}</span>
+        <span className="flex-1 text-left hidden sm:block">{year}</span>
+        <span className="flex-1 text-left sm:text-center">{title}</span>
+        <span className="flex-1 text-right sm:text-center">{date}</span>
+        <span className="flex-1 text-right hidden sm:block">{location}</span>
       </button>
       <SlideDown className="my-slide-container">
         {isOpen ? (
@@ -53,7 +53,7 @@ const EventDropdown: React.FC<DropdownProps> = ({
                     />
                   ))}
               </div>
-              <p className="pl-4">{description}</p>
+              <p className="pl-4 text-xs sm:text-sm md:text-md lg:text-lg">{description}</p>
             </div>
           </div>
         ) : null}

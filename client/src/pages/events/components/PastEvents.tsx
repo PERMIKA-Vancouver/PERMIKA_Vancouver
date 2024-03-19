@@ -28,20 +28,15 @@ export const PastEvents = () => {
   return (
     <div className="min-h-screen ml-all pt-navbar mb-9">
       <div className="pt-10 w-11/12 flex justify-between">
-        {/*<Dropdown*/}
-        {/*  options={options}*/}
-        {/*  value={defaultOption}*/}
-        {/*  placeholder="Select an option"*/}
-        {/*/>*/}
-        <div className="text-5xl font-bold flex justify-between">
-          <h1>Year of</h1>
+        <div className="flex justify-between">
+          <h1 className="font-RegoBook text-3xl sm:text-4xl md:text-6xl">Year of</h1>
 
           <div
-            className="pl-4 text-sunset-orange relative hover:cursor-pointer"
+            className="pl-2 sm:pl-4 text-sunset-orange relative hover:cursor-pointer"
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
           >
-            <h1 className="flex">
+            <h1 className="flex text-3xl sm:text-4xl md:text-6xl">
               {selectedYear}
               <RiArrowDropDownLine className="pt-3"></RiArrowDropDownLine>
             </h1>
@@ -69,7 +64,7 @@ export const PastEvents = () => {
             expand all [ + ]
           </button>
           <button
-            className="hover:text-gray-500 mt-2 mr-4"
+            className="hover:text-gray-500 mt-2 mr-4 text-sm sm:text-md"
             onClick={() => toggleAll(false)}
           >
             collapse all [ - ]
