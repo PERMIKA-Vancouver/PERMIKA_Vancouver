@@ -27,15 +27,6 @@ const EventDropdown: React.FC<DropdownProps> = ({
     setIsOpen(globalToggle.isOpen);
   }, [globalToggle.changeCounter, globalToggle.isOpen]);
 
-  const requireImage = (imagePath: string) => {
-    try {
-      return require(`../../../assets/${imagePath}`);
-    } catch (err) {
-      console.error(err);
-      return undefined;
-    }
-  };
-
   return (
     <div className="relative w-11/12 mb-2">
       <button
@@ -56,9 +47,9 @@ const EventDropdown: React.FC<DropdownProps> = ({
                   images.map((image, index) => (
                     <img
                       key={index}
-                      src={requireImage(image)}
+                      src={image}
                       alt={`Gallery item ${index}`}
-                      className="inline-block h-32 w-auto bg-gray-300 rounded-md opacity-40"
+                      className="inline-block h-32 w-auto bg-gray-300 rounded-md"
                     />
                   ))}
               </div>
