@@ -22,27 +22,44 @@ const EventDropdown: React.FC<DropdownProps> = ({
   description,
 }) => {
   const [isOpen, setIsOpen] = useState(true);
+  const formatDate = (dateString: string) => {
+    const dateObject = new Date(dateString);
+    const options:Intl.DateTimeFormatOptions = { weekday: 'long', month: 'long', day: 'numeric' };
+    let formattedDate = new Intl.DateTimeFormat('en-US', options).format(dateObject);
 
+    // Add the suffix for the day
+    const day = dateObject.getDate();
+    let suffix = 'th';
+    if (day % 10 === 1 && day !== 11) {
+      suffix = 'st';
+    } else if (day % 10 === 2 && day !== 12) {
+      suffix = 'nd';
+    } else if (day % 10 === 3 && day !== 13) {
+      suffix = 'rd';
+    }
+
+    return formattedDate.replace(new RegExp(' ' + day), ` ${day}${suffix}`);
+  };
   useEffect(() => {
     setIsOpen(globalToggle.isOpen);
   }, [globalToggle.changeCounter, globalToggle.isOpen]);
 
   return (
-    <div className="relative w-11/12 mb-2 text-xs sm:text-sm md:text-md lg:text-lg">
+    <div className="relative w-11/12 mb-2 text-xs sm:text-sm md:text-md">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex justify-between items-center py-2 sm:px-4 rounded hover:bg-amber-50 border-b-2"
+        className={`w-full flex justify-between items-center py-2 sm:px-4 rounded hover:bg-amber-50 ${isOpen ? '' : 'border-b-2'} gap-x-4`}
       >
-        <span className="flex-1 text-left hidden sm:block">{year}</span>
-        <span className="flex-1 text-left sm:text-center">{title}</span>
-        <span className="flex-1 text-right sm:text-center">{date}</span>
-        <span className="flex-1 text-right hidden sm:block">{location}</span>
+        <span className="flex-none text-left hidden sm:block text-grey-body pr-7">{year}</span>
+        <span className="flex-1 text-left text-black-text">{title}</span>
+        <span className="flex-1 text-left text-grey-body">{formatDate(date)}</span>
+        <span className="flex-1 text-right hidden sm:block text-grey-body">{location}</span>
       </button>
       <SlideDown className="my-slide-container">
         {isOpen ? (
-          <div>
+          <div className="mb-5">
             <div>
-              <div className="overflow-x-auto whitespace-nowrap space-x-4 p-4">
+              <div className="overflow-x-auto whitespace-nowrap space-x-4 px-4 pt-2 pb-2">
                 {images &&
                   images.map((image, index) => (
                     <img
@@ -53,7 +70,7 @@ const EventDropdown: React.FC<DropdownProps> = ({
                     />
                   ))}
               </div>
-              <p className="pl-4 text-xs sm:text-sm md:text-md lg:text-lg">{description}</p>
+              <p className="pl-4 text-xs sm:text-sm md:text-md text-grey-body">{description}</p>
             </div>
           </div>
         ) : null}
