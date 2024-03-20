@@ -2,7 +2,7 @@ import React from 'react';
 
 type Event = {
     id: number;
-    type: 'large' | 'small';
+    imageUrl: string;
     style: {
         width: string;
         aspectRatio: string;
@@ -12,27 +12,28 @@ type Event = {
 };
 
 const eventArchiveData: Event[] = [
-    { id: 1, type: 'large', style: { width: '22%', aspectRatio: '2 / 1', left: '5%', top: '25%' } },
-    { id: 2, type: 'small', style: { width: '10%', aspectRatio: '1 / 1', left: '37%', top: '35%' }},
-    { id: 3, type: 'small', style: { width: '20%', aspectRatio: '3 / 2', left: '75%', top: '26%' } },
-    { id: 4, type: 'large', style: { width: '18%', aspectRatio: '5 / 3', left: '8%', top: '67%' } },
-    { id: 5, type: 'large', style: { width: '16%', aspectRatio: '3 / 2', left: '45%', top: '72%' } },
-    { id: 6, type: 'small', style: { width: '10%',  aspectRatio: '5 / 7',left: '88%', top: '70%' } }
+    { id: 1, imageUrl: "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/events/2019%3A20'/prepair+to+bowl/IMG_0215.webp", style: { width: '20%', aspectRatio: '2 / 1', left: '5%', top: '10%' } },
+    { id: 2, imageUrl: "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/events/2019%3A20'/welcome+home/21C26216-A203-4902-A421-8CF1DD2A87F9.webp", style: { width: '10%', aspectRatio: '1 / 1', left: '37%', top: '22%' }},
+    { id: 3, imageUrl: "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/events/2019%3A20'/prepair+to+bowl/IMG_0212.webp", style: { width: '20%', aspectRatio: '3 / 2', left: '75%', top: '10%' } },
+    { id: 4, imageUrl: "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/events/2022%3A23'/estafet/IMG_9451.webp", style: { width: '18%', aspectRatio: '5 / 3', left: '8%', top: '70%' } },
+    { id: 5, imageUrl: "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/events/2022%3A23'/speda/IMG_0392.webp", style: { width: '16%', aspectRatio: '3 / 2', left: '57%', top: '65%' } },
+    { id: 6, imageUrl: "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/events/2022%3A23'/speda/IMG_0282.webp", style: { width: '10%',  aspectRatio: '5 / 7',left: '88%', top: '65%' } }
 ];
 
 const OurEventArchive: React.FC = () => {
     return (
         <div className="relative bg-forest-green h-screen text-white">
-            <h2 className="text-xl md:text-3xl lg:text-5xl absolute left-1/2 transform -translate-x-1/2 top-[60%]">Our event archive</h2>
+            <h2 className="text-6xl w-full absolute left-[85%] transform -translate-x-1/2 top-[50%]">Our event archive</h2>
             {eventArchiveData.map((event) => (
                 <div
                     key={event.id}
                     style={{
                         ...event.style,
                         position: 'absolute',
-                        backgroundColor: 'grey' // placeholder for images
                     }}
-                ></div>
+                    className={`w-[80%]`}
+                >
+                    <img className="opacity-50" src={event.imageUrl} alt={`Event ${event.id}`} style={{ width: '100%', height: 'auto' }} /></div>
             ))}
         </div>
     );
