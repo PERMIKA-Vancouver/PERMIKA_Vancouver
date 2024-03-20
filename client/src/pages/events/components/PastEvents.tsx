@@ -17,7 +17,7 @@ export const PastEvents = () => {
   };
 
   const [isHovering, setIsHovering] = useState(false);
-  const [selectedYear, setSelectedYear] = useState("2023");
+  const [selectedYear, setSelectedYear] = useState("2023/24'");
   const handleYearChange = (year: string) => {
     setSelectedYear(year);
   };
@@ -29,20 +29,20 @@ export const PastEvents = () => {
     <div className="min-h-screen ml-all pt-navbar mb-9">
       <div className="pt-10 w-11/12 flex justify-between">
         <div className="flex justify-between">
-          <h1 className="font-RegoBook text-3xl sm:text-4xl md:text-6xl">Year of</h1>
+          <h1 className="font-RegoBook text-2xl sm:text-4xl md:text-6xl">Year of</h1>
 
           <div
             className="pl-2 sm:pl-4 text-sunset-orange relative hover:cursor-pointer"
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
           >
-            <h1 className="flex text-3xl sm:text-4xl md:text-6xl">
+            <h1 className="flex text-2xl sm:text-4xl md:text-6xl">
               {selectedYear}
               <RiArrowDropDownLine className="pt-3"></RiArrowDropDownLine>
             </h1>
             {isHovering && (
               <div className="absolute bg-white rounded-md overflow-hidden z-10 w-full text-center space-y-1 font-RegoBook">
-                {["2023", "2022", "2021", "2020", "2019"].map((year) => (
+                {["2023/24'", "2022/23'", "2021/22'", "2020/21'", "2019/20'"].map((year) => (
                   <button
                     key={year}
                     onClick={() => handleYearChange(year)}
