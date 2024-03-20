@@ -17,9 +17,9 @@ const eventArchiveData: Event[] = [
     { id: 1, title: "prepair to bowl", year:"2019", imageUrl: "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/events/2019%3A20'/prepair+to+bowl/IMG_0215.webp", style: { width: '20%', aspectRatio: '2 / 1', left: '5%', top: '10%' } },
     { id: 2, title: "welcome home", year:"2019", imageUrl: "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/events/2019%3A20'/welcome+home/21C26216-A203-4902-A421-8CF1DD2A87F9.webp", style: { width: '10%', aspectRatio: '1 / 1', left: '37%', top: '22%' }},
     { id: 3, title: "prepair to bowl", year:"2019", imageUrl: "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/events/2019%3A20'/prepair+to+bowl/IMG_0212.webp", style: { width: '20%', aspectRatio: '3 / 2', left: '75%', top: '10%' } },
-    { id: 4, title: "estafet", year:"2019", imageUrl: "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/events/2022%3A23'/estafet/IMG_9451.webp", style: { width: '18%', aspectRatio: '5 / 3', left: '8%', top: '70%' } },
-    { id: 5, title: "speda", year:"2019", imageUrl: "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/events/2022%3A23'/speda/IMG_0392.webp", style: { width: '16%', aspectRatio: '3 / 2', left: '57%', top: '65%' } },
-    { id: 6, title: "speda", year:"2019", imageUrl: "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/events/2022%3A23'/speda/IMG_0282.webp", style: { width: '10%',  aspectRatio: '5 / 7',left: '88%', top: '65%' } }
+    { id: 4, title: "estafet", year:"2022", imageUrl: "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/events/2022%3A23'/estafet/IMG_9451.webp", style: { width: '18%', aspectRatio: '5 / 3', left: '8%', top: '70%' } },
+    { id: 5, title: "speda", year:"2023", imageUrl: "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/events/2022%3A23'/speda/IMG_0392.webp", style: { width: '16%', aspectRatio: '3 / 2', left: '57%', top: '65%' } },
+    { id: 6, title: "speda", year:"2023", imageUrl: "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/events/2022%3A23'/speda/IMG_0282.webp", style: { width: '10%',  aspectRatio: '5 / 7',left: '88%', top: '65%' } }
 ];
 
 const OurEventArchive: React.FC = () => {
