@@ -20,6 +20,7 @@ export const PastEvents = () => {
   const [selectedYear, setSelectedYear] = useState("2023/24'");
   const handleYearChange = (year: string) => {
     setSelectedYear(year);
+    toggleAll(false)
   };
   const filteredEvents = PAST_EVENTS.filter(
     (event) => event.year === selectedYear,

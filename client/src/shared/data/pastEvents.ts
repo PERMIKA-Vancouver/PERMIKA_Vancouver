@@ -61,7 +61,7 @@ const PAST_EVENTS: PastEvent[] = [
   {
     year: "2021/22'",
     title: "Speed Dating",
-    date: "2022:23'-04-16",
+    date: "2022-04-16",
     location: "KJRI Vancouver",
     description:
         "On April 16th, 2022, love and friendship were in the air at the Consulate General of Indonesia in Vancouver, where a special Speed Dating event unfolded from 2 to 4 pm. With the aim of sparking connections, whether for those single and searching or simply keen on making new friends, this gathering offered a lively platform to meet and mingle. Participants had the chance to win a $50 The Keg gift card, adding an extra layer of excitement to the mix. Open to everyone, regardless of relationship status, the event welcomed attendees without an entrance fee, though slots were limited to ensure meaningful interactions. This Speed Dating event wasn't just about finding love; it was about community, discovery, and the joy of new beginnings.",
