@@ -27,7 +27,6 @@ const EventDropdown: React.FC<DropdownProps> = ({
     const options:Intl.DateTimeFormatOptions = { weekday: 'long', month: 'long', day: 'numeric' };
     let formattedDate = new Intl.DateTimeFormat('en-US', options).format(dateObject);
 
-    // Add the suffix for the day
     const day = dateObject.getDate();
     let suffix = 'th';
     if (day % 10 === 1 && day !== 11) {
@@ -40,6 +39,10 @@ const EventDropdown: React.FC<DropdownProps> = ({
 
     return formattedDate.replace(new RegExp(' ' + day), ` ${day}${suffix}`);
   };
+  const getYear = (date: string):number => {
+    return parseInt(date.substring(0, 4))
+  }
+
   useEffect(() => {
     setIsOpen(globalToggle.isOpen);
   }, [globalToggle.changeCounter, globalToggle.isOpen]);
@@ -50,7 +53,7 @@ const EventDropdown: React.FC<DropdownProps> = ({
         onClick={() => setIsOpen(!isOpen)}
         className={`w-full flex justify-between items-center py-2 sm:px-4 rounded hover:bg-amber-50 ${isOpen ? '' : 'border-b-2'} gap-x-4`}
       >
-        <span className="flex-none text-left hidden sm:block text-grey-body pr-7">{year}</span>
+        <span className="flex-none text-left hidden sm:block text-grey-body pr-7">{getYear(date)}</span>
         <span className="flex-1 text-left text-black-text">{title}</span>
         <span className="flex-1 text-left text-grey-body">{formatDate(date)}</span>
         <span className="flex-1 text-right hidden sm:block text-grey-body">{location}</span>
