@@ -18,3 +18,12 @@ export type ScreenSizeProps = {
   isMobileView: boolean;
   isTabletPotraitView: boolean;
 };
+
+export interface PastEvent {
+  year: string;
+  title: string;
+  date: string;
+  location: string;
+  images?: string[];
+  description: string;
+}
