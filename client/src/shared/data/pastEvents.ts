@@ -74,7 +74,7 @@ const PAST_EVENTS: PastEvent[] = [
     description:
         "Our third MABAR event, MABAR 2021, hosted by PERMIKA Vancouver and Toronto on November 20-21, turned the spotlight on gamers ready for battle in Mobile Legends, PUBG, and Valorant. This event united competitors in a thrilling quest for glory and spectacular prizes, with team registrations facilitated through PERMIKA's channels. A dedicated discord offered solos a chance to join forces, while also welcoming voices for commentary, enriching the experience. MABAR 2021 was not just a competition but a celebration of gaming talent and teamwork, marking another successful chapter in its legacy.",
     images:
-    ["https://permikawebsite.s3.us-west-2.amazonaws.com/assets/events/2020:21'/mabar_offline/IMG_9639.webp", "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/events/2021:20'/mabar_offline/IMG_9645.webp", "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/events/2021:20'/mabar_offline/IMG_9650.webp"]
+    ["https://permikawebsite.s3.us-west-2.amazonaws.com/assets/events/2021%3A22'/mabar_offline/IMG_9639.webp", "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/events/2021:22'/mabar_offline/IMG_9650.webp"]
   },
   {
     year: "2021/22'",

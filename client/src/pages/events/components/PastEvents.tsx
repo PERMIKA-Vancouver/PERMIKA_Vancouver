@@ -20,6 +20,7 @@ export const PastEvents = () => {
   const [selectedYear, setSelectedYear] = useState("2023/24'");
   const handleYearChange = (year: string) => {
     setSelectedYear(year);
+    setIsHovering(false)
     toggleAll(true)
   };
   const filteredEvents = PAST_EVENTS.filter(
@@ -30,14 +31,14 @@ export const PastEvents = () => {
     <div className="min-h-screen ml-all pt-navbar mb-9">
       <div className="pt-10 w-11/12 flex justify-between">
         <div className="flex justify-between">
-          <h1 className="font-RegoBook text-2xl sm:text-4xl md:text-6xl">Year of</h1>
+          <h1 className="font-RegoBook text-2xl sm:text-4xl md:text-5xl">Year of</h1>
 
           <div
             className="pl-2 sm:pl-4 text-sunset-orange relative hover:cursor-pointer"
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
           >
-            <h1 className="flex text-2xl sm:text-4xl md:text-6xl">
+            <h1 className="flex text-2xl sm:text-4xl md:text-5xl">
               {selectedYear}
               <RiArrowDropDownLine className="pt-3"></RiArrowDropDownLine>
             </h1>
