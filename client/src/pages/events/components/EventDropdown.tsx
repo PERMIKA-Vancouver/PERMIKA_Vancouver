@@ -51,7 +51,7 @@ const EventDropdown: React.FC<DropdownProps> = ({
     <div className="relative w-11/12 mb-2 text-xs sm:text-sm md:text-md">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full flex justify-between items-center py-2 sm:px-4 rounded hover:bg-amber-50 ${isOpen ? '' : 'border-b-2'} gap-x-4`}
+        className={`w-full flex justify-between items-center py-2 sm:px-4 rounded hover:bg-amber-50 border-b-2 gap-x-4`}
       >
         <span className="flex-none text-left hidden sm:block text-grey-body pr-7">{getYear(date)}</span>
         <span className="flex-1 text-left text-black-text">{title}</span>
