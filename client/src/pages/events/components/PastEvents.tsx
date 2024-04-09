@@ -58,7 +58,7 @@ export const PastEvents = () => {
           </div>
         </div>
 
-        <div>
+        <div className="flex flex-col-reverse">
           <button
             className="hover:text-gray-500 mt-2 mr-2 hidden"
             onClick={() => toggleAll(true)}
@@ -66,7 +66,7 @@ export const PastEvents = () => {
             expand all [ + ]
           </button>
           <button
-            className="hover:text-gray-500 mt-2 mr-4 text-sm sm:text-md"
+            className="hover:text-gray-500 text-sm sm:text-md bottom-align"
             onClick={() => toggleAll(false)}
           >
             collapse all [ - ]
