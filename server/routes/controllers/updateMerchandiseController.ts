@@ -8,10 +8,6 @@ export const updateMerchandiseController = async (
   res: Response
 ) => {
   try {
-    // if (req.body.pending === undefined || req.body.bought === undefined) {
-    //   return res.status(400).send({ message: 'Send all required fields' });
-    // }
-
     const { id } = req.params;
 
     const result = await Merchandise.findByIdAndUpdate(id, req.body);

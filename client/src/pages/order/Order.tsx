@@ -15,6 +15,7 @@ import dayjs from 'dayjs';
 import { FaTrash } from 'react-icons/fa';
 import { PopUpMessage } from '../../shared/components/PopUpMessage';
 import { CustomButton } from '../../shared/components/CustomButton';
+import { Button, InputBase } from '@mui/material';
 
 const DEFAULT_SHOPPING_BAG = {
   quantity: 0,
@@ -50,6 +51,11 @@ export const Order = () => {
   const [emailError, setEmailError] = useState(false);
   const [phoneNumberError, setPhoneNumberError] = useState(false);
   const [pickupLocationError, setPickupLocationError] = useState(false);
+
+  const [promoCode, setPromoCode] = useState('');
+  const [isPromoCodeApplied, setIsPromoCodeApplied] = useState(false);
+  const [isPromoCodeInvalid, setIsPromoCodeInvalid] = useState(false);
+  const [finalPrice, setFinalPrice] = useState(0);
 
   const [paymentClicked, setPaymentClicked] = useState(false);
   const [popUpMessage, setPopUpMessage] = useState('');
@@ -291,6 +297,7 @@ export const Order = () => {
           axios
             .put(`${SERVER}/order/merchandise/${id}`, data)
             .then(() => {
+              setFinalPrice(subtotal);
               setPage('payment');
             })
             .catch((err) => {
@@ -321,20 +328,48 @@ export const Order = () => {
             const location = LOCATIONS.find(
               (loc) => loc.value === pickupLocation
             );
-            const dataOrder = {
-              firstName,
-              lastName,
-              emailAddress: email,
-              phoneNumber,
-              pickUpLocation: location?.label,
-              items: shoppingBag,
-              totalPrice: subtotal,
-            };
+
+            let dataOrder;
+            if (isPromoCodeApplied) {
+              dataOrder = {
+                firstName,
+                lastName,
+                emailAddress: email,
+                phoneNumber,
+                pickUpLocation: location?.label,
+                items: shoppingBag,
+                totalPrice: subtotal,
+                promoCode: promoCode,
+              };
+            } else {
+              dataOrder = {
+                firstName,
+                lastName,
+                emailAddress: email,
+                phoneNumber,
+                pickUpLocation: location?.label,
+                items: shoppingBag,
+                totalPrice: subtotal,
+              };
+            }
 
             axios
               .post(`${SERVER}/order`, dataOrder)
               .then(() => {
-                setPage('confirmation');
+                const data = {
+                  promoCode: promoCode,
+                  claimed: true,
+                };
+
+                axios
+                  .put(`${SERVER}/order/promocode`, data)
+                  .then(() => {
+                    setPage('confirmation');
+                  })
+                  .catch((err) => {
+                    alert('An error happened: ' + err.message);
+                    setPage('payment');
+                  });
               })
               .catch((err) => {
                 alert('An error happened: ' + err.message);
@@ -347,6 +382,37 @@ export const Order = () => {
           });
       });
     });
+  };
+
+  const handleApplyPromoCode = () => {
+    axios
+      .get(`${SERVER}/order/promocode/${promoCode}`)
+      .then((res) => {
+        if (!res.data || res.data.pending || res.data.claimed) {
+          setIsPromoCodeInvalid(true);
+          setPromoCode('');
+          return;
+        }
+
+        const data = {
+          promoCode: promoCode,
+          pending: true,
+        };
+
+        axios
+          .put(`${SERVER}/order/promocode`, data)
+          .then(() => {
+            setIsPromoCodeInvalid(false);
+            setIsPromoCodeApplied(true);
+            setFinalPrice(finalPrice * (1 - DISCOUNT));
+          })
+          .catch((err) => {
+            alert('An error happened: ' + err.message);
+          });
+      })
+      .catch((err) => {
+        alert('An error happened: ' + err.message);
+      });
   };
 
   return (
@@ -563,23 +629,83 @@ export const Order = () => {
             ))}
             {getTotalPrice() > 0 && (
               <div className="">
-                <div className="totals font-light">
-                  <div className="text-[#9A9A9A] flex justify-between">
-                    Merchandise Total{' '}
-                    <span className="">${totalPrice.toFixed(2)}</span>
+                {page === 'payment' ? (
+                  <div className="text-[#9A9A9A] flex justify-between font-light">
+                    Subtotal <span>${subtotal.toFixed(2)}</span>
                   </div>
-                  {isDiscount && (
+                ) : (
+                  <div className="totals font-light">
+                    <div className="text-[#9A9A9A] flex justify-between">
+                      Merchandise Total{' '}
+                      <span className="">${totalPrice.toFixed(2)}</span>
+                    </div>
+                    {isDiscount && (
+                      <div className="text-[#9A9A9A] flex justify-between">
+                        Discount ({`${DISCOUNT * 100}%`})
+                        <span>${disc.toFixed(2)}</span>
+                      </div>
+                    )}
+                    <div className="flex justify-between mt-2.5 text-2xl">
+                      Subtotal <span>${subtotal.toFixed(2)}</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/** PROMO CODE */}
+            {page === 'payment' && (
+              <div className="flex mt-10">
+                <InputBase
+                  className={`border-[1px] border-r-0 ${
+                    isPromoCodeInvalid
+                      ? 'border-[#d32f2f]'
+                      : isPromoCodeApplied
+                      ? 'border-light-green'
+                      : 'border-[#bdbdbd]'
+                  } rounded-l py-1.5 px-3`}
+                  value={promoCode}
+                  onChange={(e) => setPromoCode(e.target.value)}
+                  disabled={isPromoCodeApplied}
+                  placeholder="Promo code"
+                  fullWidth
+                />
+                <Button
+                  variant="contained"
+                  onClick={handleApplyPromoCode}
+                  className={`!rounded-l-none !text-white !shadow-none !normal-case ${
+                    isPromoCodeInvalid
+                      ? '!bg-[#d32f2f]'
+                      : isPromoCodeApplied
+                      ? '!bg-light-green'
+                      : promoCode
+                      ? '!bg-sunset-orange'
+                      : '!bg-grey-body'
+                  }`}
+                  disabled={!promoCode || isPromoCodeApplied}
+                >
+                  {isPromoCodeApplied ? 'Applied' : 'Apply'}
+                </Button>
+              </div>
+            )}
+
+            {/** FINAL TOTAL PRICE */}
+            {page === 'payment' && (
+              <div className="mt-4">
+                <div className="totals font-light">
+                  {isPromoCodeApplied && (
                     <div className="text-[#9A9A9A] flex justify-between">
                       Discount ({`${DISCOUNT * 100}%`})
-                      <span>${disc.toFixed(2)}</span>
+                      <span>${(subtotal * DISCOUNT).toFixed(2)}</span>
                     </div>
                   )}
                   <div className="flex justify-between mt-2.5 text-2xl">
-                    Subtotal <span>${subtotal.toFixed(2)}</span>
+                    Total <span>${finalPrice.toFixed(2)}</span>
                   </div>
                 </div>
               </div>
             )}
+
             {page === 'payment' && (
               <div className="payment-form mt-10">
                 {/* Additional payment details and upload picture form*/}
