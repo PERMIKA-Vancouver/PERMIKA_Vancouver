@@ -9,7 +9,12 @@ export const MenuInterface = ({ isOpen }: { isOpen: boolean }) => {
       } animate-growDown origin-top-right`}
     >
       <div className="grid gap-y-[0.4rem]">
-        {PAGES.filter((page) => page.name !== 'home').map((page) => (
+        {PAGES.filter(
+          (page) =>
+            page.name !== 'home' &&
+            page.name !== 'merchandise' &&
+            page.name !== 'orders'
+        ).map((page) => (
           <NavLink key={page.name} to={page.path}>
             {({ isActive }) => (
               <p
