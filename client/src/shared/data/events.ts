@@ -8,6 +8,8 @@ const UPCOMING_EVENTS: UpcomingEvent[] = [
     name: 'PERMIKA Panel 2024',
     date: '2024-04-06 14:00',
     rsvp: 'https://bit.ly/PERMIKAPanel2024',
+    location: '',
+    locationLink: '',
     type: 0,
   },
 ];
