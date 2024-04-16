@@ -13,6 +13,7 @@ export interface UpcomingEvent {
 
 export interface UpcomingWaroeng {
   date: string;
+  pickup: string;
   link: string;
 }
 
