@@ -20,8 +20,8 @@ const getNextEvents = (): number[] => {
   return nextEvents;
 };
 
-const isNextEvents = (index: number): string => {
-  return index === -1 ? 'false' : 'true';
+const isNextEvents = (index: number): boolean => {
+  return index !== -1;
 };
 
 const getNextEventName = (index: number): string => {
@@ -40,6 +40,10 @@ const getNextEventDate = (index: number): string => {
   return index === -1 ? '' : toStringMonthDate(UPCOMING_EVENTS[index].date);
 };
 
+export const getNextEventFullDate = (index: number): string => {
+  return index === -1 ? '' : toStringFullDate(UPCOMING_EVENTS[index].date);
+};
+
 const getNextEventDescription = (index: number): string => {
   return UPCOMING_EVENTS[index].type
     ? RANTANGAN_DESCRIPTION
@@ -54,6 +58,10 @@ const getNextEventLink = (index: number): string => {
   return UPCOMING_EVENTS[index].rsvp;
 };
 
+const getEventLocation = (index: number) => {
+  return [UPCOMING_EVENTS[index].location, UPCOMING_EVENTS[index].locationLink];
+};
+
 export {
   getNextEvents,
   isNextEvents,
@@ -63,6 +71,7 @@ export {
   getNextEventDescription,
   getNextEventButtonText,
   getNextEventLink,
+  getEventLocation,
 };
 
 // PRIVATE HELPER METHODS
@@ -78,6 +87,17 @@ const toStringMonthDate = (date: string): string => {
   newDate.setMonth(month - 1);
 
   return newDate.toLocaleString('en-US', { month: 'long' }) + ' ' + day;
+};
+
+const toStringFullDate = (date: string): string => {
+  const newDate = new Date(date);
+
+  const weekday = newDate.toLocaleDateString('en-US', { weekday: 'long' });
+  const month = newDate.toLocaleDateString('en-US', { month: 'long' });
+  const day = newDate.getDate();
+  const year = newDate.getFullYear();
+
+  return weekday + ', ' + month + ' ' + day + ', ' + year;
 };
 
 // ARCHIVE
