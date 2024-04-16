@@ -6,11 +6,14 @@ export interface UpcomingEvent {
   name: string;
   date: string;
   rsvp: string;
+  location: string;
+  locationLink: string;
   type: TypeEvent;
 }
 
 export interface UpcomingWaroeng {
   date: string;
+  pickup: string;
   link: string;
 }
 

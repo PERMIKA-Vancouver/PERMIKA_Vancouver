@@ -6,6 +6,7 @@ import {
   getNextWaroeng,
   getNextWaroengLink,
   isNextWaroeng,
+  isWaroengPreOrderPassed,
 } from '../../../shared/utils/UpcomingWaroengUtils';
 
 export const Waroeng = () => {
@@ -19,11 +20,13 @@ export const Waroeng = () => {
     <div className="ml-all mt-24 mr-[10%] sm:mr-28">
       <div className="flex justify-between flex-wrap">
         <h2 className="mb-4">Waroeng '24 Presents</h2>
-        <CustomButton
-          text={'Pre-order'}
-          className={'self-center'}
-          link={getNextWaroengLink(nextWaroeng)}
-        />
+        {!isWaroengPreOrderPassed(nextWaroeng) && (
+          <CustomButton
+            text={'Pre-order'}
+            className={'self-center'}
+            link={getNextWaroengLink(nextWaroeng)}
+          />
+        )}
       </div>
       <div className="flex mt-8 w-full">
         <img src={LeftImg} alt="Waroeng" className="w-1/3" />
