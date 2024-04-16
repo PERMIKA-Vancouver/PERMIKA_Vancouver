@@ -4,7 +4,7 @@ import { DATE_FORMAT, UPCOMING_WAROENG } from '../data/waroeng';
 const getNextWaroeng = (): number => {
   let nextWaroeng: number = -1;
   for (let i = 0; i < UPCOMING_WAROENG.length; i++) {
-    if (!checkDatePassed(UPCOMING_WAROENG[i].date)) nextWaroeng = i;
+    if (!checkDatePassed(UPCOMING_WAROENG[i].pickup)) nextWaroeng = i;
   }
 
   return nextWaroeng;
@@ -18,7 +18,16 @@ const getNextWaroengLink = (index: number): string => {
   return UPCOMING_WAROENG[index].link;
 };
 
-export { getNextWaroeng, isNextWaroeng, getNextWaroengLink };
+const isWaroengPreOrderPassed = (index: number): boolean => {
+  return checkDatePassed(UPCOMING_WAROENG[index].date);
+};
+
+export {
+  getNextWaroeng,
+  isNextWaroeng,
+  getNextWaroengLink,
+  isWaroengPreOrderPassed,
+};
 
 // PRIVATE HELPER METHODS
 const checkDatePassed = (date: string): boolean => {
