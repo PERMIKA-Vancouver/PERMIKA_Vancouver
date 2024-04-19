@@ -1,6 +1,6 @@
 export enum TypeEvent {
   Event = 0,
-  Rantangan = 1,
+  Hiring = 1,
 }
 export interface UpcomingEvent {
   name: string;

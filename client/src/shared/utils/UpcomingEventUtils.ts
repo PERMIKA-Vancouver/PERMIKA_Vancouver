@@ -3,8 +3,8 @@ import {
   DATE_FORMAT,
   EVENT_BUTTON,
   EVENT_DESCRIPTION,
-  RANTANGAN_BUTTON,
-  RANTANGAN_DESCRIPTION,
+  HIRING_BUTTON,
+  HIRING_DESCRIPTION,
   UPCOMING_EVENTS,
   UPCOMING_EVENTS_DEFAULT,
 } from '../data/events';
@@ -45,13 +45,11 @@ export const getNextEventFullDate = (index: number): string => {
 };
 
 const getNextEventDescription = (index: number): string => {
-  return UPCOMING_EVENTS[index].type
-    ? RANTANGAN_DESCRIPTION
-    : EVENT_DESCRIPTION;
+  return UPCOMING_EVENTS[index].type ? HIRING_DESCRIPTION : EVENT_DESCRIPTION;
 };
 
 const getNextEventButtonText = (index: number): string => {
-  return UPCOMING_EVENTS[index].type ? RANTANGAN_BUTTON : EVENT_BUTTON;
+  return UPCOMING_EVENTS[index].type ? HIRING_BUTTON : EVENT_BUTTON;
 };
 
 const getNextEventLink = (index: number): string => {
@@ -60,6 +58,10 @@ const getNextEventLink = (index: number): string => {
 
 const getEventLocation = (index: number) => {
   return [UPCOMING_EVENTS[index].location, UPCOMING_EVENTS[index].locationLink];
+};
+
+const getEventType = (index: number) => {
+  return [UPCOMING_EVENTS[index].type];
 };
 
 export {
@@ -72,6 +74,7 @@ export {
   getNextEventButtonText,
   getNextEventLink,
   getEventLocation,
+  getEventType,
 };
 
 // PRIVATE HELPER METHODS
