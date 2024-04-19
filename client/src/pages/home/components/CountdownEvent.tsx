@@ -90,15 +90,15 @@ export const CountdownEvent = ({
                   </span>
                 </div>
                 {getEventType(index) ? (
-                  <div className="flex">
+                  <div className="flex justify-center gap-4">
                     <CustomButton
                       text={getNextEventButtonText(index)}
-                      className="m-auto"
+                      className=""
                       link={getNextEventLink(index)}
                     />
                     <CustomButton
                       text={'Hiring Package'}
-                      className="m-auto"
+                      className=""
                       link={
                         'https://drive.google.com/file/d/1O5g84ux-lan3ImQfBl3G3xmwI1Ix3AS8/view'
                       }
