@@ -60,7 +60,7 @@ const eventArchiveData: Event[] = [
     year: '2023',
     imageUrl:
       "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/events/2022%3A23'/speda/IMG_0282.webp",
-    style: { width: '10%', aspectRatio: '5 / 7', left: '88%', top: '60%' },
+    style: { width: '10%', aspectRatio: '5 / 7', left: '88%', top: '55%' },
   },
 ];
 
