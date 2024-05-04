@@ -44,7 +44,7 @@ const eventArchiveData: Event[] = [
     year: '2022',
     imageUrl:
       "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/events/2022%3A23'/estafet/IMG_9451.webp",
-    style: { width: '18%', aspectRatio: '5 / 3', left: '8%', top: '70%' },
+    style: { width: '18%', aspectRatio: '5 / 3', left: '8%', top: '65%' },
   },
   {
     id: 5,
@@ -60,7 +60,7 @@ const eventArchiveData: Event[] = [
     year: '2023',
     imageUrl:
       "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/events/2022%3A23'/speda/IMG_0282.webp",
-    style: { width: '10%', aspectRatio: '5 / 7', left: '88%', top: '65%' },
+    style: { width: '10%', aspectRatio: '5 / 7', left: '88%', top: '60%' },
   },
 ];
 
