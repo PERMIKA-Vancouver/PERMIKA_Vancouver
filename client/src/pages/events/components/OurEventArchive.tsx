@@ -64,9 +64,15 @@ const eventArchiveData: Event[] = [
   },
 ];
 
-const OurEventArchive: React.FC = () => {
+const OurEventArchive: React.FC<{ isNextEvent: boolean }> = ({
+  isNextEvent,
+}) => {
   return (
-    <div className="relative bg-forest-green h-screen text-white">
+    <div
+      className={`relative bg-forest-green h-screen text-white ${
+        !isNextEvent && 'fade-in-up'
+      }`}
+    >
       <h2 className="text-6xl w-full absolute left-[85%] transform -translate-x-1/2 top-[50%]">
         Our event archive
       </h2>
