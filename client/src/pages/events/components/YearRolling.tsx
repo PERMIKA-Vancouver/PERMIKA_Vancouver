@@ -16,7 +16,7 @@ export const YearRolling = ({
 
   useEffect(() => {
     setYear(new Date().getFullYear());
-    setTimeout(() => complete(), 1800);
+    setTimeout(() => complete(), 2000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
