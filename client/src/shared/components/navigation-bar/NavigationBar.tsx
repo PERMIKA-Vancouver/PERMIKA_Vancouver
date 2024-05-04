@@ -6,8 +6,6 @@ import { Footer } from '../Footer';
 import { SandwichNavbar } from './SandwichNavbar';
 import { MOBILE_WIDTH, TABLET_POTRAIT_WIDTH } from '../../data/common';
 
-import Logo from '../../../assets/cropped_logo_white.png';
-
 export const NavigationBar = () => {
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);

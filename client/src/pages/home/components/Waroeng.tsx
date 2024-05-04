@@ -1,6 +1,3 @@
-import LeftImg from '../../../left.png';
-import MidImg from '../../../middle.png';
-import RightImg from '../../../right.png';
 import { CustomButton } from '../../../shared/components/CustomButton';
 import {
   getNextWaroeng,
@@ -29,9 +26,9 @@ export const Waroeng = () => {
         )}
       </div>
       <div className="flex mt-8 w-full">
-        <img src={LeftImg} alt="Waroeng" className="w-1/3" />
-        <img src={MidImg} alt="Waroeng" className="w-1/3" />
-        <img src={RightImg} alt="Waroeng" className="w-1/3" />
+        <img src={''} alt="Waroeng" className="w-1/3" />
+        <img src={''} alt="Waroeng" className="w-1/3" />
+        <img src={''} alt="Waroeng" className="w-1/3" />
       </div>
     </div>
   );
