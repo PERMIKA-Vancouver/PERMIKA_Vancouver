@@ -1,8 +1,14 @@
-import {CustomButton} from '../../../shared/components/CustomButton';
-import {ScreenSizeProps} from '../../../shared/types/types';
+import { CustomButton } from '../../../shared/components/CustomButton';
+import { ScreenSizeProps } from '../../../shared/types/types';
 
 const WelcomingMsg =
   "Hello there! Welcome to PERMIKA Vancouver's new chapter. We're so excited for you to experience both our signature and new events in this coming year. We also hope to create a community that you can call home while living in Vancouver. We're so glad you're here!";
+
+// Member sign up link
+// const LINK = 'https://forms.gle/z8AFC5m5PiJzKBEf7';
+
+// Hiring link
+const LINK = 'https://forms.gle/KonqUzj1n5n63yu88';
 
 export const WelcomingMessage = ({
   isMobileView,
@@ -25,7 +31,11 @@ export const WelcomingMessage = ({
       >
         <div className="flex justify-end">
           <img
-            src={isTabletPotraitView ? "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/welcome/core.webp" : "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/welcome/core_square.webp"}
+            src={
+              isTabletPotraitView
+                ? 'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/welcome/core.webp'
+                : 'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/welcome/core_square.webp'
+            }
             alt="Core Team"
             className={`${
               isTabletPotraitView
@@ -71,7 +81,7 @@ export const WelcomingMessage = ({
           <CustomButton
             text="Join PERMIKA"
             className={`${!isTabletPotraitView && 'absolute bottom-0'}`}
-            link="https://forms.gle/z8AFC5m5PiJzKBEf7"
+            link={LINK}
           />
         </div>
       </div>

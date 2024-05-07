@@ -10,6 +10,7 @@ import {
   getNextEventButtonText,
   getNextEventLink,
   isNextEvents,
+  getEventType,
 } from '../../../shared/utils/UpcomingEventUtils';
 
 export const CountdownEvent = ({
@@ -88,13 +89,30 @@ export const CountdownEvent = ({
                     {getNextEventDescription(index)}
                   </span>
                 </div>
-                <>
-                  <CustomButton
-                    text={getNextEventButtonText(index)}
-                    className="m-auto"
-                    link={getNextEventLink(index)}
-                  />
-                </>
+                {getEventType(index) ? (
+                  <div className="flex justify-center gap-4">
+                    <CustomButton
+                      text={getNextEventButtonText(index)}
+                      className=""
+                      link={getNextEventLink(index)}
+                    />
+                    <CustomButton
+                      text={'Hiring Package'}
+                      className=""
+                      link={
+                        'https://drive.google.com/file/d/1O5g84ux-lan3ImQfBl3G3xmwI1Ix3AS8/view'
+                      }
+                    />
+                  </div>
+                ) : (
+                  <>
+                    <CustomButton
+                      text={getNextEventButtonText(index)}
+                      className="m-auto"
+                      link={getNextEventLink(index)}
+                    />
+                  </>
+                )}
               </div>
             )}
             <div
