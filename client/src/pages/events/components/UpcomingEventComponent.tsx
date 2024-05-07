@@ -3,6 +3,8 @@ import Arrow from '../../../assets/arrow.svg';
 import { openExternalLink } from '../../../shared/utils/OpenLinkUtil';
 import {
   getEventLocation,
+  getEventType,
+  getNextEventButtonText,
   getNextEventFullDate,
   getNextEventLink,
   getNextEventName,
@@ -20,18 +22,20 @@ export const UpcomingEventComponent = () => {
         <h4 className="text-grey-body sm:text-white">
           {getNextEventFullDate(nextEvent)}
         </h4>
-        <div
-          className="ml-auto flex hover:cursor-pointer"
-          onClick={() => openExternalLink(eventLocLink)}
-        >
-          <h4 className="text-grey-body sm:text-white whitespace-nowrap mr-3">
-            {eventLoc}
-          </h4>
-          <img src={Arrow} alt="Arrow" />
-        </div>
+        {!getEventType(nextEvent) && (
+          <div
+            className="ml-auto flex hover:cursor-pointer"
+            onClick={() => openExternalLink(eventLocLink)}
+          >
+            <h4 className="text-grey-body sm:text-white whitespace-nowrap mr-3">
+              {eventLoc}
+            </h4>
+            <img src={Arrow} alt="Arrow" />
+          </div>
+        )}
       </div>
       <CustomButton
-        text="RSVP"
+        text={getNextEventButtonText(nextEvent)}
         className={`w-[9.45rem]`}
         link={getNextEventLink(nextEvent)}
       />
