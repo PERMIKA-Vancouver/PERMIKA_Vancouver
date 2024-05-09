@@ -5,8 +5,8 @@ const DATE_FORMAT = 'YYYY-MM-DD HH:mm';
 // Date format 'YYYY-MM-DD HH:mm'
 const UPCOMING_EVENTS: UpcomingEvent[] = [
   {
-    name: 'PERMIKA Hiring',
-    date: '2024-05-13 23:59',
+    name: 'Haloween',
+    date: '2024-08-13 23:59',
     rsvp: 'https://docs.google.com/forms/d/e/1FAIpQLSc8ZMQzcCdszKmZICP2SHmZtN2Dg56Y6Or_sUJJ69jG01U17w/viewform',
     location: '',
     locationLink: '',
