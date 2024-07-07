@@ -55,7 +55,7 @@ export const Merchandise = () => {
             to="/order"
             className="text-white button-text w-full text-center"
           >
-            Buy
+            Pre-Order Now!
           </Link>
         </div>
       </div>
