@@ -53,9 +53,6 @@ export const CountdownEvent = ({
                   >
                     {getNextEventName(index)}
                   </h3>
-                  <a className="underline text-base mt-1 text-[#68785d]"
-                    href="https://forms.gle/VopZFSiGvv5go9Vc7">RSVP for the Event Here!
-                  </a>
                 </div>
               </div>
               <>
