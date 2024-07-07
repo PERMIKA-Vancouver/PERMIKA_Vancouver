@@ -43,5 +43,15 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({addUtilities}) {
+        const newUtilities = {
+            '.line-through-red': {
+                'textDecoration': 'line-through',
+                'text-decoration-color': 'red',
+            },
+        }
+        addUtilities(newUtilities)
+    }
+],
 };
