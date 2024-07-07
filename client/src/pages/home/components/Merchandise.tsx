@@ -49,13 +49,15 @@ export const Merchandise = () => {
       <div className="flex justify-between flex-wrap xs:gap-5 gap-2">
         <h2>Merchandise</h2>
         <div
-          className={`my-auto bg-sunset-orange w-[12.875rem] h-[2.1875rem] rounded-[0.1875rem] hover:bg-[#A86108] transition-colors ease-out duration-500 flex items-center justify-center cursor-pointer`}
+          // className={`my-auto bg-sunset-orange w-[12.875rem] h-[2.1875rem] rounded-[0.1875rem] hover:bg-[#A86108] transition-colors ease-out duration-500 flex items-center justify-center cursor-pointer`}
+          className={`my-auto bg-gray-200 w-[12.875rem] h-[2.1875rem] rounded-[0.1875rem] flex items-center justify-center cursor-pointer`}
         >
           <Link
             to="/order"
-            className="text-white button-text w-full text-center"
+            // className="text-white button-text w-full text-center"
+            className="text-white button-text w-full text-center pointer-events-none"
           >
-            Buy
+            Pre-Order Now!
           </Link>
         </div>
       </div>
@@ -65,7 +67,8 @@ export const Merchandise = () => {
 
           <p className="text-sm mt-[0.9rem]">Shirt Collection</p>
           <p className="text-xl text-black-text">Anak Rantau T-Shirt</p>
-          <p className="text-sm">$20</p>
+          <p className="text-sm line-through-red inline">$20</p>
+          <p className="text-sm text-red-500">$15</p> 
           <div className="flex justify-between mt-8">
             <p className="text-sm text-black text bg-[#F1F1F1] py-1 px-3.5 rounded-sm">
               5 Sizes - S, M, L, XL, XXL
@@ -78,7 +81,8 @@ export const Merchandise = () => {
 
           <p className="text-sm mt-[0.9rem]">Hoodie Collection</p>
           <p className="text-xl text-black-text">Waroeng Cak Timmies Hoodie</p>
-          <p className="text-sm">$35</p>
+          <p className="text-sm line-through-red">$35</p>
+          <p className="text-sm text-red-500">$20</p> 
           <div className="flex justify-between mt-8">
             <p className="text-sm text-black text bg-[#F1F1F1] py-1 px-3.5 rounded-sm">
               4 Sizes - M, L, XL, XXL
@@ -91,7 +95,8 @@ export const Merchandise = () => {
 
           <p className="text-sm mt-[0.9rem]">Hoodie Collection</p>
           <p className="text-xl text-black-text">Anak Rantau Hoodie</p>
-          <p className="text-sm">$35</p>
+          <p className="text-sm line-through-red">$35</p>
+          <p className="text-sm text-red-500">$20</p>
           <div className="flex justify-between mt-8">
             <p className="text-sm text-black text bg-[#F1F1F1] py-1 px-3.5 rounded-sm">
               4 Sizes - M, L, XL, XXL
