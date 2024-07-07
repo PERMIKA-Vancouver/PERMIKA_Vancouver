@@ -17,7 +17,7 @@ const UPCOMING_EVENTS: UpcomingEvent[] = [
 
 const UPCOMING_EVENTS_DEFAULT: UpcomingEvent = {
   name: 'PRE-DEPARTURE ORIENTATION & MERCH SALE',
-  date: DateTime.fromFormat('2024-07-08 20:00', 'yyyy-MM-dd HH:mm', { zone: 'America/Los_Angeles' }).toString(),
+  date: DateTime.fromFormat('2024-07-07 20:00', 'yyyy-MM-dd HH:mm', { zone: 'America/Los_Angeles' }).toString(),
   rsvp: '',
   location: '',
   locationLink: '',
