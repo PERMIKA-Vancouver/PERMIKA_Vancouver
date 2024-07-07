@@ -1,4 +1,5 @@
 import { UpcomingEvent } from '../types/types';
+const { DateTime } = require('luxon');
 
 const DATE_FORMAT = 'YYYY-MM-DD HH:mm';
 
@@ -15,8 +16,8 @@ const UPCOMING_EVENTS: UpcomingEvent[] = [
 ];
 
 const UPCOMING_EVENTS_DEFAULT: UpcomingEvent = {
-  name: 'No Upcoming Events',
-  date: '0000-00-00 00:00',
+  name: 'PRE-DEPARTURE ORIENTATION & MERCH SALE',
+  date: DateTime.fromFormat('2024-07-08 20:00', 'yyyy-MM-dd HH:mm', { zone: 'America/Los_Angeles' }).toString(),
   rsvp: '',
   location: '',
   locationLink: '',
