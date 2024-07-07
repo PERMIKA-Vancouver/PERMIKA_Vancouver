@@ -1,6 +1,6 @@
-import { CountdownTimer } from '../../../shared/components/CountdownTimer';
-import { CustomButton } from '../../../shared/components/CustomButton';
-import { ScreenSizeProps } from '../../../shared/types/types';
+import { CountdownTimer } from "../../../shared/components/CountdownTimer";
+import { CustomButton } from "../../../shared/components/CustomButton";
+import { ScreenSizeProps } from "../../../shared/types/types";
 import {
   getNextEvents,
   getNextEventName,
@@ -11,7 +11,7 @@ import {
   getNextEventLink,
   isNextEvents,
   getEventType,
-} from '../../../shared/utils/UpcomingEventUtils';
+} from "../../../shared/utils/UpcomingEventUtils";
 
 export const CountdownEvent = ({
   isMobileView,
@@ -22,13 +22,13 @@ export const CountdownEvent = ({
       id="upcoming_event"
       className={`${
         isMobileView
-          ? 'pt-[4.31rem]'
+          ? "pt-[4.31rem]"
           : isTabletPotraitView
-          ? 'pt-[6.5rem]'
-          : 'pt-[7%]'
+          ? "pt-[6.5rem]"
+          : "pt-[7%]"
       } bg-forest-green`}
     >
-      <div className={`${isMobileView ? 'w-[80%]' : 'w-[63.2%]'} ml-all`}>
+      <div className={`${isMobileView ? "w-[80%]" : "w-[63.2%]"} ml-all`}>
         <>
           <h2 className="text-white">Coming Up</h2>
         </>
@@ -36,7 +36,7 @@ export const CountdownEvent = ({
           <div>
             <div
               className={`${
-                isMobileView ? 'mt-4' : 'flex mt-[2%]'
+                isMobileView ? "mt-4" : "flex mt-[2%]"
               } justify-between`}
             >
               <div className="flex items-center">
@@ -45,22 +45,22 @@ export const CountdownEvent = ({
                     className={`mr-4 bg-light-green w-[1.4375rem] h-[0.4375rem] rounded-[0.0625rem]`}
                   ></div>
                 )}
-                <>
+                <div>
                   <h3
                     className={`${
-                      isMobileView ? 'mt-4' : 'sub'
+                      isMobileView ? "mt-4" : "sub"
                     } text-[#8CA080]`}
                   >
                     {getNextEventName(index)}
                   </h3>
-                </>
+                </div>
               </div>
               <>
                 <p
                   className={`${
                     isMobileView
-                      ? 'mt-2'
-                      : 'font-AveRom text-[1.3125rem] italic font-normal leading-[124.6%] tracking-[-0.02625rem]'
+                      ? "mt-2"
+                      : "font-AveRom text-[1.3125rem] italic font-normal leading-[124.6%] tracking-[-0.02625rem]"
                   } text-[#8CA080]`}
                 >
                   {getNextEventDate(index)}
@@ -70,10 +70,10 @@ export const CountdownEvent = ({
             <div
               className={`${
                 isMobileView
-                  ? 'mt-[4.3rem] mb-[5.25rem]'
+                  ? "mt-[4.3rem] mb-[5.25rem]"
                   : isTabletPotraitView
-                  ? 'my-[5.75rem]'
-                  : 'mt-[9%] mb-[7%]'
+                  ? "my-[5.75rem]"
+                  : "mt-[9%] mb-[7%]"
               }`}
             >
               <CountdownTimer
@@ -96,13 +96,13 @@ export const CountdownEvent = ({
                       className=""
                       link={getNextEventLink(index)}
                     />
-                    <CustomButton
+                    {/* <CustomButton
                       text={'Hiring Package'}
                       className=""
                       link={
                         'https://drive.google.com/file/d/1O5g84ux-lan3ImQfBl3G3xmwI1Ix3AS8/view'
                       }
-                    />
+                    /> */}
                   </div>
                 ) : (
                   <>
@@ -118,10 +118,10 @@ export const CountdownEvent = ({
             <div
               className={
                 isMobileView
-                  ? 'pb-16'
+                  ? "pb-16"
                   : isTabletPotraitView
-                  ? 'pb-[6.5rem]'
-                  : 'pb-[18%]'
+                  ? "pb-[6.5rem]"
+                  : "pb-[18%]"
               }
             ></div>
           </div>
