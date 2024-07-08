@@ -762,7 +762,7 @@ export const Order = () => {
                   <p
                     onClick={() => {
                       setPaymentClicked(true);
-                      openExternalLink('https://forms.gle/wSxUEACu6ydqegVh9');
+                      openExternalLink('https://forms.gle/RbuP9j3wqG5ZKAuaA');
                     }}
                     className="text-blue-600 cursor-pointer text-xl"
                   >
