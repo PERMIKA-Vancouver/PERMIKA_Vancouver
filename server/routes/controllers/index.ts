@@ -7,3 +7,4 @@ export * from './createMerchandiseController';
 export * from './getMerchandisesController';
 export * from './updateMerchandiseController';
 export * from './getItemController';
+export * from './getMerchandiseByIdController';
