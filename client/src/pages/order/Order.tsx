@@ -239,6 +239,7 @@ export const Order = () => {
     }
   };
 
+  // ############ COMMENTED BECAUSE OF PREORDER ###############
   // const checkAvailability = async (payment: boolean): Promise<boolean> => {
   //   console.log(SERVER);
   //   return new Promise((resolve, reject) => {
@@ -362,20 +363,21 @@ export const Order = () => {
             axios
               .post(`${SERVER}/order`, dataOrder)
               .then(() => {
-                const data = {
-                  promoCode: promoCode,
-                  claimed: true,
-                };
-
-                axios
-                  .put(`${SERVER}/order/promocode`, data)
-                  .then(() => {
-                    setPage("confirmation");
-                  })
-                  .catch((err) => {
-                    alert("An error happened: " + err.message);
-                    setPage("payment");
-                  });
+                // const data = {
+                //   promoCode: promoCode,
+                //   claimed: true,
+                // };
+                // axios
+                //   .put(`${SERVER}/order/promocode`, data)
+                //   .then(() => {
+                //     setPage("confirmation");
+                //   })
+                //   .catch((err) => {
+                //     console.log(err);
+                //     alert("An error happened: " + err.message);
+                //     setPage("payment");
+                //   });
+                setPage("confirmation");
               })
               .catch((err) => {
                 alert("An error happened: " + err.message);
