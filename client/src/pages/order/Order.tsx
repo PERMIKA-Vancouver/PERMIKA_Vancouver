@@ -214,7 +214,6 @@ export const Order = () => {
       //     handlePayment();
       //   })
       checkAvailableSize().then((available) => {
-        console.log(available);
         if (available) {
           handlePayment();
         }
@@ -803,9 +802,7 @@ export const Order = () => {
           <div>
             <h4 className="text-grey-body xl:max-w-[50%]">
               Your order has been submitted and you will receive a confirmation
-              email from us shortly. Please reach out to
-              permika.vancouver@gmail.com if you haven't received your email
-              within 48 hours. We appreciate your support and we can't wait for
+              email from us. We appreciate your support and we can't wait for
               you to wear them!
             </h4>
 
