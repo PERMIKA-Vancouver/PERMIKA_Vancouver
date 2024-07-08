@@ -1,7 +1,7 @@
-import ImageModal from "../../../shared/components/ImageModal";
-import { useState } from "react";
-import SizeFitModal from "../../../shared/components/SizeFitModal";
-import { Link } from "react-router-dom";
+import ImageModal from '../../../shared/components/ImageModal';
+import { useState } from 'react';
+import SizeFitModal from '../../../shared/components/SizeFitModal';
+import { Link } from 'react-router-dom';
 // import SizeFitModal from "../../../shared/components/SizeFitModal";
 
 const ImageModalContainer: React.FC<{ images: string[] }> = ({ images }) => {
@@ -29,16 +29,16 @@ const ImageModalContainer: React.FC<{ images: string[] }> = ({ images }) => {
 
 export const Merchandise = () => {
   const shirt = [
-    "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/shirtFront.webp",
-    "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/shirtBack.webp",
+    'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/shirtFront.webp',
+    'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/shirtBack.webp',
   ];
   const hoodieBlack = [
-    "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieBlackFront.webp",
-    "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieBlackBack.webp",
+    'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieBlackFront.webp',
+    'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieBlackBack.webp',
   ];
   const hoodieWhite = [
-    "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieWhiteFront.webp",
-    "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieWhiteBack.webp",
+    'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieWhiteFront.webp',
+    'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieWhiteBack.webp',
   ];
 
   return (
@@ -49,13 +49,11 @@ export const Merchandise = () => {
       <div className="flex justify-between flex-wrap xs:gap-5 gap-2">
         <h2>Merchandise</h2>
         <div
-          // className={`my-auto bg-sunset-orange w-[12.875rem] h-[2.1875rem] rounded-[0.1875rem] hover:bg-[#A86108] transition-colors ease-out duration-500 flex items-center justify-center cursor-pointer`}
-          className={`my-auto bg-gray-200 w-[12.875rem] h-[2.1875rem] rounded-[0.1875rem] flex items-center justify-center cursor-pointer`}
+          className={`my-auto bg-sunset-orange w-[12.875rem] h-[2.1875rem] rounded-[0.1875rem] hover:bg-[#A86108] transition-colors ease-out duration-500 flex items-center justify-center cursor-pointer`}
         >
           <Link
             to="/order"
-            // className="text-white button-text w-full text-center"
-            className="text-white button-text w-full text-center pointer-events-none"
+            className="text-white button-text w-full text-center"
           >
             Pre-Order Now!
           </Link>
@@ -67,7 +65,10 @@ export const Merchandise = () => {
 
           <p className="text-sm mt-[0.9rem]">Shirt Collection</p>
           <p className="text-xl text-black-text">Anak Rantau T-Shirt</p>
-          <p className="text-sm">$20</p>
+          <div className="flex gap-1">
+            <p className="text-sm line-through-red inline !decoration-2">$20</p>
+            <p className="text-sm text-red-500">$18</p>
+          </div>
           <div className="flex justify-between mt-8">
             <p className="text-sm text-black text bg-[#F1F1F1] py-1 px-3.5 rounded-sm">
               5 Sizes - S, M, L, XL, XXL
@@ -80,7 +81,10 @@ export const Merchandise = () => {
 
           <p className="text-sm mt-[0.9rem]">Hoodie Collection</p>
           <p className="text-xl text-black-text">Waroeng Cak Timmies Hoodie</p>
-          <p className="text-sm">$35</p>
+          <div className="flex gap-1">
+            <p className="text-sm line-through-red inline !decoration-2">$35</p>
+            <p className="text-sm text-red-500">$32</p>
+          </div>
           <div className="flex justify-between mt-8">
             <p className="text-sm text-black text bg-[#F1F1F1] py-1 px-3.5 rounded-sm">
               4 Sizes - M, L, XL, XXL
@@ -93,7 +97,10 @@ export const Merchandise = () => {
 
           <p className="text-sm mt-[0.9rem]">Hoodie Collection</p>
           <p className="text-xl text-black-text">Anak Rantau Hoodie</p>
-          <p className="text-sm">$35</p>
+          <div className="flex gap-1">
+            <p className="text-sm line-through-red inline !decoration-2">$35</p>
+            <p className="text-sm text-red-500">$32</p>
+          </div>
           <div className="flex justify-between mt-8">
             <p className="text-sm text-black text bg-[#F1F1F1] py-1 px-3.5 rounded-sm">
               4 Sizes - M, L, XL, XXL
