@@ -64,8 +64,6 @@ export const Order = () => {
   const [popUpOpen, setPopUpOpen] = useState(false);
   const [submitOrderClicked, setSubmitOrderClicked] = useState(false);
 
-  console.log(shoppingBag);
-
   const isDiscount = dayjs().isBefore(
     dayjs(DISCOUNT_DEADLINE, 'YYYY-MM-DD HH:mm')
   );
@@ -804,7 +802,7 @@ export const Order = () => {
                         onClick={() => {
                           setPaymentClicked(true);
                           openExternalLink(
-                            'https://forms.gle/wSxUEACu6ydqegVh9'
+                            'https://forms.gle/RbuP9j3wqG5ZKAuaA'
                           );
                         }}
                         className="text-blue-600 cursor-pointer text-xl"
@@ -819,8 +817,8 @@ export const Order = () => {
                   <button
                     className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400"
                     onClick={() => {
-                      setPaymentClicked(true);
-                      openExternalLink('https://forms.gle/RbuP9j3wqG5ZKAuaA');
+                      setSubmitOrderClicked(true);
+                      handleNextPage();
                     }}
                     disabled={
                       getTotalPrice() <= 0 ||
