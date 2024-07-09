@@ -55,7 +55,7 @@ export const Merchandise = () => {
             to="/order"
             className="text-white button-text w-full text-center"
           >
-            Buy
+            Pre-Order Now!
           </Link>
         </div>
       </div>
@@ -65,7 +65,10 @@ export const Merchandise = () => {
 
           <p className="text-sm mt-[0.9rem]">Shirt Collection</p>
           <p className="text-xl text-black-text">Anak Rantau T-Shirt</p>
-          <p className="text-sm">$20</p>
+          <div className="flex gap-1">
+            <p className="text-sm line-through-red inline !decoration-2">$20</p>
+            <p className="text-sm text-red-500">$18</p>
+          </div>
           <div className="flex justify-between mt-8">
             <p className="text-sm text-black text bg-[#F1F1F1] py-1 px-3.5 rounded-sm">
               5 Sizes - S, M, L, XL, XXL
@@ -78,7 +81,10 @@ export const Merchandise = () => {
 
           <p className="text-sm mt-[0.9rem]">Hoodie Collection</p>
           <p className="text-xl text-black-text">Waroeng Cak Timmies Hoodie</p>
-          <p className="text-sm">$35</p>
+          <div className="flex gap-1">
+            <p className="text-sm line-through-red inline !decoration-2">$35</p>
+            <p className="text-sm text-red-500">$32</p>
+          </div>
           <div className="flex justify-between mt-8">
             <p className="text-sm text-black text bg-[#F1F1F1] py-1 px-3.5 rounded-sm">
               4 Sizes - M, L, XL, XXL
@@ -91,7 +97,10 @@ export const Merchandise = () => {
 
           <p className="text-sm mt-[0.9rem]">Hoodie Collection</p>
           <p className="text-xl text-black-text">Anak Rantau Hoodie</p>
-          <p className="text-sm">$35</p>
+          <div className="flex gap-1">
+            <p className="text-sm line-through-red inline !decoration-2">$35</p>
+            <p className="text-sm text-red-500">$32</p>
+          </div>
           <div className="flex justify-between mt-8">
             <p className="text-sm text-black text bg-[#F1F1F1] py-1 px-3.5 rounded-sm">
               4 Sizes - M, L, XL, XXL

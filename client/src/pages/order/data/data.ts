@@ -48,17 +48,17 @@ const MODELS = [
   {
     value: '1',
     label: 'KELANA - Waroeng Cak Timmies Hoodie',
-    price: 35,
+    price: 32,
   },
   {
     value: '2',
     label: 'KELANA - Anak Rantau Hoodie',
-    price: 35,
+    price: 32,
   },
   {
     value: '3',
     label: 'KELANA - Anak Rantau T-Shirt',
-    price: 20,
+    price: 18,
   },
 ];
 

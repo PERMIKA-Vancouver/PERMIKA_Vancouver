@@ -205,9 +205,15 @@ export const Order = () => {
 
       // Proceed to the next page if all checks pass
       setPage('review');
+
+      // edited at 7-7-2024 for pre-ordering capabilities (removed checking availabilities)
     } else if (page === 'review') {
       // Proceed to the payment page after finishing the review
-      checkAvailability(false).then((available) => {
+      // checkAvailability(false).then((available) => {
+      //   if (available) {
+      //     handlePayment();
+      //   })
+      checkAvailableSize().then((available) => {
         if (available) {
           handlePayment();
         }
@@ -216,16 +222,18 @@ export const Order = () => {
       // Check if the file is uploaded
       if (paymentClicked) {
         // If the file is uploaded, proceed to the confirmation page
-        checkAvailability(true).then((available) => {
-          if (available) {
-            handleSubmitOrder();
-          } else {
-            setPopUpMessage(
-              'If you have paid, please contact us at our instagram to process the refund. Sorry for the inconvenience.'
-            );
-            setPopUpOpen(true);
-          }
-        });
+        //   checkAvailability(true).then((available) => {
+        //     if (available) {
+        //       handleSubmitOrder();
+        //     } else {
+        //       setPopUpMessage(
+        //         'If you have paid, please contact us at our instagram to process the refund. Sorry for the inconvenience.'
+        //       );
+        //       setPopUpOpen(true);
+        //     }
+        //   });
+        // }
+        handleSubmitOrder();
       } else {
         // If the file is not uploaded, proceed to the payment page
         setPage('payment');
@@ -235,39 +243,69 @@ export const Order = () => {
     }
   };
 
-  const checkAvailability = async (payment: boolean): Promise<boolean> => {
-    console.log(SERVER);
-    return new Promise((resolve, reject) => {
-      axios
-        .get(`${SERVER}/order/merchandise`)
-        .then((res) => {
-          res.data.data.forEach((item: any) => {
-            const initialValue = 0;
-            const total = shoppingBag.reduce(
-              (accumulator, bag) =>
-                bag.model === item.model && bag.size === item.size
-                  ? accumulator + bag.quantity
-                  : accumulator,
-              initialValue
-            );
+  // ############ COMMENTED BECAUSE OF PREORDER ###############
+  // const checkAvailability = async (payment: boolean): Promise<boolean> => {
+  //   console.log(SERVER);
+  //   return new Promise((resolve, reject) => {
+  //     axios
+  //       .get(`${SERVER}/order/merchandise`)
+  //       .then((res) => {
+  //         res.data.data.forEach((item: any) => {
+  //           const initialValue = 0;
+  //           const total = shoppingBag.reduce(
+  //             (accumulator, bag) =>
+  //               bag.model === item.model && bag.size === item.size
+  //                 ? accumulator + bag.quantity
+  //                 : accumulator,
+  //             initialValue
+  //           );
 
-            const itemStock = payment
-              ? item.stock - item.bought
-              : item.stock - item.bought - item.pending;
-            if (total > itemStock) {
-              setPopUpMessage(
-                `${item.model} ${item.size} has only ${itemStock} in stock left.`
-              );
+  //           const itemStock = payment
+  //             ? item.stock - item.bought
+  //             : item.stock - item.bought - item.pending;
+  //           if (total > itemStock) {
+  //             setPopUpMessage(
+  //               `${item.model} ${item.size} has only ${itemStock} in stock left.`
+  //             );
+  //             setPopUpOpen(true);
+  //             resolve(false);
+  //           }
+  //         });
+  //         resolve(true);
+  //       })
+  //       .catch((err) => {
+  //         resolve(false);
+  //       });
+  //   });
+  // };
+
+  const checkAvailableSize = async (): Promise<boolean> => {
+    try {
+      const checkSizes = shoppingBag.map((item: any) => {
+        return axios
+          .get(`${SERVER}/order/merchandise/${item.model} ${item.size}`)
+          .then((res) => {
+            if (!res.data.data) {
+              setPopUpMessage(`${item.model} does not have size ${item.size}.`);
               setPopUpOpen(true);
-              resolve(false);
+              return false;
             }
+            return true;
+          })
+          .catch((err) => {
+            setPopUpMessage(`${item.model} does not have size ${item.size}.`);
+            setPopUpOpen(true);
+            return false;
           });
-          resolve(true);
-        })
-        .catch((err) => {
-          resolve(false);
-        });
-    });
+      });
+
+      const results = await Promise.all(checkSizes);
+
+      return results.every((result) => result);
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
   };
 
   const handlePayment = () => {
@@ -277,11 +315,13 @@ export const Order = () => {
         const merchandise = res.data.data.find(
           (item: any) => item.model === bag.model && item.size === bag.size
         );
-        if (!merchandise) {
-          setPopUpMessage(`${bag.model} has no size ${bag.size}`);
-          setPopUpOpen(true);
-          proceedPayment = false;
-        }
+        console.log(merchandise);
+        // another merchandise checking
+        // if (!merchandise) {
+        //   setPopUpMessage(`${bag.model} has no size ${bag.size}`);
+        //   setPopUpOpen(true);
+        //   proceedPayment = false;
+        // }
       }
 
       if (proceedPayment) {
@@ -356,20 +396,21 @@ export const Order = () => {
             axios
               .post(`${SERVER}/order`, dataOrder)
               .then(() => {
-                const data = {
-                  promoCode: promoCode,
-                  claimed: true,
-                };
-
-                axios
-                  .put(`${SERVER}/order/promocode`, data)
-                  .then(() => {
-                    setPage('confirmation');
-                  })
-                  .catch((err) => {
-                    alert('An error happened: ' + err.message);
-                    setPage('payment');
-                  });
+                // const data = {
+                //   promoCode: promoCode,
+                //   claimed: true,
+                // };
+                // axios
+                //   .put(`${SERVER}/order/promocode`, data)
+                //   .then(() => {
+                //     setPage("confirmation");
+                //   })
+                //   .catch((err) => {
+                //     console.log(err);
+                //     alert("An error happened: " + err.message);
+                //     setPage("payment");
+                //   });
+                setPage('confirmation');
               })
               .catch((err) => {
                 alert('An error happened: ' + err.message);
@@ -721,7 +762,7 @@ export const Order = () => {
                   <p
                     onClick={() => {
                       setPaymentClicked(true);
-                      openExternalLink('https://forms.gle/wSxUEACu6ydqegVh9');
+                      openExternalLink('https://forms.gle/RbuP9j3wqG5ZKAuaA');
                     }}
                     className="text-blue-600 cursor-pointer text-xl"
                   >
@@ -761,9 +802,7 @@ export const Order = () => {
           <div>
             <h4 className="text-grey-body xl:max-w-[50%]">
               Your order has been submitted and you will receive a confirmation
-              email from us shortly. Please reach out to
-              permika.vancouver@gmail.com if you haven't received your email
-              within 48 hours. We appreciate your support and we can't wait for
+              email from us. We appreciate your support and we can't wait for
               you to wear them!
             </h4>
 
