@@ -461,29 +461,31 @@ export const Order = () => {
 
   return (
     <div>
-      <div className="flex flex-col lg:flex-row min-h-screen">
+      <div className="flex flex-col lg:flex-row min-h-screen pt-navbar py-20 ml-[5%]">
         {/* Sidebar */}
-        <div className="order-2 lg:order-1 pt-[5vh] lg:pt-[20vh] flex-none ml-[2%] pl-[6.3%]">
-          <div className="mb-[50px] checkout-label">
-            <h2>Shopping bag</h2>
+        {page !== 'confirmation' && (
+          <div className="order-2 lg:order-1 flex-none">
+            <div className="mb-[50px] checkout-label">
+              <h2>Shopping bag</h2>
+            </div>
+            {/* Image cards */}
+            <div>
+              {shoppingBag.map((item, index) => {
+                if (item.model) {
+                  return (
+                    <div className="block max-w-sm p-6 mb-3 mr-3 border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+                      <img className="rounded-t-lg" src={item.image} alt="" />
+                      <h5 className="text-center mb-2 text-2xl tracking-tight text-gray-900">
+                        {item.model}
+                      </h5>
+                    </div>
+                  );
+                }
+                return <div></div>;
+              })}
+            </div>
           </div>
-          {/* Image cards */}
-          <div>
-            {shoppingBag.map((item, index) => {
-              if (item.model) {
-                return (
-                  <div className="block max-w-sm p-6 mb-3 mr-3 border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-                    <img className="rounded-t-lg" src={item.image} alt="" />
-                    <h5 className="text-center mb-2 text-2xl tracking-tight text-gray-900">
-                      {item.model}
-                    </h5>
-                  </div>
-                );
-              }
-              return <div></div>;
-            })}
-          </div>
-        </div>
+        )}
 
         {/* Main content */}
         <div
