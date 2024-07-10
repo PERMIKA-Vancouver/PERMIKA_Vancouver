@@ -863,7 +863,7 @@ export const Order = () => {
         </div>
 
         {/* Next Button Mobile View */}
-        {page !== 'confirmation' && (
+        {page !== 'confirmation' && page !== 'payment' && (
           <div className="px-[6.3%] order-3 lg:hidden">
             <button
               className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400"
