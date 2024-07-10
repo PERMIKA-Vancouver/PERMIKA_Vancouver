@@ -49,16 +49,22 @@ const MODELS = [
     value: '1',
     label: 'KELANA - Waroeng Cak Timmies Hoodie',
     price: 32,
+    image:
+      'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieBlackFront.webp',
   },
   {
     value: '2',
     label: 'KELANA - Anak Rantau Hoodie',
     price: 32,
+    image:
+      'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieWhiteFront.webp',
   },
   {
     value: '3',
     label: 'KELANA - Anak Rantau T-Shirt',
     price: 18,
+    image:
+      'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/shirtFront.webp',
   },
 ];
 
