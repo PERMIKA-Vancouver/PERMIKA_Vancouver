@@ -464,7 +464,7 @@ export const Order = () => {
       <div className="flex flex-col lg:flex-row min-h-screen pt-navbar py-20 ml-[5%]">
         {/* Sidebar */}
         {page !== 'confirmation' && (
-          <div className="order-2 lg:order-1 flex-none">
+          <div className="pl-[6.3%] mt-10 order-2 lg:pl-0 lg:mt-0 lg:order-1 flex-none">
             <div className="mb-[50px] checkout-label">
               <h2>Shopping bag</h2>
             </div>
@@ -489,7 +489,7 @@ export const Order = () => {
 
         {/* Main content */}
         <div
-          className={`lg:order-2 pt-navbar ml-[2%] flex-auto ${
+          className={`lg:order-2 ml-[2%] flex-auto ${
             page === 'confirmation' ? 'w-3/4' : 'w-full'
           }`}
         >
