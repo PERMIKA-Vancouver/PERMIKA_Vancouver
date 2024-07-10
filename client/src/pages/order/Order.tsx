@@ -464,7 +464,7 @@ export const Order = () => {
       <div className="flex flex-col lg:flex-row min-h-screen pt-navbar py-20 ml-[5%]">
         {/* Sidebar */}
         {page !== 'confirmation' && (
-          <div className="pl-[6.3%] mt-10 order-2 lg:pl-0 lg:mt-0 lg:order-1 flex-none">
+          <div className="px-[6.3%] mt-10 order-2 lg:px-0 lg:mt-0 lg:order-1 flex-none">
             <div className="mb-[50px] checkout-label">
               <h2>Shopping bag</h2>
             </div>
@@ -815,6 +815,8 @@ export const Order = () => {
                   </div>
                 )}
                 {!isTotalsVisible && shoppingBag.length === 0 && <div></div>}
+
+                {/* BUTTON */}
                 {page === 'payment' ? (
                   <button
                     className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400"
@@ -832,7 +834,7 @@ export const Order = () => {
                   </button>
                 ) : (
                   <button
-                    className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400"
+                    className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400 hidden lg:block"
                     onClick={() => handleNextPage()}
                     disabled={getTotalPrice() <= 0}
                   >
@@ -859,6 +861,19 @@ export const Order = () => {
             )}
           </div>
         </div>
+
+        {/* Next Button Mobile View */}
+        {page !== 'confirmation' && (
+          <div className="px-[6.3%] order-3 lg:hidden">
+            <button
+              className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400"
+              onClick={() => handleNextPage()}
+              disabled={getTotalPrice() <= 0}
+            >
+              Next
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
