@@ -16,7 +16,7 @@ const auth = new google.auth.JWT(
 const sheets = google.sheets({ version: "v4", auth });
 
 // The ID of the Google Sheet to modify
-const SPREADSHEET_ID = process.env.SHEETSID;
+const SPREADSHEET_ID: string = "1ENGIEMn-jgCUy8u0zY2yRk738CuuqUmL0Y9TZOwYn9k";
 
 export const createOrderController = async (req: Request, res: Response) => {
   try {
