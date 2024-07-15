@@ -16,7 +16,12 @@ const auth = new google.auth.JWT(
 const sheets = google.sheets({ version: "v4", auth });
 
 // The ID of the Google Sheet to modify
-const SPREADSHEET_ID: string = "1ENGIEMn-jgCUy8u0zY2yRk738CuuqUmL0Y9TZOwYn9k";
+
+// google sheets id for main page
+const SPREADSHEET_ID = "1ENGIEMn-jgCUy8u0zY2yRk738CuuqUmL0Y9TZOwYn9k";
+
+// google sheets id for development
+// const SPREADSHEET_ID = "1HCxupubu5_bRDErN7naRR5-uXjSE5VOUO-CwuGGiTg0";
 
 export const createOrderController = async (req: Request, res: Response) => {
   try {
@@ -104,6 +109,12 @@ export const createOrderController = async (req: Request, res: Response) => {
     const resource = {
       values,
     };
+
+    console.log(
+      "Attempting to append values to Google Sheets with ID:",
+      SPREADSHEET_ID
+    );
+
     const result = await sheets.spreadsheets.values.append({
       spreadsheetId: SPREADSHEET_ID,
       range: "Sheet1!A2", // Change this to the appropriate range in your sheet
