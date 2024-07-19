@@ -7,7 +7,7 @@ const UPCOMING_EVENTS: UpcomingEvent[] = [
   {
     name: "Pre-Departure Orientation",
     date: DateTime.fromFormat('2024-07-19 20:00', 'yyyy-MM-dd HH:mm', { zone: 'America/Los_Angeles' }).toString(),
-    rsvp: "https://forms.gle/VopZFSiGvv5go9Vc7",
+    rsvp: "https://ubc.zoom.us/j/67177885132?pwd=M72TbZWb1CjfghUemmpfc3qrA77wXG.1",
     location: "",
     locationLink: "",
     type: 0,
@@ -23,8 +23,9 @@ const UPCOMING_EVENTS_DEFAULT: UpcomingEvent = {
   type: 0,
 };
 
-const EVENT_DESCRIPTION = "Save yourself a seat for the event below!";
-const EVENT_BUTTON = "RSVP";
+// const EVENT_DESCRIPTION = "Save yourself a seat for the event below!";
+const EVENT_DESCRIPTION = "Join the Pre-Departure Orientation below!";
+const EVENT_BUTTON = "JOIN";
 
 const HIRING_DESCRIPTION = "Be part of PERMIKA's family 2024/2025";
 const HIRING_BUTTON = "Join PERMIKA";
