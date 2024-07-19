@@ -1,4 +1,4 @@
-import { CustomButton } from '../../../shared/components/CustomButton';
+// import { CustomButton } from '../../../shared/components/CustomButton';
 import { ScreenSizeProps } from '../../../shared/types/types';
 
 const WelcomingMsg =
@@ -6,9 +6,6 @@ const WelcomingMsg =
 
 // Member sign up link
 // const LINK = 'https://forms.gle/z8AFC5m5PiJzKBEf7';
-
-// Hiring link
-const LINK = 'https://forms.gle/KonqUzj1n5n63yu88';
 
 export const WelcomingMessage = ({
   isMobileView,
