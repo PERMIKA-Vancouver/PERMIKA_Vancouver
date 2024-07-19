@@ -1,12 +1,12 @@
 import { UpcomingEvent } from "../types/types";
-
-const DATE_FORMAT = "YYYY-MM-DD HH:mm";
+const { DateTime } = require('luxon');
+const DATE_FORMAT = 'YYYY-MM-DD HH:mm';
 
 // Date format 'YYYY-MM-DD HH:mm'
 const UPCOMING_EVENTS: UpcomingEvent[] = [
   {
     name: "Pre-Departure Orientation",
-    date: "2024-07-19 20:00",
+    date: DateTime.fromFormat('2024-07-19 20:00', 'yyyy-MM-dd HH:mm', { zone: 'America/Los_Angeles' }).toString(),
     rsvp: "https://forms.gle/VopZFSiGvv5go9Vc7",
     location: "",
     locationLink: "",
