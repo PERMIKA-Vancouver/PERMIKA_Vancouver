@@ -76,13 +76,13 @@ export const WelcomingMessage = ({
             {WelcomingMsg}
             <br />
             <br />
-            Tell us a bit about yourself and become a part of PERMIKA Vancouver!
+            {/* Tell us a bit about yourself and become a part of PERMIKA Vancouver! */}
           </p>
-          <CustomButton
+          {/* <CustomButton
             text="Join PERMIKA"
             className={`${!isTabletPotraitView && 'absolute bottom-0'}`}
             link={LINK}
-          />
+          /> */}
         </div>
       </div>
     </div>
