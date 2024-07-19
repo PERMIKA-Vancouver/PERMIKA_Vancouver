@@ -6,7 +6,7 @@ const DATE_FORMAT = 'YYYY-MM-DD HH:mm';
 const UPCOMING_EVENTS: UpcomingEvent[] = [
   {
     name: "Pre-Departure Orientation",
-    date: DateTime.fromFormat('2024-07-19 20:00', 'yyyy-MM-dd HH:mm', { zone: 'America/Los_Angeles' }).toString(),
+    date: DateTime.fromFormat('2024-07-19 22:00', 'yyyy-MM-dd HH:mm', { zone: 'America/Los_Angeles' }).toString(),
     rsvp: "https://ubc.zoom.us/j/67177885132?pwd=M72TbZWb1CjfghUemmpfc3qrA77wXG.1",
     location: "",
     locationLink: "",
