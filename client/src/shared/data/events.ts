@@ -23,6 +23,7 @@ const UPCOMING_EVENTS_DEFAULT: UpcomingEvent = {
   type: 0,
 };
 
+// const EVENT_DESCRIPTION = "Save yourself a seat for the event below!";
 const EVENT_DESCRIPTION = "Join the Pre-Departure Orientation below!";
 const EVENT_BUTTON = "JOIN";
 
