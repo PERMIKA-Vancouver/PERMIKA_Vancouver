@@ -30,7 +30,8 @@ export const CountdownEvent = ({
     >
       <div className={`${isMobileView ? "w-[80%]" : "w-[63.2%]"} ml-all`}>
         <>
-          <h2 className="text-white">Coming Up</h2>
+          {/* <h2 className="text-white">Coming Up</h2> */}
+          <h2 className="text-white">Happening Now!</h2>
         </>
         {getNextEvents().map((index: number) => (
           <div>
