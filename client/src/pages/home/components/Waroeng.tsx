@@ -6,6 +6,10 @@ import {
   isWaroengPreOrderPassed,
 } from '../../../shared/utils/UpcomingWaroengUtils';
 
+import slide1 from './ketoprak_images/slide1.png';
+import slide2 from './ketoprak_images/slide2.png';
+import slide3 from './ketoprak_images/slide3.png';
+
 export const Waroeng = () => {
   const nextWaroeng = getNextWaroeng();
 
@@ -26,9 +30,9 @@ export const Waroeng = () => {
         )}
       </div>
       <div className="flex mt-8 w-full">
-        <img src={''} alt="Waroeng" className="w-1/3" />
-        <img src={''} alt="Waroeng" className="w-1/3" />
-        <img src={''} alt="Waroeng" className="w-1/3" />
+        <img src={slide1} alt="Waroeng" className="w-1/3" />
+        <img src={slide2} alt="Waroeng" className="w-1/3" />
+        <img src={slide3} alt="Waroeng" className="w-1/3" />
       </div>
     </div>
   );

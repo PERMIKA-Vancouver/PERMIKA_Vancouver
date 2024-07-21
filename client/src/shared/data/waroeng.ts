@@ -1,13 +1,14 @@
 import { UpcomingWaroeng } from '../types/types';
+const { DateTime } = require('luxon');
 
-const DATE_FORMAT = 'YYYY-MM-DD HH:mm';
+const DATE_FORMAT = 'yyyy-MM-dd HH:mm';
 
 // Date format 'YYYY-MM-DD HH:mm'
 const UPCOMING_WAROENG: UpcomingWaroeng[] = [
   {
-    date: '2024-04-26 00:00',
-    pickup: '2024-04-28 23:59',
-    link: 'https://forms.gle/CKgZzW4wy6sRprYC6',
+    date: DateTime.fromFormat('2024-07-26 23:00', DATE_FORMAT, { zone: 'America/Los_Angeles' }),
+    pickup: DateTime.fromFormat('2024-07-28 16:00', DATE_FORMAT, { zone: 'America/Los_Angeles' }),
+    link: 'https://forms.gle/yYS7zPBCVmEPcAqR6',
   },
 ];
 
