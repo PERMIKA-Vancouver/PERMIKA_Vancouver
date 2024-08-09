@@ -21,6 +21,8 @@
     "@mui/icons-material": "^5.15.6",
     "@mui/material": "^5.15.6",
     "@types/react": "^18.2.54",
-    "@types/react-helmet": "^6.1.11"
+    "@types/react-helmet": "^6.1.11",
+    "luxon": "^3.5.0",
+    "permika_vancouver": "file:"
   }
 }
