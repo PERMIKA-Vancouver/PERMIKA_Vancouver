@@ -128,11 +128,19 @@ const PAST_EVENTS: PastEvent[] = [
   },
   {
     year: "2019/20'",
+    title: "Pre-Departure Orientation",
+    date: "2024-07-19",
+    location: "Zoom",
+    description:
+        "Be part of PERMIKA's family 2024/2025",
+  },
+  {
+    year: "2023/24'",
     title: "NOBAR! Nonton Bareng Film Sultan Agung",
     date: "2019-05-03",
     location: "KJRI Vancouver",
     description:
-        "On Friday, May 3, everyone was warmly invited to a special gathering at KJRI, marking the official introduction of PERMIKA Vancouver alongside a captivating 'NOBAR' movie event featuring \"SULTAN AGUNG.\" ",
+      "On Friday, May 3, everyone was warmly invited to a special gathering at KJRI, marking the official introduction of PERMIKA Vancouver alongside a captivating 'NOBAR' movie event featuring \"SULTAN AGUNG.\" ",
   },
 ];
 
