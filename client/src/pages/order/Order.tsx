@@ -1,52 +1,52 @@
-import * as React from 'react';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import { useState } from 'react';
+import * as React from "react";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
+import { useState } from "react";
 import {
   LOCATIONS,
   SIZES,
   MODELS,
   DISCOUNT,
   DISCOUNT_DEADLINE,
-} from './data/data';
-import axios from 'axios';
-import { openExternalLink } from '../../shared/utils/OpenLinkUtil';
-import dayjs from 'dayjs';
-import { FaTrash } from 'react-icons/fa';
-import { PopUpMessage } from '../../shared/components/PopUpMessage';
-import { CustomButton } from '../../shared/components/CustomButton';
-import { Button, InputBase } from '@mui/material';
+} from "./data/data";
+import axios from "axios";
+import { openExternalLink } from "../../shared/utils/OpenLinkUtil";
+import dayjs from "dayjs";
+import { FaTrash } from "react-icons/fa";
+import { PopUpMessage } from "../../shared/components/PopUpMessage";
+import { CustomButton } from "../../shared/components/CustomButton";
+import { Button, InputBase } from "@mui/material";
 
 const DEFAULT_SHOPPING_BAG = {
   quantity: 0,
-  size: '',
-  model: '',
+  size: "",
+  model: "",
   price: 0,
-  image: '',
+  image: "",
 };
 
 const DEFAULT_SELECTED_ITEM = {
-  value: '',
-  label: '',
+  value: "",
+  label: "",
   price: 0,
-  image: '',
+  image: "",
 };
 
 const SERVER = process.env.REACT_APP_SERVER;
 
 export const Order = () => {
   const [page, setPage] = useState<
-    'checkout' | 'review' | 'payment' | 'confirmation'
-  >('checkout');
+    "checkout" | "review" | "payment" | "confirmation"
+  >("checkout");
   const [shoppingBag, setShoppingBag] = useState([DEFAULT_SHOPPING_BAG]);
   const [selectedItem, setSelectedItem] = useState(DEFAULT_SELECTED_ITEM);
   const [numItems, setNumItems] = useState(0);
 
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [pickupLocation, setPickupLocation] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [pickupLocation, setPickupLocation] = useState("");
 
   const [firstNameError, setFirstNameError] = useState(false);
   const [lastNameError, setLastNameError] = useState(false);
@@ -54,18 +54,18 @@ export const Order = () => {
   const [phoneNumberError, setPhoneNumberError] = useState(false);
   const [pickupLocationError, setPickupLocationError] = useState(false);
 
-  const [promoCode, setPromoCode] = useState('');
+  const [promoCode, setPromoCode] = useState("");
   const [isPromoCodeApplied, setIsPromoCodeApplied] = useState(false);
   const [isPromoCodeInvalid, setIsPromoCodeInvalid] = useState(false);
   const [finalPrice, setFinalPrice] = useState(0);
 
   const [paymentClicked, setPaymentClicked] = useState(false);
-  const [popUpMessage, setPopUpMessage] = useState('');
+  const [popUpMessage, setPopUpMessage] = useState("");
   const [popUpOpen, setPopUpOpen] = useState(false);
   const [submitOrderClicked, setSubmitOrderClicked] = useState(false);
 
   const isDiscount = dayjs().isBefore(
-    dayjs(DISCOUNT_DEADLINE, 'YYYY-MM-DD HH:mm')
+    dayjs(DISCOUNT_DEADLINE, "YYYY-MM-DD HH:mm")
   );
 
   const handleQuantityChange = (index: number, newQuantity: number) => {
@@ -127,7 +127,7 @@ export const Order = () => {
   );
 
   const handleSizeChange = (index: number, size: (typeof SIZES)[number]) => {
-    if (page !== 'checkout') return;
+    if (page !== "checkout") return;
 
     setShoppingBag((prev) => {
       return prev.map((bag, idx) =>
@@ -137,7 +137,7 @@ export const Order = () => {
   };
 
   const handleChooseItem = (index: number, item: (typeof MODELS)[number]) => {
-    if (page !== 'checkout') return;
+    if (page !== "checkout") return;
 
     setShoppingBag((prev) => {
       return prev.map((bag, idx) =>
@@ -149,7 +149,7 @@ export const Order = () => {
   };
 
   const handleNextPage = () => {
-    if (page === 'checkout') {
+    if (page === "checkout") {
       // Check if total price is zero
       if (getTotalPrice() <= 0) {
         setFirstNameError(true); // Set error state if total price is zero
@@ -159,7 +159,7 @@ export const Order = () => {
       // Check if first name is provided
       if (!firstName.trim()) {
         setFirstNameError(true); // Set error state if first name is not provided
-        setPopUpMessage('Please enter your first name!');
+        setPopUpMessage("Please enter your first name!");
         setPopUpOpen(true);
         return;
       }
@@ -167,7 +167,7 @@ export const Order = () => {
       // Check if last name is provided
       if (!lastName.trim()) {
         setLastNameError(true);
-        setPopUpMessage('Please enter your last name!');
+        setPopUpMessage("Please enter your last name!");
         setPopUpOpen(true);
         return;
       } else {
@@ -175,7 +175,7 @@ export const Order = () => {
       }
 
       // Check if email is provided
-      if (!email.trim() || !email.includes('@') || !email.includes('.')) {
+      if (!email.trim() || !email.includes("@") || !email.includes(".")) {
         setEmailError(true);
         setPopUpMessage(
           "Please enter your email address or check it's in the right format!"
@@ -190,7 +190,7 @@ export const Order = () => {
       if (!phoneNumber.trim() || isNaN(Number(phoneNumber))) {
         setPhoneNumberError(true);
         setPopUpMessage(
-          'Please enter your phone number! (only numbers allowed)'
+          "Please enter your phone number! (only numbers allowed)"
         );
         setPopUpOpen(true);
         return;
@@ -201,115 +201,109 @@ export const Order = () => {
       // Check if pick-up location is provided
       if (!pickupLocation.trim()) {
         setPickupLocationError(true);
-        setPopUpMessage('Please choose a pick up location!');
+        setPopUpMessage("Please choose a pick up location!");
         setPopUpOpen(true);
         return;
       } else {
         setPickupLocationError(false);
       }
       // Proceed to the next page if all checks pass
-      setPage('review');
+      setPage("review");
       // edited at 7-7-2024 for pre-ordering capabilities (removed checking availabilities)
-    } else if (page === 'review') {
+    } else if (page === "review") {
       // Proceed to the payment page after finishing the review
-      // checkAvailability(false).then((available) => {
-      //   if (available) {
-      //     handlePayment();
-      //   })
-      checkAvailableSize().then((available) => {
+      checkAvailability(false).then((available) => {
         if (available) {
           handlePayment();
         }
       });
-    } else if (page === 'payment') {
+    } else if (page === "payment") {
       // Check if the file is uploaded
       if (paymentClicked) {
         // If the file is uploaded, proceed to the confirmation page
-        //   checkAvailability(true).then((available) => {
-        //     if (available) {
-        //       handleSubmitOrder();
-        //     } else {
-        //       setPopUpMessage(
-        //         'If you have paid, please contact us at our instagram to process the refund. Sorry for the inconvenience.'
-        //       );
-        //       setPopUpOpen(true);
-        //     }
-        //   });
-        // }
-        handleSubmitOrder();
+        checkAvailability(true).then((available) => {
+          if (available) {
+            handleSubmitOrder();
+          } else {
+            setPopUpMessage(
+              "If you have paid, please contact us at our instagram to process the refund. Sorry for the inconvenience."
+            );
+            setPopUpOpen(true);
+          }
+        });
       } else {
         // If the file is not uploaded, proceed to the payment page
-        setPage('payment');
+        setPage("payment");
       }
     } else {
-      setPage('confirmation'); // Assuming this is the last step after payment and file upload
+      setPage("confirmation"); // Assuming this is the last step after payment and file upload
     }
   };
 
-  // ############ COMMENTED BECAUSE OF PREORDER ###############
-  // const checkAvailability = async (payment: boolean): Promise<boolean> => {
-  //   console.log(SERVER);
-  //   return new Promise((resolve, reject) => {
-  //     axios
-  //       .get(`${SERVER}/order/merchandise`)
-  //       .then((res) => {
-  //         res.data.data.forEach((item: any) => {
-  //           const initialValue = 0;
-  //           const total = shoppingBag.reduce(
-  //             (accumulator, bag) =>
-  //               bag.model === item.model && bag.size === item.size
-  //                 ? accumulator + bag.quantity
-  //                 : accumulator,
-  //             initialValue
-  //           );
+  // ############ UNCOMMENTED BECAUSE OF PREORDER PERIOD ENDING ############
+  const checkAvailability = async (payment: boolean): Promise<boolean> => {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(`${SERVER}/order/merchandise`)
+        .then((res) => {
+          res.data.data.forEach((item: any) => {
+            const initialValue = 0;
+            const total = shoppingBag.reduce(
+              (accumulator, bag) =>
+                bag.model === item.model && bag.size === item.size
+                  ? accumulator + bag.quantity
+                  : accumulator,
+              initialValue
+            );
 
-  //           const itemStock = payment
-  //             ? item.stock - item.bought
-  //             : item.stock - item.bought - item.pending;
-  //           if (total > itemStock) {
-  //             setPopUpMessage(
-  //               `${item.model} ${item.size} has only ${itemStock} in stock left.`
-  //             );
-  //             setPopUpOpen(true);
-  //             resolve(false);
-  //           }
-  //         });
-  //         resolve(true);
-  //       })
-  //       .catch((err) => {
-  //         resolve(false);
-  //       });
-  //   });
-  // };
-
-  const checkAvailableSize = async (): Promise<boolean> => {
-    try {
-      const checkSizes = shoppingBag.map((item: any) => {
-        return axios
-          .get(`${SERVER}/order/merchandise/${item.model} ${item.size}`)
-          .then((res) => {
-            if (!res.data.data) {
-              setPopUpMessage(`${item.model} does not have size ${item.size}.`);
+            const itemStock = payment
+              ? item.stock - item.bought
+              : item.stock - item.bought - item.pending;
+            if (total > itemStock) {
+              setPopUpMessage(
+                `${item.model} ${item.size} has only ${itemStock} in stock left.`
+              );
               setPopUpOpen(true);
-              return false;
+              resolve(false);
             }
-            return true;
-          })
-          .catch((err) => {
-            setPopUpMessage(`${item.model} does not have size ${item.size}.`);
-            setPopUpOpen(true);
-            return false;
           });
-      });
-
-      const results = await Promise.all(checkSizes);
-
-      return results.every((result) => result);
-    } catch (error) {
-      console.error(error);
-      return false;
-    }
+          resolve(true);
+        })
+        .catch((err) => {
+          resolve(false);
+        });
+    });
   };
+
+  // **************** THIS CODE IS USED ONLY WHEN PRE-ORDER PERIOD FOR CHECKING IF SIZE FOR CERTAIN MERCH IS AVAILABLE ****************
+  // const checkAvailableSize = async (): Promise<boolean> => {
+  //   try {
+  //     const checkSizes = shoppingBag.map((item: any) => {
+  //       return axios
+  //         .get(`${SERVER}/order/merchandise/${item.model} ${item.size}`)
+  //         .then((res) => {
+  //           if (!res.data.data) {
+  //             setPopUpMessage(`${item.model} does not have size ${item.size}.`);
+  //             setPopUpOpen(true);
+  //             return false;
+  //           }
+  //           return true;
+  //         })
+  //         .catch((err) => {
+  //           setPopUpMessage(`${item.model} does not have size ${item.size}.`);
+  //           setPopUpOpen(true);
+  //           return false;
+  //         });
+  //     });
+
+  //     const results = await Promise.all(checkSizes);
+
+  //     return results.every((result) => result);
+  //   } catch (error) {
+  //     console.error(error);
+  //     return false;
+  //   }
+  // };
 
   const handlePayment = () => {
     axios.get(`${SERVER}/order/merchandise`).then((res) => {
@@ -329,7 +323,7 @@ export const Order = () => {
 
       if (proceedPayment) {
         for (let bag of shoppingBag) {
-          const id = bag.model + ' ' + bag.size;
+          const id = bag.model + " " + bag.size;
           const merchandise = res.data.data.find(
             (item: any) => item.model === bag.model && item.size === bag.size
           );
@@ -341,15 +335,15 @@ export const Order = () => {
             .put(`${SERVER}/order/merchandise/${id}`, data)
             .then(() => {
               setFinalPrice(subtotal);
-              setPage('payment');
+              setPage("payment");
             })
             .catch((err) => {
-              alert('Error occured: ' + err.message + '. Please try again!');
-              setPage('review');
+              alert("Error occured: " + err.message + ". Please try again!");
+              setPage("review");
             });
         }
       } else {
-        setPage('review');
+        setPage("review");
       }
     });
   };
@@ -357,7 +351,7 @@ export const Order = () => {
   const handleSubmitOrder = () => {
     axios.get(`${SERVER}/order/merchandise`).then((res) => {
       shoppingBag.forEach((bag) => {
-        const id = bag.model + ' ' + bag.size;
+        const id = bag.model + " " + bag.size;
         const merchandise = res.data.data.find(
           (item: any) => item.model === bag.model && item.size === bag.size
         );
@@ -399,30 +393,32 @@ export const Order = () => {
             axios
               .post(`${SERVER}/order`, dataOrder)
               .then(() => {
-                // const data = {
-                //   promoCode: promoCode,
-                //   claimed: true,
-                // };
-                // axios
-                //   .put(`${SERVER}/order/promocode`, data)
-                //   .then(() => {
-                //     setPage("confirmation");
-                //   })
-                //   .catch((err) => {
-                //     console.log(err);
-                //     alert("An error happened: " + err.message);
-                //     setPage("payment");
-                //   });
-                setPage('confirmation');
+                // ***** WARNING!!! promoCode feature might cause bug, if bugs comment from here
+                const data = {
+                  promoCode: promoCode,
+                  claimed: true,
+                };
+                axios
+                  .put(`${SERVER}/order/promocode`, data)
+                  .then(() => {
+                    setPage("confirmation");
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                    alert("An error happened: " + err.message);
+                    setPage("payment");
+                  });
+                // ***** up to this point
+                // setPage("confirmation"); // and then uncomment this setPage(...)
               })
               .catch((err) => {
-                alert('An error happened: ' + err.message);
-                setPage('payment');
+                alert("An error happened: " + err.message);
+                setPage("payment");
               });
           })
           .catch((err) => {
-            alert('An error happened: ' + err.message);
-            setPage('payment');
+            alert("An error happened: " + err.message);
+            setPage("payment");
           });
       });
     });
@@ -434,7 +430,7 @@ export const Order = () => {
       .then((res) => {
         if (!res.data || res.data.pending || res.data.claimed) {
           setIsPromoCodeInvalid(true);
-          setPromoCode('');
+          setPromoCode("");
           return;
         }
 
@@ -451,11 +447,11 @@ export const Order = () => {
             setFinalPrice(finalPrice * (1 - DISCOUNT));
           })
           .catch((err) => {
-            alert('An error happened: ' + err.message);
+            alert("An error happened: " + err.message);
           });
       })
       .catch((err) => {
-        alert('An error happened: ' + err.message);
+        alert("An error happened: " + err.message);
       });
   };
 
@@ -463,7 +459,7 @@ export const Order = () => {
     <div>
       <div className="flex flex-col lg:flex-row min-h-screen pt-navbar py-20 ml-[5%]">
         {/* Sidebar */}
-        {page !== 'confirmation' && (
+        {page !== "confirmation" && (
           <div className="px-[6.3%] mt-10 order-2 lg:px-0 lg:mt-0 lg:order-1 flex-none">
             <div className="mb-[50px] checkout-label">
               <h2>Shopping bag</h2>
@@ -490,7 +486,7 @@ export const Order = () => {
         {/* Main content */}
         <div
           className={`lg:order-2 ml-[2%] flex-auto ${
-            page === 'confirmation' ? 'w-3/4' : 'w-full'
+            page === "confirmation" ? "w-3/4" : "w-full"
           }`}
         >
           {/* Pop Up */}
@@ -507,32 +503,32 @@ export const Order = () => {
               <div className="checkout-outer mb-[50px]">
                 <div className="checkout-label flex justify-between items-center">
                   <h2>
-                    {page === 'review'
-                      ? 'Review Order'
-                      : page === 'payment'
-                      ? 'Payment Details'
-                      : page === 'confirmation'
-                      ? 'Thank you for your purchase!'
-                      : 'Order'}
+                    {page === "review"
+                      ? "Review Order"
+                      : page === "payment"
+                      ? "Payment Details"
+                      : page === "confirmation"
+                      ? "Thank you for your purchase!"
+                      : "Order"}
                   </h2>
-                  {page === 'review' && (
-                    <button onClick={() => setPage('checkout')}>Edit</button>
+                  {page === "review" && (
+                    <button onClick={() => setPage("checkout")}>Edit</button>
                   )}
                 </div>
                 <div className="checkout-information"></div>
               </div>
-              {page !== 'payment' && page !== 'confirmation' && (
+              {page !== "payment" && page !== "confirmation" && (
                 <form className="checkout-form">
                   <div className="name sm:flex justify-between sm:gap-5">
                     <TextField
                       className={`w-full sm:basis-[49%] ${
-                        firstNameError ? 'error' : ''
+                        firstNameError ? "error" : ""
                       }`}
                       id="outlined-multiline-flexible"
                       label="First Name*"
                       multiline
                       maxRows={4}
-                      disabled={page !== 'checkout'}
+                      disabled={page !== "checkout"}
                       value={firstName}
                       onChange={(e) => {
                         setFirstName(e.target.value);
@@ -541,13 +537,13 @@ export const Order = () => {
                     />
                     <TextField
                       className={`w-full sm:basis-[49%] ${
-                        lastNameError ? 'error' : ''
+                        lastNameError ? "error" : ""
                       } !mt-[3%] sm:!mt-0`}
                       id="outlined-multiline-flexible"
                       label="Last Name*"
                       multiline
                       maxRows={4}
-                      disabled={page !== 'checkout'}
+                      disabled={page !== "checkout"}
                       value={lastName}
                       onChange={(e) => {
                         setLastName(e.target.value);
@@ -557,12 +553,12 @@ export const Order = () => {
                   </div>
                   <div className="pt-[3%]">
                     <TextField
-                      className={`w-full ${emailError ? 'error' : ''}`}
+                      className={`w-full ${emailError ? "error" : ""}`}
                       label="Email Address*"
                       multiline
                       maxRows={4}
                       fullWidth
-                      disabled={page !== 'checkout'}
+                      disabled={page !== "checkout"}
                       value={email}
                       onChange={(e) => {
                         setEmail(e.target.value);
@@ -572,12 +568,12 @@ export const Order = () => {
                   </div>
                   <div className="phone-number flex justify-between pt-[3%] gap-5">
                     <TextField
-                      className={`flex-auto ${phoneNumberError ? 'error' : ''}`}
+                      className={`flex-auto ${phoneNumberError ? "error" : ""}`}
                       id="outlined-multiline-flexible"
                       label="Phone Number*"
                       multiline
                       maxRows={4}
-                      disabled={page !== 'checkout'}
+                      disabled={page !== "checkout"}
                       value={phoneNumber}
                       onChange={(e) => {
                         setPhoneNumber(e.target.value);
@@ -588,11 +584,11 @@ export const Order = () => {
 
                   <form className="pickup-location pt-[3%]">
                     <TextField
-                      className={`w-full ${pickupLocationError ? 'error' : ''}`}
+                      className={`w-full ${pickupLocationError ? "error" : ""}`}
                       select
                       label="Pick-Up Location*"
                       fullWidth
-                      disabled={page !== 'checkout'}
+                      disabled={page !== "checkout"}
                       value={pickupLocation}
                       onChange={(e) => {
                         setPickupLocation(e.target.value);
@@ -611,13 +607,13 @@ export const Order = () => {
             </div>
 
             {/* Shopping Bag */}
-            {page !== 'confirmation' && (
+            {page !== "confirmation" && (
               <div className="Shopping-bag mt-20">
                 <div className="shopping flex justify-between mb-3">
                   <h2 className="text-[1.875rem] text-[#414141]">
                     Shopping Bag
                   </h2>
-                  {page === 'checkout' && (
+                  {page === "checkout" && (
                     <button
                       onClick={handleAddItem}
                       className="add-button pr-[2%]"
@@ -639,12 +635,12 @@ export const Order = () => {
                         label="Qty"
                         value={bag.quantity}
                         onChange={(event) => {
-                          if (page !== 'checkout') return;
+                          if (page !== "checkout") return;
                           const newQuantity =
                             parseInt(event.target.value, 10) || 0;
                           handleQuantityChange(index, newQuantity);
                         }}
-                        disabled={page !== 'checkout'}
+                        disabled={page !== "checkout"}
                       />
                       <div className="x flex items-center">X</div>
                       <div className="w-[54%]">
@@ -654,7 +650,7 @@ export const Order = () => {
                           select
                           label="Size*"
                           defaultValue={bag.size}
-                          disabled={page !== 'checkout'}
+                          disabled={page !== "checkout"}
                         >
                           {SIZES.map((option) => (
                             <MenuItem
@@ -684,21 +680,21 @@ export const Order = () => {
                               ) || DEFAULT_SELECTED_ITEM;
                             setSelectedItem(selected);
                           }}
-                          disabled={page !== 'checkout'}
+                          disabled={page !== "checkout"}
                         >
                           {MODELS.map((option) => (
                             <MenuItem
                               key={option.value}
                               value={option.value}
                               onClick={() => handleChooseItem(index, option)}
-                              disabled={page !== 'checkout'}
+                              disabled={page !== "checkout"}
                             >
                               {option.label}
                             </MenuItem>
                           ))}
                         </TextField>
                       </div>
-                      {page === 'checkout' && (
+                      {page === "checkout" && (
                         <button
                           onClick={() => handleRemoveItem(index)}
                           className="remove-button px-[2%]"
@@ -711,14 +707,14 @@ export const Order = () => {
                 ))}
                 {getTotalPrice() > 0 && (
                   <div className="">
-                    {page === 'payment' ? (
+                    {page === "payment" ? (
                       <div className="text-[#9A9A9A] flex justify-between font-light">
                         Subtotal <span>${subtotal.toFixed(2)}</span>
                       </div>
                     ) : (
                       <div className="totals font-light">
                         <div className="text-[#9A9A9A] flex justify-between">
-                          Merchandise Total{' '}
+                          Merchandise Total{" "}
                           <span className="">${totalPrice.toFixed(2)}</span>
                         </div>
                         {isDiscount && (
@@ -736,15 +732,15 @@ export const Order = () => {
                 )}
 
                 {/** PROMO CODE */}
-                {page === 'payment' && (
+                {page === "payment" && (
                   <div className="flex mt-10">
                     <InputBase
                       className={`border-[1px] border-r-0 ${
                         isPromoCodeInvalid
-                          ? 'border-[#d32f2f]'
+                          ? "border-[#d32f2f]"
                           : isPromoCodeApplied
-                          ? 'border-light-green'
-                          : 'border-[#bdbdbd]'
+                          ? "border-light-green"
+                          : "border-[#bdbdbd]"
                       } rounded-l py-1.5 px-3`}
                       value={promoCode}
                       onChange={(e) => setPromoCode(e.target.value)}
@@ -757,22 +753,22 @@ export const Order = () => {
                       onClick={handleApplyPromoCode}
                       className={`!rounded-l-none !text-white !shadow-none !normal-case ${
                         isPromoCodeInvalid
-                          ? '!bg-[#d32f2f]'
+                          ? "!bg-[#d32f2f]"
                           : isPromoCodeApplied
-                          ? '!bg-light-green'
+                          ? "!bg-light-green"
                           : promoCode
-                          ? '!bg-sunset-orange'
-                          : '!bg-grey-body'
+                          ? "!bg-sunset-orange"
+                          : "!bg-grey-body"
                       }`}
                       disabled={!promoCode || isPromoCodeApplied}
                     >
-                      {isPromoCodeApplied ? 'Applied' : 'Apply'}
+                      {isPromoCodeApplied ? "Applied" : "Apply"}
                     </Button>
                   </div>
                 )}
 
                 {/** FINAL TOTAL PRICE */}
-                {page === 'payment' && (
+                {page === "payment" && (
                   <div className="mt-4">
                     <div className="totals font-light">
                       {isPromoCodeApplied && (
@@ -788,7 +784,7 @@ export const Order = () => {
                   </div>
                 )}
 
-                {page === 'payment' && (
+                {page === "payment" && (
                   <div className="payment-form mt-10">
                     {/* Additional payment details and upload picture form*/}
                     {/* You can add your form fields here */}
@@ -804,7 +800,7 @@ export const Order = () => {
                         onClick={() => {
                           setPaymentClicked(true);
                           openExternalLink(
-                            'https://forms.gle/RbuP9j3wqG5ZKAuaA'
+                            "https://forms.gle/RbuP9j3wqG5ZKAuaA"
                           );
                         }}
                         className="text-blue-600 cursor-pointer text-xl"
@@ -817,7 +813,7 @@ export const Order = () => {
                 {!isTotalsVisible && shoppingBag.length === 0 && <div></div>}
 
                 {/* BUTTON */}
-                {page === 'payment' ? (
+                {page === "payment" ? (
                   <button
                     className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400"
                     onClick={() => {
@@ -844,7 +840,7 @@ export const Order = () => {
               </div>
             )}
             {/* Thank you for purchase */}
-            {page === 'confirmation' && (
+            {page === "confirmation" && (
               <div>
                 <h4 className="text-grey-body xl:max-w-[50%]">
                   Your order has been submitted and you will receive a
@@ -853,9 +849,9 @@ export const Order = () => {
                 </h4>
 
                 <CustomButton
-                  text={'Back to home'}
-                  className={'mt-[6.88rem]'}
-                  link={'https://permikavancouver.com'}
+                  text={"Back to home"}
+                  className={"mt-[6.88rem]"}
+                  link={"https://permikavancouver.com"}
                 />
               </div>
             )}
@@ -863,7 +859,7 @@ export const Order = () => {
         </div>
 
         {/* Next Button Mobile View */}
-        {page !== 'confirmation' && page !== 'payment' && (
+        {page !== "confirmation" && page !== "payment" && (
           <div className="px-[6.3%] order-3 lg:hidden">
             <button
               className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400"

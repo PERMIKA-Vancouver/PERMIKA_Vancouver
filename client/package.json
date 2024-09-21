@@ -19,6 +19,7 @@
     "dayjs": "^1.11.9",
     "dotenv": "^16.4.1",
     "luxon": "^3.4.4",
+    "permika_vancouver": "file:",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet-async": "^2.0.4",
