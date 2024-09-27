@@ -49,7 +49,7 @@ export const NavigationBar = () => {
         className={`fixed z-30 ${
           show ? 'top-0' : '-top-[20vh]'
         } h-[10vh] sm:h-[15vh] lg:h-[20vh] w-full ${
-          GREEN_NAVBAR.includes(pageName) ? 'bg-forest-green' : 'bg-white'
+          pageName === 'events' ? 'bg-forest-green' : 'bg-white'
         } transition-[top] ease-in duration-500`}
       >
         <div className="absolute top-[50%] -translate-y-2/4 flex justify-between items-center w-full">
