@@ -47,7 +47,9 @@ export const NavigationBar = () => {
         className={`fixed z-30 ${
           show ? "top-0" : "-top-[20vh]"
         } h-[10vh] sm:h-[15vh] lg:h-[20vh] w-full ${
-          pageName === "events" || "gallery" ? "bg-forest-green" : "bg-white"
+          pageName === "events" || pageName === "gallery"
+            ? "bg-forest-green"
+            : "bg-white"
         } transition-[top] ease-in duration-500`}
       >
         <div className="absolute top-[50%] -translate-y-2/4 flex justify-between items-center w-full">
@@ -55,7 +57,7 @@ export const NavigationBar = () => {
             <Link to="/">
               <img
                 src={
-                  pageName === "events" || "gallery"
+                  pageName === "events" || pageName === "gallery"
                     ? "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/logo/cropped_logo_white.png"
                     : "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/logo/cropped_logo.png"
                 }
