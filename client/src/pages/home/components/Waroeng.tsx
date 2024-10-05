@@ -6,9 +6,9 @@ import {
   isWaroengPreOrderPassed,
 } from '../../../shared/utils/UpcomingWaroengUtils';
 
-import slide1 from './ketoprak_images/slide1.png';
-import slide2 from './ketoprak_images/slide2.png';
-import slide3 from './ketoprak_images/slide3.png';
+import slide1 from './ayam_geprek_images/1.jpg';
+import slide2 from './ayam_geprek_images/2.jpg';
+import slide3 from './ayam_geprek_images/3.jpg';
 
 export const Waroeng = () => {
   const nextWaroeng = getNextWaroeng();
