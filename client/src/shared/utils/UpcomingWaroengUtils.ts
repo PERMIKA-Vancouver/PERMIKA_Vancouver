@@ -1,5 +1,5 @@
-import dayjs from 'dayjs';
-import { DATE_FORMAT, UPCOMING_WAROENG } from '../data/waroeng';
+import { UPCOMING_WAROENG } from '../data/waroeng';
+const { DateTime } = require('luxon');
 
 const getNextWaroeng = (): number => {
   let nextWaroeng: number = -1;
@@ -31,5 +31,5 @@ export {
 
 // PRIVATE HELPER METHODS
 const checkDatePassed = (date: string): boolean => {
-  return dayjs(date, DATE_FORMAT).isBefore(dayjs());
+  return date < DateTime.now().setZone('America/Los_Angeles');
 };

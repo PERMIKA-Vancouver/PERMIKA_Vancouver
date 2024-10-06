@@ -25,6 +25,7 @@
     "mongoose": "^8.1.0",
     "nodemon": "^3.0.1",
     "rimraf": "^5.0.5",
+    "server": "file:",
     "typescript": "^5.3.3"
   },
   "description": ""
