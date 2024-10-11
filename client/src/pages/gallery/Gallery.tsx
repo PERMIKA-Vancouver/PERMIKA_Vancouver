@@ -34,47 +34,47 @@ export const Gallery = () => {
               <img
                 className="h-auto rounded-lg shadow-xl dark:shadow-gray-800"
                 src="https://hds.hel.fi/images/foundation/visual-assets/placeholders/image-s@2x.png"
-                alt="image description"
+                alt="placeholder"
               ></img>
               <img
                 className="h-auto rounded-lg shadow-xl dark:shadow-gray-800"
                 src="https://hds.hel.fi/images/foundation/visual-assets/placeholders/image-s@2x.png"
-                alt="image description"
+                alt="placeholder"
               ></img>
               <img
                 className="h-auto rounded-lg shadow-xl dark:shadow-gray-800"
                 src="https://hds.hel.fi/images/foundation/visual-assets/placeholders/image-s@2x.png"
-                alt="image description"
+                alt="placeholder"
               ></img>
               <img
                 className="h-auto rounded-lg shadow-xl dark:shadow-gray-800"
                 src="https://hds.hel.fi/images/foundation/visual-assets/placeholders/image-s@2x.png"
-                alt="image description"
+                alt="placeholder"
               ></img>
               <img
                 className="h-auto rounded-lg shadow-xl dark:shadow-gray-800"
                 src="https://hds.hel.fi/images/foundation/visual-assets/placeholders/image-s@2x.png"
-                alt="image description"
+                alt="placeholder"
               ></img>
               <img
                 className="h-auto rounded-lg shadow-xl dark:shadow-gray-800"
                 src="https://hds.hel.fi/images/foundation/visual-assets/placeholders/image-s@2x.png"
-                alt="image description"
+                alt="placeholder"
               ></img>
               <img
                 className="h-auto rounded-lg shadow-xl dark:shadow-gray-800"
                 src="https://hds.hel.fi/images/foundation/visual-assets/placeholders/image-s@2x.png"
-                alt="image description"
+                alt="placeholder"
               ></img>
               <img
                 className="h-auto rounded-lg shadow-xl dark:shadow-gray-800"
                 src="https://hds.hel.fi/images/foundation/visual-assets/placeholders/image-s@2x.png"
-                alt="image description"
+                alt="placeholder"
               ></img>
               <img
                 className="h-auto rounded-lg shadow-xl dark:shadow-gray-800"
                 src="https://hds.hel.fi/images/foundation/visual-assets/placeholders/image-s@2x.png"
-                alt="image description"
+                alt="placeholder"
               ></img>
             </div>
           </div>
