@@ -89,7 +89,18 @@ const EventDropdown: React.FC<DropdownProps> = ({
                       />
                       {index === images.length - 1 && (
                         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-md">
-                          <Link to="/gallery" className="text-white text-lg">
+                          <Link
+                            to="/gallery"
+                            state={{
+                              year,
+                              title,
+                              date,
+                              location,
+                              images,
+                              description,
+                            }}
+                            className="text-white text-lg"
+                          >
                             Gallery...
                           </Link>
                         </div>
