@@ -21,7 +21,7 @@ const PAGES = [
     path: 'secretpathonlyforexecsmerchandiseorders',
     element: <Orders />,
   },
-  { name: 'nextgen', path: 'nextgen', element: <Nextgen /> },
+  { name: 'PERMIKA NextGen', path: 'nextgen', element: <Nextgen /> },
 ];
 
 export { PAGES };
