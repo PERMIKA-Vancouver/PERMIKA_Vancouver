@@ -1,8 +1,7 @@
-// import { CustomButton } from '../../../shared/components/CustomButton';
 import { ScreenSizeProps } from '../../../shared/types/types';
 
 const WelcomingMsg =
-  "Hello there! Welcome to PERMIKA Vancouver's new chapter. We're so excited for you to experience both our signature and new events in this coming year. We also hope to create a community that you can call home while living in Vancouver. We're so glad you're here!";
+  "Hello and welcome! We're thrilled to kick off a new chapter with PERMIKA Vancouver and excited for you to join us. This year, get ready to experience a mix of our classic events and exciting new ones designed to bring us closer as a community. We're here to create a welcoming space that feels like home while you're in Vancouver. We're so glad to have you with us!";
 
 // Member sign up link
 // const LINK = 'https://forms.gle/z8AFC5m5PiJzKBEf7';
@@ -30,8 +29,8 @@ export const WelcomingMessage = ({
           <img
             src={
               isTabletPotraitView
-                ? 'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/welcome/core.webp'
-                : 'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/welcome/core_square.webp'
+                ? 'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/welcome/core.jpg'
+                : 'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/welcome/core_square.JPG'
             }
             alt="Core Team"
             className={`${
@@ -47,7 +46,7 @@ export const WelcomingMessage = ({
               ? 'mt-5'
               : isTabletPotraitView
               ? 'w-1/2 mt-10'
-              : 'w-[32%] relative ml-all'
+              : 'relative ml-all'
           }`}
         >
           <h3
@@ -59,7 +58,7 @@ export const WelcomingMessage = ({
                 : 'mb-11'
             }  text-black-text`}
           >
-            Welcoming message from PERMIKA 2023/24 Core team
+            Welcoming message from PERMIKA 2024/25 Core team
           </h3>
           <p
             className={`${
