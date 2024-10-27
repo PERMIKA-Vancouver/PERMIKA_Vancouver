@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import SlideDown from "react-slidedown/build/lib/slidedown";
-import { Link } from "react-router-dom";
-import "react-slidedown/lib/slidedown.css";
+import React, { useEffect, useState } from 'react';
+import SlideDown from 'react-slidedown/build/lib/slidedown';
+import { Link } from 'react-router-dom';
+import 'react-slidedown/lib/slidedown.css';
 
 interface DropdownProps {
   globalToggle: { isOpen: boolean; changeCounter: number };
@@ -26,25 +26,25 @@ const EventDropdown: React.FC<DropdownProps> = ({
   const formatDate = (dateString: string) => {
     const dateObject = new Date(dateString);
     const options: Intl.DateTimeFormatOptions = {
-      weekday: "long",
-      month: "long",
-      day: "numeric",
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
     };
-    let formattedDate = new Intl.DateTimeFormat("en-US", options).format(
+    let formattedDate = new Intl.DateTimeFormat('en-US', options).format(
       dateObject
     );
 
     const day = dateObject.getDate();
-    let suffix = "th";
+    let suffix = 'th';
     if (day % 10 === 1 && day !== 11) {
-      suffix = "st";
+      suffix = 'st';
     } else if (day % 10 === 2 && day !== 12) {
-      suffix = "nd";
+      suffix = 'nd';
     } else if (day % 10 === 3 && day !== 13) {
-      suffix = "rd";
+      suffix = 'rd';
     }
 
-    return formattedDate.replace(new RegExp(" " + day), ` ${day}${suffix}`);
+    return formattedDate.replace(new RegExp(' ' + day), ` ${day}${suffix}`);
   };
   const getYear = (date: string): number => {
     return parseInt(date.substring(0, 4));
