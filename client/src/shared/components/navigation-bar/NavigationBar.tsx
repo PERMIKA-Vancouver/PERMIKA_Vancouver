@@ -6,6 +6,8 @@ import { Footer } from '../Footer';
 import { SandwichNavbar } from './SandwichNavbar';
 import { MOBILE_WIDTH, TABLET_POTRAIT_WIDTH } from '../../data/common';
 
+const GREEN_NAVBAR = ['events', 'gallery', 'nextgen'];
+
 export const NavigationBar = () => {
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -47,7 +49,7 @@ export const NavigationBar = () => {
         className={`fixed z-30 ${
           show ? 'top-0' : '-top-[20vh]'
         } h-[10vh] sm:h-[15vh] lg:h-[20vh] w-full ${
-          pageName === 'events' ? 'bg-forest-green' : 'bg-white'
+          GREEN_NAVBAR.includes(pageName) ? 'bg-forest-green' : 'bg-white'
         } transition-[top] ease-in duration-500`}
       >
         <div className="absolute top-[50%] -translate-y-2/4 flex justify-between items-center w-full">
@@ -55,7 +57,7 @@ export const NavigationBar = () => {
             <Link to="/">
               <img
                 src={
-                  pageName === 'events'
+                  GREEN_NAVBAR.includes(pageName)
                     ? 'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/logo/cropped_logo_white.png'
                     : 'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/logo/cropped_logo.png'
                 }
@@ -71,6 +73,7 @@ export const NavigationBar = () => {
               {PAGES.filter(
                 (page) =>
                   page.name !== 'home' &&
+                  page.name !== 'gallery' &&
                   page.name !== 'merchandise' &&
                   page.name !== 'orders'
               ).map((page) => (
@@ -80,7 +83,7 @@ export const NavigationBar = () => {
                       className={`${
                         !isActive
                           ? 'text-light-grey'
-                          : pageName === 'events'
+                          : GREEN_NAVBAR.includes(pageName)
                           ? 'text-white'
                           : 'text-black-text'
                       } hover:text-sunset-orange navbar-text transition duration-500`}

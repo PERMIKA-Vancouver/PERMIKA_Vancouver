@@ -22,7 +22,7 @@ export const UpcomingEventComponent = () => {
         <h4 className="text-grey-body sm:text-white">
           {getNextEventFullDate(nextEvent)}
         </h4>
-        {!getEventType(nextEvent) && (
+        {getEventType(nextEvent) && (
           <div
             className="ml-auto flex hover:cursor-pointer"
             onClick={() => openExternalLink(eventLocLink)}
@@ -34,11 +34,18 @@ export const UpcomingEventComponent = () => {
           </div>
         )}
       </div>
-      <CustomButton
-        text={getNextEventButtonText(nextEvent)}
-        className={`w-[9.45rem]`}
-        link={getNextEventLink(nextEvent)}
-      />
+      <div className="flex gap-4">
+        <CustomButton
+          text={getNextEventButtonText(nextEvent)}
+          className={`w-[9.45rem]`}
+          link={getNextEventLink(nextEvent)}
+        />
+        <CustomButton
+          text={'Learn More'}
+          className="w-[9.45rem]"
+          link={'/nextgen'}
+        />
+      </div>
     </div>
   );
 };
