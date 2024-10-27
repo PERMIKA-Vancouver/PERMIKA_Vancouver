@@ -16,7 +16,7 @@ export const LandingComponent = () => {
         <CustomButton
           text={'Get tickets now!'}
           className={''}
-          link={'REPLACE WITH ACTUAL LINK'}
+          link={'https://forms.gle/jdeurQxe5ZyFGkh18'}
         />
       </div>
     </div>
