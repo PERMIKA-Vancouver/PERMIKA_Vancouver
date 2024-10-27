@@ -1,34 +1,38 @@
-import { UpcomingEvent } from "../types/types";
+import { UpcomingEvent } from '../types/types';
 const { DateTime } = require('luxon');
 const DATE_FORMAT = 'YYYY-MM-DD HH:mm';
 
 // Date format 'YYYY-MM-DD HH:mm'
 const UPCOMING_EVENTS: UpcomingEvent[] = [
   {
-    name: "HALU 2024",
-    date: DateTime.fromFormat('2024-09-21 13:00', 'yyyy-MM-dd HH:mm', { zone: 'America/Los_Angeles' }).toString(),
-    rsvp: "https://forms.gle/q5CoXxqfHgh5iDog9",
-    location: "KJRI Vancouver (1630 Alberni Street)",
-    locationLink: "https://maps.app.goo.gl/3DMajRakk1v4nwbG8",
+    name: 'PERMIKA NextGen',
+    date: DateTime.fromFormat('2024-11-23 12:30', 'yyyy-MM-dd HH:mm', {
+      zone: 'America/Los_Angeles',
+    }).toString(),
+    rsvp: 'https://forms.gle/jdeurQxe5ZyFGkh18',
+    location:
+      'Holiday Inn & Suites Vancouver Downtown, Columbia Ballroom (Second Floor)',
+    locationLink: 'https://maps.app.goo.gl/qRenaxpoStKvzx7Q7',
     type: 0,
   },
 ];
 
 const UPCOMING_EVENTS_DEFAULT: UpcomingEvent = {
-  name: "No Upcoming Events",
-  date: "0000-00-00 00:00",
-  rsvp: "",
-  location: "",
-  locationLink: "",
+  name: 'No Upcoming Events',
+  date: '0000-00-00 00:00',
+  rsvp: '',
+  location: '',
+  locationLink: '',
   type: 0,
 };
 
 // const EVENT_DESCRIPTION = "Save yourself a seat for the event below!";
-const EVENT_DESCRIPTION = "Connect with the Indonesian community!";
-const EVENT_BUTTON = "JOIN";
+const EVENT_DESCRIPTION =
+  'Join us for insights from industry experts and network with professionals!';
+const EVENT_BUTTON = 'RSVP Now';
 
 const HIRING_DESCRIPTION = "Be part of PERMIKA's family 2024/2025";
-const HIRING_BUTTON = "Join PERMIKA";
+const HIRING_BUTTON = 'Join PERMIKA';
 
 export {
   DATE_FORMAT,
@@ -39,4 +43,3 @@ export {
   HIRING_DESCRIPTION,
   HIRING_BUTTON,
 };
-
