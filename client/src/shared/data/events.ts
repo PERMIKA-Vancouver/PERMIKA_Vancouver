@@ -10,8 +10,7 @@ const UPCOMING_EVENTS: UpcomingEvent[] = [
       zone: 'America/Los_Angeles',
     }).toString(),
     rsvp: 'https://forms.gle/jdeurQxe5ZyFGkh18',
-    location:
-      'Holiday Inn & Suites Vancouver Downtown, Columbia Ballroom (Second Floor)',
+    location: 'Holiday Inn Downtown, Columbia Ballroom',
     locationLink: 'https://maps.app.goo.gl/qRenaxpoStKvzx7Q7',
     type: 0,
   },
