@@ -46,7 +46,7 @@ export const WelcomingMessage = ({
               ? 'mt-5'
               : isTabletPotraitView
               ? 'w-1/2 mt-10'
-              : 'relative ml-all'
+              : 'w-[32%] relative ml-all'
           }`}
         >
           <h3
