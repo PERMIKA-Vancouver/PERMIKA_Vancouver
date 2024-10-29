@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface Data {
   year: string;
@@ -13,7 +13,7 @@ interface Data {
 export const Gallery = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [maxHeight, setMaxHeight] = useState("none");
+  const [maxHeight, setMaxHeight] = useState('none');
 
   const payload: Data = {
     year: location.state.year,
@@ -35,7 +35,7 @@ export const Gallery = () => {
       height = `${Math.ceil(payload.images?.length / 2) * 400}px`;
     } else {
       // For smaller screens, no maxHeight
-      height = "none";
+      height = 'none';
     }
 
     setMaxHeight(height);
@@ -44,43 +44,43 @@ export const Gallery = () => {
   useEffect(() => {
     // redirect to events page if no payload title (or no payload at all)
     if (!payload.title) {
-      navigate("/events", { replace: true });
+      navigate('/events', { replace: true });
     }
   });
 
   useEffect(() => {
     updateMaxHeight(); // Initial
-    window.addEventListener("resize", updateMaxHeight);
-    return () => window.removeEventListener("resize", updateMaxHeight);
+    window.addEventListener('resize', updateMaxHeight);
+    return () => window.removeEventListener('resize', updateMaxHeight);
   });
 
   const formatDate = (dateString: string | undefined) => {
-    if (!dateString) return "No date available";
+    if (!dateString) return 'No date available';
     const dateObject = new Date(dateString);
 
     if (isNaN(dateObject.getTime())) {
-      return "Invalid date"; // Fallback for invalid date formats
+      return 'Invalid date'; // Fallback for invalid date formats
     }
     const options: Intl.DateTimeFormatOptions = {
-      weekday: "long",
-      month: "long",
-      day: "numeric",
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
     };
-    let formattedDate = new Intl.DateTimeFormat("en-US", options).format(
+    let formattedDate = new Intl.DateTimeFormat('en-US', options).format(
       dateObject
     );
 
     const day = dateObject.getDate();
-    let suffix = "th";
+    let suffix = 'th';
     if (day % 10 === 1 && day !== 11) {
-      suffix = "st";
+      suffix = 'st';
     } else if (day % 10 === 2 && day !== 12) {
-      suffix = "nd";
+      suffix = 'nd';
     } else if (day % 10 === 3 && day !== 13) {
-      suffix = "rd";
+      suffix = 'rd';
     }
 
-    return formattedDate.replace(new RegExp(" " + day), ` ${day}${suffix}`);
+    return formattedDate.replace(new RegExp(' ' + day), ` ${day}${suffix}`);
   };
 
   return (
@@ -114,7 +114,7 @@ export const Gallery = () => {
           </div>
           <div className="col-start-2 row-start-3 col-span-6">
             <div
-              style={maxHeight !== "none" ? { maxHeight } : {}}
+              style={maxHeight !== 'none' ? { maxHeight } : {}}
               className="flex flex-col content-center flex-wrap overflow-y-auto gap-4"
             >
               {payload.images?.map((src, index) => (
