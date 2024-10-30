@@ -8,16 +8,15 @@ export const LandingComponent = () => {
           PERMIKA Next<span className="text-sunset-orange">Gen</span>
         </h1>
         <h4 className="text-white text-[1.125rem] sm:text-[21px]">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting.
+          Connect with industry leaders at our upcoming panel and networking
+          event! Gain insights from expert speakers, explore emerging trends,
+          and expand your professional network. Don't miss this opportunity to
+          learn and make valuable connections!
         </h4>
         <CustomButton
           text={'Get tickets now!'}
           className={''}
-          link={'REPLACE WITH ACTUAL LINK'}
+          link={'https://forms.gle/jdeurQxe5ZyFGkh18'}
         />
       </div>
     </div>

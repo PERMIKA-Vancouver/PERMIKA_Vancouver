@@ -26,3 +26,4 @@ yarn-error.log*
 .env
 key.json
 *dist
+key.json
