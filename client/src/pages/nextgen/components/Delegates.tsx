@@ -3,7 +3,7 @@ import { DELEGATES } from "../data/rundown";
 export const Delegates = () => {
   const len = DELEGATES.length;
   return (
-    <div className="min-h-[50vh] bg-forest-green py-36 lg:flex items-center justify-center pl-all lg:!pl-0">
+    <div className="min-h-[50vh] bg-forest-green py-36 lg:flex pl-all ">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-9 lg:gap-28">
         <div className="text-left col-span-1 text-white">
           <h2>Delegates</h2>
