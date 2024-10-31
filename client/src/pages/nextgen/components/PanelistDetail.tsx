@@ -15,57 +15,60 @@ export const PanelistDetail = () => {
             />
             <div className="w-[285px]">
               <p className="text-3xl">{item.name}</p>
-              <p className="text-xl text-black/50 mt-3 mb-5">
-                <span style={{ color: "#CC7200" }}>{item.role}</span> at{" "}
-                <span className="italic">{item.place}</span>
+              <p
+                style={{ color: "#CC7200", fontWeight: "550" }}
+                className="text-2xl text-black/50 mt-3"
+              >
+                {item.role}
               </p>
+              <p className="text-md text-black/50 mb-5 italic">{item.remark}</p>
               <p className="text-base text-black/50 text-justify">{item.bio}</p>
               <p className="text-base text-black/50 font-light mt-5 mb-4">
                 Past Experiences
               </p>
               <ul>
-                <li className="text-xl md:text-2xl">
+                <li className="text-lg md:text-xl">
                   {item.pastExperiences[0].position}
                 </li>
                 <div className="divider">
                   <p
-                    className="text-lg md:text-xl"
+                    className="text-md md:text-lg"
                     style={{ color: "#CC7200" }}
                   >
                     {item.pastExperiences[0].organization}
                   </p>
-                  <p className="text-lg md:text-xl text-black/50">
+                  <p className="text-md md:text-lg text-black/50">
                     {item.pastExperiences[0].year}
                   </p>
                 </div>
-                <li className="text-xl md:text-2xl">
+                <li className="text-lg md:text-xl">
                   {item.pastExperiences[1].position}
                 </li>
                 <div className="divider">
                   <p
-                    className="text-lg md:text-xl"
+                    className="text-md md:text-lg"
                     style={{ color: "#CC7200" }}
                   >
                     {item.pastExperiences[1].organization}
                   </p>
-                  <p className="text-lg md:text-xl text-black/50">
+                  <p className="text-md md:text-lg text-black/50">
                     {item.pastExperiences[1].year}
                   </p>
                 </div>
-                <li className="text-xl md:text-2xl">
+                <li className="text-lg md:text-xl">
                   {item.pastExperiences[2].position}
-                  <div style={{ marginLeft: "14.5px" }}>
-                    <p
-                      className="text-lg md:text-xl"
-                      style={{ color: "#CC7200" }}
-                    >
-                      {item.pastExperiences[0].organization}
-                    </p>
-                    <p className="text-lg md:text-xl text-black/50">
-                      {item.pastExperiences[0].year}
-                    </p>
-                  </div>
                 </li>
+                <div style={{ marginLeft: "14.5px" }}>
+                  <p
+                    className="text-md md:text-lg"
+                    style={{ color: "#CC7200" }}
+                  >
+                    {item.pastExperiences[2].organization}
+                  </p>
+                  <p className="text-md md:text-lg text-black/50">
+                    {item.pastExperiences[2].year}
+                  </p>
+                </div>
               </ul>
             </div>
           </div>

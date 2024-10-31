@@ -90,39 +90,48 @@ export const DelegatesDetail = () => {
                   Past Experiences
                 </p>
                 <ul>
-                  <li className="text-2xl">
+                  <li className="text-lg md:text-xl">
                     {item.pastExperiences[0].position}
                   </li>
                   <div className="divider">
-                    <p className="text-xl" style={{ color: "#CC7200" }}>
+                    <p
+                      className="text-md md:text-lg"
+                      style={{ color: "#CC7200" }}
+                    >
                       {item.pastExperiences[0].organization}
                     </p>
-                    <p className="text-xl text-black/50">
+                    <p className="text-md md:text-lg text-black/50">
                       {item.pastExperiences[0].year}
                     </p>
                   </div>
-                  <li className="text-2xl">
+                  <li className="text-lg md:text-xl">
                     {item.pastExperiences[1].position}
                   </li>
                   <div className="divider">
-                    <p className="text-xl" style={{ color: "#CC7200" }}>
+                    <p
+                      className="text-md md:text-lg"
+                      style={{ color: "#CC7200" }}
+                    >
                       {item.pastExperiences[1].organization}
                     </p>
-                    <p className="text-xl text-black/50">
+                    <p className="text-md md:text-lg text-black/50">
                       {item.pastExperiences[1].year}
                     </p>
                   </div>
-                  <li className="text-2xl">
+                  <li className="text-lg md:text-xl">
                     {item.pastExperiences[2].position}
-                    <div style={{ marginLeft: "14.5px" }}>
-                      <p className="text-xl" style={{ color: "#CC7200" }}>
-                        {item.pastExperiences[0].organization}
-                      </p>
-                      <p className="text-xl text-black/50">
-                        {item.pastExperiences[0].year}
-                      </p>
-                    </div>
                   </li>
+                  <div style={{ marginLeft: "14.5px" }}>
+                    <p
+                      className="text-md md:text-lg"
+                      style={{ color: "#CC7200" }}
+                    >
+                      {item.pastExperiences[0].organization}
+                    </p>
+                    <p className="text-md md:text-lg text-black/50">
+                      {item.pastExperiences[0].year}
+                    </p>
+                  </div>
                 </ul>
               </div>
             </div>
