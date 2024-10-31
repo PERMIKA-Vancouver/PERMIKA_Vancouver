@@ -23,10 +23,10 @@ export const Delegates = () => {
               </>
               <>
                 <h4 className="hidden md:block text-white">
-                  <a href={"#" + item.name}>{item.name}</a>
+                  <a href={"#" + index.toString()}>{item.name}</a>
                 </h4>
                 <p className="block md:hidden text-white">
-                  <a href={"#" + item.name}>{item.name}</a>
+                  <a href={"#" + index.toString()}>{item.name}</a>
                 </p>
               </>
             </div>

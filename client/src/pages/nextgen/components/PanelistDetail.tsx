@@ -6,7 +6,7 @@ export const PanelistDetail = () => {
     <div className="min-h-[50vh] py-36 flex flex-wrap items-center justify-center lg:!pl-0">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-9 lg:gap-28">
         {PANELIST.map((item, index) => (
-          <div key={index} className="">
+          <div key={index} id={index.toString()} className="">
             <img
               className="h-[285px] w-[285px]"
               src={item.image}

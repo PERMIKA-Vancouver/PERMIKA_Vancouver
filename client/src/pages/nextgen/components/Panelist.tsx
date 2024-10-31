@@ -22,8 +22,12 @@ export const Panelist = () => {
                 <p className="block md:hidden text-white/50">{index + 1}</p>
               </>
               <>
-                <h4 className="hidden md:block text-white">{item.name}</h4>
-                <p className="block md:hidden text-white">{item.name}</p>
+                <h4 className="hidden md:block text-white">
+                  <a href={"#" + index.toString()}>{item.name}</a>
+                </h4>
+                <p className="block md:hidden text-white">
+                  <a href={"#" + index.toString()}>{item.name}</a>
+                </p>
               </>
             </div>
           ))}

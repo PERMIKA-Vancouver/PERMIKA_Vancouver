@@ -9,7 +9,7 @@ export const DelegatesDetail = () => {
           <div
             key={index}
             className="lg:w-[1000px] flex delegate"
-            id={item.name}
+            id={index.toString()}
             style={
               index !== 0
                 ? {
