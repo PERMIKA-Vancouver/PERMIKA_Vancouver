@@ -2,13 +2,14 @@ html,
 body {
   overflow-x: hidden;
   max-height: 100%;
+  scroll-behavior: smooth;
 }
 
 /* TEXT STYLE */
 
 /* H1: RegoBook60 */
 h1 {
-  font-family: 'RegoBook';
+  font-family: "RegoBook";
   font-size: 3.75rem;
   font-style: normal;
   font-weight: 300;
@@ -18,7 +19,7 @@ h1 {
 
 /* H2: RegoBook48 */
 h2 {
-  font-family: 'RegoBook';
+  font-family: "RegoBook";
   font-size: 3rem;
   font-style: normal;
   font-weight: 300;
@@ -28,7 +29,7 @@ h2 {
 
 /* H3: RegoBook30 */
 h3 {
-  font-family: 'RegoBook';
+  font-family: "RegoBook";
   font-size: 1.875rem;
   font-style: normal;
   font-weight: 300;
@@ -38,7 +39,7 @@ h3 {
 
 /* H4: AveBook21 */
 h4 {
-  font-family: 'AveBook';
+  font-family: "AveBook";
   font-size: 1.3125rem;
   font-style: normal;
   font-weight: 350;
@@ -48,7 +49,7 @@ h4 {
 
 /* Sub: RegoBook24 */
 .sub {
-  font-family: 'RegoBook';
+  font-family: "RegoBook";
   font-size: 1.5rem;
   font-style: normal;
   font-weight: 300;
@@ -58,7 +59,7 @@ h4 {
 
 /* T1: AveRom21 */
 .t1 {
-  font-family: 'AveRom';
+  font-family: "AveRom";
   font-size: 1.3125rem;
   font-style: normal;
   font-weight: 400;
@@ -68,7 +69,7 @@ h4 {
 
 /* Body: AveBook18 */
 p {
-  font-family: 'AveBook';
+  font-family: "AveBook";
   font-size: 1.1rem;
   font-style: normal;
   font-weight: 400;
@@ -78,7 +79,7 @@ p {
 
 /* ButtonText: AveMed18 */
 .button_text {
-  font-family: 'AveMed';
+  font-family: "AveMed";
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 500;
@@ -87,7 +88,7 @@ p {
 }
 
 .navbar-text {
-  font-family: 'RegoBook';
+  font-family: "RegoBook";
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 300;
@@ -124,7 +125,7 @@ p {
 @media only screen and (max-width: 639px) {
   /* M-H1: RegoReg48 */
   h1 {
-    font-family: 'RegoReg';
+    font-family: "RegoReg";
     font-size: 3rem;
     font-style: normal;
     font-weight: 400;
@@ -134,7 +135,7 @@ p {
 
   /* M-H2: RegoReg30 */
   h2 {
-    font-family: 'RegoReg';
+    font-family: "RegoReg";
     font-size: 1.875rem;
     font-style: normal;
     font-weight: 400;
@@ -144,7 +145,7 @@ p {
 
   /* M-H3: RegoReg20 */
   h3 {
-    font-family: 'RegoReg';
+    font-family: "RegoReg";
     font-size: 1.25rem;
     font-style: normal;
     font-weight: 400;
@@ -154,7 +155,7 @@ p {
 
   /* M-Sub: AveRom18 */
   .sub {
-    font-family: 'AveRom';
+    font-family: "AveRom";
     font-size: 1.125rem;
     font-style: normal;
     font-weight: 400;
@@ -164,7 +165,7 @@ p {
 
   /* M-Body: AveRom15 */
   p {
-    font-family: 'AveRom';
+    font-family: "AveRom";
     font-size: 0.9375rem;
     font-style: normal;
     font-weight: 400;
@@ -174,7 +175,7 @@ p {
 
   /* M-Button: AveMed15 */
   .button_text {
-    font-family: 'AveMed';
+    font-family: "AveMed";
     font-size: 0.9375rem;
     font-style: normal;
     font-weight: 500;
@@ -184,7 +185,7 @@ p {
 
   /* M-Footer: AveRom16 */
   .footer {
-    font-family: 'AveRom';
+    font-family: "AveRom";
     font-size: 1rem;
     font-style: normal;
     font-weight: 400;

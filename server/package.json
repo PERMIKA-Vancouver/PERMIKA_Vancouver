@@ -19,7 +19,7 @@
     "concurrently": "^8.2.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
-    "express": "^4.19.2",
+    "express": "^4.21.1",
     "googleapis": "^140.0.1",
     "mongodb": "^6.3.0",
     "mongoose": "^8.1.0",
