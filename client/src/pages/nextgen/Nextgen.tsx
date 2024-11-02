@@ -12,8 +12,9 @@ export const Nextgen = () => {
       <Rundown />
       <Panelist />
       <PanelistDetail />
-      <Delegates />
-      <DelegatesDetail />
+      {/* *** HIDDEN FOR TIER 3 *** */}
+      {/* <Delegates /> */}
+      {/* <DelegatesDetail /> */}
     </>
   );
 };

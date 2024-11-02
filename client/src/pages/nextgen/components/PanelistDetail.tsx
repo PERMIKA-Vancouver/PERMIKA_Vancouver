@@ -13,7 +13,7 @@ export const PanelistDetail = () => {
               id={item.name}
               alt={item.name}
             />
-            <div className="w-[285px]">
+            <div className="w-[285px] mt-4">
               <p className="text-3xl">{item.name}</p>
               <p
                 style={{ color: "#CC7200", fontWeight: "550" }}
@@ -23,53 +23,43 @@ export const PanelistDetail = () => {
               </p>
               <p className="text-md text-black/50 mb-5 italic">{item.remark}</p>
               <p className="text-base text-black/50 text-justify">{item.bio}</p>
-              <p className="text-base text-black/50 font-light mt-5 mb-4">
-                Past Experiences
-              </p>
-              <ul>
-                <li className="text-lg md:text-xl">
-                  {item.pastExperiences[0].position}
-                </li>
-                <div className="divider">
-                  <p
-                    className="text-md md:text-lg"
-                    style={{ color: "#CC7200" }}
-                  >
-                    {item.pastExperiences[0].organization}
+
+              {item.pastExperiences.length > 0 && (
+                <div>
+                  <p className="text-base text-black/50 font-light mt-5 mb-4">
+                    Past Experiences
                   </p>
-                  <p className="text-md md:text-lg text-black/50">
-                    {item.pastExperiences[0].year}
-                  </p>
+                  <ul>
+                    {item.pastExperiences?.map((i, index) => (
+                      <div>
+                        <li className="text-lg md:text-xl">{i.position}</li>
+                        <div
+                          className={
+                            index !== item.pastExperiences.length - 1
+                              ? "divider"
+                              : ""
+                          }
+                          style={
+                            index == item.pastExperiences.length - 1
+                              ? { marginLeft: "14.5px" }
+                              : {}
+                          }
+                        >
+                          <p
+                            className="text-md md:text-lg"
+                            style={{ color: "#CC7200" }}
+                          >
+                            {i.organization}
+                          </p>
+                          <p className="text-md md:text-lg text-black/50">
+                            {i.year}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </ul>
                 </div>
-                <li className="text-lg md:text-xl">
-                  {item.pastExperiences[1].position}
-                </li>
-                <div className="divider">
-                  <p
-                    className="text-md md:text-lg"
-                    style={{ color: "#CC7200" }}
-                  >
-                    {item.pastExperiences[1].organization}
-                  </p>
-                  <p className="text-md md:text-lg text-black/50">
-                    {item.pastExperiences[1].year}
-                  </p>
-                </div>
-                <li className="text-lg md:text-xl">
-                  {item.pastExperiences[2].position}
-                </li>
-                <div style={{ marginLeft: "14.5px" }}>
-                  <p
-                    className="text-md md:text-lg"
-                    style={{ color: "#CC7200" }}
-                  >
-                    {item.pastExperiences[2].organization}
-                  </p>
-                  <p className="text-md md:text-lg text-black/50">
-                    {item.pastExperiences[2].year}
-                  </p>
-                </div>
-              </ul>
+              )}
             </div>
           </div>
         ))}
