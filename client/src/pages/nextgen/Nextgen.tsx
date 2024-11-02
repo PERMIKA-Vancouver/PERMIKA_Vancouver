@@ -2,8 +2,9 @@ import { LandingComponent } from "./components/LandingComponent";
 import { Rundown } from "./components/Rundown";
 import { Panelist } from "./components/Panelist";
 import { PanelistDetail } from "./components/PanelistDetail";
-import { Delegates } from "./components/Delegates";
-import { DelegatesDetail } from "./components/DelegatesDetail";
+// *** HIDDEN FOR TIER 3  ***
+// import { Delegates } from "./components/Delegates";
+// import { DelegatesDetail } from "./components/DelegatesDetail";
 
 export const Nextgen = () => {
   return (

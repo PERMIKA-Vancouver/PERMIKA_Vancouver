@@ -40,7 +40,7 @@ export const PanelistDetail = () => {
                               : ""
                           }
                           style={
-                            index == item.pastExperiences.length - 1
+                            index === item.pastExperiences.length - 1
                               ? { marginLeft: "14.5px" }
                               : {}
                           }
