@@ -3,8 +3,8 @@ import Ray from "../../../assets/Ray - Profile Photo.jpg";
 import Shadrina from "../../../assets/Shadrina Wicaksono.jpg";
 
 export const SCHEDULE = [
-  { time: "12:30 - 01:00 PM", activity: "Open registeration" },
-  { time: "01:00 - 02:00 PM", activity: "Panel Sessions" },
+  { time: "12:30 - 01:00 PM", activity: "Open registration" },
+  { time: "01:00 - 02:00 PM", activity: "Panel Session" },
   { time: "02:00 - 04:00 PM", activity: "Networking Session" },
   { time: "04:00 - 04:30 PM", activity: "Closing" },
 ];
@@ -55,7 +55,7 @@ export const PANELIST = [
         year: "2017 - 2019",
       },
       {
-        position: "Creative director",
+        position: "Creative DIRECTOR",
         organization: "SFUIA",
         year: "2018 - 2020",
       },
