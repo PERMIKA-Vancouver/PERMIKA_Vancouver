@@ -26,7 +26,7 @@ export const PANELIST = [
     bio: "Shadrina is a strategic marketer with 5 years of experience spanning SaaS, higher education, e-commerce, sports, and financial service. During her academic days, Shadrina dedicated four years to GISAU and later helped kickstart PERMIKA and IPA Vancouver as a founding member. In her down time, Shadrina channels her creativity through singing, songwriting, and thrifting for the soul!  ",
     pastExperiences: [
       {
-        position: "Events Marketing Co-op",
+        position: "Events Marketing - Coop",
         organization: "Hootsuite",
         year: "2018 - 2018",
       },
@@ -39,6 +39,21 @@ export const PANELIST = [
         position: "Founding Member",
         organization: "PERMIKA Vancouver",
         year: "2018 - 2019",
+      },
+      {
+        position: "Marketing Assistant - Coop",
+        organization: "UBC Sauder School of Business",
+        year: "2019 - 2020",
+      },
+      {
+        position: "Marketing Intern",
+        organization: "Shopee",
+        year: "2020 - 2021",
+      },
+      {
+        position: "Marketing Specialist",
+        organization: "Glotman Simpson Cycling",
+        year: "2021 - 2023",
       },
     ],
   },
