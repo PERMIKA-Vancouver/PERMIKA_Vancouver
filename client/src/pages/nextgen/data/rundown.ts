@@ -26,24 +26,14 @@ export const PANELIST = [
     bio: "Shadrina is a strategic marketer with 5 years of experience spanning SaaS, higher education, e-commerce, sports, and financial service. During her academic days, Shadrina dedicated four years to GISAU and later helped kickstart PERMIKA and IPA Vancouver as a founding member. In her down time, Shadrina channels her creativity through singing, songwriting, and thrifting for the soul!  ",
     pastExperiences: [
       {
-        position: "Events Marketing - Coop",
-        organization: "Hootsuite",
-        year: "2018 - 2018",
+        position: "Representative",
+        organization: "IPA Vancouver",
+        year: "2023 - Present",
       },
       {
-        position: "Vice President",
-        organization: "GISAU",
-        year: "2018 - 2019",
-      },
-      {
-        position: "Founding Member",
-        organization: "PERMIKA Vancouver",
-        year: "2018 - 2019",
-      },
-      {
-        position: "Marketing Assistant - Coop",
-        organization: "UBC Sauder School of Business",
-        year: "2019 - 2020",
+        position: "Marketing Specialist",
+        organization: "Glotman Simpson Cycling",
+        year: "2021 - 2023",
       },
       {
         position: "Marketing Intern",
@@ -51,9 +41,39 @@ export const PANELIST = [
         year: "2020 - 2021",
       },
       {
-        position: "Marketing Specialist",
-        organization: "Glotman Simpson Cycling",
-        year: "2021 - 2023",
+        position: "Outreach Director",
+        organization: "GISAU",
+        year: "2019 - 2020",
+      },
+      {
+        position: "Marketing Assistant - Coop",
+        organization: "UBC Sauder School of Business",
+        year: "2019 - 2020",
+      },
+      {
+        position: "Founding Member",
+        organization: "PERMIKA Vancouver",
+        year: "2018 - 2019",
+      },
+      {
+        position: "Vice President",
+        organization: "GISAU",
+        year: "2018 - 2019",
+      },
+      {
+        position: "Events Marketing - Coop",
+        organization: "Hootsuite",
+        year: "2018",
+      },
+      {
+        position: "Marketing Director",
+        organization: "GISAU",
+        year: "2017 - 2018",
+      },
+      {
+        position: "Director of Innovation",
+        organization: "GISAU",
+        year: "2016 - 2017",
       },
     ],
   },
@@ -65,14 +85,14 @@ export const PANELIST = [
     bio: "Deodatus is a professional account manager blending his economics background from SFU with a natural flair for connection. An extrovert at heart, his love for people fuels his passion for food, helping him thrive in the seafood industry. During his studies, he dedicated his time to organizing engaging events for SFUIA, honing his skills in networking and collaboration. Known as a big foodie, you can find Deodatus exploring the latest culinary hotspots and sharing his food adventures with friends and colleagues.",
     pastExperiences: [
       {
-        position: "Event Coordinator",
-        organization: "Mudika Vancouver",
-        year: "2017 - 2019",
-      },
-      {
         position: "Creative DIRECTOR",
         organization: "SFUIA",
         year: "2018 - 2020",
+      },
+      {
+        position: "Event Coordinator",
+        organization: "Mudika Vancouver",
+        year: "2017 - 2019",
       },
     ],
   },
