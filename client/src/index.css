@@ -3,31 +3,43 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'RegoBook';
-  src: local('regola-book'),
-    url('./fonts/Regola/regola-book.ttf') format('truetype');
+  font-family: "RegoBook";
+  src: local("regola-book"),
+    url("./fonts/Regola/regola-book.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'RegoReg';
-  src: local('regola-regular'),
-    url('./fonts/Regola/regola-regular.ttf') format('truetype');
+  font-family: "RegoReg";
+  src: local("regola-regular"),
+    url("./fonts/Regola/regola-regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'AveRom';
-  src: local('AvenirRoman'),
-    url('./fonts/Avenir/AvenirRoman.otf') format('opentype');
+  font-family: "AveRom";
+  src: local("AvenirRoman"),
+    url("./fonts/Avenir/AvenirRoman.otf") format("opentype");
 }
 
 @font-face {
-  font-family: 'AveMed';
-  src: local('AvenirMedium'),
-    url('./fonts/Avenir/AvenirMedium.ttf') format('truetype');
+  font-family: "AveMed";
+  src: local("AvenirMedium"),
+    url("./fonts/Avenir/AvenirMedium.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'AveBook';
-  src: local('AvenirBook'),
-    url('./fonts/Avenir/AvenirBook.ttf') format('truetype');
+  font-family: "AveBook";
+  src: local("AvenirBook"),
+    url("./fonts/Avenir/AvenirBook.ttf") format("truetype");
+}
+
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 }
