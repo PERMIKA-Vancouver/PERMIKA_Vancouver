@@ -21,7 +21,7 @@ export const DelegatesDetail = () => {
           >
             <div className="left-side w-1/3">
               <img
-                className="w-100% lg:h-[285px] lg:w-[285px]"
+                className="w-100% lg:h-[285px] lg:w-[285px] mb-5"
                 src={item.image}
                 id={item.name}
                 alt={item.name}
@@ -34,30 +34,45 @@ export const DelegatesDetail = () => {
               </div>
               {/* ONLY SHOW WHEN ON PHONE */}
               <div className="block lg:hidden">
-                <p className="text-base text-black/50 font-light mt-5 mb-4">
-                  Past Experiences
-                </p>
-                <ul>
-                {item.pastExperiences && item.pastExperiences.length > 0 ? (
-                    item.pastExperiences.map((experience, j) => (
-                      <div key={j}>
-                        <li className="text-lg">
-                          {experience.position}
-                        </li>
-                        <div className="divider">
-                          <p className="text-md" style={{ color: "#CC7200" }}>
-                            {experience.organization}
-                          </p>
-                          <p className="text-md text-black/50">
-                            {experience.year}
-                          </p>
+                {item.pastExperiences.length > 0 && (
+                  <div>
+                    <p className="text-base text-black/50 font-light mt-5 mb-4">
+                      Past Experiences
+                    </p>
+                    <ul className="h-[260px] overflow-y-auto">
+                      {item.pastExperiences?.map((i, index) => (
+                        <div>
+                          <li className="text-lg md:text-xl">{i.position}</li>
+                          <div
+                            className={`
+                            ${
+                              index !== item.pastExperiences.length - 1
+                                ? "divider"
+                                : ""
+                            }`}
+                            style={
+                              index === item.pastExperiences.length - 1
+                                ? { marginLeft: "21px" }
+                                : {}
+                            }
+                          >
+                            <p
+                              className="text-md md:text-lg"
+                              style={{ color: "#CC7200" }}
+                            >
+                              {i.organization}
+                            </p>
+                            {i.year !== "no year" && (
+                              <p className="text-md md:text-lg text-black/50">
+                                {i.year}
+                              </p>
+                            )}
+                          </div>
                         </div>
-                      </div>
-                    ))
-                  ) : (
-                    <p>No past experiences available.</p>
-                  )}
-                </ul>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
               {/* UP TO THIS PART */}
             </div>
@@ -72,32 +87,46 @@ export const DelegatesDetail = () => {
               {/* UP TO THIS PART */}
               <p className="text-base text-black/50 text-justify">{item.bio}</p>
 
-              {/* ONLY SHOW WHEN ON DESKTOP */}
               <div className="hidden lg:block">
-                <p className="text-base text-black/50 font-light mt-5 mb-4">
-                  Past Experiences
-                </p>
-                <ul>
-                {item.pastExperiences && item.pastExperiences.length > 0 ? (
-                    item.pastExperiences.map((experience, j) => (
-                      <div key={j}>
-                        <li className="text-lg md:text-xl">
-                          {experience.position}
-                        </li>
-                        <div className="divider">
-                          <p className="text-md md:text-lg" style={{ color: "#CC7200" }}>
-                            {experience.organization}
-                          </p>
-                          <p className="text-md md:text-lg text-black/50">
-                            {experience.year}
-                          </p>
+                {item.pastExperiences.length > 0 && (
+                  <div>
+                    <p className="text-base text-black/50 font-light mt-5 mb-4">
+                      Past Experiences
+                    </p>
+                    <ul className="h-[260px] overflow-y-auto">
+                      {item.pastExperiences?.map((i, index) => (
+                        <div>
+                          <li className="text-lg md:text-xl">{i.position}</li>
+                          <div
+                            className={`
+                            ${
+                              index !== item.pastExperiences.length - 1
+                                ? "divider"
+                                : ""
+                            }`}
+                            style={
+                              index === item.pastExperiences.length - 1
+                                ? { marginLeft: "21px" }
+                                : {}
+                            }
+                          >
+                            <p
+                              className="text-md md:text-lg"
+                              style={{ color: "#CC7200" }}
+                            >
+                              {i.organization}
+                            </p>
+                            {i.year !== "no year" && (
+                              <p className="text-md md:text-lg text-black/50">
+                                {i.year}
+                              </p>
+                            )}
+                          </div>
                         </div>
-                      </div>
-                    ))
-                  ) : (
-                    <p>No past experiences available.</p>
-                  )}
-                </ul>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
           </div>

@@ -1,6 +1,4 @@
-import Aji from "../../../assets/Aji Putra.jpeg";
 import Anastasya from "../../../assets/Anastasya Abigail.jpg";
-import Calvin from "../../../assets/Calvin Wahyudi.JPG";
 import Dom from "../../../assets/Dominique Suraya.jpeg";
 import Elaine from "../../../assets/Elaine Kojongian.JPG";
 import Fathia from "../../../assets/Fathia Ulya.jpeg";
@@ -11,6 +9,8 @@ import Semuel from "../../../assets/Semuel Kadarusman.jpeg";
 import Kevin from "../../../assets/Kevin.jpg";
 import Ray from "../../../assets/Ray - Profile Photo.jpg";
 import Shadrina from "../../../assets/Shadrina Wicaksono.jpg";
+import Calvin from "../../../assets/Calvin Wahyudi.jpg";
+import Aji from "../../../assets/Aji Putra.jpg";
 
 export const SCHEDULE = [
   { time: "12:30 - 01:00 PM", activity: "Open registration" },
@@ -46,9 +46,34 @@ export const PANELIST = [
     bio: "Shadrina is a strategic marketer with 5 years of experience spanning SaaS, higher education, e-commerce, sports, and financial service. During her academic days, Shadrina dedicated four years to GISAU and later helped kickstart PERMIKA and IPA Vancouver as a founding member. In her down time, Shadrina channels her creativity through singing, songwriting, and thrifting for the soul!  ",
     pastExperiences: [
       {
-        position: "Events Marketing Co-op",
-        organization: "Hootsuite",
-        year: "2018 - 2018",
+        position: "Representative",
+        organization: "IPA Vancouver",
+        year: "2023 - Present",
+      },
+      {
+        position: "Marketing Specialist",
+        organization: "Glotman Simpson Cycling",
+        year: "2021 - 2023",
+      },
+      {
+        position: "Marketing Intern",
+        organization: "Shopee",
+        year: "2020 - 2021",
+      },
+      {
+        position: "Outreach Director",
+        organization: "GISAU",
+        year: "2019 - 2020",
+      },
+      {
+        position: "Marketing Assistant - Coop",
+        organization: "UBC Sauder School of Business",
+        year: "2019 - 2020",
+      },
+      {
+        position: "Founding Member",
+        organization: "PERMIKA Vancouver",
+        year: "2018 - 2019",
       },
       {
         position: "Vice President",
@@ -56,9 +81,19 @@ export const PANELIST = [
         year: "2018 - 2019",
       },
       {
-        position: "Founding Member",
-        organization: "PERMIKA Vancouver",
-        year: "2018 - 2019",
+        position: "Events Marketing - Coop",
+        organization: "Hootsuite",
+        year: "2018",
+      },
+      {
+        position: "Marketing Director",
+        organization: "GISAU",
+        year: "2017 - 2018",
+      },
+      {
+        position: "Director of Innovation",
+        organization: "GISAU",
+        year: "2016 - 2017",
       },
     ],
   },
@@ -70,14 +105,14 @@ export const PANELIST = [
     bio: "Deodatus is a professional account manager blending his economics background from SFU with a natural flair for connection. An extrovert at heart, his love for people fuels his passion for food, helping him thrive in the seafood industry. During his studies, he dedicated his time to organizing engaging events for SFUIA, honing his skills in networking and collaboration. Known as a big foodie, you can find Deodatus exploring the latest culinary hotspots and sharing his food adventures with friends and colleagues.",
     pastExperiences: [
       {
-        position: "Event Coordinator",
-        organization: "Mudika Vancouver",
-        year: "2017 - 2019",
-      },
-      {
         position: "Creative DIRECTOR",
         organization: "SFUIA",
         year: "2018 - 2020",
+      },
+      {
+        position: "Event Coordinator",
+        organization: "Mudika Vancouver",
+        year: "2017 - 2019",
       },
     ],
   },
@@ -96,22 +131,22 @@ export const DELEGATES = [
         year: "2020 - Present",
       },
       {
-          position: "Transportation Analyst Co-op",
-          organization: "Bunt & Associates",
-          year: "2019 (8 months)",
+        position: "Transportation Analyst Co-op",
+        organization: "Bunt & Associates",
+        year: "2019",
       },
       {
-          position: "Municipal Engineering Co-op",
-          organization: "WSP",
-          year: "2017 (8 months)",
-      },    
+        position: "Municipal Engineering Co-op",
+        organization: "WSP",
+        year: "2017",
+      },
     ],
   },
   {
     name: "Ray Dwitama",
     image: Ray,
     jobTitle: "Management Assistant",
-    bio: "Ray is a passionate entrepreneur with adequate managerial experience, demonstrated by starting up his own mobile car wash business 3 years ago while he was a student in SFU. His passion for leadership and client relations brought him to his current position at Enterprise Mobility which highlighted his ability to navigate complex operations with professionalism. Ray loves working on multiple projects, as he is also a part of the core team at @arisanvancouver. He is an avid coffee enthusiast who lives by the self-created motto, \"no coffee = no work.\"",
+    bio: "Ray is a passionate entrepreneur with adequate managerial experience, demonstrated by starting up his own mobile car wash business 3 years ago while he was a student in SFU. His passion for leadership and client relations brought him to his current position at Enterprise Mobility which highlighted his ability to navigate complex operations with professionalism. Ray loves working on multiple projects, as he is also a part of the core team at @arisanvancouver. He is an avid coffee enthusiast who lives by the self-created motto, “no coffee = no work.”",
     pastExperiences: [
       {
         position: "Management Assistant",
@@ -208,7 +243,7 @@ export const DELEGATES = [
     name: "Aji Putra",
     image: Aji,
     jobTitle: "Senior Buyer",
-    bio: "Aji is a Senior Buyer at NorLand Limited with 4+ years of experience in Procurement, Operations and Logistics in multiple industries such as mining and construction. During his academic days, Aji was involved in several Indonesian Student organizations such as GISAU and later became one of the founding members of PERMIKA and IPA Vancouver. He is also part of Alpha Kappa Psi Business Fraternity at UBC. In his free time, Aji is on a quest to find his perfect nap spot through hiking and climbing outdoors.",
+    bio: "Aji is a Senior Buyer with 4 years of experience in Procurement, Operations and Logistics. During his academic days, Aji was involved in several Indonesian Student organizations such as GISAU and later became one of the founding members of PERMIKA and IPA Vancouver. He is also part of Alpha Kappa Psi Business Fraternity at UBC. In his free time, Aji is on a quest to find his perfect nap spot through hiking and climbing outdoors.",
     pastExperiences: [
       {
         position: "Senior Buyer",
@@ -216,17 +251,17 @@ export const DELEGATES = [
       },
       {
         position: "Founding Member",
-        organization: "PERMIKA Vancouver"
+        organization: "PERMIKA Vancouver",
       },
       {
-        position: "Rush Committee",
-        organization: "Alpha Kappa Psi Business Fraternity",
-        year: "2019 - 2020"
+        position: "Sponsorship Coordinator",
+        organization: "PERMIKA Nasional",
+        year: "2018-2019",
       },
       {
         position: "Corporate Relations Director",
         organization: "GISAU",
-        year: "2018 - 2019"
+        year: "2018-2019",
       },
       {
         position: "Sponsorship Coordinator",

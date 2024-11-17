@@ -6,13 +6,37 @@ li::before {
   display: inline-block;
   border-radius: 6px;
   position: relative;
-  margin-left: -4.5px;
   margin-right: 10px;
   margin-top: 3px;
+  object-fit: cover;
 }
 
 div.divider {
-  min-height: 80px;
+  min-height: 60px;
   border-left: 3px solid #dedede;
   padding-left: 14.5px;
+  margin-left: 4.5px;
+  object-fit: cover;
+}
+
+/* width */
+ul::-webkit-scrollbar {
+  width: 2px;
+}
+
+/* Track */
+ul::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Handle */
+ul::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+ul::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
