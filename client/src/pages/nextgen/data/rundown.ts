@@ -26,7 +26,17 @@ export const PANELIST = [
     role: "Management Assistant",
     remark: "",
     bio: "Ray is a passionate entrepreneur and manager, demonstrated by starting up his own mobile car wash business 3 years ago while being a student. His passion for leadership and client relations brought him to his current position at Enterprise Mobility which highlighted his ability to navigate complex operations with professionalism. Ray loves working on multiple projects, as he is also a part of the core team at @arisanvancouver. He is an avid coffee enthusiast who lives by the self-created motto, “no coffee = no work.”",
-    pastExperiences: [],
+    pastExperiences: [
+      {
+        position: "Management Assistant",
+        organization: "Enterprise Mobility",
+        year: "Present"
+      },
+      {
+        position: "Co-Founder, Sales & Marketing Specialist",
+        organization: "Near Me Car Wash"
+      }
+    ],
   },
   {
     name: "Shadrina Wicaksono",
@@ -78,7 +88,7 @@ export const DELEGATES = [
     name: "Nicholas Koesnadi, P.Eng.",
     image: Nicholas,
     jobTitle: "Civil Engineer",
-    bio: "Ray is a passionate entrepreneur with adequate managerial experience, demonstrated by starting up his own mobile car wash business 3 years ago while he was a student in SFU. His passion for leadership and client relations brought him to his current position at Enterprise Mobility which highlighted his ability to navigate complex operations with professionalism. Ray loves working on multiple projects, as he is also a part of the core team at @arisanvancouver. He is an avid coffee enthusiast who lives by the self-created motto, \"no coffee = no work.\"",
+    bio: "Nick is a civil engineer whose passion in aviation led him to specialize in airport design, with projects spanning BC, Alberta, and the north. In university, Nick worked as a co-op in WSP’s municipal engineering division and at Bunt & Associates as a transportation analyst. Outside of his work as a Civil Engineer at Associated Engineering, Nick enjoys traveling, cooking, and reading.",
     pastExperiences: [
       {
         position: "Civil Engineer",
@@ -316,9 +326,15 @@ export const DELEGATES = [
       },
       {
         position: "UI Designer Internship",
-        organization:  ",",
-        year: ","
-      }
+        organization: "Apply Digital",
+        year: "2022",
+      },
+      {
+        position: "Digital Media Specialist Co-op",
+        organization: "Fraser Health",
+        year: "2021",
+      },
+    
     ],
   },
   {
