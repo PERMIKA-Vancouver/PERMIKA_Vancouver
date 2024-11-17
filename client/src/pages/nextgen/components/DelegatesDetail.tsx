@@ -8,7 +8,7 @@ export const DelegatesDetail = () => {
         {DELEGATES.map((item, index) => (
           <div
             key={index}
-            className="lg:w-[1000px] flex delegate"
+            className="lg:w-[1000px] flex item"
             id={index.toString()}
             style={
               index !== 0
@@ -38,39 +38,25 @@ export const DelegatesDetail = () => {
                   Past Experiences
                 </p>
                 <ul>
-                  <li className="text-lg">
-                    {item.pastExperiences[0].position}
-                  </li>
-                  <div className="divider">
-                    <p className="text-md" style={{ color: "#CC7200" }}>
-                      {item.pastExperiences[0].organization}
-                    </p>
-                    <p className="text-md text-black/50">
-                      {item.pastExperiences[0].year}
-                    </p>
-                  </div>
-                  <li className="text-lg">
-                    {item.pastExperiences[1].position}
-                  </li>
-                  <div className="divider">
-                    <p className="text-md" style={{ color: "#CC7200" }}>
-                      {item.pastExperiences[1].organization}
-                    </p>
-                    <p className="text-md text-black/50">
-                      {item.pastExperiences[1].year}
-                    </p>
-                  </div>
-                  <li className="text-lg">
-                    {item.pastExperiences[2].position}
-                  </li>
-                  <div style={{ marginLeft: "14.5px" }}>
-                    <p className="text-md" style={{ color: "#CC7200" }}>
-                      {item.pastExperiences[0].organization}
-                    </p>
-                    <p className="text-md text-black/50">
-                      {item.pastExperiences[0].year}
-                    </p>
-                  </div>
+                {item.pastExperiences && item.pastExperiences.length > 0 ? (
+                    item.pastExperiences.map((experience, j) => (
+                      <div key={j}>
+                        <li className="text-lg">
+                          {experience.position}
+                        </li>
+                        <div className="divider">
+                          <p className="text-md" style={{ color: "#CC7200" }}>
+                            {experience.organization}
+                          </p>
+                          <p className="text-md text-black/50">
+                            {experience.year}
+                          </p>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <p>No past experiences available.</p>
+                  )}
                 </ul>
               </div>
               {/* UP TO THIS PART */}
@@ -85,53 +71,32 @@ export const DelegatesDetail = () => {
               </div>
               {/* UP TO THIS PART */}
               <p className="text-base text-black/50 text-justify">{item.bio}</p>
+
+              {/* ONLY SHOW WHEN ON DESKTOP */}
               <div className="hidden lg:block">
                 <p className="text-base text-black/50 font-light mt-5 mb-4">
                   Past Experiences
                 </p>
                 <ul>
-                  <li className="text-lg md:text-xl">
-                    {item.pastExperiences[0].position}
-                  </li>
-                  <div className="divider">
-                    <p
-                      className="text-md md:text-lg"
-                      style={{ color: "#CC7200" }}
-                    >
-                      {item.pastExperiences[0].organization}
-                    </p>
-                    <p className="text-md md:text-lg text-black/50">
-                      {item.pastExperiences[0].year}
-                    </p>
-                  </div>
-                  <li className="text-lg md:text-xl">
-                    {item.pastExperiences[1].position}
-                  </li>
-                  <div className="divider">
-                    <p
-                      className="text-md md:text-lg"
-                      style={{ color: "#CC7200" }}
-                    >
-                      {item.pastExperiences[1].organization}
-                    </p>
-                    <p className="text-md md:text-lg text-black/50">
-                      {item.pastExperiences[1].year}
-                    </p>
-                  </div>
-                  <li className="text-lg md:text-xl">
-                    {item.pastExperiences[2].position}
-                  </li>
-                  <div style={{ marginLeft: "14.5px" }}>
-                    <p
-                      className="text-md md:text-lg"
-                      style={{ color: "#CC7200" }}
-                    >
-                      {item.pastExperiences[0].organization}
-                    </p>
-                    <p className="text-md md:text-lg text-black/50">
-                      {item.pastExperiences[0].year}
-                    </p>
-                  </div>
+                {item.pastExperiences && item.pastExperiences.length > 0 ? (
+                    item.pastExperiences.map((experience, j) => (
+                      <div key={j}>
+                        <li className="text-lg md:text-xl">
+                          {experience.position}
+                        </li>
+                        <div className="divider">
+                          <p className="text-md md:text-lg" style={{ color: "#CC7200" }}>
+                            {experience.organization}
+                          </p>
+                          <p className="text-md md:text-lg text-black/50">
+                            {experience.year}
+                          </p>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <p>No past experiences available.</p>
+                  )}
                 </ul>
               </div>
             </div>

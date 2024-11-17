@@ -3,8 +3,8 @@ import { Rundown } from "./components/Rundown";
 import { Panelist } from "./components/Panelist";
 import { PanelistDetail } from "./components/PanelistDetail";
 // *** HIDDEN FOR TIER 3  ***
-// import { Delegates } from "./components/Delegates";
-// import { DelegatesDetail } from "./components/DelegatesDetail";
+import { Delegates } from "./components/Delegates";
+import { DelegatesDetail } from "./components/DelegatesDetail";
 
 export const Nextgen = () => {
   return (
@@ -14,8 +14,8 @@ export const Nextgen = () => {
       <Panelist />
       <PanelistDetail />
       {/* *** HIDDEN FOR TIER 3 *** */}
-      {/* <Delegates /> */}
-      {/* <DelegatesDetail /> */}
+      <Delegates />
+      <DelegatesDetail /> 
     </>
   );
 };
