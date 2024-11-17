@@ -77,15 +77,17 @@ export const DelegatesDetail = () => {
               {/* UP TO THIS PART */}
             </div>
             <div className="right-side w-2/3 px-4 lg:px-0 ">
-              {/* ONLY SHOW WHEN ON PHONE */}
-              <div className="w-[285px] block lg:hidden">
-                <p className="text-xl">{item.name}</p>
-                <p className="text-lg text-black/50 mt-3 mb-5">
-                  <span style={{ color: "#CC7200" }}>{item.jobTitle}</span>
-                </p>
+              <div>
+                {/* ONLY SHOW WHEN ON PHONE */}
+                <div className="block lg:hidden">
+                  <p className="text-xl">{item.name}</p>
+                  <p className="text-lg text-black/50 mt-3 mb-5">
+                    <span style={{ color: "#CC7200" }}>{item.jobTitle}</span>
+                  </p>
+                </div>
+                {/* UP TO THIS PART */}
+                <p className="text-base text-black/50 text-justify">{item.bio}</p>
               </div>
-              {/* UP TO THIS PART */}
-              <p className="text-base text-black/50 text-justify">{item.bio}</p>
 
               <div className="hidden lg:block">
                 {item.pastExperiences.length > 0 && (
