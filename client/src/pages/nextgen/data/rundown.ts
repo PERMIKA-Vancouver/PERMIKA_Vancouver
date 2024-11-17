@@ -9,7 +9,7 @@ import Semuel from "../../../assets/Semuel Kadarusman.jpeg";
 import Kevin from "../../../assets/Kevin.jpg";
 import Ray from "../../../assets/Ray - Profile Photo.jpg";
 import Shadrina from "../../../assets/Shadrina Wicaksono.jpg";
-import Calvin from "../../../assets/Calvin Wahyudi.jpg";
+import Calvin from "../../../assets/Calvin Wahyudi.JPG";
 import Aji from "../../../assets/Aji Putra.jpg";
 
 export const SCHEDULE = [
