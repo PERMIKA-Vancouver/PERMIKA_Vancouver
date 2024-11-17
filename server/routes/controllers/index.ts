@@ -8,3 +8,4 @@ export * from './getMerchandisesController';
 export * from './updateMerchandiseController';
 export * from './getItemController';
 export * from './getMerchandiseByIdController';
+export * from './getImages';

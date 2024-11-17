@@ -4,12 +4,14 @@ import { ObjectId } from "mongodb";
 import { getErrorMessage } from "../../helper/ErrorMessage";
 import { ItemType, Items } from "../../models/merchandise/itemsModel";
 import { Order } from "../../models/merchandise/orderModel";
-import keys from "../../key.json";
+// import keys from "../../key.json";
 
 const auth = new google.auth.JWT(
-  keys.client_email,
+  process.env.client_email,
+  // keys.client_email,
   undefined,
-  keys.private_key,
+  // keys.private_key,
+  process.env.private_key,
   ["https://www.googleapis.com/auth/spreadsheets"]
 );
 
