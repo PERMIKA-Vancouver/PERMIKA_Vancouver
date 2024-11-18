@@ -27,21 +27,35 @@ export const PanelistDetail = () => {
               {item.pastExperiences.length > 0 && (
                 <div>
                   <p className="text-base text-black/50 font-light mt-5 mb-4">
-                    Past Experiences
+                    {item.name === "Shadrina Wicaksono" ? (
+                      <p className="text-base text-black/50 font-light mt-5 mb-4">
+                        Past Experiences
+                        <span
+                          className="text-md"
+                          style={{ color: "#CC7200", fontWeight: "550" }}
+                        >
+                          {" "}
+                          (Scroll to See More)
+                        </span>
+                      </p>
+                    ) : (
+                      "Past Experiences"
+                    )}
                   </p>
-                  <ul>
+                  <ul className="h-[250px] overflow-y-auto">
                     {item.pastExperiences?.map((i, index) => (
                       <div>
                         <li className="text-lg md:text-xl">{i.position}</li>
                         <div
-                          className={
-                            index !== item.pastExperiences.length - 1
-                              ? "divider"
-                              : ""
-                          }
+                          className={`
+                            ${
+                              index !== item.pastExperiences.length - 1
+                                ? "divider"
+                                : ""
+                            }`}
                           style={
                             index === item.pastExperiences.length - 1
-                              ? { marginLeft: "14.5px" }
+                              ? { marginLeft: "21px" }
                               : {}
                           }
                         >
