@@ -27,3 +27,6 @@ yarn-error.log*
 key.json
 *dist
 key.json
+.google.env
+__pycache__
+.aws
