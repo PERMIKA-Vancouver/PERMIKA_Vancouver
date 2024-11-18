@@ -162,7 +162,7 @@ export const DELEGATES = [
   {
     name: "Shadrina Wicaksono",
     image: Shadrina,
-    jobTitle: "Marketing Specialist at Leith Wheeler Investment Counsel Ltd.",
+    jobTitle: "Marketing Specialist",
     bio: "Shadrina is a strategic marketer with 5 years of experience spanning SaaS, higher education, e-commerce, sports, and financial service. During her academic days, Shadrina dedicated four years to GISAU and later helped kickstart PERMIKA and IPA Vancouver as a founding member. In her down time, Shadrina channels her creativity through singing, songwriting, and thrifting for the soul!",
     pastExperiences: [
       {
