@@ -120,7 +120,7 @@ export const DelegatesDetail = () => {
                             >
                               {i.organization}
                             </p>
-                            {i.year !== "no year" && (
+                            {i.year === "Present" && (
                               <p className="text-md md:text-lg text-black/50">
                                 {i.year}
                               </p>
