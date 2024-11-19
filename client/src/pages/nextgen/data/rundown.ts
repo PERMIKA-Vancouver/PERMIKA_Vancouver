@@ -3,7 +3,6 @@ import Dom from "../../../assets/Dominique Suraya.jpeg";
 import Elaine from "../../../assets/Elaine Kojongian.JPG";
 import Fathia from "../../../assets/Fathia Ulya.jpeg";
 import Fel from "../../../assets/Felicia Sugiarta.png";
-import Gratian from "../../../assets/Gratianus Deodatus Kavin.jpg";
 import Nicholas from "../../../assets/Nicholas Koesnadi.jpg";
 import Semuel from "../../../assets/Semuel Kadarusman.jpeg";
 import Kevin from "../../../assets/Kevin.jpg";
@@ -199,7 +198,7 @@ export const DELEGATES = [
   },
   {
     name: "Gratianus Deodatus Kavin",
-    image: Gratian,
+    image: Kevin,
     jobTitle: "Account Manager",
     bio: "Deodatus is a professional account manager blending his economics background from SFU with a natural flair for connection. An extrovert at heart, his love for people fuels his passion for food, helping him thrive in the seafood industry as an Account Manager at Grieg Seafood. During his studies, he dedicated his time to organizing engaging events for SFUIA, honing his skills in networking and collaboration. Known as a big foodie, you can find Deodatus exploring the latest culinary hotspots and sharing his food adventures with friends and colleagues.",
     pastExperiences: [
