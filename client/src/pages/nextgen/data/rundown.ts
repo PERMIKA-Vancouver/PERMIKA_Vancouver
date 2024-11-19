@@ -146,7 +146,7 @@ export const DELEGATES = [
     name: "Ray Dwitama",
     image: Ray,
     jobTitle: "Management Assistant",
-    bio: "Ray is a passionate entrepreneur with adequate managerial experience, demonstrated by starting up his own mobile car wash business 3 years ago while he was a student in SFU. His passion for leadership and client relations brought him to his current position at Enterprise Mobility which highlighted his ability to navigate complex operations with professionalism. Ray loves working on multiple projects, as he is also a part of the core team at @arisanvancouver. He is an avid coffee enthusiast who lives by the self-created motto, “no coffee = no work.”",
+    bio: "Ray is a passionate entrepreneur with adequate managerial experience, demonstrated by starting up his own mobile car wash business 3 years ago while he was a student in SFU. His passion for leadership and client relations brought him to his current position at Enterprise Mobility which highlighted his ability to navigate complex operations with professionalism. Ray loves working on multiple projects, as he is also a part of the core team at @arisanvancouver. He is an avid coffee enthusiast who lives by the self-created motto, 'no coffee = no work.'",
     pastExperiences: [
       {
         position: "Management Assistant",
