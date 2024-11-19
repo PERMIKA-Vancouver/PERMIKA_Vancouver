@@ -30,12 +30,12 @@ export const PANELIST = [
       {
         position: "Management Assistant",
         organization: "Enterprise Mobility",
-        year: "Present"
+        year: "Present",
       },
       {
         position: "Co-Founder, Sales & Marketing Specialist",
-        organization: "Near Me Car Wash"
-      }
+        organization: "Near Me Car Wash",
+      },
     ],
   },
   {
@@ -128,7 +128,7 @@ export const DELEGATES = [
       {
         position: "Civil Engineer",
         organization: "Associated Engineering",
-        year: "2020 - Present",
+        year: "Present",
       },
       {
         position: "Transportation Analyst Co-op",
@@ -151,12 +151,12 @@ export const DELEGATES = [
       {
         position: "Management Assistant",
         organization: "Enterprise Mobility",
-        year: "Present"
+        year: "Present",
       },
       {
         position: "Co-Founder, Sales & Marketing Specialist",
-        organization: "Near Me Car Wash"
-      }
+        organization: "Near Me Car Wash",
+      },
     ],
   },
   {
@@ -168,33 +168,33 @@ export const DELEGATES = [
       {
         position: "Marketing Specialist",
         organization: "Leith Wheeler Investment Counsel Ltd.",
-        year: "Present"
+        year: "Present",
       },
       {
         position: "Co-op at Hootsuite",
-        organization: "Hootsuite"
+        organization: "Hootsuite",
       },
       {
         position: "Internship at Shopee Indonesia",
-        organization: "Shopee Indonesia"
+        organization: "Shopee Indonesia",
       },
       {
         position: "Part-time at Glotman Simpson Cycling Club",
-        organization: "Glotman Simpson Cycling Club"
+        organization: "Glotman Simpson Cycling Club",
       },
       {
         position: "Marketing Director, Vice President, Outreach Director",
         organization: "GISAU",
-        year: "4 years"
+        year: "4 years",
       },
       {
         position: "Founding Member",
-        organization: "PERMIKA Vancouver"
+        organization: "PERMIKA Vancouver",
       },
       {
         position: "Representative",
-        organization: "IPA Vancouver"
-      }
+        organization: "IPA Vancouver",
+      },
     ],
   },
   {
@@ -206,12 +206,12 @@ export const DELEGATES = [
       {
         position: "Account Manager",
         organization: "Grieg Seafood",
-        year: "Present"
+        year: "Present",
       },
       {
         position: "Creative Director",
-        organization: "SFUIA"
-      }
+        organization: "SFUIA",
+      },
     ],
   },
   {
@@ -223,20 +223,20 @@ export const DELEGATES = [
       {
         position: "Product Owner",
         organization: "SAP",
-        year: "Present"
+        year: "Present",
       },
       {
         position: "Software Test Engineer - Co-op",
-        organization: "Netgear"
+        organization: "Netgear",
       },
       {
         position: "Instructor and Software Developer - Co-op",
-        organization: "Robokids"
+        organization: "Robokids",
       },
       {
         position: "Customer Support and Test Engineer - Co-op",
-        organization: "Icron Technologies"
-      }
+        organization: "Icron Technologies",
+      },
     ],
   },
   {
@@ -247,7 +247,8 @@ export const DELEGATES = [
     pastExperiences: [
       {
         position: "Senior Buyer",
-        organization: "NorLand Limited"
+        organization: "NorLand Limited",
+        year: "Present",
       },
       {
         position: "Founding Member",
@@ -266,16 +267,16 @@ export const DELEGATES = [
       {
         position: "Sponsorship Coordinator",
         organization: "PERMIKA Nasional",
-        year: "2018 - 2019"
+        year: "2018 - 2019",
       },
       {
         position: "Event Coordinator Intern",
-        organization: "Ride to Conquer Cancer"
+        organization: "Ride to Conquer Cancer",
       },
       {
         position: "Your lovely Barista",
-        organization: "Great Dane Coffee UBC"
-      }
+        organization: "Great Dane Coffee UBC",
+      },
     ],
   },
   {
@@ -287,28 +288,27 @@ export const DELEGATES = [
       {
         position: "Associate Scientist",
         organization: "Daiya Foods",
-        year: "Present"
+        year: "Present",
       },
       {
         position: "R&D - Co-op",
-        organization: "Daiya Foods"
+        organization: "Daiya Foods",
       },
       {
         position: "R&D - Internship",
-        organization: "Unilever Indonesia"
+        organization: "Unilever Indonesia",
       },
       {
         position: "Treasurer",
         organization: "GISAU",
-        year: "2018 - 2020"
+        year: "2018 - 2020",
       },
       {
         position: "First Year Rep",
         organization: "GISAU",
-        year: "2017 - 2018"
-      }
+        year: "2017 - 2018",
+      },
     ],
-    
   },
   {
     name: "Fathia Ulya Daruri",
@@ -319,28 +319,28 @@ export const DELEGATES = [
       {
         position: "Senior Tax and Client Reporting Associate",
         organization: "Raymond James Ltd.",
-        year: "Present"
+        year: "Present",
       },
       {
         position: "Branch Operations Support",
         organization: "Reef",
-        year: "2021"
+        year: "2021",
       },
       {
         position: "Economic Student Researcher",
         organization: "City of Vancouver",
-        year: "2019"
+        year: "2019",
       },
       {
         position: "Risk Advisory Intern",
         organization: "Deloitte",
-        year: "2018"
+        year: "2018",
       },
       {
         position: "Corporate Financial Analyst Intern",
         organization: "PT. Integrity",
-        year: "2018"
-      }
+        year: "2018",
+      },
     ],
   },
   {
@@ -352,12 +352,12 @@ export const DELEGATES = [
       {
         position: "Intermediate Product Designer",
         organization: "Apply Digital",
-        year: "2024 - Present"
+        year: "Present",
       },
       {
         position: "Junior Product Designer",
         organization: "Apply Digital",
-        year: "2022 - 2024"
+        year: "2022 - 2024",
       },
       {
         position: "UI Designer Internship",
@@ -369,7 +369,6 @@ export const DELEGATES = [
         organization: "Fraser Health",
         year: "2021",
       },
-    
     ],
   },
   {
@@ -381,7 +380,7 @@ export const DELEGATES = [
       {
         position: "Program Manager, Learning and Development",
         organization: "Clio",
-        year: "2019 - Present",
+        year: "Present",
       },
       {
         position: "Training Specialist",
@@ -409,12 +408,12 @@ export const DELEGATES = [
       {
         position: "Visual + Experience Designer",
         organization: "Geocomply",
-        year: "2024 - Present",
+        year: "Present",
       },
       {
         position: "IPA Vancouver Representative",
         organization: "IPA Vancouver",
-        year: "2024 - Present",
+        year: "Present",
       },
       {
         position: "UI/UX Designer",
@@ -424,42 +423,42 @@ export const DELEGATES = [
       {
         position: "Teaching Assistant + Web Designer",
         organization: "Emily Carr University of Art + Design",
-        year: "2022 - 2023"
+        year: "2022 - 2023",
       },
       {
         position: "Secretary",
         organization: "PERMIKA Nasional",
-        year: "2022"
+        year: "2022",
       },
       {
         position: "Vice President",
         organization: "PERMIKA Vancouver",
-        year: "2022"
+        year: "2022",
       },
       {
         position: "Design Team",
         organization: "TEDxEmilyCarrU",
-        year: "2020 - 2022"
+        year: "2020 - 2022",
       },
       {
         position: "Visual Media Coordinatort",
         organization: "PERMIKA Vancouver",
-        year: "2020 - 2021"
+        year: "2020 - 2021",
       },
       {
         position: "Marketing Intern",
         organization: "GeoComply",
-        year: "2021"
+        year: "2021",
       },
       {
         position: "Product Designer",
         organization: "Viamo",
-        year: "2021"
+        year: "2021",
       },
       {
         position: "Product Manager",
         organization: "Kamar Pelajar",
-        year: "2021"
+        year: "2021",
       },
     ],
   },
@@ -488,7 +487,4 @@ export const DELEGATES = [
       },
     ],
   },
-]
-
-
-
+];

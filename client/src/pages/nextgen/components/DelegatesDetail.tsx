@@ -8,7 +8,7 @@ export const DelegatesDetail = () => {
         {DELEGATES.map((item, index) => (
           <div
             key={index}
-            className="lg:w-[1000px] flex item"
+            className="lg:w-[1000px] flex item items-stretch"
             id={index.toString()}
             style={
               index !== 0
@@ -19,7 +19,7 @@ export const DelegatesDetail = () => {
                 : {}
             }
           >
-            <div className="left-side w-1/3">
+            <div className="left-side w-5/12 md:w-1/3 flex flex-col">
               <img
                 className="w-100% lg:h-[285px] lg:w-[285px] mb-5"
                 src={item.image}
@@ -33,16 +33,16 @@ export const DelegatesDetail = () => {
                 </p>
               </div>
               {/* ONLY SHOW WHEN ON PHONE */}
-              <div className="block lg:hidden">
+              <div className="block lg:hidden flex-1">
                 {item.pastExperiences.length > 0 && (
-                  <div>
+                  <div className="h-full flex flex-col">
                     <p className="text-base text-black/50 font-light mt-5 mb-4">
                       Past Experiences
                     </p>
-                    <ul className="h-[260px] overflow-y-auto">
+                    <ul className="h-[260px] overflow-y-auto overflow-x-hidden">
                       {item.pastExperiences?.map((i, index) => (
                         <div>
-                          <li className="text-lg md:text-xl">{i.position}</li>
+                          <li className="text-md md:text-xl">{i.position}</li>
                           <div
                             className={`
                             ${
@@ -62,7 +62,7 @@ export const DelegatesDetail = () => {
                             >
                               {i.organization}
                             </p>
-                            {i.year !== "no year" && (
+                            {i.year === "Present" && (
                               <p className="text-md md:text-lg text-black/50">
                                 {i.year}
                               </p>
@@ -76,7 +76,7 @@ export const DelegatesDetail = () => {
               </div>
               {/* UP TO THIS PART */}
             </div>
-            <div className="right-side w-2/3 px-4 lg:px-0 ">
+            <div className="h-full right-side w-7/12 md:w-2/3 px-4 lg:px-0 ">
               <div>
                 {/* ONLY SHOW WHEN ON PHONE */}
                 <div className="block lg:hidden">
@@ -86,7 +86,9 @@ export const DelegatesDetail = () => {
                   </p>
                 </div>
                 {/* UP TO THIS PART */}
-                <p className="text-base text-black/50 text-justify">{item.bio}</p>
+                <p className="text-base text-black/50 text-justify">
+                  {item.bio}
+                </p>
               </div>
 
               <div className="hidden lg:block">
