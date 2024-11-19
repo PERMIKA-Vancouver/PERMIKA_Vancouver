@@ -23,10 +23,10 @@ export const Panelist = () => {
               </>
               <>
                 <h4 className="hidden md:block text-white">
-                  <a href={"#" + index.toString()}>{item.name}</a>
+                  <a href={"#pan-" + index.toString()}>{item.name}</a>
                 </h4>
                 <p className="block md:hidden text-white">
-                  <a href={"#" + index.toString()}>{item.name}</a>
+                  <a href={"#pan-" + index.toString()}>{item.name}</a>
                 </p>
               </>
             </div>
