@@ -1,15 +1,28 @@
-import Anastasya from "../../../assets/Anastasya Abigail.jpg";
-import Dom from "../../../assets/Dominique Suraya.jpeg";
-import Elaine from "../../../assets/Elaine Kojongian.JPG";
-import Fathia from "../../../assets/Fathia Ulya.jpeg";
-import Fel from "../../../assets/Felicia Sugiarta.png";
-import Nicholas from "../../../assets/Nicholas Koesnadi.jpg";
-import Semuel from "../../../assets/Semuel Kadarusman.jpeg";
-import Kevin from "../../../assets/Kevin.jpg";
-import Ray from "../../../assets/Ray - Profile Photo.jpg";
-import Shadrina from "../../../assets/Shadrina Wicaksono.jpg";
-import Calvin from "../../../assets/Calvin Wahyudi.JPG";
-import Aji from "../../../assets/Aji Putra.jpg";
+import Anastasya from "../../../assets/delegates/Anastasya Abigail.jpg";
+import Dom from "../../../assets/delegates/Dominique Suraya.jpeg";
+import Elaine from "../../../assets/delegates/Elaine Kojongian.JPG";
+import Fathia from "../../../assets/delegates/Fathia Ulya.jpeg";
+import Fel from "../../../assets/delegates/Felicia Sugiarta.png";
+import Nicholas from "../../../assets/delegates/Nicholas Koesnadi.jpg";
+import Semuel from "../../../assets/delegates/Semuel Kadarusman.jpeg";
+import Kevin from "../../../assets/delegates/Kevin.jpg";
+import Ray from "../../../assets/delegates/Ray - Profile Photo.jpg";
+import Shadrina from "../../../assets/delegates/Shadrina Wicaksono.jpg";
+import Calvin from "../../../assets/delegates/Calvin Wahyudi.JPG";
+import Aji from "../../../assets/delegates/Aji Putra.jpg";
+
+import Indomie from "../../../assets/sponsors/indomie.png";
+import Hakumori from "../../../assets/sponsors/hakumori.png";
+import WPM from "../../../assets/sponsors/wpm.png";
+import Woods from "../../../assets/sponsors/woods.png";
+import Sakatonik from "../../../assets/sponsors/sakatonik.png";
+import Promag from "../../../assets/sponsors/promag.png";
+import ModoYoga from "../../../assets/sponsors/modoyoga.png";
+import ITPC from "../../../assets/sponsors/ITPC Logo.png";
+import Taphouse from "../../../assets/sponsors/taphouse.png";
+import Yeos from "../../../assets/sponsors/YEOS_LOGO_FULLCOLOUR_CMYK.jpg";
+import Wizeprep from "../../../assets/sponsors/wizeprep.webp";
+
 
 export const SCHEDULE = [
   { time: "12:30 - 01:00 PM", activity: "Open registration" },
@@ -487,3 +500,61 @@ export const DELEGATES = [
     ],
   },
 ];
+
+export const SPONSORS = [
+  {
+    name: "Indomie",
+    link: "https://indomieonline.ca/",
+    logo: Indomie
+  },
+  {
+    name: "Hakumori",
+    link: "https://hakumori.shop/",
+    logo: Hakumori
+  },
+  {
+    name: "Westpath Maple Consulting",
+    link: "https://www.wpmaple.com/",
+    logo: WPM
+  },
+  {
+    name: "Woods Lozenges",
+    link: "https://www.kalbeconsumerhealth.com/id/en/brands/respiratory-care/woods",
+    logo: Woods
+  },
+  {
+    name: "SAKATONIK ACTIV",
+    link: "https://drive.google.com/file/d/1xdk_AdWLUjVYVRRyRzpr_DWrNWzvwEGy/view?usp=drive_link",
+    logo: Sakatonik
+  },
+  {
+    name: "PROMAG",
+    link: "https://www.kalbeconsumerhealth.com/id/en/brands/digestive-and-skin/promag",
+    logo: Promag
+  },
+  {
+    name: "Modo Yoga",
+    link: "https://modoyoga.com/east-vancouver/",
+    logo: ModoYoga
+  },
+  {
+    name: "ITPC",
+    link: "https://itpcvancouver.com/",
+    logo: ITPC
+  },
+  {
+    name: "Taphouse",
+    link: "https://thetaphouse.ca/",
+    logo: Taphouse
+  },
+  {
+    name: "Yeo's",
+    link: "https://yeosusa.com/",
+    logo: Yeos
+  },
+  {
+    name: "Wizeprep",
+    link: "https://www.wizeprep.com/",
+    logo: Wizeprep
+  }
+]

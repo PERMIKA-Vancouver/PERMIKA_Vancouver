@@ -4,6 +4,7 @@ import { Panelist } from "./components/Panelist";
 import { PanelistDetail } from "./components/PanelistDetail";
 import { Delegates } from "./components/Delegates";
 import { DelegatesDetail } from "./components/DelegatesDetail";
+import { Sponsors } from "./components/Sponsors";
 
 export const Nextgen = () => {
   return (
@@ -14,6 +15,7 @@ export const Nextgen = () => {
       <PanelistDetail />
       <Delegates />
       <DelegatesDetail />
+      <Sponsors />
     </>
   );
 };
