@@ -14,24 +14,48 @@ export const Map = () => {
           <div className="md:flex gap-10">
             <div className="mt-4">
               <h5 className="mb-2 tracking-tight text-red-600">STEM</h5>
-              <p className="text-gray-700">Nicholas Koesnadi, P.Eng</p>
-              <p className="text-gray-700 ">Calvin Wahyudi</p>
-              <p className="text-gray-700 ">Elaine Kojongian</p>
-              <p className="text-gray-700 ">Semuel Kadarusman</p>
+              <a href="#0" className="block text-base text-gray-700">
+                Nicholas Koesnadi, P.Eng
+              </a>
+              <a href="#4" className="block text-base text-gray-700">
+                Calvin Wahyudi
+              </a>
+              <a href="#6" className="block text-base text-gray-700 ">
+                Elaine Kojongian
+              </a>
+              <a href="#11" className="block text-base text-gray-700 ">
+                Semuel Kadarusman
+              </a>
             </div>
             <div className="mt-4">
               <h5 className="mb-2 tracking-tight text-blue-600 ">Business</h5>
-              <p className="text-gray-700 ">Ray Dwitama</p>
-              <p className="text-gray-700 ">Shadrina Wicaksono</p>
-              <p className="text-gray-700 ">Gratianus Deodatus Kavin</p>
-              <p className="text-gray-700 ">Aji Putra</p>
-              <p className="text-gray-700 ">Fathia Ulya Daruri</p>
-              <p className="text-gray-700 ">Anastasya Abigail</p>
+              <a href="#1" className="block text-base text-gray-700 ">
+                Ray Dwitama
+              </a>
+              <a href="#2" className="block text-base text-gray-700 ">
+                Shadrina Wicaksono
+              </a>
+              <a href="#3" className="block text-base text-gray-700 ">
+                Gratianus Deodatus Kavin
+              </a>
+              <a href="#5" className="block text-base text-gray-700 ">
+                Aji Putra
+              </a>
+              <a href="#7" className="block text-base text-gray-700 ">
+                Fathia Ulya Daruri
+              </a>
+              <a href="#9" className="block text-base text-gray-700 ">
+                Anastasya Abigail
+              </a>
             </div>
             <div className="mt-4">
               <h5 className="mb-2 tracking-tight text-green-600">Arts</h5>
-              <p className="text-gray-700 ">Dominique Suraya</p>
-              <p className="text-gray-700 ">Felicia Audrey Sugiarta</p>
+              <a href="#8" className="block text-base text-gray-700 ">
+                Dominique Suraya
+              </a>
+              <a href="#10" className="block text-base text-gray-700 ">
+                Felicia Audrey Sugiarta
+              </a>
             </div>
           </div>
         </div>
