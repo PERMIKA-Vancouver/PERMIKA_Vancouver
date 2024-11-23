@@ -5,8 +5,8 @@ import { Panelist } from './components/Panelist';
 import { PanelistDetail } from './components/PanelistDetail';
 import { Delegates } from './components/Delegates';
 import { DelegatesDetail } from './components/DelegatesDetail';
-import { Hero } from './components/Hero';
 import { Sponsors } from './components/Sponsors';
+import { Networking } from './components/Networking';
 
 export const Nextgen = () => {
   return (
@@ -14,7 +14,7 @@ export const Nextgen = () => {
       <LandingComponent />
       <Map />
       <Rundown />
-      <Hero />
+      <Networking />
       <Panelist />
       <PanelistDetail />
       <Delegates />
