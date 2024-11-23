@@ -1,65 +1,38 @@
-import map from "../../../assets/nextgenMap.jpg";
+import map from '../../../assets/nextgenMap.jpg';
 
 export const Map = () => {
   return (
-    <div className="py-20 flex items-center">
-      <div className="pl-all">
-        <img className="w-[30rem] drop-shadow-xl" src={map} alt="brochure" />
-      </div>
+    <div className="py-20 pl-all items-center">
+      <h2 className="mb-4">Map</h2>
+      <div className="md:flex">
+        <div className="mb-10">
+          <img className="w-[50rem] drop-shadow-xl" src={map} alt="brochure" />
+        </div>
 
-      <div
-        style={{ backgroundColor: "#006BED" }}
-        className="block ml-[-20px] py-[100px] px-12 border border-gray-200 rounded-lg shadow"
-      >
-        <h1 className="text-center text-white pb-5"> Zones</h1>
-        <div className="flex gap-10">
-          <div>
-            <h5 className="mb-2 text-center text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              STEM
-            </h5>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
-              ● Nicholas Koesnadi, P.Eng
-            </p>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
-              ● Calvin Wahyudi
-            </p>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
-              ● Elaine Kojongian
-            </p>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
-              ● Senior Software Developer
-            </p>
-          </div>
-          <div>
-            <h5 className="mb-2 text-center text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Business
-            </h5>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
-              ● Ray Dwitama
-            </p>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
-              ● Shadrina Wicaksono
-            </p>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
-              ● Ray Dwitama
-            </p>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
-              ● Fathia Ulya Daruri
-            </p>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
-              ● Anastasya Abigail
-            </p>
-          </div>
-          <div>
-            <h5 className="mb-2 text-center text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Arts
-            </h5>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
-              ● Dominique Suraya
-            </p>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
-              ● Felicia Audrey Sugiarta
-            </p>
+        <div className="">
+          <h3 className="">Zones</h3>
+          <div className="md:flex gap-10">
+            <div className="mt-4">
+              <h5 className="mb-2 tracking-tight text-red-600">STEM</h5>
+              <p className="text-gray-700">Nicholas Koesnadi, P.Eng</p>
+              <p className="text-gray-700 ">Calvin Wahyudi</p>
+              <p className="text-gray-700 ">Elaine Kojongian</p>
+              <p className="text-gray-700 ">Semuel Kadarusman</p>
+            </div>
+            <div className="mt-4">
+              <h5 className="mb-2 tracking-tight text-blue-600 ">Business</h5>
+              <p className="text-gray-700 ">Ray Dwitama</p>
+              <p className="text-gray-700 ">Shadrina Wicaksono</p>
+              <p className="text-gray-700 ">Gratianus Deodatus Kavin</p>
+              <p className="text-gray-700 ">Aji Putra</p>
+              <p className="text-gray-700 ">Fathia Ulya Daruri</p>
+              <p className="text-gray-700 ">Anastasya Abigail</p>
+            </div>
+            <div className="mt-4">
+              <h5 className="mb-2 tracking-tight text-green-600">Arts</h5>
+              <p className="text-gray-700 ">Dominique Suraya</p>
+              <p className="text-gray-700 ">Felicia Audrey Sugiarta</p>
+            </div>
           </div>
         </div>
       </div>
