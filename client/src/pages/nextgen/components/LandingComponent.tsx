@@ -1,5 +1,6 @@
 // import { CustomButton } from "../../../shared/components/CustomButton";
-import Brochure from "../../../assets/Brochure.png";
+import Brochure from '../../../assets/Brochure.png';
+import BrochureSq from '../../../assets/Brochure-square.png';
 
 export const LandingComponent = () => {
   return (
@@ -24,7 +25,8 @@ export const LandingComponent = () => {
     // </div>
 
     <div className="pt-navbar">
-      <img src={Brochure} alt="brochure" />
+      <img src={Brochure} alt="brochure" className="hidden sm:block" />
+      <img src={BrochureSq} alt="brochure" className="sm:hidden" />
       <div className="pl-all pr-[17.5%] sm:pr-[20%] lg:pr-[35%] grid gap-[1.375rem]"></div>
     </div>
   );
