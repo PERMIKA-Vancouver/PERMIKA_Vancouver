@@ -3,9 +3,9 @@ import { SCHEDULE } from "../data/rundown";
 export const Rundown = () => {
   const len = SCHEDULE.length;
   return (
-    <div className="min-h-[50vh] py-36 lg:flex pl-all ">
+    <div className="min-h-[50vh] bg-forest-green py-36 lg:flex pl-all ">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-9 lg:gap-28">
-        <div className="text-left col-span-1">
+        <div className="text-left text-white col-span-1">
           <h2>Rundown</h2>
         </div>
 
@@ -18,12 +18,12 @@ export const Rundown = () => {
               } border-[#BCBCBC] ${index === 0 ? "pb-4" : "py-4"}`}
             >
               <>
-                <h4 className="hidden md:block text-black/50">{item.time}</h4>
-                <p className="block md:hidden text-black/50">{item.time}</p>
+                <h4 className="hidden md:block text-white/50">{item.time}</h4>
+                <p className="block md:hidden text-white/50">{item.time}</p>
               </>
               <>
-                <h4 className="hidden md:block">{item.activity}</h4>
-                <p className="block md:hidden">{item.activity}</p>
+                <h4 className="hidden md:block text-white">{item.activity}</h4>
+                <p className="block md:hidden text-white">{item.activity}</p>
               </>
             </div>
           ))}
