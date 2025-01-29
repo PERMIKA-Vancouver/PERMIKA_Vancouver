@@ -96,11 +96,11 @@ export const CountdownEvent = ({
                       className=""
                       link={getNextEventLink(index)}
                     />
-                    <CustomButton
+                    {/* <CustomButton
                       text={'Learn More'}
                       className=""
                       link={'/nextgen'}
-                    />
+                    /> */}
                   </div>
                 ) : (
                   <>

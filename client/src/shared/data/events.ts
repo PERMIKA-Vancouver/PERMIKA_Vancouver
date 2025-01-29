@@ -27,7 +27,7 @@ const UPCOMING_EVENTS_DEFAULT: UpcomingEvent = {
 
 // const EVENT_DESCRIPTION = "Save yourself a seat for the event below!";
 const EVENT_DESCRIPTION =
-  'Join us for insights from industry experts and network with professionals!';
+  'A speed dating event with lots of activites to make those who are once strangers into lovers 💘';
 const EVENT_BUTTON = 'RSVP Now';
 
 const HIRING_DESCRIPTION = "Be part of PERMIKA's family 2024/2025";
