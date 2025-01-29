@@ -5,13 +5,13 @@ const DATE_FORMAT = 'YYYY-MM-DD HH:mm';
 // Date format 'YYYY-MM-DD HH:mm'
 const UPCOMING_EVENTS: UpcomingEvent[] = [
   {
-    name: 'PERMIKA NextGen',
-    date: DateTime.fromFormat('2024-11-23 12:30', 'yyyy-MM-dd HH:mm', {
+    name: 'SPEDA (Speed Dating)',
+    date: DateTime.fromFormat('2025-02-08 13:30', 'yyyy-MM-dd HH:mm', {
       zone: 'America/Los_Angeles',
     }).toString(),
-    rsvp: 'https://forms.gle/jdeurQxe5ZyFGkh18',
-    location: 'Holiday Inn Downtown, Columbia Ballroom',
-    locationLink: 'https://maps.app.goo.gl/qRenaxpoStKvzx7Q7',
+    rsvp: 'https://forms.gle/BCBh7d6uLyVM9n1C7',
+    location: 'KJRI',
+    locationLink: 'https://maps.app.goo.gl/gyWS63JnDtq342vK8',
     type: 0,
   },
 ];
