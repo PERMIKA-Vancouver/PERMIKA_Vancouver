@@ -59,9 +59,11 @@ module.exports = {
           {
               test: /\.scss$/,
               use: [
-                  'style-loader', // Injects styles into DOM
-                  'css-loader',   // Translates CSS into CommonJS
-                  'sass-loader'   // Compiles Sass to CSS
+                  'style-loader', // inject CSS to the DOM
+          'css-loader', // translate CSS into CommonJS modules
+          'postcss-loader', // process CSS with PostCSS
+          'resolve-url-loader', // resolves relative URLs
+          'sass-loader', // compiles Sass to CSS
               ]
           }
       ]
