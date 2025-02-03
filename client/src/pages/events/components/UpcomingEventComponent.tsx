@@ -40,11 +40,11 @@ export const UpcomingEventComponent = () => {
           className={`w-[9.45rem]`}
           link={getNextEventLink(nextEvent)}
         />
-        <CustomButton
+        {/* <CustomButton
           text={'Learn More'}
           className="w-[9.45rem]"
           link={'/nextgen'}
-        />
+        /> */}
       </div>
     </div>
   );
