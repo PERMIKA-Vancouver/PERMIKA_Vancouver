@@ -6,7 +6,7 @@ import { Footer } from "../Footer";
 import { SandwichNavbar } from "./SandwichNavbar";
 import { MOBILE_WIDTH, TABLET_POTRAIT_WIDTH } from "../../data/common";
 
-const GREEN_NAVBAR = ["events", "gallery"];
+const GREEN_NAVBAR = ["events", "gallery", "sponsorship"];
 
 export const NavigationBar = () => {
   const [show, setShow] = useState(true);
