@@ -1,109 +1,112 @@
-import { SPONSORS } from "../data/SponsorDetails"
-
+import { useCallback, useState } from 'react';
+import { SPONSORS } from "../data/SponsorDetails";
+import EventPNG from "../components/Permika - SPEDA.png";
+import PermikaPNG from "../components/Logo Permika 2.png"
 import '../styles.scss';
-const sponsorsToResize = ["Wizeprep", "Taphouse", 'ITPC', 'Westpath Maple Consulting', 'Woods Lozenges'];
 
-const goldTier = ['']
-const silverTier = ['Taphouse', 'PROMAG'] 
-const bronzeTier = ['SAKATONIK ACTIV', 'Woods Lozenges', 'Indomie', 'Hakumori', 'Modo Yoga']
-const brassTier = ['Wizeprep', 'Westpath Maple Consulting', 'ITPC', "Yeo's"]
+type SponsorTheme = {
+  themeName: string,
+  logo: string,
+  sponsors: string[],
+}
+const mobile = ['Taphouse', 'FV', 'Hive Gym', 'Wizeprep', 'Westpath Maple Consulting', 'ITPC', "Yeo's"];
+
+const themes: SponsorTheme[] = [{
+  themeName: "Long term",
+  logo: PermikaPNG,
+  sponsors: ['Wizeprep', 'Westpath Maple Consulting', 'ITPC', "Yeo's"]
+},
+{
+  themeName: "Speda",
+  logo: EventPNG,
+  sponsors: ['Taphouse', 'FV', 'Hive Gym']
+}];
 
 export const Sponsors = () => {
+  const [sponsorThemeIdx, setSponsorThemeIdx] = useState(1);
 
-    // helper fucntion to render sponsors based on tier
-    const renderSponsors = (tier: string[], imagesPerRow: number) => {
-        const rows = [];
-        const sponsors = SPONSORS.filter(sponsor => tier.includes(sponsor.name)); 
-        for (let i = 0; i < sponsors.length; i += imagesPerRow) {
-        rows.push(sponsors.slice(i, i + imagesPerRow));
-        }
-        return rows.map((row, index) => (
-            <div key={index} className={`sponsor-row sponsor-row-${imagesPerRow} p-10`}>
-              {row.map((sponsor, index) => (
-                <div key={index} className="sponsor-item">
-                  <a href={sponsor.link} target="_blank" rel="noopener noreferrer">
-                    <img src={sponsor.logo} alt={sponsor.name} className={`sponsor-logo-${imagesPerRow}`} />
-                  </a>
-                </div>
-              ))}
-            </div>
-          ));
-        };
+  const switchTheme = useCallback(() => {
+    setSponsorThemeIdx((sponsorThemeIdx + 1) % themes.length)
+  }, [sponsorThemeIdx])
 
-    // helper fucntion to render sponsors based on tier on mobile
-    const renderMobileSponsors = (tier: string[], imagesPerRow: number) => {
-        const rows = [];
-        const sponsors = SPONSORS.filter(sponsor => tier.includes(sponsor.name)); 
-        for (let i = 0; i < sponsors.length; i += imagesPerRow) {
-        rows.push(sponsors.slice(i, i + imagesPerRow));
-        }
-        return rows.map((row, index) => (
-            <div key={index} className={`mobile-sponsor-row-${imagesPerRow} p-10`}>
-              {row.map((sponsor, index) => (
-                <div key={index} className="sponsor-item">
-                  <a href={sponsor.link} target="_blank" rel="noopener noreferrer">
-                    <img src={sponsor.logo} alt={sponsor.name} className={`mobile-sponsor-logo-${imagesPerRow}`} />
-                  </a>
-                </div>
-              ))}
-            </div>
-          ));
-        };
+  // Helper function to render sponsors based on tier
+  const renderSponsors = (tier: string[]) => {
+    const sponsors = SPONSORS.filter(sponsor => tier.includes(sponsor.name));
+    return (
+      <div className={`sponsor-container flex flex-col gap-4`}>
+        {sponsors.map((sponsor, index) => (
+          <div key={index} className={`sponsor-item p-10 flex flex-row w-full items-center gap-4`}>
+            <a className='flex flex-row justify-center items-center gap-x-16 w-full' href={sponsor.link} target="_blank" rel="noopener noreferrer">
+              <img src={sponsor.logo} alt={sponsor.name} className={`w-1/5 flex-shrink`} />
+              <p className="sponsor-description w-2/6">{
+
+                sponsor.description
+              }</p>
+            </a>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  const renderMobileSponsors = (tier: string[]) => {
+    const sponsors = SPONSORS.filter(sponsor => tier.includes(sponsor.name));
+    return (
+      <div className={`mobile-sponsor-container gap-4 flex-row flex flex-wrap justify-center items-center overflow-auto`}>
+        {sponsors.map((sponsor, index) => (
+          <div key={index} className={`mobile-sponsor-item p-10 items-center gap-4`}>
+            <a href={sponsor.link} target="_blank" rel="noopener noreferrer">
+              <img src={sponsor.logo} alt={sponsor.name} className={`w-full`}/>
+            </a>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
 
   return (
-    <div className="h-auto bg-white text-white pt-navbar flex flex-col items-center">
-        <div className="w-11/12 md:w-4/5 lg:w-2/3">
-            {/* Title */}
-            <div className="mb-1 text-left">
-            <h1 className="text-6xl font-AveRom">
-                <span className="text-[#050505]"> Our </span>
-                <span className="text-[#CC7200]"> 2024 </span>
-                <span className="text-[#050505]">Sponsors</span>
-            </h1>
-            </div>
+    <div className="h-auto bg-white text-white pt-navbar flex flex-col items-center justify-center">
+      <div className="md:w-4/5 lg:w-2/3 flex flex-col justify-center items-center">
+        {/* Dropdown Button */}
+        <div className='relative inline-block'
+          onClick={switchTheme}>
+          <div className="text-left p-2 text-6xl font-AveRom flex flex-wrap items-center text-[#050505]
+              flex-row gap-x-2 rounded-lg transition md:hover:scale-110 hover:cursor-pointer">
+
+            <span className="text-[#050505]">Our </span>
+            <span className="text-[#CC7200]">2025 </span>
+            <span className="text-[#050505]">Sponsors</span>
+          </div>
+          <img src={themes[sponsorThemeIdx].logo} alt={"Speda Logo"} className={`w-[18rem] absolute top-0 right-0 font-bold px-2 py-1 transform rotate-[30deg] translate-x-1/2 -translate-y-1/3 hidden sm:block`} />
         </div>
+      </div>
 
-        {/* Desktop Sponsors Section */}
-        <div className="sponsor-container text-black hidden sm:block">
+      {/* Render sponsors based on selected option */}
+      <div className="sponsor-container text-black hidden sm:block">
+        {/* Event Sponsors Section */}
+        {renderSponsors(themes[sponsorThemeIdx].sponsors)}
 
-            {goldTier.length > 0 && renderSponsors(goldTier, 1)}
-            {/* <hr /> */}
-            {silverTier.length > 0 && renderSponsors(silverTier, 2)}
-            <hr />
-            {bronzeTier.length > 0 && renderSponsors(bronzeTier, 3)}
-            <hr />
-            {brassTier.length > 0 && renderSponsors(brassTier, 4)}
-            <hr />
-        
-            {/* Long Term Sponsors*/}
-            <div className="slider flex flex-row w-11/12 md:w-4/5 lg:w-2/3 pt-20 pb-80">
-                <div className="slide-track">
-                {SPONSORS.concat(SPONSORS).map((sponsor, index) => (
-                    <div className="slide" key={index}>
-                    <a href={sponsor.link} target="_blank" rel="noopener noreferrer">
-                        <div className={`image-box ${sponsorsToResize.includes(sponsor.name) ? 'resize-logo' : ''}`}>
-                        <img src={sponsor.logo} alt={sponsor.name} />
-                        </div>
-                    </a>
+        {/* Carousel */}
+        {/* <div className="slider flex flex-row w-11/12 md:w-4/5 lg:w-2/3 pt-20 pb-80">
+                    <div className="slide-track">
+                        {SPONSORS.concat(SPONSORS).map((sponsor, index) => (
+                            <div className="slide" key={index}>
+                                <a href={sponsor.link} target="_blank" rel="noopener noreferrer">
+                                    <div className={`image-box ${sponsorsToResize.includes(sponsor.name) ? 'resize-logo' : ''}`}>
+                                        <img src={sponsor.logo} alt={sponsor.name} />
+                                    </div>
+                                </a>
+                            </div>
+                        ))}
                     </div>
-                ))}
-                </div>
-            </div>
-        
-        </div>
+                </div> */}
+      </div>
 
-        {/* Mobile Sponsors Section */}
-        <div className="sponsor-container text-black block sm:hidden">
-
-        {goldTier.length > 0 && renderMobileSponsors(goldTier, 1)}
-        {silverTier.length > 0 && renderMobileSponsors(silverTier, 2)}
-        <hr />
-        {bronzeTier.length > 0 && renderMobileSponsors(bronzeTier, 3)}
-        <hr />
-        {brassTier.length > 0 && renderMobileSponsors(brassTier, 4)}
-        <hr />
-
-        </div>
+      {/* Mobile Sponsors Section */}
+      <div className="sponsor-container text-black block sm:hidden w-11/12">
+          {renderMobileSponsors(mobile)}
+      </div>
     </div>
   );
 };
