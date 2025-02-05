@@ -34,7 +34,7 @@ export const Footer = ({
       >
         <div className={`${isTabletPotraitView ? 'text-center' : 'ml-[4%]'}`}>
           <p className={`${!isMobileView && 'navbar-text'} text-grey-footer`}>
-            PERMIKA Vancouver 2023
+            PERMIKA Vancouver 2025
           </p>
         </div>
         {!isTabletPotraitView && (
