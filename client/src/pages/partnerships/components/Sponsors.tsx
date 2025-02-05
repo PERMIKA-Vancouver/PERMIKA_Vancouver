@@ -4,8 +4,6 @@ import EventPNG from "../components/Permika - SPEDA.png";
 import PermikaPNG from "../components/Logo Permika 2.png"
 import '../styles.scss';
 
-const sponsorsToResize = ["Wizeprep", "Taphouse", 'ITPC', 'Westpath Maple Consulting', 'Woods Lozenges'];
-
 type SponsorTheme = {
   themeName: string,
   logo: string,
@@ -25,18 +23,6 @@ const themes: SponsorTheme[] = [{
 }];
 
 export const Sponsors = () => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 640); // Adjust breakpoint as needed
-    };
-
-    handleResize(); // Initial check
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   const [sponsorThemeIdx, setSponsorThemeIdx] = useState(1);
 
   const switchTheme = useCallback(() => {
