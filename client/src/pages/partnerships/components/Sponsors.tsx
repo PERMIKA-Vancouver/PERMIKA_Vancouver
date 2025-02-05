@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState } from 'react';
 import { SPONSORS } from "../data/SponsorDetails";
 import EventPNG from "../components/Permika - SPEDA.png";
 import PermikaPNG from "../components/Logo Permika 2.png"
