@@ -4,7 +4,7 @@ export const Opportunities = () => {
             <div className="w-11/12 md:w-4/5 lg:w-3/4 flex flex-col md:flex-row items-center md:items-start justify-between">
             {/* Left Section: Title */}
             <div className="w-full md:w-1/2 text-left md:text-left mb-6 md:mb-0">
-                <h1 className="text-6xl font-AveRom">Opportunities</h1>
+                <h1 className="text-5xl font-AveRom">Opportunities</h1>
             </div>
     
             {/* Right Section: Content */}

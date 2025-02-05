@@ -81,8 +81,8 @@ $animationSpeed: 10s;
 }
    
 .sponsor-logo-1, .sponsor-logo-2, .sponsor-logo-3, .sponsor-logo-4 {
-	width: auto; /* Adjust size as needed */
-	height: 150px;
+	width: 100%; /* Adjust size as needed */
+	height: 100%;
 	object-fit: auto;
 }
 
@@ -105,7 +105,60 @@ $animationSpeed: 10s;
     height: 1px;
     border-top: 1px solid #ccc;
 }
+  
+.event-container {
+	display: flex;
+	justify-content: center; 
+	align-items: center;    
+	height: 20vh;            
+	background-color: #fde9ec;
+	border: 5px solid #993334;
+	transition: 0.3s;
+	width: 95ch;             
+	margin: 0 auto;        
+}
+  
+.event-image {
+	max-width: 100%; 
+	max-height: 100%; 
+	object-fit: contain; 
+	transition: opacity 0.3s ease-in-out; 
+}
 
+.event-container:hover {
+	background-color: #fde9ec;
+	border: 5px solid #cc8f91;
+}
+
+.event-container:hover .event-image {
+	opacity: 0.5; 
+}
+
+.dropdown-content {
+	display: none; /* Initially hidden */
+	position: absolute;
+	background-color: white;
+	min-width: 160px; /* Dropdown width */
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Dropdown shadow */
+	z-index: 1;
+	border-radius: 8px;
+  }
+  
+  .dropdown-content a:hover {
+	background-color: #f1f1f1;
+	color: #050505;
+  }
+  
+  button {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+  }
+  
+  .dropdown-content {
+	transition: opacity 0.3s ease-in-out;
+  }
+  
   
 
 
