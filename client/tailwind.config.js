@@ -53,19 +53,5 @@ module.exports = {
         }
         addUtilities(newUtilities)
     }
-  ],
-  module: {
-      rules: [
-          {
-              test: /\.scss$/,
-              use: [
-                  'style-loader', // inject CSS to the DOM
-          'css-loader', // translate CSS into CommonJS modules
-          'postcss-loader', // process CSS with PostCSS
-          'resolve-url-loader', // resolves relative URLs
-          'sass-loader', // compiles Sass to CSS
-              ]
-          }
-      ]
-  }
+],
 };
