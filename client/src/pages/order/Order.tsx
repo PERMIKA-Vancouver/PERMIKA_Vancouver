@@ -47,14 +47,15 @@ export const Order = () => {
     );
   }, [shoppingBag]);
 
-  // Stock-checking function (used when moving from review to payment or before final submission)
+  // Stock-checking function: verifies that for each item, quantity does not exceed available stock.
+  // The "payment" flag is used to decide whether to consider pending items or not.
   const checkAvailability = (payment: boolean): Promise<boolean> => {
     return axios
       .get(`${SERVER}/order/merchandise`)
       .then((res) => {
         let available = true;
         res.data.data.forEach((item: any) => {
-          // Sum quantities for items matching model and size
+          // Sum quantities for items matching model and size.
           const total = shoppingBag.reduce(
             (acc, bag) =>
               bag.model === item.model && bag.size === item.size
@@ -152,7 +153,7 @@ export const Order = () => {
     }
   };
 
-  // Updated page navigation with additional validations
+  // Updated page navigation with validations and pending updates
   const handleNextPage = () => {
     if (page === 'checkout') {
       // Validate that shopping bag has items
@@ -186,10 +187,38 @@ export const Order = () => {
       }
       setPage('review');
     } else if (page === 'review') {
-      // Check stock availability before moving to payment
+      // Check stock availability before transitioning to payment
       checkAvailability(false).then((available) => {
         if (available) {
-          setPage('payment');
+          // Update each merchandise item by adding pending
+          axios
+            .get(`${SERVER}/order/merchandise`)
+            .then((res) => {
+              const updateCalls = shoppingBag.map((bag) => {
+                const id = bag.model + ' ' + bag.size;
+                const merchandise = res.data.data.find(
+                  (item: any) =>
+                    item.model === bag.model && item.size === bag.size
+                );
+                const data = {
+                  pending: merchandise.pending + bag.quantity,
+                  bought: merchandise.bought,
+                };
+                return axios.put(`${SERVER}/order/merchandise/${id}`, data);
+              });
+              Promise.all(updateCalls)
+                .then(() => setPage('payment'))
+                .catch((err) => {
+                  alert(
+                    'Error occurred during payment transition: ' + err.message
+                  );
+                  setPage('review');
+                });
+            })
+            .catch((err) => {
+              alert('Error fetching merchandise: ' + err.message);
+              setPage('review');
+            });
         }
       });
     } else if (page === 'payment') {
@@ -200,10 +229,38 @@ export const Order = () => {
         setPopUpOpen(true);
         return;
       }
-      // Check stock availability again after payment
+      // Check stock availability and update merchandise:
+      // For each bag item, reduce pending and increase bought
       checkAvailability(true).then((available) => {
         if (available) {
-          setPage('confirmation');
+          axios
+            .get(`${SERVER}/order/merchandise`)
+            .then((res) => {
+              const updateCalls = shoppingBag.map((bag) => {
+                const id = bag.model + ' ' + bag.size;
+                const merchandise = res.data.data.find(
+                  (item: any) =>
+                    item.model === bag.model && item.size === bag.size
+                );
+                const data = {
+                  pending: merchandise.pending - bag.quantity,
+                  bought: merchandise.bought + bag.quantity,
+                };
+                return axios.put(`${SERVER}/order/merchandise/${id}`, data);
+              });
+              Promise.all(updateCalls)
+                .then(() => setPage('confirmation'))
+                .catch((err) => {
+                  alert(
+                    'Error occurred during final submission: ' + err.message
+                  );
+                  setPage('payment');
+                });
+            })
+            .catch((err) => {
+              alert('Error fetching merchandise: ' + err.message);
+              setPage('payment');
+            });
         } else {
           setPopUpMessage(
             'Stock issue detected. If you have paid, please contact us for a refund.'
@@ -218,7 +275,7 @@ export const Order = () => {
   useEffect(() => {
     if (page === 'payment') {
       const totalPrice = getTotalPrice();
-      // In this example discount is not used so subtotal is the total price
+      // In this example, discount is not applied so the subtotal equals total price.
       setFinalPrice(totalPrice);
     }
   }, [page, shoppingBag, getTotalPrice]);
@@ -314,6 +371,7 @@ export const Order = () => {
                         .then(() => {
                           setIsPromoCodeInvalid(false);
                           setIsPromoCodeApplied(true);
+                          // Keep finalPrice as already calculated
                           setFinalPrice(finalPrice);
                         })
                         .catch((err) => {
@@ -328,7 +386,9 @@ export const Order = () => {
               />
             )}
             {page === 'confirmation' && <ConfirmationPage />}
-            {page !== 'payment' ? (
+            {page === 'confirmation' ? (
+              <></>
+            ) : page !== 'payment' ? (
               <button
                 className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400 hidden lg:block"
                 onClick={handleNextPage}
@@ -337,7 +397,8 @@ export const Order = () => {
                 Next
               </button>
             ) : (
-              <Button
+              <button
+                className="block bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400"
                 onClick={() => {
                   setSubmitOrderClicked(true);
                   handleNextPage();
@@ -345,10 +406,9 @@ export const Order = () => {
                 disabled={
                   getTotalPrice() <= 0 || !paymentClicked || submitOrderClicked
                 }
-                className="mt-7"
               >
                 Submit Order
-              </Button>
+              </button>
             )}
           </div>
         </div>

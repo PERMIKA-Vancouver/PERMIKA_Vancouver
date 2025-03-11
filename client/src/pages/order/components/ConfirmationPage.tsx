@@ -12,6 +12,7 @@ export const ConfirmationPage: React.FC = () => (
       text={'Back to home'}
       className={'mt-[6.88rem]'}
       link={'https://permikavancouver.com'}
+      newWindow={false}
     />
   </div>
 );
