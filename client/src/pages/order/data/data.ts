@@ -103,7 +103,25 @@ const MODELS = [
   },
 ];
 
-const DISCOUNT = 0.1;
-const DISCOUNT_DEADLINE = '2024-02-02 00:00';
+const DEFAULT_SHOPPING_BAG = {
+  quantity: 0,
+  size: '',
+  model: '',
+  price: 0,
+  image: '',
+};
 
-export { LOCATIONS, SIZES, MODELS, DISCOUNT, DISCOUNT_DEADLINE };
+const DEFAULT_SELECTED_ITEM = {
+  value: '',
+  label: '',
+  price: 0,
+  image: '',
+};
+
+export {
+  LOCATIONS,
+  SIZES,
+  MODELS,
+  DEFAULT_SHOPPING_BAG,
+  DEFAULT_SELECTED_ITEM,
+};
