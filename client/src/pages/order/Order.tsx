@@ -12,6 +12,7 @@ import {
   BUNDLE_OPTIONS,
   DEFAULT_BUNDLE_BAG,
   NO_NEED_SIZE,
+  LOCATIONS,
 } from './data/data';
 import { ShoppingBagSidebar } from './components/ShoppingBagSidebar';
 import { CheckoutForm } from './components/CheckoutForm';
@@ -96,6 +97,81 @@ export const Order = () => {
         return available;
       })
       .catch(() => false);
+  };
+
+  const handleSubmitOrder = () => {
+    axios.get(`${SERVER}/order/merchandise`).then((res) => {
+      shoppingBag.forEach((bag) => {
+        const id = bag.model + ' ' + bag.size;
+        const merchandise = res.data.data.find(
+          (item: any) => item.model === bag.model && item.size === bag.size
+        );
+        const data = {
+          pending: merchandise.pending - bag.quantity,
+          bought: merchandise.bought + bag.quantity,
+        };
+        axios
+          .put(`${SERVER}/order/merchandise/${id}`, data)
+          .then(() => {
+            const location = LOCATIONS.find(
+              (loc) => loc.value === pickupLocation
+            );
+
+            let dataOrder;
+            if (isPromoCodeApplied) {
+              dataOrder = {
+                firstName,
+                lastName,
+                emailAddress: email,
+                phoneNumber,
+                pickUpLocation: location?.label,
+                items: shoppingBag,
+                totalPrice: finalPrice,
+                promoCode: promoCode,
+              };
+            } else {
+              dataOrder = {
+                firstName,
+                lastName,
+                emailAddress: email,
+                phoneNumber,
+                pickUpLocation: location?.label,
+                items: shoppingBag,
+                totalPrice: finalPrice,
+              };
+            }
+
+            axios
+              .post(`${SERVER}/order`, dataOrder)
+              .then(() => {
+                // const data = {
+                //   promoCode: promoCode,
+                //   claimed: true,
+                // };
+                // axios
+                //   .put(`${SERVER}/order/promocode`, data)
+                //   .then(() => {
+                //     setPage('confirmation');
+                //   })
+                //   .catch((err) => {
+                //     console.log(err);
+                //     alert('An error happened: ' + err.message);
+                //     setPage('payment');
+                //   });
+                // ***** up to this point
+                setPage('confirmation');
+              })
+              .catch((err) => {
+                alert('An error happened: ' + err.message);
+                setPage('payment');
+              });
+          })
+          .catch((err) => {
+            alert('An error happened: ' + err.message);
+            setPage('payment');
+          });
+      });
+    });
   };
 
   // Handlers for shopping bag operations
@@ -292,52 +368,23 @@ export const Order = () => {
         }
       });
     } else if (page === 'payment') {
-      if (!paymentClicked) {
-        setPopUpMessage(
-          'Please complete payment before submitting your order.'
-        );
-        setPopUpOpen(true);
-        return;
+      // Check if the file is uploaded
+      if (paymentClicked) {
+        // If the file is uploaded, proceed to the confirmation page
+        checkAvailability(true).then((available) => {
+          if (available) {
+            handleSubmitOrder();
+          } else {
+            setPopUpMessage(
+              'If you have paid, please contact us at our instagram to process the refund. Sorry for the inconvenience.'
+            );
+            setPopUpOpen(true);
+          }
+        });
+      } else {
+        // If the file is not uploaded, proceed to the payment page
+        setPage('payment');
       }
-      // Check stock availability and update merchandise:
-      // For each bag item, reduce pending and increase bought
-      checkAvailability(true).then((available) => {
-        if (available) {
-          axios
-            .get(`${SERVER}/order/merchandise`)
-            .then((res) => {
-              const updateCalls = shoppingBag.map((bag) => {
-                const id = bag.model + ' ' + bag.size;
-                const merchandise = res.data.data.find(
-                  (item: any) =>
-                    item.model === bag.model && item.size === bag.size
-                );
-                const data = {
-                  pending: merchandise.pending - bag.quantity,
-                  bought: merchandise.bought + bag.quantity,
-                };
-                return axios.put(`${SERVER}/order/merchandise/${id}`, data);
-              });
-              Promise.all(updateCalls)
-                .then(() => setPage('confirmation'))
-                .catch((err) => {
-                  alert(
-                    'Error occurred during final submission: ' + err.message
-                  );
-                  setPage('payment');
-                });
-            })
-            .catch((err) => {
-              alert('Error fetching merchandise: ' + err.message);
-              setPage('payment');
-            });
-        } else {
-          setPopUpMessage(
-            'Stock issue detected. If you have paid, please contact us for a refund.'
-          );
-          setPopUpOpen(true);
-        }
-      });
     }
   };
 
