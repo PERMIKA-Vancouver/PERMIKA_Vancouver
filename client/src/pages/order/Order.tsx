@@ -15,6 +15,7 @@ import { CheckoutForm } from './components/CheckoutForm';
 import { ShoppingBagList } from './components/ShoppingBagList';
 import { PaymentSection } from './components/PaymentSection';
 import { ConfirmationPage } from './components/ConfirmationPage';
+import { TotalsDisplay } from './components/TotalsDisplay';
 
 const SERVER = process.env.REACT_APP_SERVER;
 
@@ -194,6 +195,11 @@ export const Order = () => {
                   handleSizeChange={handleSizeChange}
                   handleChooseItem={handleChooseItem}
                 />
+                <TotalsDisplay
+                  totalPrice={getTotalPrice()}
+                  discount={0}
+                  isDiscountActive={false}
+                />
               </>
             )}
             {page === 'payment' && (
@@ -237,13 +243,13 @@ export const Order = () => {
             )}
             {page === 'confirmation' && <ConfirmationPage />}
             {page !== 'payment' ? (
-              <Button
+              <button
+                className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400 hidden lg:block"
                 onClick={handleNextPage}
                 disabled={getTotalPrice() <= 0}
-                className="mt-7 hidden lg:block"
               >
                 Next
-              </Button>
+              </button>
             ) : (
               <Button
                 onClick={() => {

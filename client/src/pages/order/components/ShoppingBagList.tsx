@@ -47,6 +47,8 @@ export const ShoppingBagList: React.FC<ShoppingBagListProps> = ({
         >
           <div className="flex w-[90%] sm:w-[48%] justify-between">
             <TextField
+              className="quantity w-[30%]"
+              id="outlined-flexible"
               label="Qty"
               value={bag.quantity}
               onChange={(e) => {
@@ -58,6 +60,8 @@ export const ShoppingBagList: React.FC<ShoppingBagListProps> = ({
             <div className="x flex items-center">X</div>
             <div className="w-[54%]">
               <TextField
+                className="w-full"
+                id="outlined-multiline-sizes"
                 select
                 label="Size*"
                 defaultValue={bag.size}
@@ -78,6 +82,8 @@ export const ShoppingBagList: React.FC<ShoppingBagListProps> = ({
           <div className="justify-between flex sm:w-[50%] mt-3 sm:mt-0">
             <div className="w-[90%]">
               <TextField
+                className="w-full"
+                id="outlined-multiline-sizes"
                 select
                 label="Select your item*"
                 defaultValue={bag.model}
