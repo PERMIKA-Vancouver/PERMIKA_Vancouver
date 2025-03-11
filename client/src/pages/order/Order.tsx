@@ -135,6 +135,39 @@ export const Order = () => {
                     (loc) => loc.value === pickupLocation
                   );
 
+                  let newBags = [];
+                  for (let bag of shoppingBag) {
+                    const mainItem = {
+                      quantity: bag.quantity,
+                      size: bag.size,
+                      model: bag.model,
+                      price: bag.price,
+                      image: bag.image,
+                    };
+                    newBags.push(mainItem);
+                    if (bag.isBundle && bag.bundle && bag.bundle.length > 0) {
+                      for (let bundle of bag.bundle) {
+                        let size = bundle.size;
+                        if (
+                          bundle.model === 'Jauh di Mata Tote Bag' ||
+                          bundle.model === 'Life in Van City Tote Bag'
+                        ) {
+                          size = 'none';
+                        }
+                        const bundleItem = {
+                          quantity: 1,
+                          size: size,
+                          model: bundle.model,
+                          price: 0, // Adjust if necessary.
+                          image: '', // Optionally, look up the image from your MODELS list.
+                        };
+                        newBags.push(bundleItem);
+                      }
+                    }
+                  }
+
+                  console.log(newBags);
+
                   let dataOrder;
                   if (isPromoCodeApplied) {
                     dataOrder = {
@@ -143,7 +176,7 @@ export const Order = () => {
                       emailAddress: email,
                       phoneNumber,
                       pickUpLocation: location?.label,
-                      items: shoppingBag,
+                      items: newBags,
                       totalPrice: finalPrice,
                       promoCode: promoCode,
                     };
@@ -154,7 +187,7 @@ export const Order = () => {
                       emailAddress: email,
                       phoneNumber,
                       pickUpLocation: location?.label,
-                      items: shoppingBag,
+                      items: newBags,
                       totalPrice: finalPrice,
                     };
                   }
