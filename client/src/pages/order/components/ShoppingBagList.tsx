@@ -56,7 +56,7 @@ export const ShoppingBagList: React.FC<ShoppingBagListProps> = ({
         )}
       </div>
       {shoppingBag.map((bag, index) => (
-        <div>
+        <div key={index}>
           <div
             key={index}
             className="shopping-details sm:flex justify-between pl-[1.5%] pr-[2.5%] mt-[10%] sm:pt-[1.5%] sm:mt-0 mb-3"

@@ -165,7 +165,7 @@ export const Order = () => {
       if (idx !== index) return bag;
 
       const bundle = bag.bundle.map((item, i) =>
-        i !== bundleIndex ? item : { ...item, mdoel: model.label }
+        i !== bundleIndex ? item : { ...item, model: model.label }
       );
 
       return { ...bag, bundle: bundle };
