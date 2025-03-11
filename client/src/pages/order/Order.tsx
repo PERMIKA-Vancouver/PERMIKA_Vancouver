@@ -1,84 +1,89 @@
-import * as React from "react";
-import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
-import { useState } from "react";
+// Order.tsx
+import { useState, useCallback, useEffect } from 'react';
+import axios from 'axios';
+import { Button } from '@mui/material';
+import { openExternalLink } from '../../shared/utils/OpenLinkUtil';
+import { PopUpMessage } from '../../shared/components/PopUpMessage';
 import {
-  LOCATIONS,
   SIZES,
   MODELS,
-  DISCOUNT,
-  DISCOUNT_DEADLINE,
-} from "./data/data";
-import axios from "axios";
-import { openExternalLink } from "../../shared/utils/OpenLinkUtil";
-import dayjs from "dayjs";
-import { FaTrash } from "react-icons/fa";
-import { PopUpMessage } from "../../shared/components/PopUpMessage";
-import { CustomButton } from "../../shared/components/CustomButton";
-import { Button, InputBase } from "@mui/material";
-
-const DEFAULT_SHOPPING_BAG = {
-  quantity: 0,
-  size: "",
-  model: "",
-  price: 0,
-  image: "",
-};
-
-const DEFAULT_SELECTED_ITEM = {
-  value: "",
-  label: "",
-  price: 0,
-  image: "",
-};
+  DEFAULT_SELECTED_ITEM,
+  DEFAULT_SHOPPING_BAG,
+} from './data/data';
+import { ShoppingBagSidebar } from './components/ShoppingBagSidebar';
+import { CheckoutForm } from './components/CheckoutForm';
+import { ShoppingBagList } from './components/ShoppingBagList';
+import { PaymentSection } from './components/PaymentSection';
+import { ConfirmationPage } from './components/ConfirmationPage';
+import { TotalsDisplay } from './components/TotalsDisplay';
 
 const SERVER = process.env.REACT_APP_SERVER;
 
 export const Order = () => {
   const [page, setPage] = useState<
-    "checkout" | "review" | "payment" | "confirmation"
-  >("checkout");
+    'checkout' | 'review' | 'payment' | 'confirmation'
+  >('checkout');
   const [shoppingBag, setShoppingBag] = useState([DEFAULT_SHOPPING_BAG]);
   const [selectedItem, setSelectedItem] = useState(DEFAULT_SELECTED_ITEM);
-  const [numItems, setNumItems] = useState(0);
-
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [pickupLocation, setPickupLocation] = useState("");
-
-  const [firstNameError, setFirstNameError] = useState(false);
-  const [lastNameError, setLastNameError] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [phoneNumberError, setPhoneNumberError] = useState(false);
-  const [pickupLocationError, setPickupLocationError] = useState(false);
-
-  const [promoCode, setPromoCode] = useState("");
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [pickupLocation, setPickupLocation] = useState('');
+  const [promoCode, setPromoCode] = useState('');
   const [isPromoCodeApplied, setIsPromoCodeApplied] = useState(false);
   const [isPromoCodeInvalid, setIsPromoCodeInvalid] = useState(false);
   const [finalPrice, setFinalPrice] = useState(0);
-
   const [paymentClicked, setPaymentClicked] = useState(false);
-  const [popUpMessage, setPopUpMessage] = useState("");
+  const [popUpMessage, setPopUpMessage] = useState('');
   const [popUpOpen, setPopUpOpen] = useState(false);
   const [submitOrderClicked, setSubmitOrderClicked] = useState(false);
 
-  const isDiscount = dayjs().isBefore(
-    dayjs(DISCOUNT_DEADLINE, "YYYY-MM-DD HH:mm")
-  );
-
-  const handleQuantityChange = (index: number, newQuantity: number) => {
-    const updatedShoppingBag = [...shoppingBag];
-    updatedShoppingBag[index].quantity = newQuantity;
-    setShoppingBag(updatedShoppingBag);
-
-    // Recalculate total number of items
-    const totalQuantity = updatedShoppingBag.reduce(
-      (total, item) => total + item.quantity,
+  // Calculate total price based on shopping bag items
+  const getTotalPrice = useCallback(() => {
+    return shoppingBag.reduce(
+      (total, item) => total + item.price * item.quantity,
       0
     );
-    setNumItems(totalQuantity);
+  }, [shoppingBag]);
+
+  // Stock-checking function: verifies that for each item, quantity does not exceed available stock.
+  // The "payment" flag is used to decide whether to consider pending items or not.
+  const checkAvailability = (payment: boolean): Promise<boolean> => {
+    return axios
+      .get(`${SERVER}/order/merchandise`)
+      .then((res) => {
+        let available = true;
+        res.data.data.forEach((item: any) => {
+          // Sum quantities for items matching model and size.
+          const total = shoppingBag.reduce(
+            (acc, bag) =>
+              bag.model === item.model && bag.size === item.size
+                ? acc + bag.quantity
+                : acc,
+            0
+          );
+          const itemStock = payment
+            ? item.stock - item.bought
+            : item.stock - item.bought - item.pending;
+          if (total > itemStock) {
+            setPopUpMessage(
+              `${item.model} ${item.size} has only ${itemStock} in stock left.`
+            );
+            setPopUpOpen(true);
+            available = false;
+          }
+        });
+        return available;
+      })
+      .catch(() => false);
+  };
+
+  // Handlers for shopping bag operations
+  const handleQuantityChange = (index: number, newQuantity: number) => {
+    const updatedBag = [...shoppingBag];
+    updatedBag[index].quantity = newQuantity;
+    setShoppingBag(updatedBag);
   };
 
   const handleAddItem = () => {
@@ -87,787 +92,335 @@ export const Order = () => {
         ...DEFAULT_SHOPPING_BAG,
         quantity: 0,
         price: selectedItem.price,
-        item: selectedItem.label,
+        model: selectedItem.label,
         image: selectedItem.image,
       };
       setShoppingBag([...shoppingBag, newItem]);
-      setNumItems(numItems + 1);
     }
   };
 
   const handleRemoveItem = (index: number) => {
-    const updatedShoppingBag = [...shoppingBag];
-    const removedItem = updatedShoppingBag.splice(index, 1)[0];
-    setShoppingBag(updatedShoppingBag);
-    setNumItems(numItems - removedItem.quantity);
+    const updatedBag = [...shoppingBag];
+    updatedBag.splice(index, 1);
+    setShoppingBag(updatedBag);
   };
 
-  const getTotalPrice = React.useCallback(() => {
-    let totalPrice = 0;
-    for (const item of shoppingBag) {
-      totalPrice += item.price * item.quantity;
-    }
-    return totalPrice;
-  }, [shoppingBag]);
-
-  const totalPrice = shoppingBag.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
-
-  let subtotal = totalPrice;
-  let disc = 0;
-  if (isDiscount) {
-    disc = totalPrice * DISCOUNT;
-    subtotal -= disc;
-  }
-
-  const isTotalsVisible = shoppingBag.some(
-    (item) => item.quantity > 0 && item.size && item.model
-  );
-
   const handleSizeChange = (index: number, size: (typeof SIZES)[number]) => {
-    if (page !== "checkout") return;
-
-    setShoppingBag((prev) => {
-      return prev.map((bag, idx) =>
-        idx !== index ? bag : { ...bag, size: size.label }
-      );
-    });
+    if (page !== 'checkout') return;
+    const updatedBag = shoppingBag.map((bag, idx) =>
+      idx !== index ? bag : { ...bag, size: size.label }
+    );
+    setShoppingBag(updatedBag);
   };
 
   const handleChooseItem = (index: number, item: (typeof MODELS)[number]) => {
-    if (page !== "checkout") return;
-
-    setShoppingBag((prev) => {
-      return prev.map((bag, idx) =>
-        idx !== index
-          ? bag
-          : { ...bag, model: item.label, price: item.price, image: item.image }
-      );
-    });
+    if (page !== 'checkout') return;
+    const updatedBag = shoppingBag.map((bag, idx) =>
+      idx !== index
+        ? bag
+        : { ...bag, model: item.label, price: item.price, image: item.image }
+    );
+    setShoppingBag(updatedBag);
+    setSelectedItem(item);
   };
 
-  const handleNextPage = () => {
-    if (page === "checkout") {
-      // Check if total price is zero
-      if (getTotalPrice() <= 0) {
-        setFirstNameError(true); // Set error state if total price is zero
-        return;
-      }
-
-      // Check if first name is provided
-      if (!firstName.trim()) {
-        setFirstNameError(true); // Set error state if first name is not provided
-        setPopUpMessage("Please enter your first name!");
-        setPopUpOpen(true);
-        return;
-      }
-
-      // Check if last name is provided
-      if (!lastName.trim()) {
-        setLastNameError(true);
-        setPopUpMessage("Please enter your last name!");
-        setPopUpOpen(true);
-        return;
-      } else {
-        setLastNameError(false);
-      }
-
-      // Check if email is provided
-      if (!email.trim() || !email.includes("@") || !email.includes(".")) {
-        setEmailError(true);
-        setPopUpMessage(
-          "Please enter your email address or check it's in the right format!"
-        );
-        setPopUpOpen(true);
-        return;
-      } else {
-        setEmailError(false);
-      }
-
-      // Check if phone number is provided
-      if (!phoneNumber.trim() || isNaN(Number(phoneNumber))) {
-        setPhoneNumberError(true);
-        setPopUpMessage(
-          "Please enter your phone number! (only numbers allowed)"
-        );
-        setPopUpOpen(true);
-        return;
-      } else {
-        setPhoneNumberError(false);
-      }
-
-      // Check if pick-up location is provided
-      if (!pickupLocation.trim()) {
-        setPickupLocationError(true);
-        setPopUpMessage("Please choose a pick up location!");
-        setPopUpOpen(true);
-        return;
-      } else {
-        setPickupLocationError(false);
-      }
-      // Proceed to the next page if all checks pass
-      setPage("review");
-      // edited at 7-7-2024 for pre-ordering capabilities (removed checking availabilities)
-    } else if (page === "review") {
-      // Proceed to the payment page after finishing the review
-      checkAvailability(false).then((available) => {
-        if (available) {
-          handlePayment();
-        }
-      });
-    } else if (page === "payment") {
-      // Check if the file is uploaded
-      if (paymentClicked) {
-        // If the file is uploaded, proceed to the confirmation page
-        checkAvailability(true).then((available) => {
-          if (available) {
-            handleSubmitOrder();
-          } else {
-            setPopUpMessage(
-              "If you have paid, please contact us at our instagram to process the refund. Sorry for the inconvenience."
-            );
-            setPopUpOpen(true);
-          }
-        });
-      } else {
-        // If the file is not uploaded, proceed to the payment page
-        setPage("payment");
-      }
-    } else {
-      setPage("confirmation"); // Assuming this is the last step after payment and file upload
+  // Field change handler for form inputs
+  const handleFieldChange = (field: string, value: string | boolean) => {
+    switch (field) {
+      case 'firstName':
+        setFirstName(value as string);
+        break;
+      case 'lastName':
+        setLastName(value as string);
+        break;
+      case 'email':
+        setEmail(value as string);
+        break;
+      case 'phoneNumber':
+        setPhoneNumber(value as string);
+        break;
+      case 'pickupLocation':
+        setPickupLocation(value as string);
+        break;
+      case 'promoCode':
+        setPromoCode(value as string);
+        break;
+      case 'paymentClicked':
+        setPaymentClicked(value as boolean);
+        break;
+      default:
+        break;
     }
   };
 
-  // ############ UNCOMMENTED BECAUSE OF PREORDER PERIOD ENDING ############
-  const checkAvailability = async (payment: boolean): Promise<boolean> => {
-    return new Promise((resolve, reject) => {
-      axios
-        .get(`${SERVER}/order/merchandise`)
-        .then((res) => {
-          res.data.data.forEach((item: any) => {
-            const initialValue = 0;
-            const total = shoppingBag.reduce(
-              (accumulator, bag) =>
-                bag.model === item.model && bag.size === item.size
-                  ? accumulator + bag.quantity
-                  : accumulator,
-              initialValue
-            );
-
-            const itemStock = payment
-              ? item.stock - item.bought
-              : item.stock - item.bought - item.pending;
-            if (total > itemStock) {
-              setPopUpMessage(
-                `${item.model} ${item.size} has only ${itemStock} in stock left.`
-              );
-              setPopUpOpen(true);
-              resolve(false);
-            }
-          });
-          resolve(true);
-        })
-        .catch((err) => {
-          resolve(false);
-        });
-    });
-  };
-
-  // **************** THIS CODE IS USED ONLY WHEN PRE-ORDER PERIOD FOR CHECKING IF SIZE FOR CERTAIN MERCH IS AVAILABLE ****************
-  // const checkAvailableSize = async (): Promise<boolean> => {
-  //   try {
-  //     const checkSizes = shoppingBag.map((item: any) => {
-  //       return axios
-  //         .get(`${SERVER}/order/merchandise/${item.model} ${item.size}`)
-  //         .then((res) => {
-  //           if (!res.data.data) {
-  //             setPopUpMessage(`${item.model} does not have size ${item.size}.`);
-  //             setPopUpOpen(true);
-  //             return false;
-  //           }
-  //           return true;
-  //         })
-  //         .catch((err) => {
-  //           setPopUpMessage(`${item.model} does not have size ${item.size}.`);
-  //           setPopUpOpen(true);
-  //           return false;
-  //         });
-  //     });
-
-  //     const results = await Promise.all(checkSizes);
-
-  //     return results.every((result) => result);
-  //   } catch (error) {
-  //     console.error(error);
-  //     return false;
-  //   }
-  // };
-
-  const handlePayment = () => {
-    axios.get(`${SERVER}/order/merchandise`).then((res) => {
-      let proceedPayment = true;
-      for (let bag of shoppingBag) {
-        const merchandise = res.data.data.find(
-          (item: any) => item.model === bag.model && item.size === bag.size
-        );
-        console.log(merchandise);
-        // another merchandise checking
-        // if (!merchandise) {
-        //   setPopUpMessage(`${bag.model} has no size ${bag.size}`);
-        //   setPopUpOpen(true);
-        //   proceedPayment = false;
-        // }
+  // Updated page navigation with validations and pending updates
+  const handleNextPage = () => {
+    if (page === 'checkout') {
+      // Validate that shopping bag has items
+      if (getTotalPrice() <= 0) {
+        setPopUpMessage('Please add items to your shopping bag.');
+        setPopUpOpen(true);
+        return;
       }
-
-      if (proceedPayment) {
-        for (let bag of shoppingBag) {
-          const id = bag.model + " " + bag.size;
-          const merchandise = res.data.data.find(
-            (item: any) => item.model === bag.model && item.size === bag.size
-          );
-          const data = {
-            pending: merchandise.pending + bag.quantity,
-            bought: merchandise.bought,
-          };
+      // Validate required customer fields
+      if (
+        !firstName.trim() ||
+        !lastName.trim() ||
+        !email.trim() ||
+        !phoneNumber.trim() ||
+        !pickupLocation.trim()
+      ) {
+        setPopUpMessage('Please fill out all required fields.');
+        setPopUpOpen(true);
+        return;
+      }
+      // Validate that for each bag item with a positive quantity, size and model are chosen
+      const incompleteItem = shoppingBag.find(
+        (bag) => bag.quantity > 0 && (!bag.size || !bag.model)
+      );
+      if (incompleteItem) {
+        setPopUpMessage(
+          'Please select a size and item for all products in your shopping bag.'
+        );
+        setPopUpOpen(true);
+        return;
+      }
+      setPage('review');
+    } else if (page === 'review') {
+      // Check stock availability before transitioning to payment
+      checkAvailability(false).then((available) => {
+        if (available) {
+          // Update each merchandise item by adding pending
           axios
-            .put(`${SERVER}/order/merchandise/${id}`, data)
-            .then(() => {
-              setFinalPrice(subtotal);
-              setPage("payment");
+            .get(`${SERVER}/order/merchandise`)
+            .then((res) => {
+              const updateCalls = shoppingBag.map((bag) => {
+                const id = bag.model + ' ' + bag.size;
+                const merchandise = res.data.data.find(
+                  (item: any) =>
+                    item.model === bag.model && item.size === bag.size
+                );
+                const data = {
+                  pending: merchandise.pending + bag.quantity,
+                  bought: merchandise.bought,
+                };
+                return axios.put(`${SERVER}/order/merchandise/${id}`, data);
+              });
+              Promise.all(updateCalls)
+                .then(() => setPage('payment'))
+                .catch((err) => {
+                  alert(
+                    'Error occurred during payment transition: ' + err.message
+                  );
+                  setPage('review');
+                });
             })
             .catch((err) => {
-              alert("Error occured: " + err.message + ". Please try again!");
-              setPage("review");
+              alert('Error fetching merchandise: ' + err.message);
+              setPage('review');
             });
         }
-      } else {
-        setPage("review");
-      }
-    });
-  };
-
-  const handleSubmitOrder = () => {
-    axios.get(`${SERVER}/order/merchandise`).then((res) => {
-      shoppingBag.forEach((bag) => {
-        const id = bag.model + " " + bag.size;
-        const merchandise = res.data.data.find(
-          (item: any) => item.model === bag.model && item.size === bag.size
+      });
+    } else if (page === 'payment') {
+      if (!paymentClicked) {
+        setPopUpMessage(
+          'Please complete payment before submitting your order.'
         );
-        const data = {
-          pending: merchandise.pending - bag.quantity,
-          bought: merchandise.bought + bag.quantity,
-        };
-        axios
-          .put(`${SERVER}/order/merchandise/${id}`, data)
-          .then(() => {
-            const location = LOCATIONS.find(
-              (loc) => loc.value === pickupLocation
-            );
-
-            let dataOrder;
-            if (isPromoCodeApplied) {
-              dataOrder = {
-                firstName,
-                lastName,
-                emailAddress: email,
-                phoneNumber,
-                pickUpLocation: location?.label,
-                items: shoppingBag,
-                totalPrice: subtotal,
-                promoCode: promoCode,
-              };
-            } else {
-              dataOrder = {
-                firstName,
-                lastName,
-                emailAddress: email,
-                phoneNumber,
-                pickUpLocation: location?.label,
-                items: shoppingBag,
-                totalPrice: subtotal,
-              };
-            }
-
-            axios
-              .post(`${SERVER}/order`, dataOrder)
-              .then(() => {
-                // ***** WARNING!!! promoCode feature might cause bug, if bugs comment from here
+        setPopUpOpen(true);
+        return;
+      }
+      // Check stock availability and update merchandise:
+      // For each bag item, reduce pending and increase bought
+      checkAvailability(true).then((available) => {
+        if (available) {
+          axios
+            .get(`${SERVER}/order/merchandise`)
+            .then((res) => {
+              const updateCalls = shoppingBag.map((bag) => {
+                const id = bag.model + ' ' + bag.size;
+                const merchandise = res.data.data.find(
+                  (item: any) =>
+                    item.model === bag.model && item.size === bag.size
+                );
                 const data = {
-                  promoCode: promoCode,
-                  claimed: true,
+                  pending: merchandise.pending - bag.quantity,
+                  bought: merchandise.bought + bag.quantity,
                 };
-                axios
-                  .put(`${SERVER}/order/promocode`, data)
-                  .then(() => {
-                    setPage("confirmation");
-                  })
-                  .catch((err) => {
-                    console.log(err);
-                    alert("An error happened: " + err.message);
-                    setPage("payment");
-                  });
-                // ***** up to this point
-                // setPage("confirmation"); // and then uncomment this setPage(...)
-              })
-              .catch((err) => {
-                alert("An error happened: " + err.message);
-                setPage("payment");
+                return axios.put(`${SERVER}/order/merchandise/${id}`, data);
               });
-          })
-          .catch((err) => {
-            alert("An error happened: " + err.message);
-            setPage("payment");
-          });
-      });
-    });
-  };
-
-  const handleApplyPromoCode = () => {
-    axios
-      .get(`${SERVER}/order/promocode/${promoCode}`)
-      .then((res) => {
-        if (!res.data || res.data.pending || res.data.claimed) {
-          setIsPromoCodeInvalid(true);
-          setPromoCode("");
-          return;
+              Promise.all(updateCalls)
+                .then(() => setPage('confirmation'))
+                .catch((err) => {
+                  alert(
+                    'Error occurred during final submission: ' + err.message
+                  );
+                  setPage('payment');
+                });
+            })
+            .catch((err) => {
+              alert('Error fetching merchandise: ' + err.message);
+              setPage('payment');
+            });
+        } else {
+          setPopUpMessage(
+            'Stock issue detected. If you have paid, please contact us for a refund.'
+          );
+          setPopUpOpen(true);
         }
-
-        const data = {
-          promoCode: promoCode,
-          pending: true,
-        };
-
-        axios
-          .put(`${SERVER}/order/promocode`, data)
-          .then(() => {
-            setIsPromoCodeInvalid(false);
-            setIsPromoCodeApplied(true);
-            setFinalPrice(finalPrice * (1 - DISCOUNT));
-          })
-          .catch((err) => {
-            alert("An error happened: " + err.message);
-          });
-      })
-      .catch((err) => {
-        alert("An error happened: " + err.message);
       });
+    }
   };
+
+  // Recalculate final price when entering the payment page
+  useEffect(() => {
+    if (page === 'payment') {
+      const totalPrice = getTotalPrice();
+      // In this example, discount is not applied so the subtotal equals total price.
+      setFinalPrice(totalPrice);
+    }
+  }, [page, shoppingBag, getTotalPrice]);
 
   return (
     <div>
+      <PopUpMessage
+        open={popUpOpen}
+        handleClose={() => setPopUpOpen(false)}
+        message={popUpMessage}
+      />
       <div className="flex flex-col lg:flex-row min-h-screen pt-navbar py-20 ml-[5%]">
-        {/* Sidebar */}
-        {page !== "confirmation" && (
-          <div className="px-[6.3%] mt-10 order-2 lg:px-0 lg:mt-0 lg:order-1 flex-none">
-            <div className="mb-[50px] checkout-label">
-              <h2>Shopping bag</h2>
-            </div>
-            {/* Image cards */}
-            <div>
-              {shoppingBag.map((item, index) => {
-                if (item.model) {
-                  return (
-                    <div className="block max-w-sm p-6 mb-3 mr-3 border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-                      <img className="rounded-t-lg" src={item.image} alt="" />
-                      <h5 className="text-center mb-2 text-2xl tracking-tight text-gray-900">
-                        {item.model}
-                      </h5>
-                    </div>
-                  );
-                }
-                return <div></div>;
-              })}
-            </div>
-          </div>
+        {page !== 'confirmation' && (
+          <ShoppingBagSidebar shoppingBag={shoppingBag} />
         )}
 
-        {/* Main content */}
         <div
           className={`lg:order-2 ml-[2%] flex-auto ${
-            page === "confirmation" ? "w-3/4" : "w-full"
+            page === 'confirmation' ? 'w-3/4' : 'w-full'
           }`}
         >
-          {/* Pop Up */}
-          <PopUpMessage
-            open={popUpOpen}
-            handleClose={() => setPopUpOpen(false)}
-            message={popUpMessage}
-          />
-
-          {/* <ShoppingBag /> */}
-
           <div className="Checkout-details pl-[6.3%] w-[100%] pr-[12%]">
-            <div className="Checkout">
-              <div className="checkout-outer mb-[50px]">
-                <div className="checkout-label flex justify-between items-center">
-                  <h2>
-                    {page === "review"
-                      ? "Review Order"
-                      : page === "payment"
-                      ? "Payment Details"
-                      : page === "confirmation"
-                      ? "Thank you for your purchase!"
-                      : "Order"}
-                  </h2>
-                  {page === "review" && (
-                    <button onClick={() => setPage("checkout")}>Edit</button>
-                  )}
-                </div>
-                <div className="checkout-information"></div>
+            <div className="checkout-outer mb-[50px]">
+              <div className="checkout-label flex justify-between items-center">
+                <h2>
+                  {page === 'review'
+                    ? 'Review Order'
+                    : page === 'payment'
+                      ? 'Payment Details'
+                      : page === 'confirmation'
+                        ? 'Thank you for your purchase!'
+                        : 'Order'}
+                </h2>
+                {page === 'review' && (
+                  <button onClick={() => setPage('checkout')}>Edit</button>
+                )}
               </div>
-              {page !== "payment" && page !== "confirmation" && (
-                <form className="checkout-form">
-                  <div className="name sm:flex justify-between sm:gap-5">
-                    <TextField
-                      className={`w-full sm:basis-[49%] ${
-                        firstNameError ? "error" : ""
-                      }`}
-                      id="outlined-multiline-flexible"
-                      label="First Name*"
-                      multiline
-                      maxRows={4}
-                      disabled={page !== "checkout"}
-                      value={firstName}
-                      onChange={(e) => {
-                        setFirstName(e.target.value);
-                        setFirstNameError(false);
-                      }}
-                    />
-                    <TextField
-                      className={`w-full sm:basis-[49%] ${
-                        lastNameError ? "error" : ""
-                      } !mt-[3%] sm:!mt-0`}
-                      id="outlined-multiline-flexible"
-                      label="Last Name*"
-                      multiline
-                      maxRows={4}
-                      disabled={page !== "checkout"}
-                      value={lastName}
-                      onChange={(e) => {
-                        setLastName(e.target.value);
-                        setLastNameError(false);
-                      }}
-                    />
-                  </div>
-                  <div className="pt-[3%]">
-                    <TextField
-                      className={`w-full ${emailError ? "error" : ""}`}
-                      label="Email Address*"
-                      multiline
-                      maxRows={4}
-                      fullWidth
-                      disabled={page !== "checkout"}
-                      value={email}
-                      onChange={(e) => {
-                        setEmail(e.target.value);
-                        setEmailError(false);
-                      }}
-                    />
-                  </div>
-                  <div className="phone-number flex justify-between pt-[3%] gap-5">
-                    <TextField
-                      className={`flex-auto ${phoneNumberError ? "error" : ""}`}
-                      id="outlined-multiline-flexible"
-                      label="Phone Number*"
-                      multiline
-                      maxRows={4}
-                      disabled={page !== "checkout"}
-                      value={phoneNumber}
-                      onChange={(e) => {
-                        setPhoneNumber(e.target.value);
-                        setPhoneNumberError(false);
-                      }}
-                    />
-                  </div>
-
-                  <form className="pickup-location pt-[3%]">
-                    <TextField
-                      className={`w-full ${pickupLocationError ? "error" : ""}`}
-                      select
-                      label="Pick-Up Location*"
-                      fullWidth
-                      disabled={page !== "checkout"}
-                      value={pickupLocation}
-                      onChange={(e) => {
-                        setPickupLocation(e.target.value);
-                        setPickupLocationError(false);
-                      }}
-                    >
-                      {LOCATIONS.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                          {option.label}
-                        </MenuItem>
-                      ))}
-                    </TextField>
-                  </form>
-                </form>
-              )}
+              <div className="checkout-information"></div>
             </div>
-
-            {/* Shopping Bag */}
-            {page !== "confirmation" && (
-              <div className="Shopping-bag mt-20">
-                <div className="shopping flex justify-between mb-3">
-                  <h2 className="text-[1.875rem] text-[#414141]">
-                    Shopping Bag
-                  </h2>
-                  {page === "checkout" && (
-                    <button
-                      onClick={handleAddItem}
-                      className="add-button pr-[2%]"
-                    >
-                      Add
-                    </button>
-                  )}
-                </div>
-
-                {shoppingBag.map((bag, index) => (
-                  <div
-                    key={index}
-                    className="shopping-details sm:flex justify-between pl-[1.5%] pr-[2.5%] mt-[10%] sm:pt-[1.5%] sm:mt-0 mb-3"
-                  >
-                    <div className="flex w-[90%] sm:w-[48%] justify-between">
-                      <TextField
-                        className="quantity w-[30%]"
-                        id="outlined-flexible"
-                        label="Qty"
-                        value={bag.quantity}
-                        onChange={(event) => {
-                          if (page !== "checkout") return;
-                          const newQuantity =
-                            parseInt(event.target.value, 10) || 0;
-                          handleQuantityChange(index, newQuantity);
-                        }}
-                        disabled={page !== "checkout"}
-                      />
-                      <div className="x flex items-center">X</div>
-                      <div className="w-[54%]">
-                        <TextField
-                          className="w-full"
-                          id="outlined-multiline-sizes"
-                          select
-                          label="Size*"
-                          defaultValue={bag.size}
-                          disabled={page !== "checkout"}
-                        >
-                          {SIZES.map((option) => (
-                            <MenuItem
-                              key={option.value}
-                              value={option.value}
-                              onClick={() => handleSizeChange(index, option)}
-                            >
-                              {option.label}
-                            </MenuItem>
-                          ))}
-                        </TextField>
-                      </div>
-                    </div>
-                    <div className="justify-between flex sm:w-[50%] mt-3 sm:mt-0">
-                      <div className="w-[90%]">
-                        <TextField
-                          className="w-full"
-                          id="outlined-multiline-sizes"
-                          select
-                          label="Select your item*"
-                          defaultValue={bag.model}
-                          onChange={(event) => {
-                            const selectedItemValue = event.target.value;
-                            const selected =
-                              MODELS.find(
-                                (model) => model.value === selectedItemValue
-                              ) || DEFAULT_SELECTED_ITEM;
-                            setSelectedItem(selected);
-                          }}
-                          disabled={page !== "checkout"}
-                        >
-                          {MODELS.map((option) => (
-                            <MenuItem
-                              key={option.value}
-                              value={option.value}
-                              onClick={() => handleChooseItem(index, option)}
-                              disabled={page !== "checkout"}
-                            >
-                              {option.label}
-                            </MenuItem>
-                          ))}
-                        </TextField>
-                      </div>
-                      {page === "checkout" && (
-                        <button
-                          onClick={() => handleRemoveItem(index)}
-                          className="remove-button px-[2%]"
-                        >
-                          <FaTrash className="text-grey-body w-5 h-auto" />
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                ))}
-                {getTotalPrice() > 0 && (
-                  <div className="">
-                    {page === "payment" ? (
-                      <div className="text-[#9A9A9A] flex justify-between font-light">
-                        Subtotal <span>${subtotal.toFixed(2)}</span>
-                      </div>
-                    ) : (
-                      <div className="totals font-light">
-                        <div className="text-[#9A9A9A] flex justify-between">
-                          Merchandise Total{" "}
-                          <span className="">${totalPrice.toFixed(2)}</span>
-                        </div>
-                        {isDiscount && (
-                          <div className="text-[#9A9A9A] flex justify-between">
-                            Discount ({`${DISCOUNT * 100}%`})
-                            <span>${disc.toFixed(2)}</span>
-                          </div>
-                        )}
-                        <div className="flex justify-between mt-2.5 text-2xl">
-                          Subtotal <span>${subtotal.toFixed(2)}</span>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {/** PROMO CODE */}
-                {page === "payment" && (
-                  <div className="flex mt-10">
-                    <InputBase
-                      className={`border-[1px] border-r-0 ${
-                        isPromoCodeInvalid
-                          ? "border-[#d32f2f]"
-                          : isPromoCodeApplied
-                          ? "border-light-green"
-                          : "border-[#bdbdbd]"
-                      } rounded-l py-1.5 px-3`}
-                      value={promoCode}
-                      onChange={(e) => setPromoCode(e.target.value)}
-                      disabled={isPromoCodeApplied}
-                      placeholder="Promo code"
-                      fullWidth
-                    />
-                    <Button
-                      variant="contained"
-                      onClick={handleApplyPromoCode}
-                      className={`!rounded-l-none !text-white !shadow-none !normal-case ${
-                        isPromoCodeInvalid
-                          ? "!bg-[#d32f2f]"
-                          : isPromoCodeApplied
-                          ? "!bg-light-green"
-                          : promoCode
-                          ? "!bg-sunset-orange"
-                          : "!bg-grey-body"
-                      }`}
-                      disabled={!promoCode || isPromoCodeApplied}
-                    >
-                      {isPromoCodeApplied ? "Applied" : "Apply"}
-                    </Button>
-                  </div>
-                )}
-
-                {/** FINAL TOTAL PRICE */}
-                {page === "payment" && (
-                  <div className="mt-4">
-                    <div className="totals font-light">
-                      {isPromoCodeApplied && (
-                        <div className="text-[#9A9A9A] flex justify-between">
-                          Discount ({`${DISCOUNT * 100}%`})
-                          <span>${(subtotal * DISCOUNT).toFixed(2)}</span>
-                        </div>
-                      )}
-                      <div className="flex justify-between mt-2.5 text-2xl">
-                        Total <span>${finalPrice.toFixed(2)}</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {page === "payment" && (
-                  <div className="payment-form mt-10">
-                    {/* Additional payment details and upload picture form*/}
-                    {/* You can add your form fields here */}
-                    <div className="upload-picture pt-[5%]">
-                      <h2 className="payment-label text-[1.875rem] text-[#414141]">
-                        Payment
-                      </h2>
-                      <p className="payment-description pt-[2%] text-grey-body">
-                        Please access the link below and pay your total amount
-                        there.
-                      </p>
-                      <p
-                        onClick={() => {
-                          setPaymentClicked(true);
-                          openExternalLink(
-                            "https://forms.gle/RbuP9j3wqG5ZKAuaA"
-                          );
-                        }}
-                        className="text-blue-600 cursor-pointer text-xl"
-                      >
-                        Click here
-                      </p>
-                    </div>
-                  </div>
-                )}
-                {!isTotalsVisible && shoppingBag.length === 0 && <div></div>}
-
-                {/* BUTTON */}
-                {page === "payment" ? (
-                  <button
-                    className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400"
-                    onClick={() => {
-                      setSubmitOrderClicked(true);
-                      handleNextPage();
-                    }}
-                    disabled={
-                      getTotalPrice() <= 0 ||
-                      !paymentClicked ||
-                      submitOrderClicked
-                    }
-                  >
-                    Submit Order
-                  </button>
-                ) : (
-                  <button
-                    className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400 hidden lg:block"
-                    onClick={() => handleNextPage()}
-                    disabled={getTotalPrice() <= 0}
-                  >
-                    Next
-                  </button>
-                )}
-              </div>
-            )}
-            {/* Thank you for purchase */}
-            {page === "confirmation" && (
-              <div>
-                <h4 className="text-grey-body xl:max-w-[50%]">
-                  Your order has been submitted and you will receive a
-                  confirmation email from us. We appreciate your support and we
-                  can't wait for you to wear them!
-                </h4>
-
-                <CustomButton
-                  text={"Back to home"}
-                  className={"mt-[6.88rem]"}
-                  link={"https://permikavancouver.com"}
+            {(page === 'checkout' || page === 'review') && (
+              <>
+                <CheckoutForm
+                  state={{
+                    firstName,
+                    lastName,
+                    email,
+                    phoneNumber,
+                    pickupLocation,
+                  }}
+                  handleFieldChange={handleFieldChange}
+                  readOnly={page === 'review'}
                 />
-              </div>
+                <ShoppingBagList
+                  page={page}
+                  shoppingBag={shoppingBag}
+                  handleQuantityChange={handleQuantityChange}
+                  handleAddItem={handleAddItem}
+                  handleRemoveItem={handleRemoveItem}
+                  handleSizeChange={handleSizeChange}
+                  handleChooseItem={handleChooseItem}
+                  readOnly={page === 'review'}
+                />
+                <TotalsDisplay
+                  totalPrice={getTotalPrice()}
+                  discount={0}
+                  isDiscountActive={false}
+                />
+              </>
+            )}
+            {page === 'payment' && (
+              <PaymentSection
+                state={{
+                  promoCode,
+                  isPromoCodeApplied,
+                  isPromoCodeInvalid,
+                  finalPrice,
+                  paymentClicked,
+                }}
+                handleFieldChange={handleFieldChange}
+                handleApplyPromoCode={() => {
+                  // Promo code logic example
+                  axios
+                    .get(`${SERVER}/order/promocode/${promoCode}`)
+                    .then((res) => {
+                      if (!res.data || res.data.pending || res.data.claimed) {
+                        setIsPromoCodeInvalid(true);
+                        setPromoCode('');
+                        return;
+                      }
+                      const data = { promoCode, pending: true };
+                      axios
+                        .put(`${SERVER}/order/promocode`, data)
+                        .then(() => {
+                          setIsPromoCodeInvalid(false);
+                          setIsPromoCodeApplied(true);
+                          // Keep finalPrice as already calculated
+                          setFinalPrice(finalPrice);
+                        })
+                        .catch((err) => {
+                          alert('An error occurred: ' + err.message);
+                        });
+                    })
+                    .catch((err) => {
+                      alert('An error occurred: ' + err.message);
+                    });
+                }}
+                openExternalLink={openExternalLink}
+              />
+            )}
+            {page === 'confirmation' && <ConfirmationPage />}
+            {page === 'confirmation' ? (
+              <></>
+            ) : page !== 'payment' ? (
+              <button
+                className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400 hidden lg:block"
+                onClick={handleNextPage}
+                disabled={getTotalPrice() <= 0}
+              >
+                Next
+              </button>
+            ) : (
+              <button
+                className="block bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400"
+                onClick={() => {
+                  setSubmitOrderClicked(true);
+                  handleNextPage();
+                }}
+                disabled={
+                  getTotalPrice() <= 0 || !paymentClicked || submitOrderClicked
+                }
+              >
+                Submit Order
+              </button>
             )}
           </div>
         </div>
-
-        {/* Next Button Mobile View */}
-        {page !== "confirmation" && page !== "payment" && (
+        {page !== 'confirmation' && page !== 'payment' && (
           <div className="px-[6.3%] order-3 lg:hidden">
-            <button
-              className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400"
-              onClick={() => handleNextPage()}
+            <Button
+              onClick={handleNextPage}
               disabled={getTotalPrice() <= 0}
+              className="mt-7"
             >
               Next
-            </button>
+            </Button>
           </div>
         )}
       </div>
