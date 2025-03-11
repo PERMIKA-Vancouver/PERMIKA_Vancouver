@@ -143,6 +143,61 @@ export const Order = () => {
         ...bundleItems, // Insert the bundle items
         ...shoppingBag.slice(index + 1), // Keep items after the selected item
       ];
+    } else if (item.label === "Bundle Tote + Hoodie") {
+      const bundleItems = [
+        {
+          model: MODELS[0].label,
+          price: MODELS[0].price,
+          image: MODELS[0].image,
+          size: "M",
+          quantity: 1,
+        },
+        {
+          model: MODELS[3].label,
+          price: MODELS[3].price,
+          image: MODELS[3].image,
+          size: "M",
+          quantity: 1,
+        },
+      ];
+
+      // Replace the original bundle item with multiple items
+      updatedBag = [
+        ...shoppingBag.slice(0, index), // Keep items before the selected item
+        ...bundleItems, // Insert the bundle items
+        ...shoppingBag.slice(index + 1), // Keep items after the selected item
+      ];
+    } else if (item.label === "Bundle Tote + Kaos + Hoodie") {
+      const bundleItems = [
+        {
+          model: MODELS[0].label,
+          price: MODELS[0].price,
+          image: MODELS[0].image,
+          size: "M",
+          quantity: 1,
+        },
+        {
+          model: MODELS[2].label,
+          price: MODELS[2].price,
+          image: MODELS[2].image,
+          size: "M",
+          quantity: 1,
+        },
+        {
+          model: MODELS[3].label,
+          price: MODELS[3].price,
+          image: MODELS[3].image,
+          size: "M",
+          quantity: 1,
+        },
+      ];
+
+      // Replace the original bundle item with multiple items
+      updatedBag = [
+        ...shoppingBag.slice(0, index), // Keep items before the selected item
+        ...bundleItems, // Insert the bundle items
+        ...shoppingBag.slice(index + 1), // Keep items after the selected item
+      ];
     } else {
       updatedBag = shoppingBag.map((bag, idx) =>
         idx !== index
