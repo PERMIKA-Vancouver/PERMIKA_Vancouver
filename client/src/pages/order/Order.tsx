@@ -7,8 +7,10 @@ import { PopUpMessage } from '../../shared/components/PopUpMessage';
 import {
   SIZES,
   MODELS,
-  DEFAULT_SELECTED_ITEM,
   DEFAULT_SHOPPING_BAG,
+  SHOPPING_BAG_TYPE,
+  BUNDLE_OPTIONS,
+  DEFAULT_BUNDLE_BAG,
 } from './data/data';
 import { ShoppingBagSidebar } from './components/ShoppingBagSidebar';
 import { CheckoutForm } from './components/CheckoutForm';
@@ -23,8 +25,9 @@ export const Order = () => {
   const [page, setPage] = useState<
     'checkout' | 'review' | 'payment' | 'confirmation'
   >('checkout');
-  const [shoppingBag, setShoppingBag] = useState([DEFAULT_SHOPPING_BAG]);
-  const [selectedItem, setSelectedItem] = useState(DEFAULT_SELECTED_ITEM);
+  const [shoppingBag, setShoppingBag] = useState<SHOPPING_BAG_TYPE[]>([
+    DEFAULT_SHOPPING_BAG,
+  ]);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -87,16 +90,8 @@ export const Order = () => {
   };
 
   const handleAddItem = () => {
-    if (selectedItem) {
-      const newItem = {
-        ...DEFAULT_SHOPPING_BAG,
-        quantity: 0,
-        price: selectedItem.price,
-        model: selectedItem.label,
-        image: selectedItem.image,
-      };
-      setShoppingBag([...shoppingBag, newItem]);
-    }
+    const newItem = { ...DEFAULT_SHOPPING_BAG };
+    setShoppingBag([...shoppingBag, newItem]);
   };
 
   const handleRemoveItem = (index: number) => {
@@ -115,13 +110,66 @@ export const Order = () => {
 
   const handleChooseItem = (index: number, item: (typeof MODELS)[number]) => {
     if (page !== 'checkout') return;
-    const updatedBag = shoppingBag.map((bag, idx) =>
-      idx !== index
-        ? bag
-        : { ...bag, model: item.label, price: item.price, image: item.image }
-    );
+    const updatedBag = shoppingBag.map((bag, idx) => {
+      if (idx !== index) return bag;
+
+      let bundle: (typeof DEFAULT_BUNDLE_BAG)[] = [];
+
+      if (item.isBundle) {
+        const len =
+          BUNDLE_OPTIONS.find((bundle) => bundle.bundle === item.value)?.options
+            .length || 0;
+        for (let i = 0; i < len; i++) {
+          bundle.push({ ...DEFAULT_BUNDLE_BAG });
+        }
+      }
+
+      return {
+        ...bag,
+        model: item.label,
+        price: item.price,
+        image: item.image,
+        isBundle: item.isBundle,
+        bundle: bundle,
+      };
+    });
     setShoppingBag(updatedBag);
-    setSelectedItem(item);
+  };
+
+  const handleBundleSizeChange = (
+    index: number,
+    bundleIndex: number,
+    size: (typeof SIZES)[number]
+  ) => {
+    if (page !== 'checkout') return;
+    const updatedBag = shoppingBag.map((bag, idx) => {
+      if (idx !== index) return bag;
+
+      const bundle = bag.bundle.map((item, i) =>
+        i !== bundleIndex ? item : { ...item, size: size.label }
+      );
+
+      return { ...bag, bundle: bundle };
+    });
+    setShoppingBag(updatedBag);
+  };
+
+  const handleBundleModelChange = (
+    index: number,
+    bundleIndex: number,
+    model: (typeof MODELS)[number]
+  ) => {
+    if (page !== 'checkout') return;
+    const updatedBag = shoppingBag.map((bag, idx) => {
+      if (idx !== index) return bag;
+
+      const bundle = bag.bundle.map((item, i) =>
+        i !== bundleIndex ? item : { ...item, mdoel: model.label }
+      );
+
+      return { ...bag, bundle: bundle };
+    });
+    setShoppingBag(updatedBag);
   };
 
   // Field change handler for form inputs
@@ -336,6 +384,8 @@ export const Order = () => {
                   handleRemoveItem={handleRemoveItem}
                   handleSizeChange={handleSizeChange}
                   handleChooseItem={handleChooseItem}
+                  handleBundleSizeChange={handleBundleSizeChange}
+                  handleBundleModelChange={handleBundleModelChange}
                   readOnly={page === 'review'}
                 />
                 <TotalsDisplay
