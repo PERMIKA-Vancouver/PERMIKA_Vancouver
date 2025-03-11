@@ -51,6 +51,7 @@ const MODELS = [
     price: 25,
     image:
       "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieBlackFront.webp",
+    isBundle: false,
   },
   {
     value: "2",
@@ -58,6 +59,7 @@ const MODELS = [
     price: 25,
     image:
       "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieWhiteFront.webp",
+    isBundle: false,
   },
   {
     value: "3",
@@ -65,6 +67,7 @@ const MODELS = [
     price: 15,
     image:
       "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/shirtFront.webp",
+    isBundle: false,
   },
   {
     value: "4",
@@ -72,6 +75,7 @@ const MODELS = [
     price: 7.5,
     image:
       "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/jauh+di+mata+tote.webp",
+    isBundle: false,
   },
   {
     value: "5",
@@ -79,6 +83,7 @@ const MODELS = [
     price: 7.5,
     image:
       "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/life+in+van+city+tote.webp",
+    isBundle: false,
   },
   {
     value: "6",
@@ -86,6 +91,7 @@ const MODELS = [
     price: 17.5,
     image:
       "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/tote+kaos.webp",
+    isBundle: true,
   },
   {
     value: "7",
@@ -93,6 +99,7 @@ const MODELS = [
     price: 27.5,
     image:
       "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/tote+hoodie+1.webp",
+    isBundle: true,
   },
   {
     value: "8",
@@ -100,15 +107,19 @@ const MODELS = [
     price: 40,
     image:
       "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/tote+kaos+hoodie+1.webp",
+    isBundle: true,
   },
 ];
 
 const DEFAULT_SHOPPING_BAG = {
-  quantity: 0,
+  quantity: 1,
   size: "",
   model: "",
   price: 0,
   image: "",
+  isBundle: false,
+  bundleIdx: "0",
+  bundle: [],
 };
 
 const DEFAULT_SELECTED_ITEM = {
@@ -118,10 +129,64 @@ const DEFAULT_SELECTED_ITEM = {
   image: "",
 };
 
+const DEFAULT_BUNDLE_BAG = {
+  model: "",
+  size: "",
+};
+
+const BUNDLE_OPTIONS = [
+  {
+    bundle: "6",
+    options: [
+      { label: "kaos", options: ["3"] },
+      { label: "tote", options: ["4", "5"] },
+    ],
+  },
+  {
+    bundle: "7",
+    options: [
+      { label: "hoodie", options: ["1", "2"] },
+      { label: "tote", options: ["4", "5"] },
+    ],
+  },
+  {
+    bundle: "8",
+    options: [
+      { label: "hoodie", options: ["1", "2"] },
+      { label: "kaos", options: ["3"] },
+      { label: "tote", options: ["4", "5"] },
+    ],
+  },
+];
+
+const NO_NEED_SIZE = ["4", "5", "6", "7", "8"];
+
 export {
   LOCATIONS,
   SIZES,
   MODELS,
   DEFAULT_SHOPPING_BAG,
   DEFAULT_SELECTED_ITEM,
+  DEFAULT_BUNDLE_BAG,
+  BUNDLE_OPTIONS,
+  NO_NEED_SIZE,
+};
+
+export type SHOPPING_BAG_TYPE = {
+  quantity: number;
+  size: string;
+  model: string;
+  price: number;
+  image: string;
+  isBundle: boolean;
+  bundleIdx: string;
+  bundle: {
+    model: string;
+    size: string;
+  }[];
+};
+
+export type MODEL_SIZE = {
+  model: string;
+  size: string;
 };

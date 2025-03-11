@@ -7,8 +7,12 @@ import { PopUpMessage } from "../../shared/components/PopUpMessage";
 import {
   SIZES,
   MODELS,
-  DEFAULT_SELECTED_ITEM,
   DEFAULT_SHOPPING_BAG,
+  SHOPPING_BAG_TYPE,
+  BUNDLE_OPTIONS,
+  DEFAULT_BUNDLE_BAG,
+  NO_NEED_SIZE,
+  LOCATIONS,
 } from "./data/data";
 import { ShoppingBagSidebar } from "./components/ShoppingBagSidebar";
 import { CheckoutForm } from "./components/CheckoutForm";
@@ -23,8 +27,9 @@ export const Order = () => {
   const [page, setPage] = useState<
     "checkout" | "review" | "payment" | "confirmation"
   >("checkout");
-  const [shoppingBag, setShoppingBag] = useState([DEFAULT_SHOPPING_BAG]);
-  const [selectedItem, setSelectedItem] = useState(DEFAULT_SELECTED_ITEM);
+  const [shoppingBag, setShoppingBag] = useState<SHOPPING_BAG_TYPE[]>([
+    DEFAULT_SHOPPING_BAG,
+  ]);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -55,17 +60,32 @@ export const Order = () => {
       .then((res) => {
         let available = true;
         res.data.data.forEach((item: any) => {
-          // Sum quantities for items matching model and size.
-          const total = shoppingBag.reduce(
-            (acc, bag) =>
-              bag.model === item.model && bag.size === item.size
-                ? acc + bag.quantity
-                : acc,
-            0
-          );
+          // Sum quantities for items matching model and size,
+          // including both main items and bundle items.
+          const total = shoppingBag.reduce((acc, bag) => {
+            let count = 0;
+            // Check main bag item.
+            if (bag.model === item.model && bag.size === item.size) {
+              count += bag.quantity;
+            }
+            // Check bundle items. We assume each bundle item counts as one unit per bag quantity.
+            if (bag.isBundle) {
+              bag.bundle.forEach((bundleItem) => {
+                if (
+                  bundleItem.model === item.model &&
+                  bundleItem.size === item.size
+                ) {
+                  count += bag.quantity;
+                }
+              });
+            }
+            return acc + count;
+          }, 0);
+
           const itemStock = payment
             ? item.stock - item.bought
             : item.stock - item.bought - item.pending;
+
           if (total > itemStock) {
             setPopUpMessage(
               `${item.model} ${item.size} has only ${itemStock} in stock left.`
@@ -79,6 +99,175 @@ export const Order = () => {
       .catch(() => false);
   };
 
+  const handleSubmitOrder = () => {
+    axios
+      .get(`${SERVER}/order/merchandise`)
+      .then((res) => {
+        shoppingBag.forEach((bag) => {
+          if (bag.isBundle) {
+            for (let bundle of bag.bundle) {
+              let id;
+              if (
+                bundle.model === "Jauh di Mata Tote Bag" ||
+                bundle.model === "Life in Van City Tote Bag"
+              ) {
+                id = bundle.model + " none";
+              } else {
+                id = bundle.model + " " + bundle.size;
+              }
+
+              const merchandise = res.data.data.find(
+                (item: any) =>
+                  item.model === bundle.model &&
+                  (item.size === bundle.size ||
+                    bundle.model === "Jauh di Mata Tote Bag" ||
+                    bundle.model === "Life in Van City Tote Bag")
+              );
+              const data = {
+                pending: merchandise.pending - 1,
+                bought: merchandise.bought + 1,
+              };
+
+              axios
+                .put(`${SERVER}/order/merchandise/${id}`, data)
+                .then(() => {
+                  const location = LOCATIONS.find(
+                    (loc) => loc.value === pickupLocation
+                  );
+
+                  let newBags = [];
+                  for (let bag of shoppingBag) {
+                    const mainItem = {
+                      quantity: bag.quantity,
+                      size: bag.size,
+                      model: bag.model,
+                      price: bag.price,
+                      image: bag.image,
+                    };
+                    newBags.push(mainItem);
+                    if (bag.isBundle && bag.bundle && bag.bundle.length > 0) {
+                      for (let bundle of bag.bundle) {
+                        let size = bundle.size;
+                        if (
+                          bundle.model === "Jauh di Mata Tote Bag" ||
+                          bundle.model === "Life in Van City Tote Bag"
+                        ) {
+                          size = "none";
+                        }
+                        const bundleItem = {
+                          quantity: 1,
+                          size: size,
+                          model: bundle.model,
+                          price: 0, // Adjust if necessary.
+                          image: "", // Optionally, look up the image from your MODELS list.
+                        };
+                        newBags.push(bundleItem);
+                      }
+                    }
+                  }
+
+                  console.log(newBags);
+
+                  let dataOrder;
+                  if (isPromoCodeApplied) {
+                    dataOrder = {
+                      firstName,
+                      lastName,
+                      emailAddress: email,
+                      phoneNumber,
+                      pickUpLocation: location?.label,
+                      items: newBags,
+                      totalPrice: finalPrice,
+                      promoCode: promoCode,
+                    };
+                  } else {
+                    dataOrder = {
+                      firstName,
+                      lastName,
+                      emailAddress: email,
+                      phoneNumber,
+                      pickUpLocation: location?.label,
+                      items: newBags,
+                      totalPrice: finalPrice,
+                    };
+                  }
+
+                  axios
+                    .post(`${SERVER}/order`, dataOrder)
+                    .then(() => {
+                      setPage("confirmation");
+                    })
+                    .catch((err) => {
+                      alert("An error happened: " + err.message);
+                      setPage("payment");
+                    });
+                })
+                .catch((err) => {
+                  alert("An error happened: " + err.message);
+                  setPage("payment");
+                });
+            }
+          } else {
+            const id = bag.model + " " + bag.size;
+            const merchandise = res.data.data.find(
+              (item: any) =>
+                item.model === bag.model &&
+                (item.size === bag.size ||
+                  bag.model === "Jauh di Mata Tote Bag" ||
+                  bag.model === "Life in Van City Tote Bag")
+            );
+            const data = {
+              pending: merchandise.pending - bag.quantity,
+              bought: merchandise.bought + bag.quantity,
+            };
+            axios.put(`${SERVER}/order/merchandise/${id}`, data).then(() => {
+              const location = LOCATIONS.find(
+                (loc) => loc.value === pickupLocation
+              );
+
+              let dataOrder;
+              if (isPromoCodeApplied) {
+                dataOrder = {
+                  firstName,
+                  lastName,
+                  emailAddress: email,
+                  phoneNumber,
+                  pickUpLocation: location?.label,
+                  items: shoppingBag,
+                  totalPrice: finalPrice,
+                  promoCode: promoCode,
+                };
+              } else {
+                dataOrder = {
+                  firstName,
+                  lastName,
+                  emailAddress: email,
+                  phoneNumber,
+                  pickUpLocation: location?.label,
+                  items: shoppingBag,
+                  totalPrice: finalPrice,
+                };
+              }
+
+              axios
+                .post(`${SERVER}/order`, dataOrder)
+                .then(() => {
+                  setPage("confirmation");
+                })
+                .catch((err) => {
+                  alert("An error happened: " + err.message);
+                  setPage("payment");
+                });
+            });
+          }
+        });
+      })
+      .catch((err) => {
+        alert("An error happened: " + err.message);
+        setPage("payment");
+      });
+  };
+
   // Handlers for shopping bag operations
   const handleQuantityChange = (index: number, newQuantity: number) => {
     const updatedBag = [...shoppingBag];
@@ -87,16 +276,8 @@ export const Order = () => {
   };
 
   const handleAddItem = () => {
-    if (selectedItem) {
-      const newItem = {
-        ...DEFAULT_SHOPPING_BAG,
-        quantity: 0,
-        price: selectedItem.price,
-        model: selectedItem.label,
-        image: selectedItem.image,
-      };
-      setShoppingBag([...shoppingBag, newItem]);
-    }
+    const newItem = { ...DEFAULT_SHOPPING_BAG };
+    setShoppingBag([...shoppingBag, newItem]);
   };
 
   const handleRemoveItem = (index: number) => {
@@ -115,97 +296,72 @@ export const Order = () => {
 
   const handleChooseItem = (index: number, item: (typeof MODELS)[number]) => {
     if (page !== "checkout") return;
+    const updatedBag = shoppingBag.map((bag, idx) => {
+      if (idx !== index) return bag;
 
-    let updatedBag = [...shoppingBag]; // Copy the current shopping bag
+      let bundle: (typeof DEFAULT_BUNDLE_BAG)[] = [];
 
-    // If the selected item is "Bundle Tote + Kaos", replace it with multiple items
-    if (item.label === "Bundle Tote + Kaos") {
-      const bundleItems = [
-        {
-          model: MODELS[2].label,
-          price: MODELS[2].price,
-          image: MODELS[2].image,
-          size: "M",
-          quantity: 1,
-        },
-        {
-          model: MODELS[3].label,
-          price: MODELS[3].price,
-          image: MODELS[3].image,
-          size: "M",
-          quantity: 1,
-        },
-      ];
+      if (item.isBundle) {
+        const len =
+          BUNDLE_OPTIONS.find((bundle) => bundle.bundle === item.value)?.options
+            .length || 0;
+        for (let i = 0; i < len; i++) {
+          bundle.push({ ...DEFAULT_BUNDLE_BAG });
+        }
+      }
 
-      // Replace the original bundle item with multiple items
-      updatedBag = [
-        ...shoppingBag.slice(0, index), // Keep items before the selected item
-        ...bundleItems, // Insert the bundle items
-        ...shoppingBag.slice(index + 1), // Keep items after the selected item
-      ];
-    } else if (item.label === "Bundle Tote + Hoodie") {
-      const bundleItems = [
-        {
-          model: MODELS[0].label,
-          price: MODELS[0].price,
-          image: MODELS[0].image,
-          size: "M",
-          quantity: 1,
-        },
-        {
-          model: MODELS[3].label,
-          price: MODELS[3].price,
-          image: MODELS[3].image,
-          size: "M",
-          quantity: 1,
-        },
-      ];
+      let size = bag.size;
 
-      // Replace the original bundle item with multiple items
-      updatedBag = [
-        ...shoppingBag.slice(0, index), // Keep items before the selected item
-        ...bundleItems, // Insert the bundle items
-        ...shoppingBag.slice(index + 1), // Keep items after the selected item
-      ];
-    } else if (item.label === "Bundle Tote + Kaos + Hoodie") {
-      const bundleItems = [
-        {
-          model: MODELS[0].label,
-          price: MODELS[0].price,
-          image: MODELS[0].image,
-          size: "M",
-          quantity: 1,
-        },
-        {
-          model: MODELS[2].label,
-          price: MODELS[2].price,
-          image: MODELS[2].image,
-          size: "M",
-          quantity: 1,
-        },
-        {
-          model: MODELS[3].label,
-          price: MODELS[3].price,
-          image: MODELS[3].image,
-          size: "M",
-          quantity: 1,
-        },
-      ];
+      if (NO_NEED_SIZE.includes(item.value)) size = "none";
 
-      // Replace the original bundle item with multiple items
-      updatedBag = [
-        ...shoppingBag.slice(0, index), // Keep items before the selected item
-        ...bundleItems, // Insert the bundle items
-        ...shoppingBag.slice(index + 1), // Keep items after the selected item
-      ];
-    } else {
-      updatedBag = shoppingBag.map((bag, idx) =>
-        idx !== index
-          ? bag
-          : { ...bag, model: item.label, price: item.price, image: item.image }
+      return {
+        ...bag,
+        model: item.label,
+        price: item.price,
+        image: item.image,
+        isBundle: item.isBundle,
+        bundleIdx: item.value,
+        bundle: bundle,
+        size: size,
+      };
+    });
+    setShoppingBag(updatedBag);
+    console.log(updatedBag);
+  };
+
+  const handleBundleSizeChange = (
+    index: number,
+    bundleIndex: number,
+    size: (typeof SIZES)[number]
+  ) => {
+    if (page !== "checkout") return;
+    const updatedBag = shoppingBag.map((bag, idx) => {
+      if (idx !== index) return bag;
+
+      const bundle = bag.bundle.map((item, i) =>
+        i !== bundleIndex ? item : { ...item, size: size.label }
       );
-      setSelectedItem(item);
-    }
+
+      return { ...bag, bundle: bundle };
+    });
+    setShoppingBag(updatedBag);
+  };
+
+  const handleBundleModelChange = (
+    index: number,
+    bundleIndex: number,
+    model: (typeof MODELS)[number]
+  ) => {
+    if (page !== "checkout") return;
+    const updatedBag = shoppingBag.map((bag, idx) => {
+      if (idx !== index) return bag;
+
+      const bundle = bag.bundle.map((item, i) =>
+        i !== bundleIndex ? item : { ...item, model: model.label }
+      );
+
+      return { ...bag, bundle: bundle };
+    });
     setShoppingBag(updatedBag);
   };
 
@@ -276,83 +432,90 @@ export const Order = () => {
       checkAvailability(false).then((available) => {
         if (available) {
           // Update each merchandise item by adding pending
-          axios
-            .get(`${SERVER}/order/merchandise`)
-            .then((res) => {
-              const updateCalls = shoppingBag.map((bag) => {
+          axios.get(`${SERVER}/order/merchandise`).then((res) => {
+            for (let bag of shoppingBag) {
+              if (bag.isBundle) {
+                for (let bundle of bag.bundle) {
+                  let id;
+                  if (
+                    bundle.model === "Jauh di Mata Tote Bag" ||
+                    bundle.model === "Life in Van City Tote Bag"
+                  ) {
+                    id = bundle.model + " none";
+                  } else {
+                    id = bundle.model + " " + bundle.size;
+                  }
+                  const merchandise = res.data.data.find(
+                    (item: any) =>
+                      item.model === bundle.model &&
+                      (item.size === bundle.size ||
+                        bundle.model === "Jauh di Mata Tote Bag" ||
+                        bundle.model === "Life in Van City Tote Bag")
+                  );
+                  const data = {
+                    pending: merchandise.pending + 1,
+                    bought: merchandise.bought,
+                  };
+                  axios
+                    .put(`${SERVER}/order/merchandise/${id}`, data)
+                    .then(() => {
+                      setPage("payment");
+                    })
+                    .catch((err) => {
+                      alert(
+                        "Error occured: " + err.message + ". Please try again!"
+                      );
+                      setPage("review");
+                    });
+                }
+              } else {
                 const id = bag.model + " " + bag.size;
                 const merchandise = res.data.data.find(
                   (item: any) =>
-                    item.model === bag.model && item.size === bag.size
+                    item.model === bag.model &&
+                    (item.size === bag.size ||
+                      bag.model === "Jauh di Mata Tote Bag" ||
+                      bag.model === "Life in Van City Tote Bag")
                 );
                 const data = {
                   pending: merchandise.pending + bag.quantity,
                   bought: merchandise.bought,
                 };
-                return axios.put(`${SERVER}/order/merchandise/${id}`, data);
-              });
-              Promise.all(updateCalls)
-                .then(() => setPage("payment"))
-                .catch((err) => {
-                  alert(
-                    "Error occurred during payment transition: " + err.message
-                  );
-                  setPage("review");
-                });
-            })
-            .catch((err) => {
-              alert("Error fetching merchandise: " + err.message);
-              setPage("review");
-            });
+                console.log(id);
+                axios
+                  .put(`${SERVER}/order/merchandise/${id}`, data)
+                  .then(() => {
+                    setPage("payment");
+                  })
+                  .catch((err) => {
+                    alert(
+                      "Error occured: " + err.message + ". Please try again!"
+                    );
+                    setPage("review");
+                  });
+              }
+            }
+          });
         }
       });
     } else if (page === "payment") {
-      if (!paymentClicked) {
-        setPopUpMessage(
-          "Please complete payment before submitting your order."
-        );
-        setPopUpOpen(true);
-        return;
+      // Check if the file is uploaded
+      if (paymentClicked) {
+        // If the file is uploaded, proceed to the confirmation page
+        checkAvailability(true).then((available) => {
+          if (available) {
+            handleSubmitOrder();
+          } else {
+            setPopUpMessage(
+              "If you have paid, please contact us at our instagram to process the refund. Sorry for the inconvenience."
+            );
+            setPopUpOpen(true);
+          }
+        });
+      } else {
+        // If the file is not uploaded, proceed to the payment page
+        setPage("payment");
       }
-      // Check stock availability and update merchandise:
-      // For each bag item, reduce pending and increase bought
-      checkAvailability(true).then((available) => {
-        if (available) {
-          axios
-            .get(`${SERVER}/order/merchandise`)
-            .then((res) => {
-              const updateCalls = shoppingBag.map((bag) => {
-                const id = bag.model + " " + bag.size;
-                const merchandise = res.data.data.find(
-                  (item: any) =>
-                    item.model === bag.model && item.size === bag.size
-                );
-                const data = {
-                  pending: merchandise.pending - bag.quantity,
-                  bought: merchandise.bought + bag.quantity,
-                };
-                return axios.put(`${SERVER}/order/merchandise/${id}`, data);
-              });
-              Promise.all(updateCalls)
-                .then(() => setPage("confirmation"))
-                .catch((err) => {
-                  alert(
-                    "Error occurred during final submission: " + err.message
-                  );
-                  setPage("payment");
-                });
-            })
-            .catch((err) => {
-              alert("Error fetching merchandise: " + err.message);
-              setPage("payment");
-            });
-        } else {
-          setPopUpMessage(
-            "Stock issue detected. If you have paid, please contact us for a refund."
-          );
-          setPopUpOpen(true);
-        }
-      });
     }
   };
 
@@ -421,6 +584,8 @@ export const Order = () => {
                   handleRemoveItem={handleRemoveItem}
                   handleSizeChange={handleSizeChange}
                   handleChooseItem={handleChooseItem}
+                  handleBundleSizeChange={handleBundleSizeChange}
+                  handleBundleModelChange={handleBundleModelChange}
                   readOnly={page === "review"}
                 />
                 <TotalsDisplay
