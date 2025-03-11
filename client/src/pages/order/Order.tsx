@@ -103,105 +103,134 @@ export const Order = () => {
     axios
       .get(`${SERVER}/order/merchandise`)
       .then((res) => {
-        const updateCalls = shoppingBag.flatMap((bag) => {
+        shoppingBag.forEach((bag) => {
           if (bag.isBundle) {
-            // For bundle items, update each bundle element
-            return bag.bundle.map((bundleItem) => {
-              const id = bundleItem.model + ' ' + bundleItem.size;
+            for (let bundle of bag.bundle) {
+              let id;
+              if (
+                bundle.model === 'Jauh di Mata Tote Bag' ||
+                bundle.model === 'Life in Van City Tote Bag'
+              ) {
+                id = bundle.model + ' none';
+              } else {
+                id = bundle.model + ' ' + bundle.size;
+              }
+
               const merchandise = res.data.data.find(
                 (item: any) =>
-                  item.model === bundleItem.model &&
-                  item.size === bundleItem.size
+                  item.model === bundle.model &&
+                  (item.size === bundle.size ||
+                    bundle.model === 'Jauh di Mata Tote Bag' ||
+                    bundle.model === 'Life in Van City Tote Bag')
               );
-              if (!merchandise) {
-                // Optionally handle not found merchandise
-                return Promise.resolve();
-              }
               const data = {
-                pending: merchandise.pending + bag.quantity,
-                bought: merchandise.bought,
+                pending: merchandise.pending - 1,
+                bought: merchandise.bought + 1,
               };
-              return axios.put(`${SERVER}/order/merchandise/${id}`, data);
-            });
+
+              axios
+                .put(`${SERVER}/order/merchandise/${id}`, data)
+                .then(() => {
+                  const location = LOCATIONS.find(
+                    (loc) => loc.value === pickupLocation
+                  );
+
+                  let dataOrder;
+                  if (isPromoCodeApplied) {
+                    dataOrder = {
+                      firstName,
+                      lastName,
+                      emailAddress: email,
+                      phoneNumber,
+                      pickUpLocation: location?.label,
+                      items: shoppingBag,
+                      totalPrice: finalPrice,
+                      promoCode: promoCode,
+                    };
+                  } else {
+                    dataOrder = {
+                      firstName,
+                      lastName,
+                      emailAddress: email,
+                      phoneNumber,
+                      pickUpLocation: location?.label,
+                      items: shoppingBag,
+                      totalPrice: finalPrice,
+                    };
+                  }
+
+                  axios
+                    .post(`${SERVER}/order`, dataOrder)
+                    .then(() => {
+                      setPage('confirmation');
+                    })
+                    .catch((err) => {
+                      alert('An error happened: ' + err.message);
+                      setPage('payment');
+                    });
+                })
+                .catch((err) => {
+                  alert('An error happened: ' + err.message);
+                  setPage('payment');
+                });
+            }
           } else {
-            // For regular items, update normally.
             const id = bag.model + ' ' + bag.size;
             const merchandise = res.data.data.find(
-              (item: any) => item.model === bag.model && item.size === bag.size
+              (item: any) =>
+                item.model === bag.model &&
+                (item.size === bag.size ||
+                  bag.model === 'Jauh di Mata Tote Bag' ||
+                  bag.model === 'Life in Van City Tote Bag')
             );
-            if (!merchandise) {
-              return [];
-            }
             const data = {
-              pending: merchandise.pending + bag.quantity,
-              bought: merchandise.bought,
+              pending: merchandise.pending - bag.quantity,
+              bought: merchandise.bought + bag.quantity,
             };
-            return [axios.put(`${SERVER}/order/merchandise/${id}`, data)];
+            axios.put(`${SERVER}/order/merchandise/${id}`, data).then(() => {
+              const location = LOCATIONS.find(
+                (loc) => loc.value === pickupLocation
+              );
+
+              let dataOrder;
+              if (isPromoCodeApplied) {
+                dataOrder = {
+                  firstName,
+                  lastName,
+                  emailAddress: email,
+                  phoneNumber,
+                  pickUpLocation: location?.label,
+                  items: shoppingBag,
+                  totalPrice: finalPrice,
+                  promoCode: promoCode,
+                };
+              } else {
+                dataOrder = {
+                  firstName,
+                  lastName,
+                  emailAddress: email,
+                  phoneNumber,
+                  pickUpLocation: location?.label,
+                  items: shoppingBag,
+                  totalPrice: finalPrice,
+                };
+              }
+
+              axios
+                .post(`${SERVER}/order`, dataOrder)
+                .then(() => {
+                  setPage('confirmation');
+                })
+                .catch((err) => {
+                  alert('An error happened: ' + err.message);
+                  setPage('payment');
+                });
+            });
           }
         });
-
-        Promise.all(updateCalls)
-          .then(() => {
-            const location = LOCATIONS.find(
-              (loc) => loc.value === pickupLocation
-            );
-
-            let dataOrder;
-            if (isPromoCodeApplied) {
-              dataOrder = {
-                firstName,
-                lastName,
-                emailAddress: email,
-                phoneNumber,
-                pickUpLocation: location?.label,
-                items: shoppingBag,
-                totalPrice: finalPrice,
-                promoCode: promoCode,
-              };
-            } else {
-              dataOrder = {
-                firstName,
-                lastName,
-                emailAddress: email,
-                phoneNumber,
-                pickUpLocation: location?.label,
-                items: shoppingBag,
-                totalPrice: finalPrice,
-              };
-            }
-
-            axios
-              .post(`${SERVER}/order`, dataOrder)
-              .then(() => {
-                // const data = {
-                //   promoCode: promoCode,
-                //   claimed: true,
-                // };
-                // axios
-                //   .put(`${SERVER}/order/promocode`, data)
-                //   .then(() => {
-                //     setPage('confirmation');
-                //   })
-                //   .catch((err) => {
-                //     console.log(err);
-                //     alert('An error happened: ' + err.message);
-                //     setPage('payment');
-                //   });
-                // ***** up to this point
-                setPage('confirmation');
-              })
-              .catch((err) => {
-                alert('An error happened: ' + err.message);
-                setPage('payment');
-              });
-          })
-          .catch((err) => {
-            alert('Error occurred during payment transition: ' + err.message);
-            setPage('payment');
-          });
       })
       .catch((err) => {
-        alert('Error fetching merchandise: ' + err.message);
+        alert('An error happened: ' + err.message);
         setPage('payment');
       });
   };
@@ -383,7 +412,6 @@ export const Order = () => {
                   } else {
                     id = bundle.model + ' ' + bundle.size;
                   }
-                  console.log(id);
                   const merchandise = res.data.data.find(
                     (item: any) =>
                       item.model === bundle.model &&
@@ -411,7 +439,10 @@ export const Order = () => {
                 const id = bag.model + ' ' + bag.size;
                 const merchandise = res.data.data.find(
                   (item: any) =>
-                    item.model === bag.model && item.size === bag.size
+                    item.model === bag.model &&
+                    (item.size === bag.size ||
+                      bag.model === 'Jauh di Mata Tote Bag' ||
+                      bag.model === 'Life in Van City Tote Bag')
                 );
                 const data = {
                   pending: merchandise.pending + bag.quantity,
