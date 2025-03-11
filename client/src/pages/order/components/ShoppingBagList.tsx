@@ -8,6 +8,7 @@ import {
   DEFAULT_SELECTED_ITEM,
   SHOPPING_BAG_TYPE,
   BUNDLE_OPTIONS,
+  NO_NEED_SIZE,
 } from '../data/data';
 import { BundleList } from './BundleList';
 
@@ -80,7 +81,7 @@ export const ShoppingBagList: React.FC<ShoppingBagListProps> = ({
                   select
                   label="Size*"
                   defaultValue={bag.size}
-                  disabled={readOnly}
+                  disabled={NO_NEED_SIZE.includes(bag.bundleIdx) || readOnly}
                 >
                   {SIZES.map((option) => (
                     <MenuItem
@@ -136,7 +137,6 @@ export const ShoppingBagList: React.FC<ShoppingBagListProps> = ({
             <div>
               <BundleList
                 index={index}
-                page={page}
                 options={
                   BUNDLE_OPTIONS.find(
                     (option) => option.bundle === bag.bundleIdx

@@ -1,12 +1,15 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import { FaTrash } from 'react-icons/fa';
-import { SIZES, MODELS, DEFAULT_SELECTED_ITEM } from '../data/data';
+import {
+  SIZES,
+  MODELS,
+  DEFAULT_SELECTED_ITEM,
+  NO_NEED_SIZE,
+} from '../data/data';
 
 interface BundleListProps {
   index: number;
-  page: string;
   options: { label: string; options: string[] }[];
   bundleBag: {
     model: string;
@@ -27,7 +30,6 @@ interface BundleListProps {
 
 export const BundleList: React.FC<BundleListProps> = ({
   index,
-  page,
   options,
   bundleBag,
   handleBundleSizeChange,
@@ -57,7 +59,9 @@ export const BundleList: React.FC<BundleListProps> = ({
                 select
                 label="Size*"
                 defaultValue={bag.size}
-                disabled={readOnly}
+                disabled={
+                  NO_NEED_SIZE.includes(options[i].options[0]) || readOnly
+                }
               >
                 {SIZES.map((option) => (
                   <MenuItem

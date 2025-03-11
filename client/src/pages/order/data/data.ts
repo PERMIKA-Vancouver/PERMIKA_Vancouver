@@ -159,6 +159,8 @@ const BUNDLE_OPTIONS = [
   },
 ];
 
+const NO_NEED_SIZE = ['4', '5', '6', '7', '8'];
+
 export {
   LOCATIONS,
   SIZES,
@@ -167,6 +169,7 @@ export {
   DEFAULT_SELECTED_ITEM,
   DEFAULT_BUNDLE_BAG,
   BUNDLE_OPTIONS,
+  NO_NEED_SIZE,
 };
 
 export type SHOPPING_BAG_TYPE = {
