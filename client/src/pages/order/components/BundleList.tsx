@@ -7,37 +7,36 @@ import { SIZES, MODELS, DEFAULT_SELECTED_ITEM } from '../data/data';
 interface BundleListProps {
   index: number;
   page: string;
-  bundle: {
-    label: string;
-    options: string[];
-  }[];
+  options: { label: string; options: string[] }[];
   bundleBag: {
-    size: string;
     model: string;
+    size: string;
   }[];
-  handleQuantityChange: (index: number, newQuantity: number) => void;
-  handleAddItem: () => void;
-  handleRemoveItem: (index: number) => void;
-  handleSizeChange: (index: number, size: any) => void;
-  handleChooseItem: (index: number, item: any) => void;
+  handleBundleSizeChange: (
+    index: number,
+    bundleIndex: number,
+    size: any
+  ) => void;
+  handleBundleModelChange: (
+    index: number,
+    bundleIndex: number,
+    model: any
+  ) => void;
   readOnly: boolean;
 }
 
 export const BundleList: React.FC<BundleListProps> = ({
   index,
   page,
-  bundle,
+  options,
   bundleBag,
-  handleQuantityChange,
-  handleAddItem,
-  handleRemoveItem,
-  handleSizeChange,
-  handleChooseItem,
+  handleBundleSizeChange,
+  handleBundleModelChange,
   readOnly,
 }) => {
   return (
     <div className="bundle-list">
-      {bundle.map((item, i) => (
+      {bundleBag.map((bag, i) => (
         <div
           key={i}
           className="shopping-details sm:flex justify-between pl-[1.5%] pr-[2.5%] mt-[10%] sm:pt-[1.5%] sm:mt-0 mb-3"
@@ -57,14 +56,14 @@ export const BundleList: React.FC<BundleListProps> = ({
                 id="outlined-multiline-sizes"
                 select
                 label="Size*"
-                defaultValue={bundleBag[index].size}
+                defaultValue={bag.size}
                 disabled={readOnly}
               >
                 {SIZES.map((option) => (
                   <MenuItem
                     key={option.value}
                     value={option.value}
-                    onClick={() => handleSizeChange(index, option)}
+                    onClick={() => handleBundleSizeChange(index, i, option)}
                   >
                     {option.label}
                   </MenuItem>
@@ -79,35 +78,27 @@ export const BundleList: React.FC<BundleListProps> = ({
                 id="outlined-multiline-sizes"
                 select
                 label="Select your item*"
-                defaultValue={bundleBag[index].model}
+                defaultValue={bag.model}
                 onChange={(e) => {
                   const selected =
                     MODELS.find((model) => model.value === e.target.value) ||
                     DEFAULT_SELECTED_ITEM;
-                  handleChooseItem(index, selected);
+                  handleBundleModelChange(index, i, selected);
                 }}
                 disabled={readOnly}
               >
-                {MODELS.map((option) => (
+                {options[i].options.map((option) => (
                   <MenuItem
-                    key={option.value}
-                    value={option.value}
-                    onClick={() => handleChooseItem(index, option)}
+                    key={option}
+                    value={option}
+                    onClick={() => handleBundleModelChange(index, i, option)}
                     disabled={readOnly}
                   >
-                    {option.label}
+                    {MODELS.find((model) => model.value === option)?.label}
                   </MenuItem>
                 ))}
               </TextField>
             </div>
-            {page === 'checkout' && (
-              <button
-                onClick={() => handleRemoveItem(index)}
-                className="remove-button px-[2%]"
-              >
-                <FaTrash className="text-grey-body w-5 h-auto" />
-              </button>
-            )}
           </div>
         </div>
       ))}

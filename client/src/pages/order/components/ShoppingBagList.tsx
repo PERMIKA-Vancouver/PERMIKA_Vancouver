@@ -7,6 +7,7 @@ import {
   MODELS,
   DEFAULT_SELECTED_ITEM,
   SHOPPING_BAG_TYPE,
+  BUNDLE_OPTIONS,
 } from '../data/data';
 import { BundleList } from './BundleList';
 
@@ -131,36 +132,23 @@ export const ShoppingBagList: React.FC<ShoppingBagListProps> = ({
               )}
             </div>
           </div>
-          <div>
-            {/* <BundleList
-              page={''}
-              bundle={[
-                { label: 'kaos', options: ['3'] },
-                { label: 'tote', options: ['4', '5'] },
-              ]}
-              bundleBag={[]}
-              handleQuantityChange={function (
-                index: number,
-                newQuantity: number
-              ): void {
-                throw new Error('Function not implemented.');
-              }}
-              handleAddItem={function (): void {
-                throw new Error('Function not implemented.');
-              }}
-              handleRemoveItem={function (index: number): void {
-                throw new Error('Function not implemented.');
-              }}
-              handleSizeChange={function (index: number, size: any): void {
-                throw new Error('Function not implemented.');
-              }}
-              handleChooseItem={function (index: number, item: any): void {
-                throw new Error('Function not implemented.');
-              }}
-              readOnly={false}
-              index={0}
-            /> */}
-          </div>
+          {bag.isBundle && (
+            <div>
+              <BundleList
+                index={index}
+                page={page}
+                options={
+                  BUNDLE_OPTIONS.find(
+                    (option) => option.bundle === bag.bundleIdx
+                  )?.options || []
+                }
+                bundleBag={bag.bundle}
+                handleBundleSizeChange={handleBundleSizeChange}
+                handleBundleModelChange={handleBundleModelChange}
+                readOnly={false}
+              />
+            </div>
+          )}
         </div>
       ))}
     </div>

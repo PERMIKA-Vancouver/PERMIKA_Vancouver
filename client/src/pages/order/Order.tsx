@@ -130,6 +130,7 @@ export const Order = () => {
         price: item.price,
         image: item.image,
         isBundle: item.isBundle,
+        bundleIdx: item.value,
         bundle: bundle,
       };
     });

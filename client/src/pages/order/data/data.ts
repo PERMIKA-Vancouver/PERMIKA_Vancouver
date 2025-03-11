@@ -118,6 +118,7 @@ const DEFAULT_SHOPPING_BAG = {
   price: 0,
   image: '',
   isBundle: false,
+  bundleIdx: '0',
   bundle: [],
 };
 
@@ -175,6 +176,7 @@ export type SHOPPING_BAG_TYPE = {
   price: number;
   image: string;
   isBundle: boolean;
+  bundleIdx: string;
   bundle: {
     model: string;
     size: string;
