@@ -1,5 +1,5 @@
 // Order.tsx
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import axios from 'axios';
 import { Button } from '@mui/material';
 import { openExternalLink } from '../../shared/utils/OpenLinkUtil';
@@ -39,16 +39,44 @@ export const Order = () => {
   const [popUpOpen, setPopUpOpen] = useState(false);
   const [submitOrderClicked, setSubmitOrderClicked] = useState(false);
 
-  // Helper to determine if discount is active
-  // const isDiscountActive = () =>
-  //   dayjs().isBefore(dayjs(DISCOUNT_DEADLINE, 'YYYY-MM-DD HH:mm'));
-
+  // Calculate total price based on shopping bag items
   const getTotalPrice = useCallback(() => {
     return shoppingBag.reduce(
       (total, item) => total + item.price * item.quantity,
       0
     );
   }, [shoppingBag]);
+
+  // Stock-checking function (used when moving from review to payment or before final submission)
+  const checkAvailability = (payment: boolean): Promise<boolean> => {
+    return axios
+      .get(`${SERVER}/order/merchandise`)
+      .then((res) => {
+        let available = true;
+        res.data.data.forEach((item: any) => {
+          // Sum quantities for items matching model and size
+          const total = shoppingBag.reduce(
+            (acc, bag) =>
+              bag.model === item.model && bag.size === item.size
+                ? acc + bag.quantity
+                : acc,
+            0
+          );
+          const itemStock = payment
+            ? item.stock - item.bought
+            : item.stock - item.bought - item.pending;
+          if (total > itemStock) {
+            setPopUpMessage(
+              `${item.model} ${item.size} has only ${itemStock} in stock left.`
+            );
+            setPopUpOpen(true);
+            available = false;
+          }
+        });
+        return available;
+      })
+      .catch(() => false);
+  };
 
   // Handlers for shopping bag operations
   const handleQuantityChange = (index: number, newQuantity: number) => {
@@ -124,14 +152,16 @@ export const Order = () => {
     }
   };
 
-  // Simplified page navigation logic for demonstration
+  // Updated page navigation with additional validations
   const handleNextPage = () => {
     if (page === 'checkout') {
+      // Validate that shopping bag has items
       if (getTotalPrice() <= 0) {
         setPopUpMessage('Please add items to your shopping bag.');
         setPopUpOpen(true);
         return;
       }
+      // Validate required customer fields
       if (
         !firstName.trim() ||
         !lastName.trim() ||
@@ -143,9 +173,25 @@ export const Order = () => {
         setPopUpOpen(true);
         return;
       }
+      // Validate that for each bag item with a positive quantity, size and model are chosen
+      const incompleteItem = shoppingBag.find(
+        (bag) => bag.quantity > 0 && (!bag.size || !bag.model)
+      );
+      if (incompleteItem) {
+        setPopUpMessage(
+          'Please select a size and item for all products in your shopping bag.'
+        );
+        setPopUpOpen(true);
+        return;
+      }
       setPage('review');
     } else if (page === 'review') {
-      setPage('payment');
+      // Check stock availability before moving to payment
+      checkAvailability(false).then((available) => {
+        if (available) {
+          setPage('payment');
+        }
+      });
     } else if (page === 'payment') {
       if (!paymentClicked) {
         setPopUpMessage(
@@ -154,9 +200,28 @@ export const Order = () => {
         setPopUpOpen(true);
         return;
       }
-      setPage('confirmation');
+      // Check stock availability again after payment
+      checkAvailability(true).then((available) => {
+        if (available) {
+          setPage('confirmation');
+        } else {
+          setPopUpMessage(
+            'Stock issue detected. If you have paid, please contact us for a refund.'
+          );
+          setPopUpOpen(true);
+        }
+      });
     }
   };
+
+  // Recalculate final price when entering the payment page
+  useEffect(() => {
+    if (page === 'payment') {
+      const totalPrice = getTotalPrice();
+      // In this example discount is not used so subtotal is the total price
+      setFinalPrice(totalPrice);
+    }
+  }, [page, shoppingBag, getTotalPrice]);
 
   return (
     <div>
@@ -171,7 +236,9 @@ export const Order = () => {
         )}
 
         <div
-          className={`lg:order-2 ml-[2%] flex-auto ${page === 'confirmation' ? 'w-3/4' : 'w-full'}`}
+          className={`lg:order-2 ml-[2%] flex-auto ${
+            page === 'confirmation' ? 'w-3/4' : 'w-full'
+          }`}
         >
           <div className="Checkout-details pl-[6.3%] w-[100%] pr-[12%]">
             <div className="checkout-outer mb-[50px]">
