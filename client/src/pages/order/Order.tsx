@@ -264,6 +264,7 @@ export const Order = () => {
       };
     });
     setShoppingBag(updatedBag);
+    console.log(updatedBag);
   };
 
   const handleBundleSizeChange = (
@@ -369,60 +370,68 @@ export const Order = () => {
       checkAvailability(false).then((available) => {
         if (available) {
           // Update each merchandise item by adding pending
-          axios
-            .get(`${SERVER}/order/merchandise`)
-            .then((res) => {
-              const updateCalls = shoppingBag.flatMap((bag) => {
-                if (bag.isBundle) {
-                  // For bundle items, update each bundle element
-                  return bag.bundle.map((bundleItem) => {
-                    const id = bundleItem.model + ' ' + bundleItem.size;
-                    const merchandise = res.data.data.find(
-                      (item: any) =>
-                        item.model === bundleItem.model &&
-                        item.size === bundleItem.size
-                    );
-                    if (!merchandise) {
-                      // Optionally handle not found merchandise
-                      return Promise.resolve();
-                    }
-                    const data = {
-                      pending: merchandise.pending + bag.quantity,
-                      bought: merchandise.bought,
-                    };
-                    return axios.put(`${SERVER}/order/merchandise/${id}`, data);
-                  });
-                } else {
-                  // For regular items, update normally.
-                  const id = bag.model + ' ' + bag.size;
+          axios.get(`${SERVER}/order/merchandise`).then((res) => {
+            for (let bag of shoppingBag) {
+              if (bag.isBundle) {
+                for (let bundle of bag.bundle) {
+                  let id;
+                  if (
+                    bundle.model === 'Jauh di Mata Tote Bag' ||
+                    bundle.model === 'Life in Van City Tote Bag'
+                  ) {
+                    id = bundle.model + ' none';
+                  } else {
+                    id = bundle.model + ' ' + bundle.size;
+                  }
+                  console.log(id);
                   const merchandise = res.data.data.find(
                     (item: any) =>
-                      item.model === bag.model && item.size === bag.size
+                      item.model === bundle.model &&
+                      (item.size === bundle.size ||
+                        bundle.model === 'Jauh di Mata Tote Bag' ||
+                        bundle.model === 'Life in Van City Tote Bag')
                   );
-                  if (!merchandise) {
-                    return [];
-                  }
                   const data = {
-                    pending: merchandise.pending + bag.quantity,
+                    pending: merchandise.pending + 1,
                     bought: merchandise.bought,
                   };
-                  return [axios.put(`${SERVER}/order/merchandise/${id}`, data)];
+                  axios
+                    .put(`${SERVER}/order/merchandise/${id}`, data)
+                    .then(() => {
+                      setPage('payment');
+                    })
+                    .catch((err) => {
+                      alert(
+                        'Error occured: ' + err.message + '. Please try again!'
+                      );
+                      setPage('review');
+                    });
                 }
-              });
-
-              Promise.all(updateCalls)
-                .then(() => setPage('payment'))
-                .catch((err) => {
-                  alert(
-                    'Error occurred during payment transition: ' + err.message
-                  );
-                  setPage('review');
-                });
-            })
-            .catch((err) => {
-              alert('Error fetching merchandise: ' + err.message);
-              setPage('review');
-            });
+              } else {
+                const id = bag.model + ' ' + bag.size;
+                const merchandise = res.data.data.find(
+                  (item: any) =>
+                    item.model === bag.model && item.size === bag.size
+                );
+                const data = {
+                  pending: merchandise.pending + bag.quantity,
+                  bought: merchandise.bought,
+                };
+                console.log(id);
+                axios
+                  .put(`${SERVER}/order/merchandise/${id}`, data)
+                  .then(() => {
+                    setPage('payment');
+                  })
+                  .catch((err) => {
+                    alert(
+                      'Error occured: ' + err.message + '. Please try again!'
+                    );
+                    setPage('review');
+                  });
+              }
+            }
+          });
         }
       });
     } else if (page === 'payment') {
