@@ -58,17 +58,32 @@ export const Order = () => {
       .then((res) => {
         let available = true;
         res.data.data.forEach((item: any) => {
-          // Sum quantities for items matching model and size.
-          const total = shoppingBag.reduce(
-            (acc, bag) =>
-              bag.model === item.model && bag.size === item.size
-                ? acc + bag.quantity
-                : acc,
-            0
-          );
+          // Sum quantities for items matching model and size,
+          // including both main items and bundle items.
+          const total = shoppingBag.reduce((acc, bag) => {
+            let count = 0;
+            // Check main bag item.
+            if (bag.model === item.model && bag.size === item.size) {
+              count += bag.quantity;
+            }
+            // Check bundle items. We assume each bundle item counts as one unit per bag quantity.
+            if (bag.isBundle) {
+              bag.bundle.forEach((bundleItem) => {
+                if (
+                  bundleItem.model === item.model &&
+                  bundleItem.size === item.size
+                ) {
+                  count += bag.quantity;
+                }
+              });
+            }
+            return acc + count;
+          }, 0);
+
           const itemStock = payment
             ? item.stock - item.bought
             : item.stock - item.bought - item.pending;
+
           if (total > itemStock) {
             setPopUpMessage(
               `${item.model} ${item.size} has only ${itemStock} in stock left.`

@@ -185,3 +185,8 @@ export type SHOPPING_BAG_TYPE = {
     size: string;
   }[];
 };
+
+export type MODEL_SIZE = {
+  model: string;
+  size: string;
+};
