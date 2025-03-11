@@ -100,18 +100,47 @@ export const Order = () => {
   };
 
   const handleSubmitOrder = () => {
-    axios.get(`${SERVER}/order/merchandise`).then((res) => {
-      shoppingBag.forEach((bag) => {
-        const id = bag.model + ' ' + bag.size;
-        const merchandise = res.data.data.find(
-          (item: any) => item.model === bag.model && item.size === bag.size
-        );
-        const data = {
-          pending: merchandise.pending - bag.quantity,
-          bought: merchandise.bought + bag.quantity,
-        };
-        axios
-          .put(`${SERVER}/order/merchandise/${id}`, data)
+    axios
+      .get(`${SERVER}/order/merchandise`)
+      .then((res) => {
+        const updateCalls = shoppingBag.flatMap((bag) => {
+          if (bag.isBundle) {
+            // For bundle items, update each bundle element
+            return bag.bundle.map((bundleItem) => {
+              const id = bundleItem.model + ' ' + bundleItem.size;
+              const merchandise = res.data.data.find(
+                (item: any) =>
+                  item.model === bundleItem.model &&
+                  item.size === bundleItem.size
+              );
+              if (!merchandise) {
+                // Optionally handle not found merchandise
+                return Promise.resolve();
+              }
+              const data = {
+                pending: merchandise.pending + bag.quantity,
+                bought: merchandise.bought,
+              };
+              return axios.put(`${SERVER}/order/merchandise/${id}`, data);
+            });
+          } else {
+            // For regular items, update normally.
+            const id = bag.model + ' ' + bag.size;
+            const merchandise = res.data.data.find(
+              (item: any) => item.model === bag.model && item.size === bag.size
+            );
+            if (!merchandise) {
+              return [];
+            }
+            const data = {
+              pending: merchandise.pending + bag.quantity,
+              bought: merchandise.bought,
+            };
+            return [axios.put(`${SERVER}/order/merchandise/${id}`, data)];
+          }
+        });
+
+        Promise.all(updateCalls)
           .then(() => {
             const location = LOCATIONS.find(
               (loc) => loc.value === pickupLocation
@@ -167,11 +196,14 @@ export const Order = () => {
               });
           })
           .catch((err) => {
-            alert('An error happened: ' + err.message);
+            alert('Error occurred during payment transition: ' + err.message);
             setPage('payment');
           });
+      })
+      .catch((err) => {
+        alert('Error fetching merchandise: ' + err.message);
+        setPage('payment');
       });
-    });
   };
 
   // Handlers for shopping bag operations
@@ -340,18 +372,44 @@ export const Order = () => {
           axios
             .get(`${SERVER}/order/merchandise`)
             .then((res) => {
-              const updateCalls = shoppingBag.map((bag) => {
-                const id = bag.model + ' ' + bag.size;
-                const merchandise = res.data.data.find(
-                  (item: any) =>
-                    item.model === bag.model && item.size === bag.size
-                );
-                const data = {
-                  pending: merchandise.pending + bag.quantity,
-                  bought: merchandise.bought,
-                };
-                return axios.put(`${SERVER}/order/merchandise/${id}`, data);
+              const updateCalls = shoppingBag.flatMap((bag) => {
+                if (bag.isBundle) {
+                  // For bundle items, update each bundle element
+                  return bag.bundle.map((bundleItem) => {
+                    const id = bundleItem.model + ' ' + bundleItem.size;
+                    const merchandise = res.data.data.find(
+                      (item: any) =>
+                        item.model === bundleItem.model &&
+                        item.size === bundleItem.size
+                    );
+                    if (!merchandise) {
+                      // Optionally handle not found merchandise
+                      return Promise.resolve();
+                    }
+                    const data = {
+                      pending: merchandise.pending + bag.quantity,
+                      bought: merchandise.bought,
+                    };
+                    return axios.put(`${SERVER}/order/merchandise/${id}`, data);
+                  });
+                } else {
+                  // For regular items, update normally.
+                  const id = bag.model + ' ' + bag.size;
+                  const merchandise = res.data.data.find(
+                    (item: any) =>
+                      item.model === bag.model && item.size === bag.size
+                  );
+                  if (!merchandise) {
+                    return [];
+                  }
+                  const data = {
+                    pending: merchandise.pending + bag.quantity,
+                    bought: merchandise.bought,
+                  };
+                  return [axios.put(`${SERVER}/order/merchandise/${id}`, data)];
+                }
               });
+
               Promise.all(updateCalls)
                 .then(() => setPage('payment'))
                 .catch((err) => {
