@@ -22,11 +22,13 @@ export const ShoppingBagSidebar: React.FC<ShoppingBagSidebarProps> = ({
                 key={index}
                 className="block max-w-sm p-6 mb-3 mr-3 border border-gray-200 rounded-lg shadow hover:bg-gray-100"
               >
-                <img
-                  className="rounded-t-lg"
-                  src={item.image}
-                  alt={item.model}
-                />
+                {item.image !== '' && (
+                  <img
+                    className="rounded-t-lg"
+                    src={item.image}
+                    alt={item.model}
+                  />
+                )}
                 <h5 className="text-center mb-2 text-2xl tracking-tight text-gray-900">
                   {item.model}
                 </h5>

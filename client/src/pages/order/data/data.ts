@@ -1,179 +1,179 @@
 const LOCATIONS = [
   {
-    value: "1",
-    label: "Lougheed",
+    value: '1',
+    label: 'Lougheed',
   },
   {
-    value: "2",
-    label: "UBC",
+    value: '2',
+    label: 'UBC',
   },
   {
-    value: "3",
-    label: "SFU",
+    value: '3',
+    label: 'SFU',
   },
   {
-    value: "4",
-    label: "Marine Drive",
+    value: '4',
+    label: 'Marine Drive',
   },
   {
-    value: "5",
-    label: "Joyce Collingwood",
+    value: '5',
+    label: 'Joyce Collingwood',
   },
 ];
 
 const SIZES = [
   {
-    value: "1",
-    label: "S",
+    value: '1',
+    label: 'S',
   },
   {
-    value: "2",
-    label: "M",
+    value: '2',
+    label: 'M',
   },
   {
-    value: "3",
-    label: "L",
+    value: '3',
+    label: 'L',
   },
   {
-    value: "4",
-    label: "XL",
+    value: '4',
+    label: 'XL',
   },
   {
-    value: "5",
-    label: "XXL",
+    value: '5',
+    label: 'XXL',
   },
 ];
 
 const MODELS = [
   {
-    value: "1",
-    label: "KELANA - Waroeng Cak Timmies Hoodie",
+    value: '1',
+    label: 'KELANA - Waroeng Cak Timmies Hoodie',
     price: 25,
     image:
-      "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieBlackFront.webp",
+      'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieBlackFront.webp',
     isBundle: false,
   },
   {
-    value: "2",
-    label: "KELANA - Anak Rantau Hoodie",
+    value: '2',
+    label: 'KELANA - Anak Rantau Hoodie',
     price: 25,
     image:
-      "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieWhiteFront.webp",
+      'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/hoodieWhiteFront.webp',
     isBundle: false,
   },
   {
-    value: "3",
-    label: "KELANA - Anak Rantau T-Shirt",
+    value: '3',
+    label: 'KELANA - Anak Rantau T-Shirt',
     price: 15,
     image:
-      "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/shirtFront.webp",
+      'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/shirtFront.webp',
     isBundle: false,
   },
   {
-    value: "4",
-    label: "Jauh di Mata Tote Bag",
+    value: '4',
+    label: 'Jauh di Mata Tote Bag',
     price: 7.5,
     image:
-      "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/jauh+di+mata+tote.webp",
+      'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/jauh+di+mata+tote.webp',
     isBundle: false,
   },
   {
-    value: "5",
-    label: "Life in Van City Tote Bag",
+    value: '5',
+    label: 'Life in Van City Tote Bag',
     price: 7.5,
     image:
-      "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/life+in+van+city+tote.webp",
+      'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/life+in+van+city+tote.webp',
     isBundle: false,
   },
   {
-    value: "6",
-    label: "Bundle Tote + Kaos",
+    value: '6',
+    label: 'Bundle Tote + Kaos',
     price: 17.5,
     image:
-      "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/tote+kaos.webp",
+      'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/tote+kaos.webp',
     isBundle: true,
   },
   {
-    value: "7",
-    label: "Bundle Tote + Hoodie",
+    value: '7',
+    label: 'Bundle Tote + Hoodie',
     price: 27.5,
     image:
-      "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/tote+hoodie+1.webp",
+      'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/tote+hoodie+1.webp',
     isBundle: true,
   },
   {
-    value: "8",
-    label: "Bundle Tote + Kaos + Hoodie",
+    value: '8',
+    label: 'Bundle Tote + Kaos + Hoodie',
     price: 40,
     image:
-      "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/tote+kaos+hoodie+1.webp",
+      'https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/tote+kaos+hoodie+1.webp',
     isBundle: true,
   },
   {
-    value: "9",
-    label: "Bundle 2 Tote",
+    value: '9',
+    label: 'Bundle 2 Tote Bags',
     price: 12,
-    image: "",
+    image: '',
     isBundle: true,
   },
 ];
 
 const DEFAULT_SHOPPING_BAG = {
   quantity: 1,
-  size: "",
-  model: "",
+  size: '',
+  model: '',
   price: 0,
-  image: "",
+  image: '',
   isBundle: false,
-  bundleIdx: "0",
+  bundleIdx: '0',
   bundle: [],
 };
 
 const DEFAULT_SELECTED_ITEM = {
-  value: "",
-  label: "",
+  value: '',
+  label: '',
   price: 0,
-  image: "",
+  image: '',
 };
 
 const DEFAULT_BUNDLE_BAG = {
-  model: "",
-  size: "",
+  model: '',
+  size: '',
 };
 
 const BUNDLE_OPTIONS = [
   {
-    bundle: "6",
+    bundle: '6',
     options: [
-      { label: "kaos", options: ["3"] },
-      { label: "tote", options: ["4", "5"] },
+      { label: 'kaos', options: ['3'] },
+      { label: 'tote', options: ['4', '5'] },
     ],
   },
   {
-    bundle: "7",
+    bundle: '7',
     options: [
-      { label: "hoodie", options: ["1", "2"] },
-      { label: "tote", options: ["4", "5"] },
+      { label: 'hoodie', options: ['1', '2'] },
+      { label: 'tote', options: ['4', '5'] },
     ],
   },
   {
-    bundle: "8",
+    bundle: '8',
     options: [
-      { label: "hoodie", options: ["1", "2"] },
-      { label: "kaos", options: ["3"] },
-      { label: "tote", options: ["4", "5"] },
+      { label: 'hoodie', options: ['1', '2'] },
+      { label: 'kaos', options: ['3'] },
+      { label: 'tote', options: ['4', '5'] },
     ],
   },
   {
-    bundle: "9",
+    bundle: '9',
     options: [
-      { label: "tote", options: ["4", "5"] },
-      { label: "tote", options: ["4", "5"] },
+      { label: 'tote', options: ['4'] },
+      { label: 'tote', options: ['5'] },
     ],
   },
 ];
 
-const NO_NEED_SIZE = ["4", "5", "6", "7", "8"];
+const NO_NEED_SIZE = ['4', '5', '6', '7', '8', '9'];
 
 export {
   LOCATIONS,
