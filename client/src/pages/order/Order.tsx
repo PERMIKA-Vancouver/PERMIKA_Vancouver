@@ -11,6 +11,7 @@ import {
   SHOPPING_BAG_TYPE,
   BUNDLE_OPTIONS,
   DEFAULT_BUNDLE_BAG,
+  NO_NEED_SIZE,
 } from './data/data';
 import { ShoppingBagSidebar } from './components/ShoppingBagSidebar';
 import { CheckoutForm } from './components/CheckoutForm';
@@ -139,6 +140,10 @@ export const Order = () => {
         }
       }
 
+      let size = bag.size;
+
+      if (NO_NEED_SIZE.includes(item.value)) size = 'none';
+
       return {
         ...bag,
         model: item.label,
@@ -147,6 +152,7 @@ export const Order = () => {
         isBundle: item.isBundle,
         bundleIdx: item.value,
         bundle: bundle,
+        size: size,
       };
     });
     setShoppingBag(updatedBag);
