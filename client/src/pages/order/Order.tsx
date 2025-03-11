@@ -1,41 +1,41 @@
 // Order.tsx
-import { useState, useCallback, useEffect } from 'react';
-import axios from 'axios';
-import { Button } from '@mui/material';
-import { openExternalLink } from '../../shared/utils/OpenLinkUtil';
-import { PopUpMessage } from '../../shared/components/PopUpMessage';
+import { useState, useCallback, useEffect } from "react";
+import axios from "axios";
+import { Button } from "@mui/material";
+import { openExternalLink } from "../../shared/utils/OpenLinkUtil";
+import { PopUpMessage } from "../../shared/components/PopUpMessage";
 import {
   SIZES,
   MODELS,
   DEFAULT_SELECTED_ITEM,
   DEFAULT_SHOPPING_BAG,
-} from './data/data';
-import { ShoppingBagSidebar } from './components/ShoppingBagSidebar';
-import { CheckoutForm } from './components/CheckoutForm';
-import { ShoppingBagList } from './components/ShoppingBagList';
-import { PaymentSection } from './components/PaymentSection';
-import { ConfirmationPage } from './components/ConfirmationPage';
-import { TotalsDisplay } from './components/TotalsDisplay';
+} from "./data/data";
+import { ShoppingBagSidebar } from "./components/ShoppingBagSidebar";
+import { CheckoutForm } from "./components/CheckoutForm";
+import { ShoppingBagList } from "./components/ShoppingBagList";
+import { PaymentSection } from "./components/PaymentSection";
+import { ConfirmationPage } from "./components/ConfirmationPage";
+import { TotalsDisplay } from "./components/TotalsDisplay";
 
 const SERVER = process.env.REACT_APP_SERVER;
 
 export const Order = () => {
   const [page, setPage] = useState<
-    'checkout' | 'review' | 'payment' | 'confirmation'
-  >('checkout');
+    "checkout" | "review" | "payment" | "confirmation"
+  >("checkout");
   const [shoppingBag, setShoppingBag] = useState([DEFAULT_SHOPPING_BAG]);
   const [selectedItem, setSelectedItem] = useState(DEFAULT_SELECTED_ITEM);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [pickupLocation, setPickupLocation] = useState('');
-  const [promoCode, setPromoCode] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [pickupLocation, setPickupLocation] = useState("");
+  const [promoCode, setPromoCode] = useState("");
   const [isPromoCodeApplied, setIsPromoCodeApplied] = useState(false);
   const [isPromoCodeInvalid, setIsPromoCodeInvalid] = useState(false);
   const [finalPrice, setFinalPrice] = useState(0);
   const [paymentClicked, setPaymentClicked] = useState(false);
-  const [popUpMessage, setPopUpMessage] = useState('');
+  const [popUpMessage, setPopUpMessage] = useState("");
   const [popUpOpen, setPopUpOpen] = useState(false);
   const [submitOrderClicked, setSubmitOrderClicked] = useState(false);
 
@@ -106,7 +106,7 @@ export const Order = () => {
   };
 
   const handleSizeChange = (index: number, size: (typeof SIZES)[number]) => {
-    if (page !== 'checkout') return;
+    if (page !== "checkout") return;
     const updatedBag = shoppingBag.map((bag, idx) =>
       idx !== index ? bag : { ...bag, size: size.label }
     );
@@ -114,38 +114,68 @@ export const Order = () => {
   };
 
   const handleChooseItem = (index: number, item: (typeof MODELS)[number]) => {
-    if (page !== 'checkout') return;
-    const updatedBag = shoppingBag.map((bag, idx) =>
-      idx !== index
-        ? bag
-        : { ...bag, model: item.label, price: item.price, image: item.image }
-    );
+    if (page !== "checkout") return;
+
+    let updatedBag = [...shoppingBag]; // Copy the current shopping bag
+
+    // If the selected item is "Bundle Tote + Kaos", replace it with multiple items
+    if (item.label === "Bundle Tote + Kaos") {
+      const bundleItems = [
+        {
+          model: MODELS[2].label,
+          price: MODELS[2].price,
+          image: MODELS[2].image,
+          size: "M",
+          quantity: 1,
+        },
+        {
+          model: MODELS[3].label,
+          price: MODELS[3].price,
+          image: MODELS[3].image,
+          size: "M",
+          quantity: 1,
+        },
+      ];
+
+      // Replace the original bundle item with multiple items
+      updatedBag = [
+        ...shoppingBag.slice(0, index), // Keep items before the selected item
+        ...bundleItems, // Insert the bundle items
+        ...shoppingBag.slice(index + 1), // Keep items after the selected item
+      ];
+    } else {
+      updatedBag = shoppingBag.map((bag, idx) =>
+        idx !== index
+          ? bag
+          : { ...bag, model: item.label, price: item.price, image: item.image }
+      );
+      setSelectedItem(item);
+    }
     setShoppingBag(updatedBag);
-    setSelectedItem(item);
   };
 
   // Field change handler for form inputs
   const handleFieldChange = (field: string, value: string | boolean) => {
     switch (field) {
-      case 'firstName':
+      case "firstName":
         setFirstName(value as string);
         break;
-      case 'lastName':
+      case "lastName":
         setLastName(value as string);
         break;
-      case 'email':
+      case "email":
         setEmail(value as string);
         break;
-      case 'phoneNumber':
+      case "phoneNumber":
         setPhoneNumber(value as string);
         break;
-      case 'pickupLocation':
+      case "pickupLocation":
         setPickupLocation(value as string);
         break;
-      case 'promoCode':
+      case "promoCode":
         setPromoCode(value as string);
         break;
-      case 'paymentClicked':
+      case "paymentClicked":
         setPaymentClicked(value as boolean);
         break;
       default:
@@ -155,10 +185,10 @@ export const Order = () => {
 
   // Updated page navigation with validations and pending updates
   const handleNextPage = () => {
-    if (page === 'checkout') {
+    if (page === "checkout") {
       // Validate that shopping bag has items
       if (getTotalPrice() <= 0) {
-        setPopUpMessage('Please add items to your shopping bag.');
+        setPopUpMessage("Please add items to your shopping bag.");
         setPopUpOpen(true);
         return;
       }
@@ -170,7 +200,7 @@ export const Order = () => {
         !phoneNumber.trim() ||
         !pickupLocation.trim()
       ) {
-        setPopUpMessage('Please fill out all required fields.');
+        setPopUpMessage("Please fill out all required fields.");
         setPopUpOpen(true);
         return;
       }
@@ -180,13 +210,13 @@ export const Order = () => {
       );
       if (incompleteItem) {
         setPopUpMessage(
-          'Please select a size and item for all products in your shopping bag.'
+          "Please select a size and item for all products in your shopping bag."
         );
         setPopUpOpen(true);
         return;
       }
-      setPage('review');
-    } else if (page === 'review') {
+      setPage("review");
+    } else if (page === "review") {
       // Check stock availability before transitioning to payment
       checkAvailability(false).then((available) => {
         if (available) {
@@ -195,7 +225,7 @@ export const Order = () => {
             .get(`${SERVER}/order/merchandise`)
             .then((res) => {
               const updateCalls = shoppingBag.map((bag) => {
-                const id = bag.model + ' ' + bag.size;
+                const id = bag.model + " " + bag.size;
                 const merchandise = res.data.data.find(
                   (item: any) =>
                     item.model === bag.model && item.size === bag.size
@@ -207,24 +237,24 @@ export const Order = () => {
                 return axios.put(`${SERVER}/order/merchandise/${id}`, data);
               });
               Promise.all(updateCalls)
-                .then(() => setPage('payment'))
+                .then(() => setPage("payment"))
                 .catch((err) => {
                   alert(
-                    'Error occurred during payment transition: ' + err.message
+                    "Error occurred during payment transition: " + err.message
                   );
-                  setPage('review');
+                  setPage("review");
                 });
             })
             .catch((err) => {
-              alert('Error fetching merchandise: ' + err.message);
-              setPage('review');
+              alert("Error fetching merchandise: " + err.message);
+              setPage("review");
             });
         }
       });
-    } else if (page === 'payment') {
+    } else if (page === "payment") {
       if (!paymentClicked) {
         setPopUpMessage(
-          'Please complete payment before submitting your order.'
+          "Please complete payment before submitting your order."
         );
         setPopUpOpen(true);
         return;
@@ -237,7 +267,7 @@ export const Order = () => {
             .get(`${SERVER}/order/merchandise`)
             .then((res) => {
               const updateCalls = shoppingBag.map((bag) => {
-                const id = bag.model + ' ' + bag.size;
+                const id = bag.model + " " + bag.size;
                 const merchandise = res.data.data.find(
                   (item: any) =>
                     item.model === bag.model && item.size === bag.size
@@ -249,21 +279,21 @@ export const Order = () => {
                 return axios.put(`${SERVER}/order/merchandise/${id}`, data);
               });
               Promise.all(updateCalls)
-                .then(() => setPage('confirmation'))
+                .then(() => setPage("confirmation"))
                 .catch((err) => {
                   alert(
-                    'Error occurred during final submission: ' + err.message
+                    "Error occurred during final submission: " + err.message
                   );
-                  setPage('payment');
+                  setPage("payment");
                 });
             })
             .catch((err) => {
-              alert('Error fetching merchandise: ' + err.message);
-              setPage('payment');
+              alert("Error fetching merchandise: " + err.message);
+              setPage("payment");
             });
         } else {
           setPopUpMessage(
-            'Stock issue detected. If you have paid, please contact us for a refund.'
+            "Stock issue detected. If you have paid, please contact us for a refund."
           );
           setPopUpOpen(true);
         }
@@ -273,7 +303,7 @@ export const Order = () => {
 
   // Recalculate final price when entering the payment page
   useEffect(() => {
-    if (page === 'payment') {
+    if (page === "payment") {
       const totalPrice = getTotalPrice();
       // In this example, discount is not applied so the subtotal equals total price.
       setFinalPrice(totalPrice);
@@ -288,34 +318,34 @@ export const Order = () => {
         message={popUpMessage}
       />
       <div className="flex flex-col lg:flex-row min-h-screen pt-navbar py-20 ml-[5%]">
-        {page !== 'confirmation' && (
+        {page !== "confirmation" && (
           <ShoppingBagSidebar shoppingBag={shoppingBag} />
         )}
 
         <div
           className={`lg:order-2 ml-[2%] flex-auto ${
-            page === 'confirmation' ? 'w-3/4' : 'w-full'
+            page === "confirmation" ? "w-3/4" : "w-full"
           }`}
         >
           <div className="Checkout-details pl-[6.3%] w-[100%] pr-[12%]">
             <div className="checkout-outer mb-[50px]">
               <div className="checkout-label flex justify-between items-center">
                 <h2>
-                  {page === 'review'
-                    ? 'Review Order'
-                    : page === 'payment'
-                      ? 'Payment Details'
-                      : page === 'confirmation'
-                        ? 'Thank you for your purchase!'
-                        : 'Order'}
+                  {page === "review"
+                    ? "Review Order"
+                    : page === "payment"
+                    ? "Payment Details"
+                    : page === "confirmation"
+                    ? "Thank you for your purchase!"
+                    : "Order"}
                 </h2>
-                {page === 'review' && (
-                  <button onClick={() => setPage('checkout')}>Edit</button>
+                {page === "review" && (
+                  <button onClick={() => setPage("checkout")}>Edit</button>
                 )}
               </div>
               <div className="checkout-information"></div>
             </div>
-            {(page === 'checkout' || page === 'review') && (
+            {(page === "checkout" || page === "review") && (
               <>
                 <CheckoutForm
                   state={{
@@ -326,7 +356,7 @@ export const Order = () => {
                     pickupLocation,
                   }}
                   handleFieldChange={handleFieldChange}
-                  readOnly={page === 'review'}
+                  readOnly={page === "review"}
                 />
                 <ShoppingBagList
                   page={page}
@@ -336,7 +366,7 @@ export const Order = () => {
                   handleRemoveItem={handleRemoveItem}
                   handleSizeChange={handleSizeChange}
                   handleChooseItem={handleChooseItem}
-                  readOnly={page === 'review'}
+                  readOnly={page === "review"}
                 />
                 <TotalsDisplay
                   totalPrice={getTotalPrice()}
@@ -345,7 +375,7 @@ export const Order = () => {
                 />
               </>
             )}
-            {page === 'payment' && (
+            {page === "payment" && (
               <PaymentSection
                 state={{
                   promoCode,
@@ -362,7 +392,7 @@ export const Order = () => {
                     .then((res) => {
                       if (!res.data || res.data.pending || res.data.claimed) {
                         setIsPromoCodeInvalid(true);
-                        setPromoCode('');
+                        setPromoCode("");
                         return;
                       }
                       const data = { promoCode, pending: true };
@@ -375,20 +405,20 @@ export const Order = () => {
                           setFinalPrice(finalPrice);
                         })
                         .catch((err) => {
-                          alert('An error occurred: ' + err.message);
+                          alert("An error occurred: " + err.message);
                         });
                     })
                     .catch((err) => {
-                      alert('An error occurred: ' + err.message);
+                      alert("An error occurred: " + err.message);
                     });
                 }}
                 openExternalLink={openExternalLink}
               />
             )}
-            {page === 'confirmation' && <ConfirmationPage />}
-            {page === 'confirmation' ? (
+            {page === "confirmation" && <ConfirmationPage />}
+            {page === "confirmation" ? (
               <></>
-            ) : page !== 'payment' ? (
+            ) : page !== "payment" ? (
               <button
                 className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400 hidden lg:block"
                 onClick={handleNextPage}
@@ -412,7 +442,7 @@ export const Order = () => {
             )}
           </div>
         </div>
-        {page !== 'confirmation' && page !== 'payment' && (
+        {page !== "confirmation" && page !== "payment" && (
           <div className="px-[6.3%] order-3 lg:hidden">
             <Button
               onClick={handleNextPage}

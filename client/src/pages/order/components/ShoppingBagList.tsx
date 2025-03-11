@@ -1,9 +1,9 @@
 // ShoppingBagList.tsx
-import React from 'react';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import { FaTrash } from 'react-icons/fa';
-import { SIZES, MODELS, DEFAULT_SELECTED_ITEM } from '../data/data';
+import React from "react";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
+import { FaTrash } from "react-icons/fa";
+import { SIZES, MODELS, DEFAULT_SELECTED_ITEM } from "../data/data";
 
 interface ShoppingBagListProps {
   page: string;
@@ -32,11 +32,12 @@ export const ShoppingBagList: React.FC<ShoppingBagListProps> = ({
   handleChooseItem,
   readOnly,
 }) => {
+  console.log(shoppingBag, "this is the shopping bag");
   return (
     <div className="Shopping-bag mt-20">
       <div className="shopping flex justify-between mb-3">
         <h2 className="text-[1.875rem] text-[#414141]">Shopping Bag</h2>
-        {page === 'checkout' && (
+        {page === "checkout" && (
           <button onClick={handleAddItem} className="add-button pr-[2%]">
             Add
           </button>
@@ -66,7 +67,7 @@ export const ShoppingBagList: React.FC<ShoppingBagListProps> = ({
                 id="outlined-multiline-sizes"
                 select
                 label="Size*"
-                defaultValue={bag.size}
+                value={bag.size}
                 disabled={readOnly}
               >
                 {SIZES.map((option) => (
@@ -88,7 +89,7 @@ export const ShoppingBagList: React.FC<ShoppingBagListProps> = ({
                 id="outlined-multiline-sizes"
                 select
                 label="Select your item*"
-                defaultValue={bag.model}
+                value={bag.model}
                 onChange={(e) => {
                   const selected =
                     MODELS.find((model) => model.value === e.target.value) ||
@@ -109,7 +110,7 @@ export const ShoppingBagList: React.FC<ShoppingBagListProps> = ({
                 ))}
               </TextField>
             </div>
-            {page === 'checkout' && (
+            {page === "checkout" && (
               <button
                 onClick={() => handleRemoveItem(index)}
                 className="remove-button px-[2%]"
