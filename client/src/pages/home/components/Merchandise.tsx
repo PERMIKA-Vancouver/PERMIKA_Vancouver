@@ -82,7 +82,12 @@ export const Merchandise = () => {
           <p className="text-sm mt-[0.9rem]">Shirt Collection</p>
           <p className="text-xl text-black-text">Anak Rantau T-Shirt</p>
           <div className="flex gap-1">
-            <p className="text-sm !decoration-2">$20</p>
+            <p className="text-sm !decoration-2">
+              <span className="text-xs line-through text-red-500 mr-1">
+                $20
+              </span>
+              $15
+            </p>
           </div>
           <div className="flex justify-between mt-8">
             <p className="text-sm text-black text bg-[#F1F1F1] py-1 px-3.5 rounded-sm">
@@ -97,7 +102,12 @@ export const Merchandise = () => {
           <p className="text-sm mt-[0.9rem]">Hoodie Collection</p>
           <p className="text-xl text-black-text">Waroeng Cak Timmies Hoodie</p>
           <div className="flex gap-1">
-            <p className="text-sm !decoration-2">$35</p>
+            <p className="text-sm !decoration-2">
+              <span className="text-xs line-through text-red-500 mr-1">
+                $35
+              </span>
+              $25
+            </p>
           </div>
           <div className="flex justify-between mt-8">
             <p className="text-sm text-black text bg-[#F1F1F1] py-1 px-3.5 rounded-sm">
@@ -112,7 +122,12 @@ export const Merchandise = () => {
           <p className="text-sm mt-[0.9rem]">Hoodie Collection</p>
           <p className="text-xl text-black-text">Anak Rantau Hoodie</p>
           <div className="flex gap-1">
-            <p className="text-sm !decoration-2">$35</p>
+            <p className="text-sm !decoration-2">
+              <span className="text-xs line-through text-red-500 mr-1">
+                $35
+              </span>
+              $25
+            </p>
           </div>
           <div className="flex justify-between mt-8">
             <p className="text-sm text-black text bg-[#F1F1F1] py-1 px-3.5 rounded-sm">
@@ -128,7 +143,7 @@ export const Merchandise = () => {
           <p className="text-sm mt-[0.9rem]">Tote bag Collection</p>
           <p className="text-xl text-black-text">Life in Van City Tote bag</p>
           <div className="flex gap-1">
-            <p className="text-sm !decoration-2">$12</p>
+            <p className="text-sm !decoration-2">$7.5</p>
           </div>
         </div>
         <div className="flex flex-col text-grey-body">
@@ -137,7 +152,7 @@ export const Merchandise = () => {
           <p className="text-sm mt-[0.9rem]">Tote bag Collection</p>
           <p className="text-xl text-black-text">Jauh di Mata Tote Bag</p>
           <div className="flex gap-1">
-            <p className="text-sm !decoration-2">$12</p>
+            <p className="text-sm !decoration-2">$7.5</p>
           </div>
         </div>
         <div className="flex flex-col text-grey-body">
