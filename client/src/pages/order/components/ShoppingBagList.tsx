@@ -19,6 +19,7 @@ interface ShoppingBagListProps {
   handleRemoveItem: (index: number) => void;
   handleSizeChange: (index: number, size: any) => void;
   handleChooseItem: (index: number, item: any) => void;
+  readOnly: boolean;
 }
 
 export const ShoppingBagList: React.FC<ShoppingBagListProps> = ({
@@ -29,6 +30,7 @@ export const ShoppingBagList: React.FC<ShoppingBagListProps> = ({
   handleRemoveItem,
   handleSizeChange,
   handleChooseItem,
+  readOnly,
 }) => {
   return (
     <div className="Shopping-bag mt-20">
@@ -55,7 +57,7 @@ export const ShoppingBagList: React.FC<ShoppingBagListProps> = ({
                 const newQuantity = parseInt(e.target.value, 10) || 0;
                 handleQuantityChange(index, newQuantity);
               }}
-              disabled={page !== 'checkout'}
+              disabled={readOnly}
             />
             <div className="x flex items-center">X</div>
             <div className="w-[54%]">
@@ -65,7 +67,7 @@ export const ShoppingBagList: React.FC<ShoppingBagListProps> = ({
                 select
                 label="Size*"
                 defaultValue={bag.size}
-                disabled={page !== 'checkout'}
+                disabled={readOnly}
               >
                 {SIZES.map((option) => (
                   <MenuItem
@@ -93,14 +95,14 @@ export const ShoppingBagList: React.FC<ShoppingBagListProps> = ({
                     DEFAULT_SELECTED_ITEM;
                   handleChooseItem(index, selected);
                 }}
-                disabled={page !== 'checkout'}
+                disabled={readOnly}
               >
                 {MODELS.map((option) => (
                   <MenuItem
                     key={option.value}
                     value={option.value}
                     onClick={() => handleChooseItem(index, option)}
-                    disabled={page !== 'checkout'}
+                    disabled={readOnly}
                   >
                     {option.label}
                   </MenuItem>

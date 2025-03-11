@@ -174,7 +174,24 @@ export const Order = () => {
           className={`lg:order-2 ml-[2%] flex-auto ${page === 'confirmation' ? 'w-3/4' : 'w-full'}`}
         >
           <div className="Checkout-details pl-[6.3%] w-[100%] pr-[12%]">
-            {page === 'checkout' && (
+            <div className="checkout-outer mb-[50px]">
+              <div className="checkout-label flex justify-between items-center">
+                <h2>
+                  {page === 'review'
+                    ? 'Review Order'
+                    : page === 'payment'
+                      ? 'Payment Details'
+                      : page === 'confirmation'
+                        ? 'Thank you for your purchase!'
+                        : 'Order'}
+                </h2>
+                {page === 'review' && (
+                  <button onClick={() => setPage('checkout')}>Edit</button>
+                )}
+              </div>
+              <div className="checkout-information"></div>
+            </div>
+            {(page === 'checkout' || page === 'review') && (
               <>
                 <CheckoutForm
                   state={{
@@ -185,6 +202,7 @@ export const Order = () => {
                     pickupLocation,
                   }}
                   handleFieldChange={handleFieldChange}
+                  readOnly={page === 'review'}
                 />
                 <ShoppingBagList
                   page={page}
@@ -194,6 +212,7 @@ export const Order = () => {
                   handleRemoveItem={handleRemoveItem}
                   handleSizeChange={handleSizeChange}
                   handleChooseItem={handleChooseItem}
+                  readOnly={page === 'review'}
                 />
                 <TotalsDisplay
                   totalPrice={getTotalPrice()}

@@ -13,11 +13,13 @@ interface CheckoutFormProps {
     pickupLocation: string;
   };
   handleFieldChange: (field: string, value: string) => void;
+  readOnly: boolean;
 }
 
 export const CheckoutForm: React.FC<CheckoutFormProps> = ({
   state,
   handleFieldChange,
+  readOnly,
 }) => {
   return (
     <form className="checkout-form">
@@ -26,12 +28,14 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
           className="w-full sm:basis-[49%]"
           label="First Name*"
           value={state.firstName}
+          disabled={readOnly}
           onChange={(e) => handleFieldChange('firstName', e.target.value)}
         />
         <TextField
           className="w-full sm:basis-[49%]"
           label="Last Name*"
           value={state.lastName}
+          disabled={readOnly}
           onChange={(e) => handleFieldChange('lastName', e.target.value)}
         />
       </div>
@@ -40,6 +44,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
           className="w-full"
           label="Email Address*"
           value={state.email}
+          disabled={readOnly}
           onChange={(e) => handleFieldChange('email', e.target.value)}
         />
       </div>
@@ -48,6 +53,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
           className="flex-auto"
           label="Phone Number*"
           value={state.phoneNumber}
+          disabled={readOnly}
           onChange={(e) => handleFieldChange('phoneNumber', e.target.value)}
         />
       </div>
@@ -57,6 +63,7 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({
           select
           label="Pick-Up Location*"
           value={state.pickupLocation}
+          disabled={readOnly}
           onChange={(e) => handleFieldChange('pickupLocation', e.target.value)}
         >
           {LOCATIONS.map((option) => (
