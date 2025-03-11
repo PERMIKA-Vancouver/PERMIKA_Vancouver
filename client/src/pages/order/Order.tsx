@@ -429,7 +429,6 @@ export const Order = () => {
       }
       setPage('review');
     } else if (page === 'review') {
-      setNextPageClicked(true);
       // Check stock availability before transitioning to payment
       checkAvailability(false).then((available) => {
         if (available) {
@@ -643,7 +642,10 @@ export const Order = () => {
             ) : page !== 'payment' ? (
               <button
                 className="bg-[#D07D14] w-full rounded-md text-white py-1.5 text-lg mt-7 disabled:bg-gray-400 hidden lg:block"
-                onClick={handleNextPage}
+                onClick={() => {
+                  if (page === 'review') setNextPageClicked(true);
+                  handleNextPage();
+                }}
                 disabled={getTotalPrice() <= 0 || nextPageClicked}
               >
                 Next
