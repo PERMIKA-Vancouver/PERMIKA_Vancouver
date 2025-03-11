@@ -45,7 +45,6 @@ export const ShoppingBagList: React.FC<ShoppingBagListProps> = ({
   handleBundleModelChange,
   readOnly,
 }) => {
-  console.log(shoppingBag, "this is the shopping bag");
   return (
     <div className="Shopping-bag mt-20">
       <div className="shopping flex justify-between mb-3">

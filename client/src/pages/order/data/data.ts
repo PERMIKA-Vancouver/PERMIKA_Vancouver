@@ -109,6 +109,13 @@ const MODELS = [
       "https://permikawebsite.s3.us-west-2.amazonaws.com/assets/merchandise/tote+kaos+hoodie+1.webp",
     isBundle: true,
   },
+  {
+    value: "9",
+    label: "Bundle 2 Tote",
+    price: 12,
+    image: "",
+    isBundle: true,
+  },
 ];
 
 const DEFAULT_SHOPPING_BAG = {
@@ -154,6 +161,13 @@ const BUNDLE_OPTIONS = [
     options: [
       { label: "hoodie", options: ["1", "2"] },
       { label: "kaos", options: ["3"] },
+      { label: "tote", options: ["4", "5"] },
+    ],
+  },
+  {
+    bundle: "9",
+    options: [
+      { label: "tote", options: ["4", "5"] },
       { label: "tote", options: ["4", "5"] },
     ],
   },
