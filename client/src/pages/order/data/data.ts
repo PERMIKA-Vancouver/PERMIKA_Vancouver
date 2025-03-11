@@ -112,7 +112,7 @@ const MODELS = [
 ];
 
 const DEFAULT_SHOPPING_BAG = {
-  quantity: 0,
+  quantity: 1,
   size: '',
   model: '',
   price: 0,

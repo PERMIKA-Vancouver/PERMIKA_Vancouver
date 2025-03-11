@@ -71,7 +71,7 @@ export const ShoppingBagList: React.FC<ShoppingBagListProps> = ({
                   const newQuantity = parseInt(e.target.value, 10) || 0;
                   handleQuantityChange(index, newQuantity);
                 }}
-                disabled={readOnly}
+                disabled={bag.isBundle || readOnly}
               />
               <div className="x flex items-center">X</div>
               <div className="w-[54%]">
