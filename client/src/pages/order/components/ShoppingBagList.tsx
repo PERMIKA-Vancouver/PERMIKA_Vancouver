@@ -1,7 +1,7 @@
-import React from "react";
-import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
-import { FaTrash } from "react-icons/fa";
+import React from 'react';
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
+import { FaTrash } from 'react-icons/fa';
 import {
   SIZES,
   MODELS,
@@ -9,8 +9,8 @@ import {
   SHOPPING_BAG_TYPE,
   BUNDLE_OPTIONS,
   NO_NEED_SIZE,
-} from "../data/data";
-import { BundleList } from "./BundleList";
+} from '../data/data';
+import { BundleList } from './BundleList';
 
 interface ShoppingBagListProps {
   page: string;
@@ -49,7 +49,7 @@ export const ShoppingBagList: React.FC<ShoppingBagListProps> = ({
     <div className="Shopping-bag mt-20">
       <div className="shopping flex justify-between mb-3">
         <h2 className="text-[1.875rem] text-[#414141]">Shopping Bag</h2>
-        {page === "checkout" && (
+        {page === 'checkout' && (
           <button onClick={handleAddItem} className="add-button pr-[2%]">
             Add
           </button>
@@ -123,7 +123,7 @@ export const ShoppingBagList: React.FC<ShoppingBagListProps> = ({
                   ))}
                 </TextField>
               </div>
-              {page === "checkout" && (
+              {page === 'checkout' && (
                 <button
                   onClick={() => handleRemoveItem(index)}
                   className="remove-button px-[2%]"
@@ -145,7 +145,7 @@ export const ShoppingBagList: React.FC<ShoppingBagListProps> = ({
                 bundleBag={bag.bundle}
                 handleBundleSizeChange={handleBundleSizeChange}
                 handleBundleModelChange={handleBundleModelChange}
-                readOnly={false}
+                readOnly={readOnly}
               />
             </div>
           )}
