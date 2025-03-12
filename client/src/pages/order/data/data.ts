@@ -19,6 +19,10 @@ const LOCATIONS = [
     value: '5',
     label: 'Joyce Collingwood',
   },
+  {
+    value: '6',
+    label: "PERMIKA's Next Event",
+  },
 ];
 
 const SIZES = [
