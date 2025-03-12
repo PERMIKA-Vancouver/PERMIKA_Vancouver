@@ -1,14 +1,17 @@
-export const CustomButton = ({
-  text,
-  className,
-  link,
-}: {
+import React from 'react';
+
+export const CustomButton: React.FC<{
   text: string;
-  className: string;
+  className?: string;
   link: string;
-}) => {
+  newWindow?: boolean;
+}> = ({ text, className = '', link, newWindow = true }) => {
   const clickHandler = () => {
-    window.open(link, '_blank');
+    if (newWindow) {
+      window.open(link, '_blank', 'noopener,noreferrer');
+    } else {
+      window.location.href = link;
+    }
   };
 
   return (
