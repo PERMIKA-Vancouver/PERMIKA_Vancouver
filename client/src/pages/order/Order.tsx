@@ -444,7 +444,8 @@ export const Order = () => {
                       alert(
                         "Error occured: " + err.message + ". Please try again!"
                       );
-                      setPage("review");
+                      setNextPageClicked(false);
+                      setPage('review');
                     });
                 }
               } else {
@@ -470,11 +471,14 @@ export const Order = () => {
                     alert(
                       "Error occured: " + err.message + ". Please try again!"
                     );
-                    setPage("review");
+                    setNextPageClicked(false);
+                    setPage('review');
                   });
               }
             }
           });
+        } else {
+          setNextPageClicked(false);
         }
       });
     } else if (page === "payment") {

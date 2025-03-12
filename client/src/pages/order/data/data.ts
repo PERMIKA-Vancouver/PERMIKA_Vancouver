@@ -19,6 +19,10 @@ const LOCATIONS = [
     value: "5",
     label: "Metrotown",
   },
+  {
+    value: '6',
+    label: "PERMIKA's Next Event",
+  },
 ];
 
 const SIZES = [
