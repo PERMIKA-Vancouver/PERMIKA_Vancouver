@@ -466,6 +466,7 @@ export const Order = () => {
                       alert(
                         'Error occured: ' + err.message + '. Please try again!'
                       );
+                      setNextPageClicked(false);
                       setPage('review');
                     });
                 }
@@ -492,11 +493,14 @@ export const Order = () => {
                     alert(
                       'Error occured: ' + err.message + '. Please try again!'
                     );
+                    setNextPageClicked(false);
                     setPage('review');
                   });
               }
             }
           });
+        } else {
+          setNextPageClicked(false);
         }
       });
     } else if (page === 'payment') {
