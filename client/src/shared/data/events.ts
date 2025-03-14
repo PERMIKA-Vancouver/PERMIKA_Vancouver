@@ -5,13 +5,13 @@ const DATE_FORMAT = 'YYYY-MM-DD HH:mm';
 // Date format 'YYYY-MM-DD HH:mm'
 const UPCOMING_EVENTS: UpcomingEvent[] = [
   {
-    name: 'SPEDA (Speed Dating)',
-    date: DateTime.fromFormat('2025-02-08 13:30', 'yyyy-MM-dd HH:mm', {
+    name: 'Warung Pak Rembo',
+    date: DateTime.fromFormat('2025-03-23 18:00', 'yyyy-MM-dd HH:mm', {
       zone: 'America/Los_Angeles',
     }).toString(),
-    rsvp: 'https://forms.gle/BCBh7d6uLyVM9n1C7',
-    location: 'KJRI',
-    locationLink: 'https://maps.app.goo.gl/gyWS63JnDtq342vK8',
+    rsvp: 'https://forms.gle/4LvDAeRcgQFqjbcr5',
+    location: '6396 Silver Avenue, Metrotown',
+    locationLink: 'https://maps.app.goo.gl/j6wRTdRFBdhaq36Q6',
     type: 0,
   },
 ];
@@ -27,7 +27,7 @@ const UPCOMING_EVENTS_DEFAULT: UpcomingEvent = {
 
 // const EVENT_DESCRIPTION = "Save yourself a seat for the event below!";
 const EVENT_DESCRIPTION =
-  'A speed dating event with lots of activites to make those who are once strangers into lovers 💘';
+  'Come Enjoy Balinese Food at the Pop-Up Hosted by PERMIKA Vancouver! 🍖';
 const EVENT_BUTTON = 'RSVP Now';
 
 const HIRING_DESCRIPTION = "Be part of PERMIKA's family 2024/2025";
