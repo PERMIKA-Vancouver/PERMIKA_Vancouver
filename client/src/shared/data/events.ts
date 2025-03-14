@@ -5,7 +5,7 @@ const DATE_FORMAT = 'YYYY-MM-DD HH:mm';
 // Date format 'YYYY-MM-DD HH:mm'
 const UPCOMING_EVENTS: UpcomingEvent[] = [
   {
-    name: 'Warung Pak Rembo',
+    name: 'Waroeng Pak Rembo',
     date: DateTime.fromFormat('2025-03-23 18:00', 'yyyy-MM-dd HH:mm', {
       zone: 'America/Los_Angeles',
     }).toString(),
