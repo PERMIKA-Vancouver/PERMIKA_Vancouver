@@ -6,6 +6,8 @@ import { ItemType, Items } from "../../models/merchandise/itemsModel";
 import { Order } from "../../models/merchandise/orderModel";
 import keys from "../../key.json";
 
+console.log(keys.client_email)
+
 const auth = new google.auth.JWT(
   keys.client_email,
   undefined,
