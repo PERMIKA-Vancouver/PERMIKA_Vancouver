@@ -4,6 +4,7 @@ export enum TypeEvent {
 }
 export interface UpcomingEvent {
   name: string;
+  hiringPackageLink: string;
   date: string;
   rsvp: string;
   location: string;

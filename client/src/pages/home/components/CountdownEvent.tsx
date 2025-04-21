@@ -11,6 +11,7 @@ import {
   getNextEventLink,
   isNextEvents,
   getEventType,
+  getHiringPackageLink,
 } from '../../../shared/utils/UpcomingEventUtils';
 
 export const CountdownEvent = ({
@@ -30,7 +31,8 @@ export const CountdownEvent = ({
     >
       <div className={`${isMobileView ? 'w-[80%]' : 'w-[63.2%]'} ml-all`}>
         <>
-          <h2 className="text-white">Coming Up</h2>
+          {/* <h2 className="text-white">Coming Up</h2> */}
+          <h2 className="text-white">PERMIKA Vancouver 2025/2026 Hiring</h2>
         </>
         {getNextEvents().map((index: number) => (
           <div>
@@ -46,13 +48,26 @@ export const CountdownEvent = ({
                   ></div>
                 )}
                 <div>
-                  <h3
+                  {/* <h3
                     className={`${
                       isMobileView ? 'mt-4' : 'sub'
                     } text-[#8CA080]`}
                   >
                     {getNextEventName(index)}
-                  </h3>
+                  </h3> */}
+                  <a
+                    href={getHiringPackageLink(index)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <h3
+                        className={`${
+                          isMobileView ? 'mt-4' : 'sub'
+                        } text-[#8CA080]`}
+                      >
+                        {getNextEventName(index)}
+                      </h3>
+                  </a>
                 </div>
               </div>
               <>

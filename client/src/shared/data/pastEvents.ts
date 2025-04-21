@@ -136,10 +136,4 @@ const PAST_EVENTS: PastEvent[] = [
   },
 ];
 
-// const UPCOMING_EVENTS_DEFAULT: UpcomingEvent = {
-//   name: "No Upcoming Events",
-//   date: "0000-00-00 00:00",
-//   rsvp: "",
-// };
-
 export { PAST_EVENTS };
