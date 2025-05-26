@@ -47,22 +47,13 @@ export const CountdownEvent = ({
                   ></div>
                 )}
                 <div>
-                  {/* <h3
+                  <h3
                     className={`${
                       isMobileView ? 'mt-4' : 'sub'
                     } text-[#8CA080]`}
-                  >
+                    >
                     {getNextEventName(index)}
-                  </h3> */}
-                  <a>
-                      <h3
-                        className={`${
-                          isMobileView ? 'mt-4' : 'sub'
-                        } text-[#8CA080]`}
-                      >
-                        {getNextEventName(index)}
-                      </h3>
-                  </a>
+                  </h3>
                 </div>
               </div>
               <>
