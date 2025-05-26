@@ -11,7 +11,6 @@ import {
   getNextEventLink,
   isNextEvents,
   getEventType,
-  getHiringPackageLink,
 } from '../../../shared/utils/UpcomingEventUtils';
 
 export const CountdownEvent = ({
@@ -55,11 +54,7 @@ export const CountdownEvent = ({
                   >
                     {getNextEventName(index)}
                   </h3> */}
-                  <a
-                    href={getHiringPackageLink(index)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                  <a>
                       <h3
                         className={`${
                           isMobileView ? 'mt-4' : 'sub'
