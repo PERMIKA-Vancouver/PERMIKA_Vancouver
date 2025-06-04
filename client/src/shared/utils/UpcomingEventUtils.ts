@@ -29,9 +29,7 @@ const getNextEventName = (index: number): string => {
     ? UPCOMING_EVENTS_DEFAULT.name
     : UPCOMING_EVENTS[index].name;
 };
-const getHiringPackageLink = (index: number): string => {
-  return UPCOMING_EVENTS[index].hiringPackageLink;
-};
+
 
 const getNextEventTimestamp = (index: number): string => {
   return index === -1
@@ -78,7 +76,6 @@ export {
   getNextEventLink,
   getEventLocation,
   getEventType,
-  getHiringPackageLink,
 };
 
 // PRIVATE HELPER METHODS
