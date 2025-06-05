@@ -82,7 +82,10 @@ export const Sponsors = () => {
               <span className="text-[#CC7200]">2025 </span>
               <span className="text-[#050505]">Sponsors</span>
             </div>
-            <img src={isNextEvents(index) ? events[sponsorEventIdx].logo : defaultEvent.logo} className={`w-[18rem] absolute top-0 right-0 font-bold px-2 py-1 transform rotate-[30deg] translate-x-1/2 -translate-y-1/3 hidden sm:block`} />
+            <img 
+              src={isNextEvents(index) ? events[sponsorEventIdx].logo : defaultEvent.logo}
+              alt="PERMIKA Sponsors"
+              className={`w-[18rem] absolute top-0 right-0 font-bold px-2 py-1 transform rotate-[30deg] translate-x-1/2 -translate-y-1/3 hidden sm:block`} />
           </div>
         ))}
       </div>
